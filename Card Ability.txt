@@ -1,0 +1,163 @@
+ID: B000
+Name: "Attack"
+Type: Basic
+Range: WR  //Weapon Range 
+Target: Others
+Cast-type: Target
+Effect: Target.Life(-1)
+Requirement: Always
+Tooltip: 
+
+
+ID: B001
+Name: "Dodge"
+Type: Basic
+Range: Self
+Target: Self
+Cast-type: Activate
+Effect: Negate(Last)
+Requirement: Pending_card(B000),Pending_card(T005)
+Tooltip: Dodge an Attack made on you
+
+
+ID: B002
+Name: "Peach"
+Type: Basic
+Range: All
+Target: Self, Brink_of_death
+Cast-type: Activate
+Effect: Target.Life(+1)
+Requirement: Active_turn, Brink_of_death
+Tooltip:
+
+
+ID: T000
+Name: "Dismantle"
+Type: Tool
+Range: Any
+Target: Card(Any)
+Cast-type: Target
+Effect: Move_Card(target,discard_pit())
+Requirement: Always
+Tooltip:
+
+
+ID: T001
+Name: "Duel"
+Type: Tool
+Range: Any
+Target: Player
+Cast-type: Target
+Effect: Duel(Target)
+Requirement: Always
+Tooltip: 
+
+
+ID: T002
+Name: "Negate"
+Type: Tool
+Range: Any
+Target: Always
+Cast-type: Activate
+Effect: Negate(Pending)
+Requirement: Pending_Type(Tool),Pending_Type(Timed)
+Tooltip: 
+
+
+ID: T003 
+Name: "Duress"
+Type: Tool
+Range: Any
+Target: Any
+Cast-type: Target
+Effect: 
+Requirement: TargetHas(Weapon)
+Tooltip: 
+
+
+ID: T004
+Name: "Peach Garden"
+Type: Tool
+Range: Self
+Target: Self
+Cast-type: Activate
+Effect: Modify_Life(+1,Player(All_Players()))
+Requirement: 
+Tooltip: Give every player one life
+
+
+ID: T005
+Name: "Rain Of Arrows"
+Type: Tool
+Range: Self
+Target: Target_Player(Pick_All()-Self)
+Cast-type: Activate
+Effect: Modify_Life(-1,Target)
+Requirement: 
+Tooltip: 
+
+
+ID: T006
+Name: "Steal"
+Type: Tool
+Range: PR
+Target: Card(Within(Range))
+Cast-type: Target
+Effect: Move_Card(Target,Self_Hand())
+Requirement: 
+Tooltip: Steal a card
+
+
+ID: T007
+Name: "Draw 2"
+Type: Tool
+Range:
+Target: Card(Deck())
+Cast-type: Activate
+Effect: Move_Card(Target,Self_Hand(),2)
+Requirement: 
+Tooltip: Draw 2 cards from the top of the deck
+
+
+ID: T008
+Name: "Barbarians"
+Type: Tool
+Range:
+Target: Target_Player(All_Players()-Self)
+Cast-type: Activate
+Effect: Modify_Life(-1,Target)
+Requirement: 
+Tooltip: 
+
+
+ID: T009
+Name: "Harvest"
+Type: Tool
+Range:
+Target: Card(Deck())
+Cast-type: Activate
+Effect: Move_Card(Target,Table(Open),Count(Picked_Player(All_Players()))
+Requirement: 
+Tooltip: 
+
+
+ID: TI00
+Name: "Acedia"
+Type: Timed
+Range: All
+Target: Within(Range)
+Cast-type: Target
+Effect: Add_Judgement(Acedia, Target)
+Requirement: Target(Is_Not(CS06))
+Tooltip: Imprison a player,
+
+
+ID: TI01
+Name: "Lightning"
+Type: Tool
+Range: Self
+Target: Self
+Cast-type: Activate
+Effect: Add_Judgement(Lightning,Target)
+Requirement: 
+Tooltip: 
