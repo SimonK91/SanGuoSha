@@ -8,56 +8,56 @@
 using namespace std;
 SDL_Surface* load_image(const string&);
 void apply_surface(int, int, SDL_Surface*, SDL_Surface*);
+SDL_Surface* Init(const int& width, const int& height, const int& Bits_Per_Pixel);
+void clean_up(initializer_list<SDL_Surface*>);
 
 int main(int argc, char* argv[])
 {
-	const int SCREEN_WIDTH  = 1024;
-	const int SCREEN_HEIGHT =  768;
-	const int SCREEN_BPP    =   32;
+	// Variabler i starten
+	const int SCREEN_WIDTH  = 800;
+	const int SCREEN_HEIGHT = 600;
+	const int SCREEN_BPP    =  32;
 	
-	SDL_Surface* message = nullptr;
-	SDL_Surface* background = nullptr;
+	SDL_Surface* image = nullptr;
 	SDL_Surface* screen = nullptr;
-
-	if( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
+	
+	SDL_Event event;
+	
+	
+	// Start av main
+	bool quit = false;
+	
+	// Initialize
+	screen = Init(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
+	if( screen == nullptr )
 		return 1;
 	
-	screen = SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_SWSURFACE );
-	//SDL_SWSURFACE skapar skärmen i system minnet
-	
-	if( screen == nullptr)
-	{
-		return 1;
-	}
-	
-	SDL_WM_SetCaption( "Hello World", nullptr);
-	
-	message = load_image("hello.bmp");
-	if(message == nullptr)
+	// Load the files
+	image = load_image ("Images/Gui/background.png");
+	if(image == nullptr)
 		return 1;
 	
-	background = load_image("background.bmp");
-	if(message == nullptr)
-		return 1;
+	// Apply the surface to the screen
+	apply_surface(0, 0, image, screen);
 	
-	apply_surface(0, 0, background, screen);
-	apply_surface(500, 0, background, screen);
-	apply_surface(0, 546, background, screen);
-	apply_surface(500, 546, background, screen);
-	apply_surface(400, 200, message, screen);
-	
+	// Update the screen
 	if( SDL_Flip( screen ) == -1)
 		return 1;
 	
-	SDL_Delay(4000);
-
-	SDL_FreeSurface( background );
-	SDL_FreeSurface( message );
-	
-	SDL_Quit();
+	//While the user hasn't quit
+	while( quit == false)
+	{
+		while( SDL_PollEvent( &event))
+		{
+			if( event.type == SDL_QUIT )
+			{
+				quit = true;
+			}
+		}
+	}
+	clean_up({image});
 	
 	return 0;
-	
 }
 
 SDL_Surface* load_image(const string& filename)
@@ -89,4 +89,35 @@ void apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination)
 	offset.y = y;
 	
 	SDL_BlitSurface( source, nullptr, destination, &offset );
+}
+
+SDL_Surface* Init(const int& SCREEN_WIDTH, const int& SCREEN_HEIGHT, const int& SCREEN_BPP)
+{
+	//Initialize all SDL subsystems
+	if( SDL_Init( SDL_INIT_EVERYTHING ) == -1)
+		return nullptr;
+	
+	//Set up the title of the program
+	SDL_WM_SetCaption( "Hello World", nullptr);
+	
+	
+	//Set up the screen
+	SDL_Surface* screen;	
+	screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_SWSURFACE);
+	
+	//If there was an error in setting up the screen
+	if (screen == nullptr)
+		return nullptr;
+	
+	
+	//If everything is ok
+	return screen;
+}
+
+void clean_up(initializer_list<SDL_Surface*> cleanup)
+{
+	for(auto it = cleanup.begin(); it != cleanup.end(); ++it)
+		SDL_FreeSurface(*it);
+		
+	SDL_Quit();
 }
