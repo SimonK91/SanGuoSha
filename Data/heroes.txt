@@ -1,0 +1,6 @@
+1-start
+Name: 1
+"prime minister who is past his prime"
+character ability 1:
+At the beginning of your turn, you can view X number of cards from the top of the deck (X equals to the number of players still in play with X having maximum of 5). Of these X cards, you can choose any number of cards to place at the top or at the bottom of the pile. You can also rearrange the order of the cards.
+1-end
