@@ -6,17 +6,18 @@
 #include <string>
 
 using namespace std;
+
 SDL_Surface* load_image(const string&);
-void apply_surface(int, int, SDL_Surface*, SDL_Surface*);
+void apply_surface(int x, int y, SDL_Surface* from_where, SDL_Surface* to_where, SDL_Rect* what_part = nullptr);
 SDL_Surface* Init(const int& width, const int& height, const int& Bits_Per_Pixel);
-void clean_up(initializer_list<SDL_Surface*>);
+void clean_up(initializer_list<SDL_Surface*> all_surfaces_you_wish_to_clear);
 
 int main(int argc, char* argv[])
 {
 	// Variabler i starten
-	const int SCREEN_WIDTH  = 800;
-	const int SCREEN_HEIGHT = 600;
-	const int SCREEN_BPP    =  32;
+	const int SCREEN_WIDTH  = 1024;
+	const int SCREEN_HEIGHT =  768;
+	const int SCREEN_BPP    =   32;
 	
 	SDL_Surface* image = nullptr;
 	SDL_Surface* screen = nullptr;
@@ -81,14 +82,14 @@ SDL_Surface* load_image(const string& filename)
 	return optimizedImage;
 }
 
-void apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination)
+void apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip)
 {
 	SDL_Rect offset;
 	
 	offset.x = x;
 	offset.y = y;
 	
-	SDL_BlitSurface( source, nullptr, destination, &offset );
+	SDL_BlitSurface( source, clip, destination, &offset );
 }
 
 SDL_Surface* Init(const int& SCREEN_WIDTH, const int& SCREEN_HEIGHT, const int& SCREEN_BPP)
