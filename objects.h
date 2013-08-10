@@ -12,7 +12,7 @@ private:
 	SDL_Surface* image = nullptr;
 public:
 	~pointer_arrow(){clean_up({image});}
-	pointer_arrow(std::string filename, int red = -1, int green = -1, int blue = -1){image = load_image(filename,red,green,blue);}
+	pointer_arrow(std::string filename,bool transparant = true, const Uint8& red = 0, const Uint8& green = 0, const Uint8& blue = 0, bool color_key = false){image = load_image(filename,transparant,red,green,blue,color_key);}
 	pointer_arrow() = default;
 	pointer_arrow(const pointer_arrow&) = delete;
 	pointer_arrow(const pointer_arrow&&) = delete;
@@ -30,7 +30,7 @@ class text_box
 {
 private:
 	SDL_Color textColor;
-	TTF_Font* font = nullptr;
+	TTF_Font* font;
 	SDL_Surface* surface = nullptr;
 public:
 	~text_box()
@@ -38,8 +38,8 @@ public:
 		clean_up({surface});
 	}
 	
-	text_box(std::string font_style, int size = 12, int red = 255, int green = 255, int blue = 255)
-		{font = TTF_OpenFont(font_style.c_str(), size); textColor = {red,green,blue};}
+	text_box(const std::string& font_style, const unsigned& size = 12, const Uint8& red = 255, const Uint8& green = 255, const Uint8& blue = 255)
+		{font = TTF_OpenFont(font_style.c_str(), size); textColor = {red,green,blue,0};}
 
 	bool loaded(){return font != nullptr;}
 	void print(std::string message, int x, int y, SDL_Surface* to_where)

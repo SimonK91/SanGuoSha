@@ -27,6 +27,8 @@ int main(int argc, char* argv[])
 	
 	bool quit = false;
 	string text;
+	TTF_Font* font;
+	font = TTF_OpenFont("Fonts/LHANDW.TTF",28);
 		
 	// Load the files
 	
@@ -42,22 +44,22 @@ int main(int argc, char* argv[])
 	//	return 1;
 	
 	SDL_ShowCursor(0); //hide standard cursor
-	pointer_arrow arrow("Images/Gui/pointer.png",255,255,255);
+	pointer_arrow arrow("Images/Gui/pointer.png");
 	if(!arrow.loaded())
-		return 1;
+		SDL_ShowCursor(1);
 		
-	button back("Images/Gui/backButton.png",400,504,195,51);
+	button button_back("Images/Gui/backButton.png",400,504,195,51);
 	
 	//While the user hasn't quit
 	while( quit == false)
 	{
 		apply_surface(0, 0, background, screen);
 		message.print(text,(SCREEN_WIDTH - message.get_w())/2,0,screen);
+		button_back.print(screen);
 		arrow.print(screen);
-		back.show(screen);
 		while( SDL_PollEvent( &event))
 		{
-			back.handle_events(event, arrow);
+			button_back.handle_events(event, arrow);
 			if( event.type == SDL_KEYDOWN)
 			{
 				switch( event.key.keysym.sym)
@@ -83,7 +85,7 @@ int main(int argc, char* argv[])
 			return 1;
 		}
 	}
-	clean_up({background});
+	clean_up({background},{font});
 	TTF_Quit();
 	SDL_Quit();
 	return 0;

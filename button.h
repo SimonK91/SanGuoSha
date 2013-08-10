@@ -12,13 +12,18 @@ private:
 	SDL_Rect clip[4];
 	int active;
 	SDL_Surface* buttonSheet = nullptr;
+	std::string value;
 public:
 	button(std::string image, int x, int y, int w, int h);
 	
-	bool inside( const pointer_arrow&);
-	void handle_events(const SDL_Event&, const pointer_arrow&);
+	std::string get_value(){return value;}
+	void set_value(std::string s){value = s;}
 	
-	void show(SDL_Surface*);
+	bool inside( const pointer_arrow&);
+	bool inside( const int& x, const int& y);
+	bool handle_events(const SDL_Event&, const pointer_arrow&);
+	
+	void print(SDL_Surface*);
 };
 
 

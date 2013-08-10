@@ -3,7 +3,7 @@
 
 using namespace std;
 
-SDL_Surface* load_image(const string& filename, const int& red, const int& green, const int& blue)
+SDL_Surface* load_image(const string& filename,bool transparant, const Uint8& red, const Uint8& green, const Uint8& blue, bool color_key)
 {
 	//Temporary storage for the image that's loaded
 	SDL_Surface* loadedImage = nullptr;
@@ -15,16 +15,20 @@ SDL_Surface* load_image(const string& filename, const int& red, const int& green
 	loadedImage = IMG_Load( filename.c_str() );
 	if(loadedImage != nullptr)
 	{
-		//create an optimized image
-		optimizedImage = SDL_DisplayFormat( loadedImage );
-		
-		//make transparent if added a color
-		if(red >= 0 && red <= 255 && green >= 0 && green <= 255 && blue >= 0 && red <= blue)
+		if(transparant)
+			optimizedImage = SDL_DisplayFormatAlpha( loadedImage );
+		else
 		{
-			Uint32 colorkey = SDL_MapRGB( optimizedImage->format, red, green, blue );
-			SDL_SetColorKey( optimizedImage, SDL_SRCCOLORKEY, colorkey );
+			//create an optimized image
+			optimizedImage = SDL_DisplayFormat( loadedImage );
+				
+			//set color key if added colors
+			if(color_key)
+			{
+				Uint32 colorkey = SDL_MapRGB( optimizedImage->format, red, green, blue );
+				SDL_SetColorKey( optimizedImage, SDL_SRCCOLORKEY, colorkey );
+			}
 		}
-		
 		//free the old image
 		SDL_FreeSurface( loadedImage );
 	}
@@ -78,9 +82,9 @@ void clean_up(initializer_list<SDL_Surface*> clean_surface, initializer_list<TTF
 {
 	for(auto it = clean_surface.begin(); it != clean_surface.end(); ++it)
 		SDL_FreeSurface(*it);
-	
+		
 	for(auto it = clean_font.begin(); it != clean_font.end(); ++it)
-		if(*it != nullptr)
+		//if(*it != nullptr)
 			TTF_CloseFont(*it);
 
 	//Quit SDL_ttf

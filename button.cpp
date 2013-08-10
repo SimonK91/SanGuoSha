@@ -5,7 +5,7 @@
 button::button(std::string image, int x, int y, int w, int h)
 {
 
-	buttonSheet = load_image(image,255,255,255);
+	buttonSheet = load_image(image,true);
 	box.x = x;
 	box.y = y;
 	box.w = w;
@@ -38,59 +38,51 @@ bool button::inside( const pointer_arrow& arrow)
 {
 	return (arrow.get_x() > box.x && arrow.get_x() < box.x + box.w && arrow.get_y() > box.y && arrow.get_y() < box.y + box.h);
 }
+bool button::inside( const int& x, const int& y)
+{
+	return (x > box.x && x < box.x + box.w && y > box.y && y < box.y + box.h);
+}
 
-void button::handle_events(const SDL_Event& event, const pointer_arrow& arrow)
+bool button::handle_events(const SDL_Event& event, const pointer_arrow& arrow)
 {
 
     //If the mouse moved
     if( event.type == SDL_MOUSEMOTION )
     {
-        
         //If the mouse is over the button
         if( inside(arrow) )
         {
-            //Set the button sprite
-            active = 1;
+			if(!SDL_GetMouseState(NULL,NULL)&SDL_BUTTON(1)&& active == 0){active = 1; return false;} // om muspekaren är över knappen enbart!
+			if(SDL_GetMouseState(NULL, NULL)&SDL_BUTTON(1)&& active == 2){return false;}             // om muspekaren är över knappen och knappen är intryckt
+			if(SDL_GetMouseState(NULL, NULL)&SDL_BUTTON(1)&& active == 3){active = 2; return false;} // om muspekaren är intryckt och går från utanför knappen till innanför
+			if(active == 3){return false;} // om knappen inte är intryckt men har varit
         }
-        //If not
+        //Om pekaren inte är över knappen
         else
         {
             //Set the button sprite
-            active = 0;
+			if(SDL_GetMouseState(NULL, NULL)&SDL_BUTTON(1)&& (active == 2 || active == 3)){active = 3;return false;} // om knappen är intryct och går utanför knappen eller fortfarande intryckt fast utanför
+			else{active = 0; return false;} //annars blir knappen till neutralt värde
         }    
     }
+	
 	//If a mouse button was pressed
     if( event.type == SDL_MOUSEBUTTONDOWN )
     {
-        //If the left mouse button was pressed
-        if( event.button.button == SDL_BUTTON_LEFT )
-        {
-          
-            //If the mouse is over the button
-            if( inside(arrow) )
-            {
-                //Set the button sprite
-                active = 2;
-            }
-        }
+		//om vänster musknapp blev intryckt innanför knappen
+        if( event.button.button == SDL_BUTTON_LEFT && inside(arrow) ) {active = 2; return false;}
     }
 	//If a mouse button was released
     if( event.type == SDL_MOUSEBUTTONUP )
     {
-        //If the left mouse button was released
-        if( event.button.button == SDL_BUTTON_LEFT )
-        { 
-            
-            //If the mouse is over the button
-            if( inside(arrow) )
-            {
-                //Set the button sprite
-                active = 3;
-            }
-        }
+		//om musknappen blev släppt när knappen var aktivt nertryckt
+		if( event.button.button == SDL_BUTTON_LEFT && inside(arrow) && active == 2){active = 3; return true;}
+		if( event.button.button == SDL_BUTTON_LEFT && inside(arrow) && active == 0){active = 1; return false;}
+		if( event.button.button == SDL_BUTTON_LEFT && !inside(arrow)){active = 0; return false;}
     }
+	return false;
 }
-void button::show(SDL_Surface* to_where)
+void button::print(SDL_Surface* to_where)
 {
     //Show the button
     apply_surface( box.x, box.y, buttonSheet, to_where, &clip[active] );
