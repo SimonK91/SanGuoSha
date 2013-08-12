@@ -53,6 +53,7 @@ int main(int argc, char* argv[])
 	//While the user hasn't quit
 	while( quit == false)
 	{
+		SDL_Delay(17);
 		apply_surface(0, 0, background, screen);
 		message.print(text,(SCREEN_WIDTH - message.get_w())/2,0,screen);
 		button_back.print(screen);
