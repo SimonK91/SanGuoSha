@@ -11,7 +11,7 @@ button::button(std::string image, int x, int y, int w, int h)
 	box.w = w;
 	box.h = h;
 	
-	active = 1;
+	active = 0;
 	
 	clip[0].x = 0;
 	clip[0].y = 0;

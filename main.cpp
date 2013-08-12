@@ -39,28 +39,44 @@ int main(int argc, char* argv[])
 		return 1;
 	
 	
-	text_box message("Fonts/LHANDW.TTF",28);
+	//text_box message("Fonts/LHANDW.TTF",28);
 	//if(!message.loaded())
 	//	return 1;
 	
-	SDL_ShowCursor(0); //hide standard cursor
-	pointer_arrow arrow("Images/Gui/pointer.png");
+	//SDL_ShowCursor(0); //hide standard cursor
+	pointer_arrow arrow("");
 	if(!arrow.loaded())
 		SDL_ShowCursor(1);
 		
-	button button_back("Images/Gui/backButton.png",400,504,195,51);
+	button button_back("Images/Gui/backButton.png",100,200,195,51);
+	
+	button button_back2("Images/Gui/backButton.png",200,200,195,51);
+	
+	button button_back3("Images/Gui/backButton.png",300,200,195,51);
+	
+	button button_back4("Images/Gui/backButton.png",400,200,195,51);
+	
+	button button_back5("Images/Gui/backButton.png",500,200,195,51);
 	
 	//While the user hasn't quit
 	while( quit == false)
 	{
 		SDL_Delay(17);
 		apply_surface(0, 0, background, screen);
-		message.print(text,(SCREEN_WIDTH - message.get_w())/2,0,screen);
+		//message.print(text,(SCREEN_WIDTH - message.get_w())/2,0,screen);
 		button_back.print(screen);
-		arrow.print(screen);
+		button_back2.print(screen);
+		button_back3.print(screen);
+		button_back4.print(screen);
+		button_back5.print(screen);
+		//arrow.print(screen);
 		while( SDL_PollEvent( &event))
 		{
 			button_back.handle_events(event, arrow);
+			button_back2.handle_events(event, arrow);
+			button_back3.handle_events(event, arrow);
+			button_back4.handle_events(event, arrow);
+			button_back5.handle_events(event, arrow);
 			if( event.type == SDL_KEYDOWN)
 			{
 				switch( event.key.keysym.sym)

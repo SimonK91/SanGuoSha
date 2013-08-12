@@ -1,14 +1,13 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "functions.h"
+#include "../functions.h"
 #include "objects.h"
 #include <string>
 
-class button
+class button : public active_object
 {
 private:
-	SDL_Rect box;
 	SDL_Rect clip[4];
 	int active;
 	SDL_Surface* buttonSheet = nullptr;
