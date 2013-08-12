@@ -4,6 +4,15 @@
 #include "functions.h"
 #include <string>
 
+class Object
+{
+public:
+	
+private:
+	
+};
+
+
 class pointer_arrow
 {
 private:
