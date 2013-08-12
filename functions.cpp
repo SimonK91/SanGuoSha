@@ -72,7 +72,7 @@ SDL_Surface* Init(const int& SCREEN_WIDTH, const int& SCREEN_HEIGHT, const int& 
 	}
 	
 	//Set the window caption
-	SDL_WM_SetCaption( "TTF Test", nullptr);
+	SDL_WM_SetCaption( "SanGuoSha", nullptr);
 	
 	//If everything is ok
 	return screen;
