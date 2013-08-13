@@ -2,7 +2,6 @@
 #include <string>
 
 using namespace std;
-
 SDL_Surface* load_image(const string& filename,bool transparant, const Uint8& red, const Uint8& green, const Uint8& blue, bool color_key)
 {
 	//Temporary storage for the image that's loaded
