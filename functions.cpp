@@ -83,8 +83,7 @@ void clean_up(initializer_list<SDL_Surface*> clean_surface, initializer_list<TTF
 		SDL_FreeSurface(*it);
 		
 	for(auto it = clean_font.begin(); it != clean_font.end(); ++it)
-		//if(*it != nullptr)
-			TTF_CloseFont(*it);
+		TTF_CloseFont(*it);
 
 	//Quit SDL_ttf
 	//TTF_Quit();
