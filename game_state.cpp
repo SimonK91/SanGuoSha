@@ -1,6 +1,7 @@
 #include "game_state.h"
 
-//using namespace object;
+using namespace object;
+
 void GameState::run()
 {
 	int a = 0;
@@ -10,6 +11,7 @@ void GameState::run()
 		{
 			arrow.update_coordinates(event);
 			apply_surface(0,0,background,screen);
+			
 			for(int i = 0 ; i < all_objects.size() ; ++i)
 			{
 				if(static_cast<active_object*>(all_objects.at(i)) != nullptr)
@@ -33,7 +35,7 @@ void GameState::run()
 						{
 						
 						}
-					}
+					}	
 				}
 				(all_objects.at(i))->print(screen);
 			}
@@ -41,8 +43,6 @@ void GameState::run()
 			{
 				return;
 			}
-			
-			
 		}
 
 	SDL_Flip(screen);
@@ -56,8 +56,19 @@ void GameState::make_button(const std::string& name, const int& x_pos, const int
 	
 	all_objects.push_back(temp);
 }
-/*
-void GameState::make_button(const std::string& filename, const int& x_pos, const int& y_pos, const int& w_pos, const int& h_pos)
+
+void GameState::make_text_box(){
+	text_box* tmp = new text_box();
+	all_objects.push_back(tmp);
+}
+
+void GameState::make_textBox(const std::string& text, const int& x, const int& y, const int& w, const int& h ,SDL_Color col, const std::string& font, const int& size)
 {
-	all_objects.push_back() = new button{filename,x_pos,y_pos,w_pos,h_pos);
-}*/
+	text_box* temp = new text_box(text, x, y, w, h, col, font, size);
+	
+	all_objects.push_back(temp);
+}
+
+
+
+

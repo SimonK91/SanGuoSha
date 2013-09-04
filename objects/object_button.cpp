@@ -25,6 +25,8 @@ button::button
 	apply_surface((width-(textSurface->w))/2 -2 ,8+height*2+1,textSurface,buttonSheet);
 	apply_surface((width-(textSurface->w))/2 -5 ,8+height*3  ,textSurface,buttonSheet);
 	
+	clean_up({textSurface},{font});		//fixa minnesläcka
+	
 	box.x = x;
 	box.y = y;
 	box.w = width;
@@ -47,6 +49,8 @@ button::button
 	
 	temp.y = 3*temp.h;
 	clip.push_back(temp);
+	
+	
 }
 bool button::inside( const pointer_arrow& arrow)
 {

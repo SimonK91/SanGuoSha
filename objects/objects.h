@@ -18,7 +18,7 @@ protected:
 public:
 	virtual bool loaded() = 0;
  object(){}
-~object(){}
+virtual ~object(){}
 
 	virtual void print(SDL_Surface*) = 0;
 };
@@ -28,7 +28,8 @@ class dead_object : public object
 private:
 
 public:
-
+	dead_object(){}
+	virtual ~dead_object(){}
 };
 
 class active_object : public object
@@ -39,11 +40,9 @@ protected:
 	int active;
 
 public:
-
 	virtual std::string handle_event(const SDL_Event&, const pointer_arrow&) = 0;
- active_object(){}
-~active_object(){}
-
+	active_object(){}
+	virtual ~active_object(){}
  };
 
 

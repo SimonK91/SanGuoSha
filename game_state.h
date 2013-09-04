@@ -4,7 +4,7 @@
 #include "functions.h"
 #include "object_button.h"
 #include "pointer_arrow.h"
-
+#include "object_text_box.h"
 
 
 #include <vector>
@@ -29,7 +29,10 @@ public:
 	
 	
 	void run();
-};
+	void make_button(const std::string& filename, const int& x_pos, const int& y_pos, const int& w_pos = 195, const int& h_pos = 51);
+	void make_textBox(const std::string& text, const int& x, const int& y, const int& witdh = 200, const int& height = 200, SDL_Color col = {0,0,0,0}, const std::string& font = "Fonts/LHANDW.TTF", const int& size = 12);
+	void make_text_box();
+	};
 
 
 
