@@ -26,8 +26,10 @@ int main(int argc, char* argv[])
 		
 	GameState mainMenu(screen);
 	mainMenu.load_background("Images/Gui/background.png");
-	mainMenu.make_button("Images/Gui/backButton.png",100,450,195,51);
-	
+	mainMenu.make_button("Exit",300,500,"exit");
+	mainMenu.make_button("Options",300,300,"make_options");
+	mainMenu.make_button("Credits",300,400,"make_credits");
+	mainMenu.make_button("New Game",300,200,"make_new_game");
 	//mainMenu.make_textbox();
 	
 	mainMenu.run();

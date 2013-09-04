@@ -40,7 +40,7 @@ protected:
 
 public:
 
-	virtual bool handle_event(const SDL_Event&, const pointer_arrow&) = 0;
+	virtual std::string handle_event(const SDL_Event&, const pointer_arrow&) = 0;
  active_object(){}
 ~active_object(){}
 
