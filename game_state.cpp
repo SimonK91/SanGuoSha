@@ -1,6 +1,6 @@
 #include "game_state.h"
 
-using namespace object;
+//using namespace object;
 void GameState::run()
 {
 	int a = 0;
