@@ -1,4 +1,3 @@
-{
 void GameState::run_command(const std::string& what_command)
 {
 	if(what_command == "exit")
