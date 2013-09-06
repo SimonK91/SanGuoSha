@@ -22,9 +22,9 @@ TTF_Font* font;
 	int textCounter = 0;
 	*/
 public:
-	text_box(){
+	//text_box(int a = 0){
 		
-	}
+	//}
 
 /*
 	text_box(const std::string& text_, const int& x, const int& y, const int& w, const int& h,

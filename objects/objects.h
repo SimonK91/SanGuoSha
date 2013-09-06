@@ -8,41 +8,53 @@
 
 namespace object
 {
+
+//bashierarkin - abstrakt som bara den
 class object
 {
 private:
 
 protected:
+
+	//konstruktorer och operatorer som ej används!
+	object() = default;
+	object(const object&) = delete;
+	object(object&&) = delete;
+	object& operator=(const object&) = delete;
+	object& operator=(object&&) = delete;
+	
 	SDL_Rect box;
 	
 public:
 	virtual bool loaded() = 0;
- object(){}
-virtual ~object(){}
+	virtual ~object(){}
 
 	virtual void print(SDL_Surface*) = 0;
 };
 
+//alla objekt som inte har någon funktion i sig
 class dead_object : public object
 {
 private:
 
+protected:
+
 public:
-	dead_object(){}
-	virtual ~dead_object(){}
+	virtual ~dead_object() = default;
 };
 
+//alla objekt som har en funktion med något kommando.
 class active_object : public object
 {
 private:
 
 protected:
 	int active;
+	std::string command;
 
 public:
 	virtual std::string handle_event(const SDL_Event&, const pointer_arrow&) = 0;
-	active_object(){}
-	virtual ~active_object(){}
+	virtual ~active_object() = default;
  };
 
 

@@ -1,32 +1,40 @@
-#include <string>
+#ifndef OBJECT_SLIDER_H
+#define OBJECT_SLIDER_H
 
 #include "objects.h"
 
+#include <string>
 
 namespace object
 {
-	class slider : public active_object
-	{
-		public:
-		
-		slider(const int& x, y, const std::string& bg_i = "Images/Gui/borderBottom.png", 
-			const std::string& btn_i = "Images/Gui/borderLeftBottomCorner.png")
-		{
-		
-			bg = loadimage(bg_i, true);
-			btn = loadimage(btn_i, true) ;		
-		}
-		
-		
-		
-		protected:	
-			//Nej
-		
-		private:
-		SDL_Surface* bg;
-		SDL_Surface* btn;
-		
-	}
-}
+class slider : public active_object
+{
+private:
+	SDL_Surface* bg = nullptr;
+	SDL_Surface* btn = nullptr;
+	SDL_Rect btn_box;
+	int offset;
+	int box_min;
+	int box_max;
 
-//Hej
+public:
+	
+	slider(const int& x, const int& y, const std::string& command,
+			const std::string& bg_i = "Images/Gui/thickSlider.png", const int& edge = 20,
+			const std::string& btn_i = "Images/Gui/thickSliderButton.png");
+	~slider();
+		
+	bool inside( const pointer_arrow& arrow);
+	
+	bool loaded(){return false;}
+		
+	std::string handle_event(const SDL_Event&, const pointer_arrow&);
+	
+	void print(SDL_Surface* to_where);
+		
+protected:	
+		
+};
+}//slut på namespace
+
+#endif
