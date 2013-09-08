@@ -45,7 +45,8 @@ namespace object
       }
     ~window();
     std::string handle_event(const SDL_Event&, const pointer_arrow&);
-    void makeButton(const std::string& text, const int& xPos, const int& yPos, const std::string command = "");
+    void makeButton(const std::string& text, const int& xPos, const int& yPos, const std::string& command = "",
+					const std::string& image = "Images/Gui/cleanButton2.png", const unsigned& size = 20);
     void makeSlider(/*konstruktor argument för slider*/);
     void makeCheckBox(/*konstruktor argument för checkBox*/);
     void makeTextBox(/*konstruktor argument för textbox*/);

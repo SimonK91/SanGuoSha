@@ -6,6 +6,7 @@
 #include "object_button.h"
 #include "object_slider.h"
 #include "object_text_box.h"
+#include "object_window.h"
 
 #include <vector>
 
@@ -45,6 +46,7 @@ public:
 	bool make_button(const std::string& name, const int& x_pos, const int& y_pos, const std::string& command,
 					 const std::string& image = "Images/Gui/cleanButton2.png", const unsigned& size = 20);
 	bool make_slider(const int& x_pos, const int& y_pos, const std::string& command);
+	bool add_window(object::window& your_window){object::window* obj = &your_window; all_objects.push_back(obj);}
 	bool make_textbox(const std::string& text, const int& x, const int& y, const int& w, const int& h,
 					  const SDL_Color &col = {255,255,255,0}, const std::string& font = "Fonts/LHANDW.TTF", const unsigned& size = 13);
 };

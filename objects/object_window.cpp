@@ -2,9 +2,9 @@
 
 namespace object
 {
-  void window::makeButton(const std::string& text, const int& xPos, const int& yPos, const std::string command)
+  void window::makeButton(const std::string& text, const int& xPos, const int& yPos, const std::string& command,const std::string& image, const unsigned& size)
   {
-    button* tmp = new button(text, xPos, yPos, command);
+    button* tmp = new button(text, xPos, yPos, command, image, size);
     objects.push_back(tmp);
   } 
   
