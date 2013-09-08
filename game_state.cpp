@@ -3,14 +3,7 @@
 using namespace object;
 
 //Destruktor
-GameState::~GameState()
-{
-	clean_up({background}); //screen är utifrån och tas bort där, ta inte bort den här, då kraschar programmet!
-	for(auto it : all_objects)
-	{
-		delete it;          //varje objekt tas bort så att man undviker minnesläckor
-	}
-}
+GameState::~GameState(){} //destruering sker i slutet av run!
 
 
 //Mainfunktionen i GameState
@@ -25,16 +18,19 @@ void GameState::run()
 			
 			for(unsigned i = 0 ; i < all_objects.size() ; ++i)  //för varje objekt som finns i gamestatet
 			{
-				if(static_cast<active_object*>(all_objects.at(i)) != nullptr) //om objektet är ett aktivt objekt (aktiva objekt kan manipulera saker)
+				
+				if(dynamic_cast<active_object*>(all_objects.at(i)) != nullptr) //om objektet är ett aktivt objekt (aktiva objekt kan manipulera saker)
 				{
-					std::string command = static_cast<active_object*>(all_objects.at(i))->handle_event(event,arrow); //kör handle event på objektet (detta ser om kriterier är uppfyllda för att göra något
+					std::string command = dynamic_cast<active_object*>(all_objects.at(i))->handle_event(event,arrow); //kör handle event på objektet (detta ser om kriterier är uppfyllda för att göra något
 					if(command != "") //om man fick tillbaka annat än en tom sträng
 					{
-						run_command(command); //kör kommandot för denna sträng
+						run_command(command,i); //kör kommandot för denna sträng
 					}	
 				}
-				
-				all_objects.at(i)->print(screen); // för varje objekt (oavsett aktivt eller inte), skriv ut det på skärmen
+				if(i < all_objects.size())
+				{
+					all_objects.at(i)->print(screen); // för varje objekt (oavsett aktivt eller inte), skriv ut det på skärmen
+				}
 			}
 			if( event.type == SDL_QUIT )    // om krysset uppe till höger blev intryckt
 			{
@@ -44,14 +40,22 @@ void GameState::run()
 		SDL_Flip(screen);                   // Skriv ut bilden på skärmen
 		SDL_Delay(15);                      // Vänta 15ms för att sänka fps lite
 	}
+	
+	while(!all_objects.empty())
+	{
+		delete all_objects.back();
+		all_objects.pop_back();
+	}
+	clean_up({background});
 }
 
 
 
 //för att skapa alla objekttyper
-bool GameState::make_button(const std::string& name, const int& x_pos, const int& y_pos, const std::string& command)
+bool GameState::make_button(const std::string& name, const int& x_pos, const int& y_pos, const std::string& command,
+							const std::string& image, const unsigned& size)
 {
-	button* temp = new button(name, x_pos, y_pos, command);
+	button* temp = new button(name, x_pos, y_pos, command, image, size);
 	if (temp == nullptr)
 		return false;
 	all_objects.push_back(temp);
@@ -66,16 +70,17 @@ bool GameState::make_slider(const int& x_pos, const int& y_pos, const std::strin
 	return true;
 }
 
-bool GameState::make_textbox(const std::string& text, const int& x, const int& y, const int& w, const int& h ,SDL_Color col, const std::string& font, const int& size)
+bool GameState::make_textbox(const std::string& text, const int& x, const int& y, const int& w , const int& h
+							,const SDL_Color &col, const std::string& font, const unsigned& size)
 {
-	/*
-	text_box* temp = new text_box();
+	text_box* temp = new text_box(text,x,y,w,h,col,font,size);
+	
 	if (temp == nullptr)
 		return false;
 	all_objects.push_back(temp);
+	//all_objects.pop_back();
 	return true;
-*/
-	return false;
+	
 }
 
 #include "game_state_commands.cpp" //enbart för att separera upp alla commands till en annan cpp fil, (detta är ej nödvändigt att göra)

@@ -26,8 +26,6 @@ public:
 		
 	bool inside( const pointer_arrow& arrow);
 	
-	bool loaded(){return false;}
-		
 	std::string handle_event(const SDL_Event&, const pointer_arrow&);
 	
 	void print(SDL_Surface* to_where);

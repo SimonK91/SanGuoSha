@@ -24,11 +24,9 @@ protected:
 	object& operator=(object&&) = delete;
 	
 	SDL_Rect box;
-	
+	SDL_Rect clip;
 public:
-	virtual bool loaded() = 0;
 	virtual ~object(){}
-
 	virtual void print(SDL_Surface*) = 0;
 };
 

@@ -1,6 +1,7 @@
 #include "functions.h"
 #include <string>
-
+#include <sstream>
+#include <vector>
 using namespace std;
 SDL_Surface* load_image(const string& filename,bool transparant, const Uint8& red, const Uint8& green, const Uint8& blue, bool color_key)
 {
@@ -77,17 +78,21 @@ SDL_Surface* Init(const int& SCREEN_WIDTH, const int& SCREEN_HEIGHT, const int& 
 	return screen;
 }
 
-void clean_up(initializer_list<SDL_Surface*> clean_surface, initializer_list<TTF_Font*> clean_font)
+void clean_up(std::vector<SDL_Surface*> clean_surface, std::vector<TTF_Font*> clean_font)
 {
 	for(auto it = clean_surface.begin(); it != clean_surface.end(); ++it)
 		SDL_FreeSurface(*it);
 		
-	for(auto it = clean_font.begin(); it != clean_font.end(); ++it)
-		TTF_CloseFont(*it);
+	for(int i = 0 ; i < clean_font.size(); ++i)
+		TTF_CloseFont(clean_font.at(i));
 
-	//Quit SDL_ttf
-	//TTF_Quit();
-		
-	//Quit SDL
-	//SDL_Quit();
+}
+
+//Integer to string
+std::string I2S(const int& i)
+{
+	std::stringstream ss;
+	ss << i;
+	std::string s = ss.str();
+	return s;
 }

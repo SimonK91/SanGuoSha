@@ -5,8 +5,7 @@
 namespace object
 {
 
-button::button(const std::string& name, int x, int y, const std::string& command_,const std::string& image)
-//:box.x(x),box.y(y),box.w(width),box.h(height),active(0)
+button::button(const std::string& name, int x, int y, const std::string& command_,const std::string& image, const unsigned& size)
 {
 
 	command = command_;
@@ -16,9 +15,9 @@ button::button(const std::string& name, int x, int y, const std::string& command
 	SDL_Surface* textSurface;
 	TTF_Font* font;
 	
-	font = TTF_OpenFont("Fonts/LHANDW.TTF", 24);	
+	font = TTF_OpenFont("Fonts/LHANDW.TTF", size);	
 	SDL_Color textColor{0,0,0,0};
-	textSurface = TTF_RenderText_Solid(font, name.c_str(), textColor);
+	textSurface = TTF_RenderText_Blended(font, name.c_str(), textColor);
 	
 	buttonSheet = load_image(image.c_str(),true); //själva knappskalet
 	box.x = x;
@@ -29,10 +28,10 @@ button::button(const std::string& name, int x, int y, const std::string& command
 	int offset = (box.h - textSurface->h)/2;
 	if(textSurface != nullptr)
 	{
-		apply_surface((box.w-(textSurface->w))/2 -5 ,offset          ,textSurface,buttonSheet); //text på alla delar av knappen
-		apply_surface((box.w-(textSurface->w))/2 -5 ,offset+box.h    ,textSurface,buttonSheet);
-		apply_surface((box.w-(textSurface->w))/2 -2 ,offset+box.h*2+1,textSurface,buttonSheet);
-		apply_surface((box.w-(textSurface->w))/2 -5 ,offset+box.h*3  ,textSurface,buttonSheet);
+		apply_surface((box.w-(textSurface->w))/2    ,offset          ,textSurface,buttonSheet); //text på alla delar av knappen
+		apply_surface((box.w-(textSurface->w))/2    ,offset+box.h    ,textSurface,buttonSheet);
+		apply_surface((box.w-(textSurface->w))/2 +3 ,offset+box.h*2+1,textSurface,buttonSheet);
+		apply_surface((box.w-(textSurface->w))/2    ,offset+box.h*3  ,textSurface,buttonSheet);
 	}
 	
 	clean_up({textSurface},{font});	
@@ -107,9 +106,5 @@ void button::print(SDL_Surface* to_where)
     apply_surface( box.x, box.y, buttonSheet, to_where, &clip.at(active));
 }
 
-bool button::loaded()
-{
-	return buttonSheet != nullptr;
-}
 
 }//slut på namnrymden

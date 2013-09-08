@@ -4,13 +4,7 @@
 #include <sstream>
 
 
-std::string I2S(const int& i)
-{
-	std::stringstream ss;
-	ss << i;
-	std::string s = ss.str();
-	return s;
-}
+
 namespace object
 {
 
