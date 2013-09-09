@@ -58,7 +58,7 @@ std::string slider::handle_event(const SDL_Event& event, const pointer_arrow& ar
 		else if(x > box_max)
 			btn_box.x = box_max;
 		
-		int value = (btn_box.x - box_min)/(box_max - box_min)*100;
+		int value = (btn_box.x - box_min)*100/(box_max - box_min);
 		return command + " " + I2S(value);	
 	}
 	if(event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)

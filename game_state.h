@@ -22,6 +22,8 @@ private:
 
 //variabler som finns för alla commands och liknande
 	bool running = true;
+	bool has_window = false;
+	bool fullscreen = false;
 	
 	
 public:
@@ -39,14 +41,14 @@ public:
 	void run();
 	
 	//funktion med alla kommandon som finns
-	void run_command(const std::string& what_command, const int& current_command); //finns skapad i "game_state_commands.cpp"
+	void run_command(const std::string& what_command, unsigned& current_command); //finns skapad i "game_state_commands.cpp"
 	
 	//publika funktioner för att ladda background och skapa objekt i gamestatet
 	void load_background(const std::string& bg){background = load_image(bg);}
 	bool make_button(const std::string& name, const int& x_pos, const int& y_pos, const std::string& command,
 					 const std::string& image = "Images/Gui/cleanButton2.png", const unsigned& size = 20);
 	bool make_slider(const int& x_pos, const int& y_pos, const std::string& command);
-	bool add_window(object::window& your_window){object::window* obj = &your_window; all_objects.push_back(obj);}
+	bool add_window(object::window* your_window);
 	bool make_textbox(const std::string& text, const int& x, const int& y, const int& w, const int& h,
 					  const SDL_Color &col = {255,255,255,0}, const std::string& font = "Fonts/LHANDW.TTF", const unsigned& size = 13);
 };

@@ -21,6 +21,8 @@ public:
 	void print(SDL_Surface* to_where){apply_surface(x,y,image,to_where);}
 	int get_x()const{ return x;}
 	int get_y()const{ return y;}
+	void set_x(int i){x = i;}
+	void set_y(int i){y = i;}
 	int get_w()const{ return image->w;}
 	int get_h()const{ return image->h;}
 	void update_coordinates(const SDL_Event& event);

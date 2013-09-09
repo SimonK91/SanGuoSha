@@ -13,36 +13,36 @@ text_box::text_box(const std::string& text_, const int& x, const int& y, const i
 	SDL_Surface* tmp_bg;
 	
 	//övre ramen
-	tmp_bg = load_image("Images/Gui/borderTop.png",true);
+	tmp_bg = load_image("Images/Gui//window/tb.png",true);
 	apply_surface(0,0, tmp_bg, background, nullptr);
 	frameSize = tmp_bg->h;
 	clean_up({tmp_bg});
 	//vänstra ramen
-	tmp_bg = load_image("Images/Gui/borderLeft.png",true);
+	tmp_bg = load_image("Images/Gui/window/lb.png",true);
 	apply_surface(0,0, tmp_bg, background, nullptr);
 	clean_up({tmp_bg});
 	//nedre ramen
-	tmp_bg = load_image("Images/Gui/borderBottom.png",true);
+	tmp_bg = load_image("Images/Gui/window/bb.png",true);
 	apply_surface(0,h - tmp_bg->h, tmp_bg, background, nullptr);
 	clean_up({tmp_bg});
 	//högra ramen
-	tmp_bg = load_image("Images/Gui/borderRight.png",true);
+	tmp_bg = load_image("Images/Gui/window/rb.png",true);
 	apply_surface(w - tmp_bg->w,0, tmp_bg, background, nullptr);
 	clean_up({tmp_bg});
 	//övre vänstra hörnet
-	tmp_bg = load_image("Images/Gui/borderLeftTopCorner.png",true);
+	tmp_bg = load_image("Images/Gui/window/ltc.png",true);
 	apply_surface(0,0, tmp_bg, background, nullptr);
 	clean_up({tmp_bg});
 	//övre högra hörnet
-	tmp_bg = load_image("Images/Gui/borderRightTopCorner.png",true);
+	tmp_bg = load_image("Images/Gui/window/rtc.png",true);
 	apply_surface(w - tmp_bg->w,0, tmp_bg, background, nullptr);
 	clean_up({tmp_bg});
 	//nedre vänstra hörnet
-	tmp_bg = load_image("Images/Gui/borderLeftBottomCorner.png",true);
+	tmp_bg = load_image("Images/Gui/window/lbc.png",true);
 	apply_surface(0,h - tmp_bg->h, tmp_bg, background, nullptr);
 	clean_up({tmp_bg});
 	//nedre högra hörnet
-	tmp_bg = load_image("Images/Gui/borderRightBottomCorner.png",true);
+	tmp_bg = load_image("Images/Gui/window/rbc.png",true);
 	apply_surface(w - tmp_bg->w, h - tmp_bg->h, tmp_bg, background, nullptr);
 	clean_up({tmp_bg});
 	
@@ -170,6 +170,7 @@ void text_box::set_text(const std::string& what_text)
 	}
 	//Skapar yta att skriva på
 	textArea = SDL_CreateRGBSurface(0,clip.w,clip.h,32,0,0,0,1);	//skapar en ny tom yta
+	//apply_surface(0,0, load_image("Images/Gui/transparent.png",true),textArea,&clip);
 	apply_surface(0,0, background, textArea, &clip);				//ritar ut bakgrunden (ramen)
 	
 	//laddar variabler
