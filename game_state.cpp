@@ -42,7 +42,8 @@ void GameState::run()
 			}
 			if( event.type == SDL_QUIT )    // om krysset uppe till höger blev intryckt
 			{
-				running = false;            // avsluta GameStatet
+			  
+			  running = false;            // avsluta GameStatet
 			}
 		}
 		SDL_Flip(screen);                   // Skriv ut bilden på skärmen
@@ -55,6 +56,7 @@ void GameState::run()
 		all_objects.pop_back();
 	}
 	clean_up({background});
+	write_settings(settings);
 }
 
 

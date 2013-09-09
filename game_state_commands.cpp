@@ -34,6 +34,7 @@ void GameState::run_command(const std::string& what_command,unsigned& current)
 		{
 			screen = SDL_SetVideoMode(800,600,32, screen->flags+SDL_FULLSCREEN);
 			fullscreen = true;
+			
 		}
 		else
 		{
