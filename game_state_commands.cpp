@@ -13,10 +13,10 @@ void GameState::run_command(const std::string& what_command,unsigned& current)
 	if(what_command == "options")
 	{
 		window* options = new window(160,50,500,450);
-		options->makeButton("Fullscreen",30,20,"toggle_fullscreen");
-		options->makeButton("Back",270,390,"close_window");
-		options->makeTextBox("Modify sound",300,20,150,30);
-		options->makeSlider(250,60,"set_sound");
+		options->make_button("Fullscreen",30,20,"toggle_fullscreen");
+		options->make_button("Back",270,390,"close_window");
+		options->make_text_box("Modify sound",300,20,150,30);
+		options->make_slider(250,60,"set_sound");
 		add_window(options);
 		has_window = true;
 		dynamic_cast<text_box*>(all_objects.at(0))->set_text("You cannot change options yet!");
