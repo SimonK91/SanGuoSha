@@ -2,8 +2,6 @@
 #include <string>
 #include <sstream>
 #include <vector>
-#include <fstream>
-
 using namespace std;
 SDL_Surface* load_image(const string& filename,bool transparant, const Uint8& red, const Uint8& green, const Uint8& blue, bool color_key)
 {
@@ -72,7 +70,12 @@ SDL_Surface* Init(const int& SCREEN_WIDTH, const int& SCREEN_HEIGHT, const int& 
 	{
 		return nullptr;
 	}
-	
+	 
+	//Initialize SDL_mixer
+    if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
+    {
+        return false;    
+    }
 	//Set the window caption
 	SDL_WM_SetCaption( "SanGuoSha", nullptr);
 	
@@ -98,46 +101,14 @@ std::string I2S(const int& i)
 	std::string s = ss.str();
 	return s;
 }
-bool load_settings(std::vector<std::pair<std::string, std::string>>& settings)
+
+int S2I(const std::string& s)
 {
-  std::ifstream read_from("Data/settings.txt");
-  
-  if(!read_from.is_open())
-    {
-      //filen kunde inte öppnas
-      return false;
-    }
-  
-  std::string tmpSetting = "";
-  std::string tmpValue = "";
-  
-  while(read_from >> tmpSetting)
-    {
-      read_from >> ws;
-      read_from >> tmpValue;
-      settings.push_back(std::make_pair(tmpSetting, tmpValue) );
-      }
- 
-  read_from.close();
-  
-    return true;
+	int value = 0;
+	for(char c: s)
+	{
+		value = value*10 + (c - '0');
+	}
+	return value;
 }
 
-bool write_settings(std::vector< std::pair<std::string, std::string>> settings)
-{
-  fstream write_to;
-  write_to.open("Data/settings.txt");
-  if(!write_to.is_open())
-    {
-      //filen kunde inte öppnas
-      return false;
-    }
-  write_to.clear();
-  for(auto i : settings)
-    {
-      write_to << i.first << " " << i.second << std::endl;
-    }
-  write_to.close();
-
-  return true;
-}

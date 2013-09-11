@@ -18,7 +18,6 @@ int main(int argc, char* argv[])
 	if( screen == nullptr )
 		return 1;
 	
-	
 	// Start av main	
 	GameState mainMenu(screen);  //Skapa mainMenu och länka det till skärmen
 	mainMenu.load_background("Images/Gui/background.png");
@@ -28,9 +27,10 @@ int main(int argc, char* argv[])
 	mainMenu.make_button("Options", 300,200,"options");
 	mainMenu.make_button("Exit", 300,400,"exit");
 	mainMenu.run(); //startar programmet
-	delete &mainMenu;
-	//avslut, ta bort alla surfaces som skapas (enbart screen just nu) och avsluta TTF och SDL
+	//delete &mainMenu;
+	//avslut, ta bort alla surfaces som skapas (enbart screen just nu) och avsluta TTF, SDL och musiken
 	clean_up({screen});
+    Mix_CloseAudio();
 	TTF_Quit();
 	SDL_Quit();
 	return 0;

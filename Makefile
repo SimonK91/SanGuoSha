@@ -1,8 +1,8 @@
 CCC        =g++
 CFLAGS   +=-L/sw/gcc-${GCC4_V}/lib -static-libstdc++ -std=c++11 -pedantic -Wall -Wextra
 INCLUDE  = -I./objects
-SDLFLAGS +=-lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_ttf
-OBJECTS = main.cpp game_state.o object_button.o object_slider.o object_text_box.o functions.o pointer_arrow.o object_window.o
+SDLFLAGS +=-lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer
+OBJECTS = main.cpp game_state.o object_button.o object_slider.o object_text_box.o functions.o pointer_arrow.o object_window.o music.o
 all: $(OBJECTS)
 		@ echo
 		@ echo execute skapas
@@ -12,12 +12,16 @@ all: $(OBJECTS)
 		@ echo Filnamnet ar SGS.exe
 		@ echo
 
-
 		
 functions.o: functions.cpp functions.h
 		@ echo
 		@ echo functions.o skapas
 		$(CCC) $(CFLAGS) -c functions.cpp $(SDLFLAGS)
+		
+music.o: music.h music.cpp
+		@ echo
+		@ echo music.o skapas
+		$(CCC) $(CFLAGS) -c music.cpp $(SDLFLAGS)
 		
 game_state.o: game_state.cpp game_state_commands.cpp game_state.h
 		@ echo
@@ -48,6 +52,7 @@ pointer_arrow.o: ./objects/pointer_arrow.h ./objects/pointer_arrow.cpp
 		@ echo
 		@ echo pointer_arrow.o skapas
 		$(CCC) $(CFLAGS) -c ./objects/pointer_arrow.cpp $(SDLFLAGS)
+		
 		
 		
 		

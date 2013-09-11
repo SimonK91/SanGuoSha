@@ -1,16 +1,15 @@
 #ifndef GAME_STATE_H
 #define GAME_STATE_H
 
+#include "music.h"
 #include "functions.h"
 #include "pointer_arrow.h"
 #include "object_button.h"
 #include "object_slider.h"
 #include "object_text_box.h"
 #include "object_window.h"
-#include <map>
+
 #include <vector>
-#include <string>
-#include <utility>
 
 class GameState
 {
@@ -21,23 +20,18 @@ private:
 	SDL_Surface* screen;
 	object::pointer_arrow arrow;
 	std::vector<object::object*> all_objects;
+	
+	Music m;
 
 //variabler som finns för alla commands och liknande
 	bool running = true;
 	bool has_window = false;
 	bool fullscreen = false;
-
-//settings variabler
-	std::vector<std::pair<std::string, std::string>> settings; 
 	
 	
 public:
 	//konstruktorer, destruktorer och operatorer
-	GameState(SDL_Surface* scr)
-	  {
-	    screen = scr;
-	    load_settings(settings);
-	  }
+	GameState(SDL_Surface* scr) : screen(scr){m.loadMusic("Music/Menu.wav");}
 	~GameState();
 	//borttagna
 	GameState() = delete;                 //defaultkonstruktor
@@ -51,7 +45,7 @@ public:
 	
 	//funktion med alla kommandon som finns
 	void run_command(const std::string& what_command, unsigned& current_command); //finns skapad i "game_state_commands.cpp"
-	void run_settings
+	
 	//publika funktioner för att ladda background och skapa objekt i gamestatet
 	void load_background(const std::string& bg){background = load_image(bg);}
 	bool make_button(const std::string& name, const int& x_pos, const int& y_pos, const std::string& command,

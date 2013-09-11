@@ -58,9 +58,9 @@ namespace object
     
     
   }
-  bool window::make_slider(const int& x_pos, const int& y_pos, const std::string& command)
+  bool window::make_slider(const int& x_pos, const int& y_pos, const std::string& command, const int& value)
   {
-    slider* temp = new slider(x_pos, y_pos, command);
+    slider* temp = new slider(x_pos, y_pos, command, value);
     if (temp == nullptr)
 		return false;
     objects.push_back(temp);
@@ -79,4 +79,9 @@ namespace object
     return true;
     
   }
+	void window::set_text(const int& where, const std::string& what_text)
+	{
+		if(dynamic_cast<text_box*>(objects.at(where)) != nullptr)
+			dynamic_cast<text_box*>(objects.at(where))->set_text(what_text);
+	}
 }//slut på namnrymd

@@ -16,8 +16,8 @@ namespace object
   private:
     SDL_Surface* background = nullptr;
     SDL_Rect box;
-    
     std::vector<object*> objects;
+    
   public:
     //notera att  fönstret bör vara minst 10x10 pixlar stort
     window(const int& x, const int& y, const int& w, const int& h)
@@ -68,11 +68,12 @@ namespace object
     std::string handle_event(const SDL_Event&, const pointer_arrow&);
     void make_button(const std::string& text, const int& x_pos, const int& y_pos, const std::string& command = "",
 					const std::string& image = "Images/Gui/cleanButton2.png", const unsigned& size = 20);
-    bool make_slider(const int& x_pos, const int& y_pos, const std::string& command);
-    void make_check_box(/*konstruktor argument för checkBox*/){}
+    bool make_slider(const int& x_pos, const int& y_pos, const std::string& command, const int& value);
+    void make_checkbox(/*konstruktor argument för checkBox*/){}
     bool make_text_box(const std::string& text, const int& x, const int& y, const int& w, const int& h,
 					  const SDL_Color &col = {255,255,255,0}, const std::string& font = "Fonts/LHANDW.TTF", const unsigned& size = 13);
     void print(SDL_Surface* screen);
+	void set_text(const int& where, const std::string& what_text);
   };  
 }//namnrymd
 #endif

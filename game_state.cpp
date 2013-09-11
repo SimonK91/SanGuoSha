@@ -9,6 +9,7 @@ GameState::~GameState(){} //destruering sker i slutet av run!
 //Mainfunktionen i GameState
 void GameState::run()
 {
+	m.play();
 	while(running) //medans programmet körs
 	{
 		while( SDL_PollEvent( &event)) //så länge som det finns en event
@@ -25,6 +26,7 @@ void GameState::run()
 					if(command != "") //om man fick tillbaka annat än en tom sträng
 					{
 						run_command(command,i); //kör kommandot för denna sträng
+						
 					}	
 				}
 				else if(dynamic_cast<window*>(all_objects.at(i)) != nullptr)
@@ -33,6 +35,10 @@ void GameState::run()
 					if(command != "") //om man fick tillbaka annat än en tom sträng
 					{
 						run_command(command,i); //kör kommandot för denna sträng
+						//rensa events 
+						//gör det senare så får vi mindre lagg :D
+						
+						break;
 					}
 				}
 				if(i < all_objects.size())
@@ -42,8 +48,7 @@ void GameState::run()
 			}
 			if( event.type == SDL_QUIT )    // om krysset uppe till höger blev intryckt
 			{
-			  
-			  running = false;            // avsluta GameStatet
+				running = false;            // avsluta GameStatet
 			}
 		}
 		SDL_Flip(screen);                   // Skriv ut bilden på skärmen
@@ -56,7 +61,6 @@ void GameState::run()
 		all_objects.pop_back();
 	}
 	clean_up({background});
-	write_settings(settings);
 }
 
 
@@ -73,7 +77,7 @@ bool GameState::make_button(const std::string& name, const int& x_pos, const int
 }
 bool GameState::make_slider(const int& x_pos, const int& y_pos, const std::string& command)
 {
-	slider* temp = new slider(x_pos, y_pos, command);
+	slider* temp = new slider(x_pos, y_pos, command,m.getVolume());
 	if (temp == nullptr)
 		return false;
 	all_objects.push_back(temp);

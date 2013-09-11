@@ -19,7 +19,7 @@ private:
 
 public:
 	
-	slider(const int& x, const int& y, const std::string& command,
+	slider(const int& x, const int& y, const std::string& command, const int& val,
 			const std::string& bg_i = "Images/Gui/thickSlider.png", const int& edge = 20,
 			const std::string& btn_i = "Images/Gui/thickSliderButton.png");
 	~slider();

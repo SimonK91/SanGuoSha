@@ -15,27 +15,28 @@ button::button(const std::string& name, int x, int y, const std::string& command
 	SDL_Surface* textSurface;
 	TTF_Font* font;
 	
-	font = TTF_OpenFont("Fonts/LHANDW.TTF", size);	
-	SDL_Color textColor{0,0,0,0};
-	textSurface = TTF_RenderText_Blended(font, name.c_str(), textColor);
-	
-	buttonSheet = load_image(image.c_str(),true); //själva knappskalet
+	if(name != "")
+	{
+		font = TTF_OpenFont("Fonts/LHANDW.TTF", size);	
+		SDL_Color textColor{0,0,0,0};
+		textSurface = TTF_RenderText_Blended(font, name.c_str(), textColor);
+	}
+	buttonSheet = load_image(image,true); //själva knappskalet
 	box.x = x;
 	box.y = y;
 	box.w = buttonSheet->w;
 	box.h = buttonSheet->h/4;
 	
 	int offset = (box.h - textSurface->h)/2;
-	if(textSurface != nullptr)
+	if(name != "")
 	{
 		apply_surface((box.w-(textSurface->w))/2    ,offset          ,textSurface,buttonSheet); //text på alla delar av knappen
 		apply_surface((box.w-(textSurface->w))/2    ,offset+box.h    ,textSurface,buttonSheet);
 		apply_surface((box.w-(textSurface->w))/2 +3 ,offset+box.h*2+1,textSurface,buttonSheet);
 		apply_surface((box.w-(textSurface->w))/2    ,offset+box.h*3  ,textSurface,buttonSheet);
-	}
-	
+
 	clean_up({textSurface},{font});	
-	
+	}
 	SDL_Rect temp;
 	temp.x = 0;
 	temp.y = 0;

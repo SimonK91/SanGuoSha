@@ -8,7 +8,7 @@
 namespace object
 {
 
-slider::slider(const int& x, const int& y, const std::string& command_,
+slider::slider(const int& x, const int& y, const std::string& command_, const int& val,
 			   const std::string& bg_i, const int& edge,
 			   const std::string& btn_i)
 {
@@ -25,13 +25,15 @@ slider::slider(const int& x, const int& y, const std::string& command_,
 	
 	//sliderknappen
 	btn = load_image(btn_i, true);
-	btn_box.x = offset;
+	//btn_box.x = offset;
 	btn_box.y = (box.h - btn->h+1)/2;
 	btn_box.w = btn->w;
 	btn_box.h = btn->h;
 	
 	box_min = offset;
 	box_max = box.w - btn_box.w - offset;
+	btn_box.x = offset + (val*(box_max-offset))/100;
+	
 }
 
 
@@ -44,9 +46,9 @@ std::string slider::handle_event(const SDL_Event& event, const pointer_arrow& ar
 		{
 			active = 1;
 		}
-		return "";
+		//return "";
 	}
-	if(active == 1 && event.type == SDL_MOUSEMOTION)
+	if(active == 1 && (event.type == SDL_MOUSEMOTION || event.type == SDL_MOUSEBUTTONDOWN))
 	{
 		int x = arrow.get_x() - btn_box.w/2;// - offset + btn_box.w/2;
 		if(x >= box.x + box_min && x <= box.x + box_max)
@@ -72,8 +74,8 @@ std::string slider::handle_event(const SDL_Event& event, const pointer_arrow& ar
 
 bool slider::inside( const pointer_arrow& arrow)
 {
-	int left_edge  = box.x + btn_box.x;
-	int right_edge = left_edge + btn_box.w;
+	int left_edge  = box.x;// + btn_box.x;
+	int right_edge = left_edge + box.w;// + btn_box.w;
 	int upper_edge = box.y;
 	int lower_edge = upper_edge + box.h;
 	
