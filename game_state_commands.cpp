@@ -33,7 +33,8 @@ void GameState::run_command(const std::string& what_command,unsigned& current)
 		//hitta grejer3
 		int volume = S2I(what_command.substr(11,what_command.size()-11));
 		m.setVolume(volume);
-		dynamic_cast<window*>(all_objects.at(current))->set_text(2,"Music volume: " + I2S(volume));
+		settings.at(1).second = I2S(volume);
+		dynamic_cast<window*>(all_objects.at(current))->set_text(2,"Music volume: " +  I2S(m.getVolume()));
 	}
 	if(what_command == "toggle_fullscreen")
 	{
@@ -41,16 +42,39 @@ void GameState::run_command(const std::string& what_command,unsigned& current)
 		{
 			screen = SDL_SetVideoMode(800,600,32, screen->flags+SDL_FULLSCREEN);
 			fullscreen = true;
+			settings.at(2).second = "on";
 		}
 		else
 		{
 			screen = SDL_SetVideoMode(800,600,32, screen->flags-SDL_FULLSCREEN);
 			fullscreen = false;
+			settings.at(2).second = "off";
 		}
 	}
 	for(int a = 0 ; a <= current ; ++a)
 		{
 			all_objects.at(a)->print(screen);
 		}
+
+	if(what_command == "set_settings")
+	  {
+	    
+	    //toggle sounds not yet implementet
+
+	    //set volume
+	     int volume = S2I(settings.at(1).second);
+	    m.setVolume(volume);
+	    //fullscreen on/off
+	    if(settings.at(2).second == "on")
+	      {
+		screen = SDL_SetVideoMode(800,600,32, screen->flags+SDL_FULLSCREEN);
+		fullscreen = true;
+	      }
+	    else if(settings.at(2).second == "off")
+	      {
+		//screen = SDL_SetVideoMode(800,600,32, screen->flags-SDL_FULLSCREEN);
+		fullscreen = false;
+	      } 
+	  }
 	return;
 }

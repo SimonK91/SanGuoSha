@@ -17,4 +17,12 @@ SDL_Surface* Init(const int& width, const int& height, const int& Bits_Per_Pixel
 void clean_up(std::vector<SDL_Surface*> clean_surface = {}, std::vector<TTF_Font*> clean_font = {});
 std::string I2S(const int&);
 int S2I(const std::string&);
+
+bool load_settings( std::vector<std::pair<std::string, std::string>>&);
+bool write_settings(std::vector<std::pair<std::string, std::string>>);
+
+
+
+
+
 #endif

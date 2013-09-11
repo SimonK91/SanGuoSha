@@ -9,6 +9,9 @@ GameState::~GameState(){} //destruering sker i slutet av run!
 //Mainfunktionen i GameState
 void GameState::run()
 {
+  //tmp tills vi fÂr tag pÂ r‰tt unsigned
+  unsigned k = 2;
+  run_command("set_settings" , k);
 	m.play();
 	while(running) //medans programmet k√∂rs
 	{
@@ -55,6 +58,7 @@ void GameState::run()
 		SDL_Delay(15);                      // V√§nta 15ms f√∂r att s√§nka fps lite
 	}
 	
+	write_settings(settings);
 	while(!all_objects.empty())
 	{
 		delete all_objects.back();

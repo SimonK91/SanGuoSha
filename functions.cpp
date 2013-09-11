@@ -2,6 +2,8 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <fstream>
+#include <utility>
 using namespace std;
 SDL_Surface* load_image(const string& filename,bool transparant, const Uint8& red, const Uint8& green, const Uint8& blue, bool color_key)
 {
@@ -11,7 +13,7 @@ SDL_Surface* load_image(const string& filename,bool transparant, const Uint8& re
 	//The optimized image that will be used
 	SDL_Surface* optimizedImage = nullptr;
 	
-	// laddar in bilden till temporära
+	// laddar in bilden till temporÃ¤ra
 	loadedImage = IMG_Load( filename.c_str() );
 	if(loadedImage != nullptr)
 	{
@@ -112,3 +114,47 @@ int S2I(const std::string& s)
 	return value;
 }
 
+	 
+bool load_settings(std::vector<std::pair<std::string, std::string>>& settings)
+{
+  std::ifstream read_from("Data/settings.txt");
+  
+  if(!read_from.is_open())
+    {
+      //filen kunde inte �ppnas
+      return false;
+    }
+  
+  std::string tmpSetting = "";
+  std::string tmpValue = "";
+  
+  while(read_from >> tmpSetting)
+    {
+      read_from >> ws;
+      read_from >> tmpValue;
+      settings.push_back(std::make_pair(tmpSetting, tmpValue) );
+    }
+  
+  read_from.close();
+  
+  return true;
+}
+
+bool write_settings(std::vector< std::pair<std::string, std::string>> settings)
+{
+  fstream write_to;
+  write_to.open("Data/settings.txt");
+  if(!write_to.is_open())
+    {
+      //filen kunde inte �ppnas
+      return false;
+    }
+  write_to.clear();
+  for(auto i : settings)
+    {
+      write_to << i.first << " " << i.second << std::endl;
+    }
+  write_to.close();
+  
+  return true;
+}

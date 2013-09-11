@@ -1,3 +1,5 @@
 Music off
-Volume 20
-Fullscreen off
+Volume 29
+Fullscreen on
+
+

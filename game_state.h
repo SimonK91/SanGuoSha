@@ -27,11 +27,14 @@ private:
 	bool running = true;
 	bool has_window = false;
 	bool fullscreen = false;
-	
+	std::vector<std::pair<std::string, std::string>> settings;
 	
 public:
 	//konstruktorer, destruktorer och operatorer
-	GameState(SDL_Surface* scr) : screen(scr){m.loadMusic("Music/Menu.wav");}
+	GameState(SDL_Surface* scr) : screen(scr){
+	  m.loadMusic("Music/Menu.wav");
+	  load_settings(settings);
+	}
 	~GameState();
 	//borttagna
 	GameState() = delete;                 //defaultkonstruktor
