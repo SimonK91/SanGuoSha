@@ -42,13 +42,13 @@ void GameState::run_command(const std::string& what_command,unsigned current)
 		{
 			screen = SDL_SetVideoMode(800,600,32, screen->flags+SDL_FULLSCREEN);
 			fullscreen = true;
-			settings.at(2).second = "on";
+			//settings.at(2).second = "on";
 		}
 		else
 		{
 			screen = SDL_SetVideoMode(800,600,32, screen->flags-SDL_FULLSCREEN);
 			fullscreen = false;
-			settings.at(2).second = "off";
+			//settings.at(2).second = "off";
 		}
 	}
 	for(unsigned a = 0 ; a <= current ; ++a)

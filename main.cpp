@@ -27,11 +27,12 @@ int main(int argc, char* argv[])
 	mainMenu.make_button("Options", 300,200,"options");
 	mainMenu.make_button("Exit", 300,400,"exit");
 	mainMenu.make_checkbox(50, 50, "", false);
+	mainMenu.makePopup();
 	mainMenu.run(); //startar programmet
 	//delete &mainMenu;
 	//avslut, ta bort alla surfaces som skapas (enbart screen just nu) och avsluta TTF, SDL och musiken
 	clean_up({screen});
-    Mix_CloseAudio();
+	Mix_CloseAudio();
 	TTF_Quit();
 	SDL_Quit();
 	return 0;

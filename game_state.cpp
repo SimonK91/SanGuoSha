@@ -116,5 +116,16 @@ bool GameState::make_checkbox(int x, int y, const std::string& command, bool che
 	all_objects.push_back(tmp);
 	return true;
 }
+void GameState::makePopup()
+{
+
+  PopupText* temp = new PopupText( 300, 100, 200, 50, {255,255,255}, "Fonts/LHANDW.TTF", 10);
+  //temp->setText("NEW GAME skapar nytt game och krashar f�rhoppningsvis inte alls");
+   temp->setColor("<c|ff4020>");
+  temp->setFileText("Data/Tool tips.txt", "-weapon 3-");
+    all_objects.push_back(temp);
+      
+    
+}
 
 #include "game_state_commands.cpp" //enbart för att separera upp alla commands till en annan cpp fil, (detta är ej nödvändigt att göra)

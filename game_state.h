@@ -9,6 +9,7 @@
 #include "object_text_box.h"
 #include "object_window.h"
 #include "object_check_box.h"
+#include "PopupText.h"
 
 #include <vector>
 
@@ -59,6 +60,7 @@ public:
 	bool make_checkbox(int x, int y, const std:: string& command, bool checked = false);
 	bool make_textbox(const std::string& text, const int& x, const int& y, const int& w, const int& h,
 					  const SDL_Color &col = {255,255,255,0}, const std::string& font = "Fonts/LHANDW.TTF", const unsigned& size = 13);
+	void makePopup();
 };
 
 #endif
