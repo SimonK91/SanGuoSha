@@ -19,16 +19,14 @@ private:
 
 public:
 	
-	slider(const int& x, const int& y, const std::string& command,
+	slider(const int& x, const int& y, const std::string& command, const int& val,
 			const std::string& bg_i = "Images/Gui/thickSlider.png", const int& edge = 20,
 			const std::string& btn_i = "Images/Gui/thickSliderButton.png");
 	~slider();
 		
-	bool inside( const pointer_arrow& arrow);
+	bool inside( const SDL_Event& event);
 	
-	bool loaded(){return false;}
-		
-	std::string handle_event(const SDL_Event&, const pointer_arrow&);
+	std::string handle_event(const SDL_Event&);
 	
 	void print(SDL_Surface* to_where);
 		

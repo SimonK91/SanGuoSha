@@ -4,17 +4,11 @@
 #include <sstream>
 
 
-std::string I2S(const int& i)
-{
-	std::stringstream ss;
-	ss << i;
-	std::string s = ss.str();
-	return s;
-}
+
 namespace object
 {
 
-slider::slider(const int& x, const int& y, const std::string& command_,
+slider::slider(const int& x, const int& y, const std::string& command_, const int& val,
 			   const std::string& bg_i, const int& edge,
 			   const std::string& btn_i)
 {
@@ -31,30 +25,32 @@ slider::slider(const int& x, const int& y, const std::string& command_,
 	
 	//sliderknappen
 	btn = load_image(btn_i, true);
-	btn_box.x = offset;
+	//btn_box.x = offset;
 	btn_box.y = (box.h - btn->h+1)/2;
 	btn_box.w = btn->w;
 	btn_box.h = btn->h;
 	
 	box_min = offset;
 	box_max = box.w - btn_box.w - offset;
+	btn_box.x = offset + (val*(box_max-offset))/100;
+	
 }
 
 
-std::string slider::handle_event(const SDL_Event& event, const pointer_arrow& arrow)
+std::string slider::handle_event(const SDL_Event& event)
 {
 	//Hantera event
 	if(event.type == SDL_MOUSEBUTTONDOWN)
 	{
-	    if( event.button.button == SDL_BUTTON_LEFT && inside(arrow) ) 
+	    if( event.button.button == SDL_BUTTON_LEFT && inside(event) ) 
 		{
 			active = 1;
 		}
-		return "";
+		//return "";
 	}
-	if(active == 1 && event.type == SDL_MOUSEMOTION)
+	if(active == 1 && (event.type == SDL_MOUSEMOTION || event.type == SDL_MOUSEBUTTONDOWN))
 	{
-		int x = arrow.get_x() - btn_box.w/2;// - offset + btn_box.w/2;
+		int x = event.motion.x - btn_box.w/2;// - offset + btn_box.w/2;
 		if(x >= box.x + box_min && x <= box.x + box_max)
 			btn_box.x = x - box.x;
 		
@@ -64,7 +60,7 @@ std::string slider::handle_event(const SDL_Event& event, const pointer_arrow& ar
 		else if(x > box_max)
 			btn_box.x = box_max;
 		
-		int value = (btn_box.x - box_min)/(box_max - box_min)*100;
+		int value = (btn_box.x - box_min)*100/(box_max - box_min);
 		return command + " " + I2S(value);	
 	}
 	if(event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
@@ -76,17 +72,17 @@ std::string slider::handle_event(const SDL_Event& event, const pointer_arrow& ar
 
 
 
-bool slider::inside( const pointer_arrow& arrow)
+bool slider::inside( const SDL_Event& event)
 {
-	int left_edge  = box.x + btn_box.x;
-	int right_edge = left_edge + btn_box.w;
+	int left_edge  = box.x;// + btn_box.x;
+	int right_edge = left_edge + box.w;// + btn_box.w;
 	int upper_edge = box.y;
 	int lower_edge = upper_edge + box.h;
 	
-	return (arrow.get_x() > left_edge 
-		 && arrow.get_x() < right_edge
-		 && arrow.get_y() > upper_edge
-		 && arrow.get_y() < lower_edge);
+	return (event.motion.x > left_edge 
+		 && event.motion.x < right_edge
+		 && event.motion.y > upper_edge
+		 && event.motion.y < lower_edge);
 }
 
 void slider::print(SDL_Surface* to_where)

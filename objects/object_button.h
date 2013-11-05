@@ -18,13 +18,12 @@ public:
 	
 	//konstruktorer och destruktorer
 	button(const std::string& name, int x, int y, const std::string& command,
-			const std::string& image = "Images/Gui/cleanButton2.png");
+			const std::string& image, const unsigned& size);
 	
 	~button(){clean_up({buttonSheet});}
 	
-	bool inside( const pointer_arrow&);
-	std::string handle_event( const SDL_Event&, const pointer_arrow&);
-	bool loaded();
+	bool inside( const SDL_Event&);
+	std::string handle_event( const SDL_Event&);
 	
 	void print(SDL_Surface*);
 };

@@ -2,7 +2,7 @@
 #define OBJECTS_H
 
 #include "../functions.h"
-#include "pointer_arrow.h"
+//#include "pointer_arrow.h"
 #include <string>
 #include <vector>
 
@@ -24,11 +24,9 @@ protected:
 	object& operator=(object&&) = delete;
 	
 	SDL_Rect box;
-	
+	SDL_Rect clip;
 public:
-	virtual bool loaded() = 0;
 	virtual ~object(){}
-
 	virtual void print(SDL_Surface*) = 0;
 };
 
@@ -53,7 +51,7 @@ protected:
 	std::string command;
 
 public:
-	virtual std::string handle_event(const SDL_Event&, const pointer_arrow&) = 0;
+	virtual std::string handle_event(const SDL_Event&) = 0;
 	virtual ~active_object() = default;
  };
 
