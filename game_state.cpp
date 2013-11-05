@@ -108,4 +108,13 @@ bool GameState::add_window(object::window* your_window)
 	return true;
 }
 
+bool GameState::make_checkbox(int x, int y, const std::string& command, bool checked)
+{
+	CheckBox* tmp = new CheckBox(x,y,command,checked);
+	if(tmp == nullptr)
+		return false;
+	all_objects.push_back(tmp);
+	return true;
+}
+
 #include "game_state_commands.cpp" //enbart för att separera upp alla commands till en annan cpp fil, (detta är ej nödvändigt att göra)

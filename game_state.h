@@ -8,6 +8,7 @@
 #include "object_slider.h"
 #include "object_text_box.h"
 #include "object_window.h"
+#include "object_check_box.h"
 
 #include <vector>
 
@@ -55,6 +56,7 @@ public:
 					 const std::string& image = "Images/Gui/cleanButton2.png", const unsigned& size = 20);
 	bool make_slider(const int& x_pos, const int& y_pos, const std::string& command);
 	bool add_window(object::window* your_window);
+	bool make_checkbox(int x, int y, const std:: string& command, bool checked = false);
 	bool make_textbox(const std::string& text, const int& x, const int& y, const int& w, const int& h,
 					  const SDL_Color &col = {255,255,255,0}, const std::string& font = "Fonts/LHANDW.TTF", const unsigned& size = 13);
 };
