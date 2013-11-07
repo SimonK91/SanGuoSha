@@ -23,26 +23,7 @@ private:
 	std::string name;
 	std::vector<std::string> abilities;
 public:
-	HeroCard(std::string ID_)
-	{
-		ID = ID_;
-		SDL_Surface* img = nullptr;
-		std::stringstream ss(ID_);
-		std::string filename = "Images/Cards/";
-		std::string tmpStr;
-		
-		ss >> tmpStr;
-		filename += tmpStr;
-		
-		img = load_image(filename, true);
-		if(img == nullptr)
-		{
-			//std::cout << "hej på dig din glada ping vin hej hej"  << std::endl;
-			throw std::runtime_error("could not open: " + filename);
-		}
-		image = img;
-		
-	}
+	HeroCard(std::string ID_);
 	~HeroCard(){}
 	
 	void print(SDL_Surface* to_where){}

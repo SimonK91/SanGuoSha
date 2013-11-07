@@ -12,11 +12,10 @@ GameCard::GameCard(int valor, Suit suit_, std::string ID_)
 	
 	SDL_Surface* img = nullptr; //fixa bilden!
 	std::stringstream ss(ID_);
-	std::string filename = "Images/Cards/";
+	std::string filename;
 		
-	std::string tmpStr;
-	ss >> tmpStr;
-	filename += tmpStr; // nu har vi hela sökvägen!
+	ss >> filename;
+	filename = "Images/Cards/" + filename; // nu har vi hela sökvägen!
 		
 	img = load_image(filename,true); //hoppas på det bästa :D
 	if(img == nullptr)
