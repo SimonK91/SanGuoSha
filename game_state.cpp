@@ -9,12 +9,15 @@ GameState::~GameState(){} //destruering sker i slutet av run!
 //Mainfunktionen i GameState
 void GameState::run()
 {
+	
   //tmp tills vi f�r tag p� r�tt unsigned
   unsigned k = 2;
   run_command("set_settings" , k);
 	m.play();
 	while(running) //medans programmet körs
 	{
+	GameCard* gc = new GameCard(8, clubs, "back.png destroy 42");
+	
 		while( SDL_PollEvent( &event)) //så länge som det finns en event
 		{
 			arrow.update_coordinates(event); //uppdatera position för musen
@@ -54,6 +57,8 @@ void GameState::run()
 				running = false;            // avsluta GameStatet
 			}
 		}
+		gc -> paint(screen, 30, 50);
+		delete gc;
 		SDL_Flip(screen);                   // Skriv ut bilden på skärmen
 		SDL_Delay(15);                      // Vänta 15ms för att sänka fps lite
 	}

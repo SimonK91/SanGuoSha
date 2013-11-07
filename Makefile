@@ -2,7 +2,7 @@ CCC        =g++
 CFLAGS   +=-L/sw/gcc-${GCC4_V}/lib -static-libstdc++ -std=c++11 -pedantic -Wall -Wextra
 INCLUDE  = -I./objects
 SDLFLAGS +=-lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer
-OBJECTS = main.cpp game_state.o object_button.o object_slider.o object_text_box.o functions.o pointer_arrow.o object_window.o music.o
+OBJECTS = main.cpp game_state.o object_button.o object_slider.o object_text_box.o functions.o pointer_arrow.o object_window.o music.o gameCard.o
 all: $(OBJECTS)
 		@ echo
 		@ echo execute skapas
@@ -53,6 +53,10 @@ pointer_arrow.o: ./objects/pointer_arrow.h ./objects/pointer_arrow.cpp
 		@ echo pointer_arrow.o skapas
 		$(CCC) $(CFLAGS) -c ./objects/pointer_arrow.cpp $(SDLFLAGS)
 		
+gameCard.o: ./objects/gameCard.h ./objects/gameCard.cpp
+		@ echo
+		@ echo gameCard.o skapas
+		$(CCC) $(CFLAGS) -c ./objects/gameCard.cpp $(SDLFLAGS)
 		
 		
 		

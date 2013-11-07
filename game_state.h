@@ -7,6 +7,7 @@
 #include "object_button.h"
 #include "object_slider.h"
 #include "object_text_box.h"
+#include "gameCard.h"
 #include "object_window.h"
 
 #include <vector>

@@ -1,7 +1,5 @@
-//#include "functions.h"
-//#include <iostream>
-//#include <string>
 #include "game_state.h"
+#include <stdexcept>
 
 using namespace std;
 
@@ -26,8 +24,19 @@ int main(int argc, char* argv[])
 	mainMenu.make_button("New Game",300,100,"make_new_game");
 	mainMenu.make_button("Options", 300,200,"options");
 	mainMenu.make_button("Exit", 300,400,"exit");
-	mainMenu.run(); //startar programmet
-	//delete &mainMenu;
+	//try catch? för om man får seriösa fel?
+	try{
+		mainMenu.run(); //startar programmet
+	}
+	catch(runtime_error re)
+	{
+		cout << re.what();
+		//skapa error ruta!
+	}
+	catch(...)
+	{
+		cout << "unknown error ocurred...";
+	}
 	//avslut, ta bort alla surfaces som skapas (enbart screen just nu) och avsluta TTF, SDL och musiken
 	clean_up({screen});
     Mix_CloseAudio();
