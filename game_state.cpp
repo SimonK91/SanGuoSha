@@ -17,6 +17,7 @@ void GameState::run()
 	while(running) //medans programmet körs
 	{
 	GameCard* gc = new GameCard(8, clubs, "back.png destroy 42");
+	HeroCard* hc = new HeroCard("back.png");
 	
 		while( SDL_PollEvent( &event)) //så länge som det finns en event
 		{
@@ -57,8 +58,10 @@ void GameState::run()
 				running = false;            // avsluta GameStatet
 			}
 		}
+		hc -> paint(screen, 400, 50);
 		gc -> paint(screen, 30, 50);
 		delete gc;
+		delete hc;
 		SDL_Flip(screen);                   // Skriv ut bilden på skärmen
 		SDL_Delay(15);                      // Vänta 15ms för att sänka fps lite
 	}

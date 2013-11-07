@@ -8,6 +8,8 @@ namespace object
 {
 GameCard::GameCard(int valor, Suit suit_, std::string ID_)
 {
+	ID = ID_;
+	
 	SDL_Surface* img = nullptr; //fixa bilden!
 	std::stringstream ss(ID_);
 	std::string filename = "Images/Cards/";

@@ -25,6 +25,11 @@ enum Suit
 	clubs, heart, spades, diamond
 };
 
+enum Clan
+{
+	red, green, blue, gray
+};
+
 } //namespace 
 
 #endif
