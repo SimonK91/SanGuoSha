@@ -6,21 +6,19 @@
 
 namespace object
 {
-GameCard::GameCard(int valor, Suit suit_, std::string ID_)
-{
-	ID = ID_;
-	
+GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) : Card(filename)
+{	
 	SDL_Surface* img = nullptr; //fixa bilden!
-	std::stringstream ss(ID_);
-	std::string filename;
+	std::stringstream ss(ID);
+	// std::string filename;
 		
-	ss >> filename;
-	filename = "Images/Cards/" + filename; // nu har vi hela sökvägen!
+	// ss >> filename;
+	// filename = "Images/Cards/" + filename; // nu har vi hela sökvägen!
 		
-	img = load_image(filename,true); //hoppas på det bästa :D
-	if(img == nullptr)
-		throw std::runtime_error ("could not open image file: " + filename);
-	image = img;
+	// img = load_image(filename,true); //hoppas på det bästa :D
+	// if(img == nullptr)
+		// throw std::runtime_error ("could not open image file: " + filename);
+	// image = img;
 		
 	ss >> abilityID;
 	ss >> target_type;

@@ -16,8 +16,8 @@ void GameState::run()
 	m.play();
 	while(running) //medans programmet körs
 	{
-	GameCard* gc = new GameCard(8, clubs, "back.png destroy 42");
-	HeroCard* hc = new HeroCard("back.png");
+	GameCard* gc = new GameCard(8, clubs, "back.png", "destroy 42");
+	HeroCard* hc = new HeroCard("back.png", "hellu");
 	
 		while( SDL_PollEvent( &event)) //så länge som det finns en event
 		{

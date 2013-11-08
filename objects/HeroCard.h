@@ -9,7 +9,7 @@
 /*
 id struktur:
 
-<cardImageFileName> <abilityID> <target_type> <range>
+<abilityID> <target_type> <range>
 
 */
 namespace object
@@ -23,7 +23,7 @@ private:
 	std::string name;
 	std::vector<std::string> abilities;
 public:
-	HeroCard(std::string ID_);
+	HeroCard(std::string filename, std::string ID);
 	~HeroCard(){}
 	
 	void print(SDL_Surface* to_where){}

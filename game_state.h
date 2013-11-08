@@ -33,8 +33,7 @@ private:
 	
 public:
 	//konstruktorer, destruktorer och operatorer
-	GameState(SDL_Surface* scr) : screen(scr){
-	  m.loadMusic("Music/Menu.wav");
+	GameState(SDL_Surface* scr) : screen(scr) , m("Music/Menu.wav"){
 	  load_settings(settings);
 	}
 	~GameState();

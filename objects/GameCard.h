@@ -6,7 +6,7 @@
 /*
 id struktur:
 
-<cardImageFileName> <abilityID> <target_type> <range>
+<abilityID> <target_type> <range>
 
 */
 namespace object
@@ -21,7 +21,7 @@ private:
 	int target_type;
 	std::string abilityID;
 public:
-	GameCard(int valor, Suit suit_, std::string ID_);
+	GameCard(int valor, Suit suit_, std::string filename, std::string ID);
 	~GameCard(){}
 	
 	Suit getSuit(){ return suit; }

@@ -1,4 +1,5 @@
 #include "music.h"
+#include <stdexcept>
 
 using namespace std;
 
@@ -37,10 +38,10 @@ void Music::loadMusic(const std::string& musicFile){
 	{
 		Mix_FreeMusic( music );
 	}
-	
 	music = Mix_LoadMUS( musicFile.c_str() );
 	
-	//fixa sound effects efter ett tag!
+	if(!music)
+		throw std::runtime_error("music file could not be opened: " + musicFile);
 }
 
 void Music::setVolume(const int& volume)
@@ -64,19 +65,21 @@ int Music::getEffectVolume()
 	return (Mix_VolumeChunk(soundEffects.front(),-1) * 100 ) / 128;
 }
 
-bool Music::loadSoundEffect(const string& effect)
+void Music::loadSoundEffect(const string& effect)
 {
 	Mix_Chunk * se = Mix_LoadWAV(effect.c_str());
-	if(se != nullptr){
-		soundEffects.push_back(se);
-		return true;
-	}
-	return false;
+	if(se == nullptr)
+		throw std::runtime_error("failed to load soundEffectFile: " + effect);
+	soundEffects.push_back(se);
 }
 
 void Music::playSoundEffect(const int& index)
 {
-	Mix_PlayChannel( -1, soundEffects.at(index), 0 );	//channel -1 = all, soundEffect, loop-times 0 => 1 play
+	if(index < soundEffects.size())
+		Mix_PlayChannel( -1, soundEffects.at(index), 0 );	//channel -1 = all, soundEffect, loop-times 0 => 1 play
+	else
+		std::cout << "soundEffect index: " << index << " is non existant" << std::endl
+				  << "nEffects loaded are: " << soundEffects.size() << std::endl;
 }
 
 

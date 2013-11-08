@@ -22,7 +22,7 @@ public:
 	void pause();
 	void stop();
 	void loadMusic(const std::string& musicFile);
-	bool loadSoundEffect(const std::string& effects);
+	void loadSoundEffect(const std::string& effects);
 	void playSoundEffect(const int& index);
 };
 
