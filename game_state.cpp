@@ -9,16 +9,16 @@ GameState::~GameState(){} //destruering sker i slutet av run!
 //Mainfunktionen i GameState
 void GameState::run()
 {
-	
   //tmp tills vi f�r tag p� r�tt unsigned
   unsigned k = 2;
   run_command("set_settings" , k);
+	m.loadMusic("Music/Dovahkiin.mp3");
 	m.play();
 	while(running) //medans programmet körs
 	{
-	GameCard* gc = new GameCard(8, clubs, "back.png", "destroy 42");
-	HeroCard* hc = new HeroCard("back.png", "hellu");
-	
+		GameCard* gc = new GameCard(8, clubs, "back.png", "destroy 42");
+		HeroCard* hc = new HeroCard("back.png", "42 gray 1 wolo destroy wololo trololo");
+		
 		while( SDL_PollEvent( &event)) //så länge som det finns en event
 		{
 			arrow.update_coordinates(event); //uppdatera position för musen
@@ -57,11 +57,15 @@ void GameState::run()
 			{
 				running = false;            // avsluta GameStatet
 			}
+			hc -> handle_event(event,arrow);
 		}
-		hc -> paint(screen, 400, 50);
-		gc -> paint(screen, 30, 50);
+		hc -> setPosition(50,50);
+		gc -> setPosition(50, 300);
+		hc -> paint(screen);
+		gc -> paint(screen);
 		delete gc;
 		delete hc;
+		
 		SDL_Flip(screen);                   // Skriv ut bilden på skärmen
 		SDL_Delay(15);                      // Vänta 15ms för att sänka fps lite
 	}

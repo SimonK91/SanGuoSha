@@ -1,5 +1,5 @@
-#ifndef music_h
-#define music_h
+#ifndef MUSIC_H
+#define MUSIC_H
 
 #include "functions.h"
 
@@ -11,7 +11,8 @@ private:
 	std::vector<Mix_Chunk*> soundEffects;
 
 public:
-	Music(const std::string& musicFile  = ""){ loadMusic(musicFile); }
+	Music() = delete;
+	Music(const std::string& musicFile){ loadMusic(musicFile); }
 	~Music();
 	
 	int getVolume();

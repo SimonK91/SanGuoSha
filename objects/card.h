@@ -1,8 +1,9 @@
-#ifndef card_h
-#define card_h
+#ifndef CARD_H
+#define CARD_H
+
 #include "objects.h"
 
-#include <stdexcept>
+#include <iostream>
 
 namespace object
 {
@@ -12,20 +13,13 @@ class Card : public active_object
 private:
 	
 protected:
-	// std::string ID;
 	SDL_Surface* image;
 public:
-	Card() = default;
-	// Card(std::string identity , SDL_Surface* img) : ID(identity), image(img) {}
-	Card(std::string filename)
-	{
-		image = load_image("Images/Cards/"+filename, true);
-		if(image == nullptr)
-			throw std::runtime_error("could not open file: Images/Cards/" +filename);
-	}
+	Card(std::string filename);
+	
 	virtual ~Card(){ clean_up({image});  };
 	
-	// std::string getID(){return ID;}
+	void setPosition(const int& x,const int& y);
 };
 
 enum Suit
@@ -38,6 +32,11 @@ enum Clan
 	red, green, blue, gray
 };
 
+Clan str2clan(const std::string& str);
+std::ostream& operator<< (std::ostream& os , Clan clan);
+
 } //namespace 
+
+
 
 #endif

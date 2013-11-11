@@ -15,7 +15,6 @@ class object
 private:
 
 protected:
-
 	//konstruktorer och operatorer som ej används!
 	object() = default;
 	object(const object&) = delete;

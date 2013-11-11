@@ -14,7 +14,7 @@ Music::~Music(){
 
  void Music::play()
 {
-	if(Mix_PlayingMusic() == 0)
+	if(!Mix_PlayingMusic())
 	{
 		Mix_PlayMusic( music, -1 );			//vilken musik, hur många ggr -1 = inf
 	}
@@ -22,7 +22,7 @@ Music::~Music(){
 
 void Music::pause()
 {
-	if(Mix_PausedMusic() == 0)
+	if(!Mix_PausedMusic())
 	{
 		Mix_PauseMusic();
 	}

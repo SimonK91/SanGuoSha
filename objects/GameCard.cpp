@@ -10,15 +10,6 @@ GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) 
 {	
 	SDL_Surface* img = nullptr; //fixa bilden!
 	std::stringstream ss(ID);
-	// std::string filename;
-		
-	// ss >> filename;
-	// filename = "Images/Cards/" + filename; // nu har vi hela sökvägen!
-		
-	// img = load_image(filename,true); //hoppas på det bästa :D
-	// if(img == nullptr)
-		// throw std::runtime_error ("could not open image file: " + filename);
-	// image = img;
 		
 	ss >> abilityID;
 	ss >> target_type;
@@ -26,7 +17,7 @@ GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) 
 	//detta sak ändras så att det fungerar bättre o är rätt bild!!
 	img = load_image("Images/Gui/borderLeftTopCorner.png",true); //suit!
 	
-	if(img == nullptr)
+	if(!img)
 		throw std::runtime_error ("could not open image file: Images/Gui/borderLeftTopCorner.png");
 	
 	apply_surface(10,10, img, image, nullptr);
@@ -35,14 +26,18 @@ GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) 
 	//detta sak ändras så att det fungerar bättre o är rätt bild!!
 	img = load_image("Images/Gui/thickSliderButton.png" , true); //nummer
 	
-	if(img == nullptr)
+	if(!img)
 		throw std::runtime_error ("could not open image file: Images/Gui/thickSliderButton.png");
 	
 	apply_surface(180,10, img, image, nullptr);
 	clean_up({img});
 	
-	
-	//std::cout << "target_type: " << target_type << " abilityID: "<< abilityID << " range: " << range <<  std::endl;
+}
+
+std::string GameCard::handle_event(const SDL_Event& event, const pointer_arrow& pa)
+{
+	//ska fixas mer så att den går att använda på något vettigt sätt :D
+	return ""; 
 }
 
 } // namespace

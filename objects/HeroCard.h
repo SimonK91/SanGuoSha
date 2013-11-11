@@ -5,11 +5,9 @@
 
 #include <vector>
 #include <sstream>
-#include <stdexcept>
 /*
 id struktur:
-
-<abilityID> <target_type> <range>
+<maxHP> <clan> <male> <name> <abilities>
 
 */
 namespace object
@@ -27,15 +25,17 @@ public:
 	~HeroCard(){}
 	
 	void print(SDL_Surface* to_where){}
-	void paint(SDL_Surface* to_where, int x, int y)
+	void paint(SDL_Surface* to_where)
 	{
-		apply_surface(x, y, image, to_where);
+		apply_surface(box.x, box.y, image, to_where);
 	}
-	bool getMale(){ return true;}
+	std::string getAblility(int index);
+	std::string handle_event(const SDL_Event& event, const pointer_arrow& pa);
+
 	std::string getName(){ return name; }
-	std::string getAblility(int index){ return ""; }
-	std::string handle_event(const SDL_Event& event, const pointer_arrow& pa){ return "";}
 	Clan getClan(){ return clan; }
+	bool getMale(){ return male; }
+	
 };
 
 } // namespace
