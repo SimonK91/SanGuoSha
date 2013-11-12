@@ -14,11 +14,14 @@ void GameState::run()
   run_command("set_settings" , k);
 	m.loadMusic("Music/Dovahkiin.mp3");
 	m.play();
+	
+	GameCard* gc = new GameCard(8, clubs, "back.png", "destroy 42");
+	HeroCard* hc = new HeroCard("back.png", "42 gray 1 wolo destroy wololo trololo");
+	hc -> setPosition(50,50);
+	gc -> setPosition(50, 300);
+	
 	while(running) //medans programmet körs
 	{
-		GameCard* gc = new GameCard(8, clubs, "back.png", "destroy 42");
-		HeroCard* hc = new HeroCard("back.png", "42 gray 1 wolo destroy wololo trololo");
-		
 		while( SDL_PollEvent( &event)) //så länge som det finns en event
 		{
 			arrow.update_coordinates(event); //uppdatera position för musen
@@ -58,17 +61,17 @@ void GameState::run()
 				running = false;            // avsluta GameStatet
 			}
 			hc -> handle_event(event,arrow);
+			gc -> handle_event(event,arrow);
 		}
-		hc -> setPosition(50,50);
-		gc -> setPosition(50, 300);
 		hc -> paint(screen);
 		gc -> paint(screen);
-		delete gc;
-		delete hc;
 		
 		SDL_Flip(screen);                   // Skriv ut bilden på skärmen
 		SDL_Delay(15);                      // Vänta 15ms för att sänka fps lite
 	}
+	
+	delete gc;
+	delete hc;
 	
 	write_settings(settings);
 	while(!all_objects.empty())

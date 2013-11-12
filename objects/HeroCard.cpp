@@ -32,34 +32,21 @@ std::string HeroCard::getAblility(int index)
 
 std::string HeroCard::handle_event(const SDL_Event& event, const pointer_arrow& pa)
 {
-	//om du klickas på aktiviera
-	//om klicka annat och du är aktivierad skicka ability! eller dylikt
-	//annars... inte något
 	if(event.type == SDL_MOUSEBUTTONDOWN)
 	{
-		
-		if(event.motion.x > box.x && event.motion.x < box.x + box.w && event.motion.y > box.y && event.motion.y < box.y + box.h)
+		if(active == 1)
+		{
+			active = 0;
+			box.y += 20;
+		}
+		else if(active == 0 && event.motion.x > box.x && event.motion.x < box.x + box.w && event.motion.y > box.y && event.motion.y < box.y + box.h)
 		{
 			active = 1;
-			std::cout << "the card is active" << std::endl;
+			box.y -= 20;
+			return "HeroCardInUsed";		//fortfarande ett frågetecken :D
 		}
-		else
-		{
-			std::cout << "card is inactive" << std::endl;
-			active = 0;
-		}
-		
-		// if(active)
-		// {
-			// //gör grejer :D
-			// active = 0;
-			// return "ability";
-		// }
-		
 	}
-	
 	return "";
-	
 }
 } //namespace
 

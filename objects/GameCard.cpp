@@ -31,13 +31,26 @@ GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) 
 	
 	apply_surface(180,10, img, image, nullptr);
 	clean_up({img});
-	
 }
 
 std::string GameCard::handle_event(const SDL_Event& event, const pointer_arrow& pa)
 {
 	//ska fixas mer så att den går att använda på något vettigt sätt :D
-	return ""; 
+	if(event.type == SDL_MOUSEBUTTONDOWN)
+	{
+		if(active == 1)
+		{
+			active = 0;
+			box.y += 20;
+			return abilityID;
+		}
+		else if(active == 0 && event.motion.x > box.x && event.motion.x < box.x + box.w && event.motion.y > box.y && event.motion.y < box.y + box.h)
+		{
+			active = 1;
+			box.y -= 20;
+		}
+	}
+	return "";
 }
 
 } // namespace

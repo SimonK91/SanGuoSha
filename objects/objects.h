@@ -50,6 +50,8 @@ protected:
 	std::string command;
 
 public:
+	active_object() : object() , active(0), command(""){}
+	
 	virtual std::string handle_event(const SDL_Event&, const pointer_arrow&) = 0;
 	virtual ~active_object() = default;
  };

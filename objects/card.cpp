@@ -4,7 +4,7 @@
 
 namespace object
 {
-Card::Card(std::string filename)
+Card::Card(std::string filename) : active_object()
 {
 	image = load_image("Images/Cards/"+filename, true);
 	if(!image)
