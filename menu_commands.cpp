@@ -1,6 +1,10 @@
 //using namespace object;
-void menu::run_command(const std::string& what_command,unsigned current)
+void Menu::run_command(const std::string& what_command)
 {
+	if(what_command == "")
+		return;
+		
+	
 	if(what_command == "exit")
 	{
 		running = false;
@@ -23,10 +27,9 @@ void menu::run_command(const std::string& what_command,unsigned current)
 	}
 	if(what_command == "close_window")
 	{
-		delete all_objects.at(current);
-		all_objects.erase(all_objects.begin()+current,all_objects.begin()+current+1);
+		delete all_objects.back();
+		all_objects.pop_back();
 		has_window = false;
-		--current;
 	}
 	if(what_command.substr(0,10) == "set_volume")
 	{
@@ -34,7 +37,7 @@ void menu::run_command(const std::string& what_command,unsigned current)
 		int volume = S2I(what_command.substr(11,what_command.size()-11));
 		m.setVolume(volume);
 		//settings.at(1).second = I2S(volume);
-		dynamic_cast<window*>(all_objects.at(current))->set_text(2,"Music volume: " +  I2S(m.getVolume()));
+		dynamic_cast<window*>(all_objects.back())->set_text(2,"Music volume: " +  I2S(m.getVolume()));
 	}
 	if(what_command == "toggle_fullscreen")
 	{
@@ -51,10 +54,7 @@ void menu::run_command(const std::string& what_command,unsigned current)
 			//settings.at(2).second = "off";
 		}
 	}
-	for(unsigned a = 0 ; a <= current ; ++a)
-		{
-			all_objects.at(a)->print(screen);
-		}
+
 
 	if(what_command == "set_settings")
 	  {
