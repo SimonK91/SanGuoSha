@@ -10,7 +10,7 @@ Card::Card(std::string filename) : active_object()
 	if(!image)
 		throw std::runtime_error("could not open file: Images/Cards/" +filename);
 	box.w = 200;
-	box.h = 282;
+	box.h = 281;
 }
 
 void Card::setPosition(const int& x, const int& y)
