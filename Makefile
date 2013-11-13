@@ -13,6 +13,7 @@ all: $(OBJECTS)
 		@ echo
 
 		
+		
 functions.o: functions.cpp functions.h
 		@ echo functions.o skapas
 		@$(CCC) $(CFLAGS) -c functions.cpp $(SDLFLAGS)
@@ -21,7 +22,7 @@ music.o: music.h music.cpp
 		@ echo music.o skapas
 		@$(CCC) $(CFLAGS) -c music.cpp $(SDLFLAGS)
 		
-game_state.o: game_state.cpp game_state_commands.cpp game_state.h
+game_state.o: game_state.cpp menu_commands.cpp game_state.h
 		@ echo game_state.o skapas
 		@$(CCC) $(INCLUDE) $(CFLAGS) -c game_state.cpp $(SDLFLAGS)
 		

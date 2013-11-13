@@ -1,5 +1,5 @@
-using namespace object;
-void GameState::run_command(const std::string& what_command,unsigned current)
+//using namespace object;
+void menu::run_command(const std::string& what_command,unsigned current)
 {
 	if(what_command == "exit")
 	{

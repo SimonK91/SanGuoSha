@@ -12,10 +12,10 @@
 
 #include <vector>
 
-class GameState
+class SGS
 {
-private:
-//basvariabler som behövs för att gamestate ska fungera
+protected:
+//basvariabler som behövs för att SGS ska fungera
 	SDL_Surface* background;
 	SDL_Event event;
 	SDL_Surface* screen;
@@ -32,23 +32,23 @@ private:
 	
 public:
 	//konstruktorer, destruktorer och operatorer
-	GameState(SDL_Surface* scr) : screen(scr){
+	SGS(SDL_Surface* scr) : screen(scr){
 	  m.loadMusic("Music/Menu.wav");
 	  load_settings(settings);
 	}
-	~GameState();
+	~SGS();
 	//borttagna
-	GameState() = delete;                 //defaultkonstruktor
-	GameState(const GameState&) = delete; //kopieringskonstruktor
-	GameState(GameState&&) = delete;      //movekonstruktor
-	GameState& operator=(const GameState&) = delete;
-	GameState& operator=(GameState&&) = delete;
+	SGS() = delete;                 //defaultkonstruktor
+	SGS(const SGS&) = delete; //kopieringskonstruktor
+	SGS(SGS&&) = delete;      //movekonstruktor
+	SGS& operator=(const SGS&) = delete;
+	SGS& operator=(SGS&&) = delete;
 	
 	//funktion för att köra programmet.
-	void run();
+	virtual void run() = 0;
 	
 	//funktion med alla kommandon som finns
-	void run_command(const std::string& what_command, unsigned current_command = 0); //finns skapad i "game_state_commands.cpp"
+	virtual void run_command(const std::string& what_command, unsigned current_object = 0) = 0; //finns skapad i "game_state_commands.cpp"
 	
 	//publika funktioner för att ladda background och skapa objekt i gamestatet
 	void load_background(const std::string& bg){background = load_image(bg);}
@@ -61,4 +61,15 @@ public:
 					  const SDL_Color &col = {255,255,255,0}, const std::string& font = "Fonts/LHANDW.TTF", const unsigned& size = 13);
 };
 
+
+class menu : public SGS
+{
+public:
+	void run();
+	void run_command(const std::string& what_command, unsigned current_object = 0);
+	menu(SDL_Surface* scr) : SGS(scr){
+	  m.loadMusic("Music/Menu.wav");
+	  load_settings(settings);
+	}
+};
 #endif

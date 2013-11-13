@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
 		return 1;
 	
 	// Start av main	
-	GameState mainMenu(screen);  //Skapa mainMenu och länka det till skärmen
+	menu mainMenu(screen);  //Skapa mainMenu och länka det till skärmen
 	mainMenu.load_background("Images/Gui/background.png");
 	
 	mainMenu.make_textbox("<b>aa<u>aa</u>bb</b> <s>bbb</s> b fds afd asf sda ghfdsjalh flkdfh sa gff jakl fhf gf hjasb b vh vnans djf a fdsaf ökankvjshldaf skdnf vlsahflgjkasdfj bjdsgafjbn vbscjhag djsabvsdytyuerabreab hdsgayfyeurb bfeakgbfasrgyea bfeag",50,50, 300, 500);

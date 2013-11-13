@@ -3,16 +3,17 @@
 using namespace object;
 
 //Destruktor
-GameState::~GameState(){} //destruering sker i slutet av run!
+SGS::~SGS(){} //destruering sker i slutet av run!
 
 
 //Mainfunktionen i GameState
-void GameState::run()
+void menu::run()
 {
   //tmp tills vi f�r tag p� r�tt unsigned
   //unsigned k = 2;
   //run_command("set_settings");
 	m.play();
+	Uint8 *keystates = SDL_GetKeyState(nullptr);
 	while(running) //medans programmet körs
 	{
 		while( SDL_PollEvent( &event)) //så länge som det finns en event
@@ -49,7 +50,7 @@ void GameState::run()
 					all_objects.at(i)->print(screen); // för varje objekt (oavsett aktivt eller inte), skriv ut det på skärmen
 				}
 			}
-			if( event.type == SDL_QUIT )    // om krysset uppe till höger blev intryckt
+			if( event.type == SDL_QUIT || (keystates[SDLK_LALT] && event.key.keysym.sym == SDLK_F4) )    // om krysset uppe till höger blev intryckt
 			{
 				running = false;            // avsluta GameStatet
 			}
@@ -70,7 +71,7 @@ void GameState::run()
 
 
 //för att skapa alla objekttyper
-bool GameState::make_button(const std::string& name, const int& x_pos, const int& y_pos, const std::string& command,
+bool SGS::make_button(const std::string& name, const int& x_pos, const int& y_pos, const std::string& command,
 							const std::string& image, const unsigned& size)
 {
 	button* temp = new button(name, x_pos, y_pos, command, image, size);
@@ -79,7 +80,7 @@ bool GameState::make_button(const std::string& name, const int& x_pos, const int
 	all_objects.push_back(temp);
 	return true;
 }
-bool GameState::make_slider(const int& x_pos, const int& y_pos, const std::string& command)
+bool SGS::make_slider(const int& x_pos, const int& y_pos, const std::string& command)
 {
 	slider* temp = new slider(x_pos, y_pos, command,m.getVolume());
 	if (temp == nullptr)
@@ -88,7 +89,7 @@ bool GameState::make_slider(const int& x_pos, const int& y_pos, const std::strin
 	return true;
 }
 
-bool GameState::make_textbox(const std::string& text, const int& x, const int& y, const int& w , const int& h
+bool SGS::make_textbox(const std::string& text, const int& x, const int& y, const int& w , const int& h
 							,const SDL_Color &col, const std::string& font, const unsigned& size)
 {
 	text_box* temp = new text_box(text,x,y,w,h,col,font,size);
@@ -100,7 +101,7 @@ bool GameState::make_textbox(const std::string& text, const int& x, const int& y
 	return true;
 	
 }
-bool GameState::add_window(object::window* your_window)
+bool SGS::add_window(object::window* your_window)
 {
 	if(your_window == nullptr)
 		return false;
@@ -108,7 +109,7 @@ bool GameState::add_window(object::window* your_window)
 	return true;
 }
 
-bool GameState::make_checkbox(int x, int y, const std::string& command, bool checked)
+bool SGS::make_checkbox(int x, int y, const std::string& command, bool checked)
 {
 	CheckBox* tmp = new CheckBox(x,y,command,checked);
 	if(tmp == nullptr)
@@ -117,4 +118,4 @@ bool GameState::make_checkbox(int x, int y, const std::string& command, bool che
 	return true;
 }
 
-#include "game_state_commands.cpp" //enbart för att separera upp alla commands till en annan cpp fil, (detta är ej nödvändigt att göra)
+#include "menu_commands.cpp" //enbart för att separera upp alla commands till en annan cpp fil, (detta är ej nödvändigt att göra)
