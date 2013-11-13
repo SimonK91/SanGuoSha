@@ -22,11 +22,11 @@ int main(int argc, char* argv[])
 	GameState mainMenu(screen);  //Skapa mainMenu och länka det till skärmen
 	mainMenu.load_background("Images/Gui/background.png");
 	
-	//mainMenu.make_textbox("<b>aa<u>aa</u>bb</b> <s>bbb</s> b fds afd asf sda ghfdsjalh flkdfh sa gff jakl fhf gf hjasb b vh vnans djf a fdsaf ökankvjshldaf skdnf vlsahflgjkasdfj bjdsgafjbn vbscjhag djsabvsdytyuerabreab hdsgayfyeurb bfeakgbfasrgyea bfeag",50,50, 300, 500);
+	mainMenu.make_textbox("<b>aa<u>aa</u>bb</b> <s>bbb</s> b fds afd asf sda ghfdsjalh flkdfh sa gff jakl fhf gf hjasb b vh vnans djf a fdsaf ökankvjshldaf skdnf vlsahflgjkasdfj bjdsgafjbn vbscjhag djsabvsdytyuerabreab hdsgayfyeurb bfeakgbfasrgyea bfeag",50,50, 300, 500);
 	mainMenu.make_button("New Game",300,100,"make_new_game");
 	mainMenu.make_button("Options", 300,200,"options");
 	mainMenu.make_button("Exit", 300,400,"exit");
-	mainMenu.make_checkbox(50, 50, "", false);
+	//mainMenu.make_checkbox(50, 50, "", false);
 	mainMenu.run(); //startar programmet
 	//delete &mainMenu;
 	//avslut, ta bort alla surfaces som skapas (enbart screen just nu) och avsluta TTF, SDL och musiken

@@ -13,7 +13,7 @@ private:
 	bool checked = false;
 	SDL_Surface* box_sheet = NULL;
 	std::vector<SDL_Rect> clip;
-	bool hoverOver(SDL_Event event){return false;}
+	//bool hoverOver(SDL_Event event){return false;}
 	std::string command;
 	
 public:

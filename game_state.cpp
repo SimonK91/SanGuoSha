@@ -10,7 +10,7 @@ GameState::~GameState(){} //destruering sker i slutet av run!
 void GameState::run()
 {
   //tmp tills vi får tag på rätt unsigned
-  unsigned k = 2;
+  //unsigned k = 2;
   //run_command("set_settings");
 	m.play();
 	while(running) //medans programmet kÃ¶rs
