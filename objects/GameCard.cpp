@@ -1,35 +1,73 @@
 #include "gameCard.h"
 #include <string>
 #include <sstream>
-#include <iostream>
 #include <stdexcept>
 
 namespace object
 {
-GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) : Card(filename)
+GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) : Card(filename), suit(suit_), number(valor)
 {	
 	SDL_Surface* img = nullptr; //fixa bilden!
 	std::stringstream ss(ID);
+	SDL_Rect suitClip;
+	int imageOffset;
 		
 	ss >> abilityID;
 	ss >> target_type;
 	ss >> range;
 	//detta sak ändras så att det fungerar bättre o är rätt bild!!
-	img = load_image("Images/Gui/borderLeftTopCorner.png",true); //suit!
+	img = load_image("Images/Cards/suit.png",true); //suit!
 	
 	if(!img)
-		throw std::runtime_error ("could not open image file: Images/Gui/borderLeftTopCorner.png");
+		throw std::runtime_error ("could not open image file: Images/Card/suits.png");
 	
-	apply_surface(10,10, img, image, nullptr);
+	imageOffset = (img -> h) / 2;
+	switch(suit)
+	{
+		case heart:
+			suitClip.x = 0;
+			suitClip.y = 0;
+			break;
+		case clubs:
+			suitClip.x = imageOffset;
+			suitClip.y = imageOffset;
+			break;
+		case spades:
+			suitClip.x = 0;
+			suitClip.y = imageOffset;
+			break;
+		case diamond:
+			suitClip.x = imageOffset;
+			suitClip.y = 0;
+			break;
+		default:
+			throw std::runtime_error("no suit avilable!");
+	}
+	suitClip.w = imageOffset;
+	suitClip.h = imageOffset;
+	
+	apply_surface(13,27, img, image, &suitClip);
+	
 	clean_up({img});
 	
-	//detta sak ändras så att det fungerar bättre o är rätt bild!!
-	img = load_image("Images/Gui/thickSliderButton.png" , true); //nummer
+	img = load_image("Images/Cards/numbers.png" , true); //nummer
 	
 	if(!img)
-		throw std::runtime_error ("could not open image file: Images/Gui/thickSliderButton.png");
+		throw std::runtime_error ("could not open image file: Images/Gui/numbers.png"); //bilden är inte bra än...
+		
+	// fixa med suitClip som återanvänds för numrett
+	suitClip.w = img -> w / 13;
+	suitClip.h = img -> h;
+	suitClip.x =  suitClip.w * (valor - 2);
+	suitClip.y = 0;
 	
-	apply_surface(180,10, img, image, nullptr);
+	//imageOffset återanvänds för utritning
+	if(valor == 10)	// cuz the 10 is so F****G BIG!!!
+		imageOffset = 0;
+	else
+		imageOffset = 5;
+		
+	apply_surface(13 + imageOffset,7, img, image, &suitClip);
 	clean_up({img});
 }
 
@@ -48,6 +86,7 @@ std::string GameCard::handle_event(const SDL_Event& event, const pointer_arrow& 
 		{
 			active = 1;
 			box.y -= 20;
+			return "gameCardInUse";
 		}
 	}
 	return "";

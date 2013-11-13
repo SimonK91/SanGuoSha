@@ -8,7 +8,8 @@ void GameState::run_command(const std::string& what_command,unsigned& current)
 	}
 	if(what_command == "make_new_game")
 	{
-		m.stop();
+		// m.stop();
+		// m.playSoundEffect(0);
 		dynamic_cast<text_box*>(all_objects.at(0))->set_text("You cannot make a new game yet!");
 	}
 	if(what_command == "options")

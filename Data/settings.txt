@@ -1,5 +1,7 @@
 Music off
-Volume 100
+Volume 0
 Fullscreen off
+
+
 
 

@@ -15,7 +15,7 @@ void GameState::run()
 	m.loadMusic("Music/Dovahkiin.mp3");
 	m.play();
 	
-	GameCard* gc = new GameCard(8, clubs, "back.png", "destroy 42");
+	GameCard* gc = new GameCard(5, heart, "chi_tu.png", "destroy 42");
 	HeroCard* hc = new HeroCard("back.png", "42 gray 1 wolo destroy wololo trololo");
 	hc -> setPosition(50,50);
 	gc -> setPosition(50, 300);

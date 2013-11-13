@@ -1,0 +1,3 @@
+Bakgrundsmusiken kan använda sig av många format bland annat .mp3 som är trevligt
+
+soundeffects måste dock vara i .wav filer... eller .ogg
