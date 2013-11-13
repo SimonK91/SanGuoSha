@@ -1,8 +1,10 @@
 //#include "functions.h"
 //#include <iostream>
 //#include <string>
-#include "game_state.h"
-
+//#include "game_state.h"
+#include "objects/Button.h"
+#include "objects/Slider.h"
+#include "objects/Window.h"
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -17,7 +19,7 @@ int main(int argc, char* argv[])
 	screen = Init(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
 	if( screen == nullptr )
 		return 1;
-	
+	/*
 	// Start av main	
 	GameState mainMenu(screen);  //Skapa mainMenu och länka det till skärmen
 	mainMenu.load_background("Images/Gui/background.png");
@@ -28,10 +30,10 @@ int main(int argc, char* argv[])
 	mainMenu.make_button("Exit", 300,400,"exit");
 	mainMenu.make_checkbox(50, 50, "", false);
 	mainMenu.makePopup();
-	mainMenu.run(); //startar programmet
+	mainMenu.run(); //startar programmet*/
 	//delete &mainMenu;
 	//avslut, ta bort alla surfaces som skapas (enbart screen just nu) och avsluta TTF, SDL och musiken
-	clean_up({screen});
+	//clean_up({screen});
 	Mix_CloseAudio();
 	TTF_Quit();
 	SDL_Quit();

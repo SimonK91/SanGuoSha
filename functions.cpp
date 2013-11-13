@@ -5,7 +5,7 @@
 #include <fstream>
 #include <utility>
 using namespace std;
-SDL_Surface* load_image(const string& filename,bool transparant, const Uint8& red, const Uint8& green, const Uint8& blue, bool color_key)
+SDL_Surface* loadImage(const string& filename,bool transparant, const Uint8& red, const Uint8& green, const Uint8& blue, bool color_key)
 {
 	//Temporary storage for the image that's loaded
 	SDL_Surface* loadedImage = nullptr;
@@ -38,7 +38,7 @@ SDL_Surface* load_image(const string& filename,bool transparant, const Uint8& re
 	return optimizedImage;
 }
 
-void apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip)
+void applySurface(int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip)
 {
 	SDL_Rect offset;
 	
@@ -85,7 +85,7 @@ SDL_Surface* Init(const int& SCREEN_WIDTH, const int& SCREEN_HEIGHT, const int& 
 	return screen;
 }
 
-void clean_up(std::vector<SDL_Surface*> clean_surface, std::vector<TTF_Font*> clean_font)
+void cleanUp(std::vector<SDL_Surface*> clean_surface, std::vector<TTF_Font*> clean_font)
 {
 	for(auto it = clean_surface.begin(); it != clean_surface.end(); ++it)
 		SDL_FreeSurface(*it);
@@ -115,7 +115,7 @@ int S2I(const std::string& s)
 }
 
 	 
-bool load_settings(std::vector<std::pair<std::string, std::string>>& settings)
+bool loadSettings(std::vector<std::pair<std::string, std::string>>& settings)
 {
   std::ifstream read_from("Data/settings.txt");
   
@@ -140,7 +140,7 @@ bool load_settings(std::vector<std::pair<std::string, std::string>>& settings)
   return true;
 }
 
-bool write_settings(std::vector< std::pair<std::string, std::string>> settings)
+bool writeSettings(std::vector< std::pair<std::string, std::string>> settings)
 {
   fstream write_to;
   write_to.open("Data/settings.txt");

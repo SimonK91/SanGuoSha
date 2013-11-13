@@ -3,7 +3,7 @@
 #include <sstream>
 #include <vector>
 
-namespace object
+namespace Object
 {
   PopupText::PopupText(int x_pos, int y_pos, int width, int height, SDL_Color color, std::string f, unsigned font_size)
   {
@@ -18,13 +18,13 @@ namespace object
     box.h = height;
 
     //backrundbild
-    background = load_image("Images/Gui/windowBackground.png", true);
+    background = loadImage("Images/Gui/windowBackground.png", true);
   }
   
   
   PopupText::~PopupText()
   {
-    clean_up( {background, text_area},{font});
+    cleanUp( {background, text_area},{font});
   }
   
   void PopupText::setColor(std::string color)
@@ -56,7 +56,7 @@ namespace object
     text_color = SDL_Color{r,g,b,0};		   //sätt "textColor" till de nya värdena 
   }
   
-  std::string PopupText::handle_event(const SDL_Event& event)
+  std::string PopupText::handleEvent(const SDL_Event& event)
   {
     int x = 0;
     int y = 0;
@@ -79,7 +79,7 @@ namespace object
     return "";
   }
   
-  void PopupText::print(SDL_Surface* to_where)
+  void PopupText::paint(SDL_Surface* to_where)
   {
     SDL_Rect text_rect;
     text_rect.x = 0;
@@ -89,8 +89,8 @@ namespace object
 
     if(show_text == true)
       {
-	apply_surface(text_x - 10, text_y -5, background, to_where, &text_rect);
-	apply_surface(text_x, text_y, text_area, to_where, NULL);
+	applySurface(text_x - 10, text_y -5, background, to_where, &text_rect);
+	applySurface(text_x, text_y, text_area, to_where, NULL);
       }
  
   }
@@ -133,37 +133,37 @@ namespace object
 
     //ramen
     SDL_Surface* tmp_border = NULL;
-    tmp_border = load_image("Images/Gui/window/tb.png", true);
-    apply_surface(0,0, tmp_border, background, nullptr);
+    tmp_border = loadImage("Images/Gui/window/tb.png", true);
+    applySurface(0,0, tmp_border, background, nullptr);
     frame_size = tmp_border->h;
     SDL_FreeSurface(tmp_border);
     
-    tmp_border = load_image("Images/Gui/window/lb.png", true);
-    apply_surface(0,0, tmp_border, background, nullptr);
+    tmp_border = loadImage("Images/Gui/window/lb.png", true);
+    applySurface(0,0, tmp_border, background, nullptr);
     SDL_FreeSurface(tmp_border);
 
-    tmp_border = load_image("Images/Gui/window/bb.png", true);
-    apply_surface(0,text_rect.h - tmp_border->h, tmp_border, background, nullptr);
+    tmp_border = loadImage("Images/Gui/window/bb.png", true);
+    applySurface(0,text_rect.h - tmp_border->h, tmp_border, background, nullptr);
     SDL_FreeSurface(tmp_border);
 
-    tmp_border = load_image("Images/Gui/window/rb.png", true);
-    apply_surface(text_rect.w - tmp_border->w, 0, tmp_border, background, nullptr);
+    tmp_border = loadImage("Images/Gui/window/rb.png", true);
+    applySurface(text_rect.w - tmp_border->w, 0, tmp_border, background, nullptr);
     SDL_FreeSurface(tmp_border);
 
-    tmp_border = load_image("Images/Gui/window/ltc.png", true);
-    apply_surface(0,0, tmp_border, background, nullptr);
+    tmp_border = loadImage("Images/Gui/window/ltc.png", true);
+    applySurface(0,0, tmp_border, background, nullptr);
     SDL_FreeSurface(tmp_border);
     
-    tmp_border = load_image("Images/Gui/window/rtc.png", true);
-    apply_surface(text_rect.w - tmp_border->w,0, tmp_border, background, nullptr);
+    tmp_border = loadImage("Images/Gui/window/rtc.png", true);
+    applySurface(text_rect.w - tmp_border->w,0, tmp_border, background, nullptr);
     SDL_FreeSurface(tmp_border);
     
-    tmp_border = load_image("Images/Gui/window/lbc.png", true);
-    apply_surface(0, text_rect.h - tmp_border->h, tmp_border, background, nullptr);
+    tmp_border = loadImage("Images/Gui/window/lbc.png", true);
+    applySurface(0, text_rect.h - tmp_border->h, tmp_border, background, nullptr);
     SDL_FreeSurface(tmp_border);
  
-    tmp_border = load_image("Images/Gui/window/rbc.png", true);
-    apply_surface(text_rect.w - tmp_border->w, text_rect.h - tmp_border->h, tmp_border, background, nullptr);
+    tmp_border = loadImage("Images/Gui/window/rbc.png", true);
+    applySurface(text_rect.w - tmp_border->w, text_rect.h - tmp_border->h, tmp_border, background, nullptr);
     SDL_FreeSurface(tmp_border);
   }
   

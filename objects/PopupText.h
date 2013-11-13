@@ -4,12 +4,12 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 #include "SDL/SDL_ttf.h"
-#include "objects.h"
+#include "Objects.h"
 #include <string>
 
-namespace object
+namespace Object
 {
-  class PopupText : public active_object
+  class PopupText : public ActiveObject
   {
     
   private:
@@ -33,8 +33,8 @@ namespace object
     PopupText(int x_pos, int y_pos, int width, int height, SDL_Color color, std::string f, unsigned font_size);
     ~PopupText();
     void setColor(std::string color);
-    std::string handle_event(const SDL_Event& event);
-    void  print(SDL_Surface* to_where);
+    std::string handleEvent(const SDL_Event& event);
+    void  paint(SDL_Surface* to_where);
     void  setFileText(std::string file, std::string keyword);
     void  setText(std::string text);
     
