@@ -11,6 +11,7 @@ void Menu::run()
 	
 	CardList* cl = new CardList("card_deck");
 	//delete cl;
+	Card* card;
 	while(running) //medans programmet kÃ¶rs
 	{
 
@@ -39,10 +40,15 @@ void Menu::run()
 			   event.key.keysym.sym == SDLK_F4) //
 				running = false;           		// avsluta programmet
 		}
+		card = cl -> drawCard();
+		card -> setPosition(10,10);
+		dynamic_cast<GameCard*>(card) -> paint(screen);
+		delete card;
 		paint();
-		SDL_Delay(15);
+		SDL_Delay(45);
 	}
 
+	delete cl;
 	if(!exit())
 	{
 		throw("Could not exit Menu");

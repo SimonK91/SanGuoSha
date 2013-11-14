@@ -8,6 +8,17 @@ id struktur:
 
 <abilityID> <target_type> <range>
 
+target_type:0 = self
+			1 = target
+			2 = pending?
+			3 = ?
+			4 = ?
+			5 = equipment
+			
+range:		0 	= inf
+			1->8= const
+			9  	= 
+			10 	= physical
 */
 namespace object
 {

@@ -38,6 +38,12 @@ CardList::~CardList()
 	
 Card* CardList::drawCard()
 {
+	if(set.empty())
+	{
+		loadCardDeck();
+		shuffle();
+	}
+	
 	Card* c = set.front();
 	set.front() = nullptr; //peka bort så att vi inte tar bort c ^^
 	set.erase(set.begin());
@@ -57,7 +63,7 @@ void CardList::pushTop(Card* card)
 }
 	
 void CardList::shuffle()
-	{
+{
 	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 
 	std::shuffle (set.begin(), set.end(), std::default_random_engine(seed));
@@ -67,8 +73,6 @@ void CardList::shuffle()
 
 void CardList::loadHeroDeck()
 {
-	//gameCard( number, suit, filename, ability targetType range );
-	// set.push_back(new GameCard(1,heart,"chi_tu.png","attack 1 0"));
 	
 }
 
