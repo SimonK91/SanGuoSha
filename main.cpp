@@ -1,6 +1,7 @@
 //#include "functions.h"
 //#include <iostream>
 //#include <string>
+#include <stdexcept>
 #include "SGS.h"
 
 using namespace std;
@@ -30,6 +31,10 @@ int main(int argc, char* argv[])
 	try
 	{
 		mainMenu.run(); //startar programmet
+	}
+	catch(runtime_error re)
+	{
+		cout << re.what() << endl;
 	}
 	catch(...)
 	{

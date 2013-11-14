@@ -1,4 +1,6 @@
 #include "SGS.h"
+#include "cardList.h"
+
 using namespace object;
 
 void Menu::run()
@@ -9,6 +11,7 @@ void Menu::run()
 	
 	while(running) //medans programmet kÃ¶rs
 	{
+
 		while( SDL_PollEvent( &event)) //sÃ¥ lÃ¤nge som det finns en event
 		{
 			for(unsigned i = 0 ; i < all_objects.size() ; ++i)  //fÃ¶r varje objekt som finns i gamestatet
@@ -68,9 +71,9 @@ bool Menu::exit()
 
 	return true;
 }
+
 void Menu::paint()
 {
-
 	apply_surface(0,0,background,screen); //skriv ut bakgrunden att ha som en bas
 	for(unsigned i = 0; i < all_objects.size() ; ++i)
 	{

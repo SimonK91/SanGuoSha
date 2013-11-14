@@ -29,7 +29,7 @@ public:
 	std::string getAbility(){ return abilityID; }
 	
 	std::string handle_event(const SDL_Event& event);
-//	void print(SDL_Surface* to_where){} //ska tas bort
+	void print(SDL_Surface* to_where){} //ska tas bort
 	
 	void paint(SDL_Surface* to_where)
 	{
