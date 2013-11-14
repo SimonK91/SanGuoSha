@@ -26,7 +26,7 @@ std::string HeroCard::getAblility(int index)
 	if(abilities.size() > index){
 		return abilities.at(index);
 	}else{
-		return "ERROR INDEX OUT OF BOUNDS";
+		return "ERROR_INDEX_OUT_OF_BOUNDS";
 	}
 }
 

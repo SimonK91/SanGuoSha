@@ -56,18 +56,16 @@ GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) 
 		throw std::runtime_error ("could not open image file: Images/Gui/numbers.png"); //bilden är inte bra än...
 		
 	// fixa med suitClip som återanvänds för numrett
-	suitClip.w = img -> w / 13;
-	suitClip.h = img -> h;
-	suitClip.x =  suitClip.w * (valor - 2);
-	suitClip.y = 0;
+	suitClip.w = img -> w / 2 ;
+	suitClip.h = img -> h / 13;
+	suitClip.y =  suitClip.h * (valor - 1);
 	
-	//imageOffset återanvänds för utritning
-	if(valor == 10)	// cuz the 10 is so F****G BIG!!!
-		imageOffset = 0;
+	if(suit == heart || suit == diamond)
+		suitClip.x = img -> w / 2;
 	else
-		imageOffset = 5;
-		
-	apply_surface(13 + imageOffset,7, img, image, &suitClip);
+		suitClip.x = 0;
+			
+	apply_surface(13,7, img, image, &suitClip);
 	clean_up({img});
 }
 

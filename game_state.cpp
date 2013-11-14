@@ -14,12 +14,6 @@ void GameState::run()
   run_command("set_settings" , k);
 	m.loadMusic("Music/Dovahkiin.mp3");
 	m.play();
-	
-	GameCard* gc = new GameCard(5, heart, "chi_tu.png", "destroy 42");
-	HeroCard* hc = new HeroCard("back.png", "42 gray 1 wolo destroy wololo trololo");
-	hc -> setPosition(50,50);
-	gc -> setPosition(50, 300);
-	
 	while(running) //medans programmet körs
 	{
 		while( SDL_PollEvent( &event)) //så länge som det finns en event
@@ -60,18 +54,11 @@ void GameState::run()
 			{
 				running = false;            // avsluta GameStatet
 			}
-			hc -> handle_event(event,arrow);
-			gc -> handle_event(event,arrow);
 		}
-		hc -> paint(screen);
-		gc -> paint(screen);
 		
 		SDL_Flip(screen);                   // Skriv ut bilden på skärmen
 		SDL_Delay(15);                      // Vänta 15ms för att sänka fps lite
 	}
-	
-	delete gc;
-	delete hc;
 	
 	write_settings(settings);
 	while(!all_objects.empty())
