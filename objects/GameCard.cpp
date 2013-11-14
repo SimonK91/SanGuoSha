@@ -24,7 +24,7 @@ GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) 
 	imageOffset = (img -> h) / 2;
 	switch(suit)
 	{
-		case heart:
+		case hearts:
 			suitClip.x = 0;
 			suitClip.y = 0;
 			break;
@@ -36,7 +36,7 @@ GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) 
 			suitClip.x = 0;
 			suitClip.y = imageOffset;
 			break;
-		case diamond:
+		case diamonds:
 			suitClip.x = imageOffset;
 			suitClip.y = 0;
 			break;
@@ -60,7 +60,7 @@ GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) 
 	suitClip.h = img -> h / 13;
 	suitClip.y =  suitClip.h * (valor - 1);
 	
-	if(suit == heart || suit == diamond)
+	if(suit == hearts || suit == diamonds)
 		suitClip.x = img -> w / 2;
 	else
 		suitClip.x = 0;

@@ -1,4 +1,7 @@
 #include "cardList.h"
+#include "gameCard.h"
+#include "heroCard.h"
+	
 #include <algorithm>
 #include <chrono>
 #include <stdexcept>
@@ -18,6 +21,8 @@ CardList::CardList(const std::string& setting)
 		loadHeroDeck();
 	else
 		throw std::runtime_error("no such deck type as: " + setting);
+	
+	shuffle(); //blanda listan fint^^
 }
 	
 CardList::~CardList()
@@ -61,9 +66,15 @@ void CardList::shuffle()
 //kolla inte här nere... du blir bara ledsen :'(
 
 void CardList::loadHeroDeck()
-{}
+{
+	//gameCard( number, suit, filename, ability targetType range );
+	// set.push_back(new GameCard(1,heart,"chi_tu.png","attack 1 0"));
+	
+}
 
 void CardList::loadCardDeck()
-{}
+{
+	
+}
 
 } //namespace

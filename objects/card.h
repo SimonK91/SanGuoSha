@@ -24,7 +24,7 @@ public:
 
 enum Suit
 {
-	clubs, heart, spades, diamond
+	clubs, hearts, spades, diamonds
 };
 
 enum Clan

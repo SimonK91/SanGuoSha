@@ -9,6 +9,8 @@ void Menu::run()
 	Uint8 *keystates = SDL_GetKeyState(nullptr);
 	std::string command;
 	
+	CardList* cl = new CardList("card_deck");
+	delete cl;
 	while(running) //medans programmet kÃ¶rs
 	{
 
