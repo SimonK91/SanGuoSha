@@ -52,6 +52,7 @@ protected:
 public:
 	active_object() : object() , active(0), command(""){}
 	
+	int isActivated(){ return active; }
 	virtual std::string handle_event(const SDL_Event&, const pointer_arrow&) = 0;
 	virtual ~active_object() = default;
  };
