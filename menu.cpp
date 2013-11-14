@@ -18,14 +18,14 @@ void Menu::run()
 				{
 					 //kÃ¶r handle event pÃ¥ objektet (detta ser om kriterier Ã¤r uppfyllda fÃ¶r att gÃ¶ra nÃ¥got
 					command = dynamic_cast<active_object*>(all_objects.at(i))->handle_event(event);
+					run_command(command);
 				}
 				 //annars kör enbart handle_event på window
 				else if(dynamic_cast<window*>(all_objects.at(i)) != nullptr)
 				{
 					command = dynamic_cast<window*>(all_objects.at(i))->handle_event(event); //kÃ¶r handle event pÃ¥ objektet (detta ser om kriterier Ã¤r uppfyllda fÃ¶r att gÃ¶ra nÃ¥got
+					run_command(command);
 				}
-
-				run_command(command);
 			}
 			
 			if( event.type == SDL_QUIT)    		// om krysset uppe till hÃ¶ger blev intryckt
