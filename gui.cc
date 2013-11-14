@@ -1,1 +1,0 @@
-gui kod, bilder o skit

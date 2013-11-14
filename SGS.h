@@ -3,29 +3,30 @@
 
 #include "music.h"
 #include "functions.h"
+#include "pointer_arrow.h"
 #include "object_button.h"
 #include "object_slider.h"
 #include "object_text_box.h"
 #include "object_window.h"
 #include "object_check_box.h"
-#include "gameCard.h"
-#include "heroCard.h"
+#include "GameCard.h"
+#include "HeroCard.h"
 
 #include <vector>
 
-class GameState
+class SGS
 {
-private:
-//basvariabler som behövs för att gamestate ska fungera
+protected:
+//basvariabler som behövs för att SGS ska fungera
 	SDL_Surface* background;
 	SDL_Event event;
 	SDL_Surface* screen;
 	//object::pointer_arrow arrow;
 	std::vector<object::object*> all_objects;
 	
-	Music m;
-
+	virtual bool exit() = 0;
 //variabler som finns för alla commands och liknande
+	Music m;
 	bool running = true;
 	bool has_window = false;
 	bool fullscreen = false;
@@ -33,23 +34,23 @@ private:
 	
 public:
 	//konstruktorer, destruktorer och operatorer
-	GameState(SDL_Surface* scr) : screen(scr){
-	  m.loadMusic("Music/Menu.wav");
+	SGS(SDL_Surface* scr) : screen(scr),m("Music/Menu.wav"){
+	  //m.loadMusic("Music/Menu.wav");
 	  load_settings(settings);
 	}
-	~GameState();
+	~SGS();
 	//borttagna
-	GameState() = delete;                 //defaultkonstruktor
-	GameState(const GameState&) = delete; //kopieringskonstruktor
-	GameState(GameState&&) = delete;      //movekonstruktor
-	GameState& operator=(const GameState&) = delete;
-	GameState& operator=(GameState&&) = delete;
+	SGS() = delete;                 //defaultkonstruktor
+	SGS(const SGS&) = delete; //kopieringskonstruktor
+	SGS(SGS&&) = delete;      //movekonstruktor
+	SGS& operator=(const SGS&) = delete;
+	SGS& operator=(SGS&&) = delete;
 	
 	//funktion för att köra programmet.
-	void run();
+	virtual void run() = 0;
 	
 	//funktion med alla kommandon som finns
-	void run_command(const std::string& what_command, unsigned current_command = 0); //finns skapad i "game_state_commands.cpp"
+	virtual void run_command(const std::string& what_command) = 0; //finns skapad i "game_state_commands.cpp"
 	
 	//publika funktioner för att ladda background och skapa objekt i gamestatet
 	void load_background(const std::string& bg){background = load_image(bg);}
@@ -62,4 +63,47 @@ public:
 					  const SDL_Color &col = {255,255,255,0}, const std::string& font = "Fonts/LHANDW.TTF", const unsigned& size = 13);
 };
 
+
+class Menu : public SGS
+{
+private:
+	void run_command(const std::string& what_command);
+	void paint();
+	bool exit();
+		
+public:
+	void run();
+	~Menu();
+	Menu(SDL_Surface* scr) : SGS(scr){
+	  m.loadMusic("Music/Menu.wav");
+	  load_settings(settings);
+	}
+};
+/*
+class Game : public SGS
+{
+private:
+	CardList card_deck;
+	CardList discard_pile;
+	vector<Player> players;
+	Timer timer;
+	map<std::string,SDL_Surface*> card_images;
+	
+	void paint();
+	void setup();
+	void game();
+	void end();
+	void run_command(const std::string& what_command);
+public:
+	~Game();
+	
+	Game(SDL_Surface* scr, Settings& set,vector<Player>& players) : SGS(scr)
+	{
+	  m.loadMusic("Music/Menu.wav");
+	  load_settings(settings);
+	}
+	void run();
+	
+};
+*/
 #endif

@@ -2,16 +2,17 @@ CCC        =g++
 CFLAGS   +=-L/sw/gcc-${GCC4_V}/lib -static-libstdc++ -std=c++11 -pedantic -Wall -Wextra
 INCLUDE  = -I./objects
 SDLFLAGS +=-lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer
-OBJECTS = main.cpp game_state.o object_button.o object_slider.o object_text_box.o object_check_box.o functions.o object_window.o music.o
+OBJECTS = main.cpp gameCard.o heroCard.o card.o Menu.o object_button.o object_slider.o object_text_box.o object_check_box.o functions.o object_window.o music.o SGS.o
 all: $(OBJECTS)
 		@ echo
 		@ echo execute skapas
-		@$(CCC) $(INCLUDE) $(CFLAGS) $(OBJECTS) $(SDLFLAGS) -o "SGS.exe"
+		@$(CCC) $(INCLUDE) $(CFLAGS) $(OBJECTS) $(SDLFLAGS) -o "SanGuoSha.exe"
 		@ echo
 		@ echo Filen lyckades att skapa
-		@ echo Filnamnet ar SGS.exe
+		@ echo Filnamnet ar SanGuoSha.exe
 		@ echo
 
+		
 		
 functions.o: functions.cpp functions.h
 		@ echo functions.o skapas
@@ -21,9 +22,17 @@ music.o: music.h music.cpp
 		@ echo music.o skapas
 		@$(CCC) $(CFLAGS) -c music.cpp $(SDLFLAGS)
 		
-game_state.o: game_state.cpp game_state_commands.cpp game_state.h
-		@ echo game_state.o skapas
-		@$(CCC) $(INCLUDE) $(CFLAGS) -c game_state.cpp $(SDLFLAGS)
+Menu.o: menu.cpp menu_commands.cpp
+		@ echo Menu.o skapas
+		@$(CCC) $(INCLUDE) $(CFLAGS) -c menu.cpp $(SDLFLAGS)
+		
+Game.o: game.cpp game_commands.cpp
+		@ echo Game.o skapas
+		@$(CCC) $(INCLUDE) $(CFLAGS) -c game.cpp $(SDLFLAGS)
+		
+SGS.o: SGS.cpp SGS.h	
+		@ echo SGS.o skapas
+		@$(CCC) $(INCLUDE) $(CFLAGS) -c SGS.cpp $(SDLFLAGS)
 		
 object_button.o: ./objects/object_button.h ./objects/object_button.cpp
 		@ echo object_button.o skapas
@@ -44,11 +53,18 @@ object_window.o: ./objects/object_window.h ./objects/object_window.cpp
 object_text_box.o: ./objects/object_text_box.h ./objects/object_text_box.cpp
 		@ echo object_text_box.o skapas
 		@$(CCC) $(CFLAGS) -c ./objects/object_text_box.cpp $(SDLFLAGS)
+			
+gameCard.o: ./objects/gameCard.h ./objects/gameCard.cpp
+		@ echo gameCard.o skapas
+		@$(CCC) $(CFLAGS) -c ./objects/gameCard.cpp $(SDLFLAGS)
 		
-pointer_arrow.o: ./objects/pointer_arrow.h ./objects/pointer_arrow.cpp
-		@ echo pointer_arrow.o skapas
-		@$(CCC) $(CFLAGS) -c ./objects/pointer_arrow.cpp $(SDLFLAGS)
-		
+heroCard.o: ./objects/gameCard.h ./objects/heroCard.cpp
+		@ echo heroCard.o skapas
+		@$(CCC) $(CFLAGS) -c ./objects/heroCard.cpp $(SDLFLAGS)
+
+card.o: ./objects/card.h ./objects/card.cpp
+		@ echo card.o skapas
+		@$(CCC) $(CFLAGS) -c ./objects/card.cpp $(SDLFLAGS)
 		
 		
 		
