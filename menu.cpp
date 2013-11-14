@@ -1,5 +1,5 @@
 #include "SGS.h"
-using namespace object;
+using namespace Object;
 
 void Menu::run()
 {
@@ -14,18 +14,20 @@ void Menu::run()
 			for(unsigned i = 0 ; i < all_objects.size() ; ++i)  //fÃ¶r varje objekt som finns i gamestatet
 			{
 				 //om objektet Ã¤r ett aktivt objekt och has_window är false(aktiva objekt kan manipulera saker)
-				if(!has_window && dynamic_cast<active_object*>(all_objects.at(i)) != nullptr)
+				if(!has_window && dynamic_cast<ActiveObject*>(all_objects.at(i)) != nullptr)
 				{
 					 //kÃ¶r handle event pÃ¥ objektet (detta ser om kriterier Ã¤r uppfyllda fÃ¶r att gÃ¶ra nÃ¥got
-					command = dynamic_cast<active_object*>(all_objects.at(i))->handle_event(event);
+					command = dynamic_cast<ActiveObject*>(all_objects.at(i))->handleEvent(event);
+					run_command(command);
 				}
 				 //annars kör enbart handle_event på window
-				else if(dynamic_cast<window*>(all_objects.at(i)) != nullptr)
+				else if(dynamic_cast<Window*>(all_objects.at(i)) != nullptr)
 				{
-					command = dynamic_cast<window*>(all_objects.at(i))->handle_event(event); //kÃ¶r handle event pÃ¥ objektet (detta ser om kriterier Ã¤r uppfyllda fÃ¶r att gÃ¶ra nÃ¥got
+					command = dynamic_cast<Window*>(all_objects.at(i))->handleEvent(event); //kÃ¶r handle event pÃ¥ objektet (detta ser om kriterier Ã¤r uppfyllda fÃ¶r att gÃ¶ra nÃ¥got
+					run_command(command);
 				}
 
-				run_command(command);
+				//run_command(command);
 			}
 			
 			if( event.type == SDL_QUIT)    		// om krysset uppe till hÃ¶ger blev intryckt
@@ -53,13 +55,13 @@ bool Menu::exit()
 {
 	try
 	{
-	write_settings(settings);
+	writeSettings(settings);
 	while(!all_objects.empty())
 	{
 		delete all_objects.back();
 		all_objects.pop_back();
 	}
-	clean_up({background});
+	cleanUp({background});
 	}
 	catch(...)
 	{
@@ -71,10 +73,10 @@ bool Menu::exit()
 void Menu::paint()
 {
 
-	apply_surface(0,0,background,screen); //skriv ut bakgrunden att ha som en bas
+	applySurface(0,0,background,screen); //skriv ut bakgrunden att ha som en bas
 	for(unsigned i = 0; i < all_objects.size() ; ++i)
 	{
-		all_objects.at(i)->print(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
+		all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
 	}
 	SDL_Flip(screen);                   // Skriv ut bilden pÃ¥ skÃ¤rmen
 }

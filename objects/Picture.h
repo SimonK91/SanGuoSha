@@ -1,0 +1,21 @@
+#ifndef PICTURE_H
+#define PICTURE_H
+#include "DeadObject.h"
+
+class Picture : public DeadObject
+{
+
+ private:
+  SDL_Surface* image;
+  SDL_Rect pos;
+  SDL_Rect clip;
+
+ public:
+  Picture(int pos_x, int pos_y, std::string image, SDL_Rect clip = NULL);
+  ~Picture();
+  
+  void Paint(SDL_Surface* to_where);
+
+
+};
+#endif

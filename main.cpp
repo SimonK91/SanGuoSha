@@ -1,6 +1,6 @@
-//#include "functions.h"
-//#include <iostream>
-//#include <string>
+#include "Functions.h"
+#include <iostream>
+#include <string>
 #include "SGS.h"
 
 using namespace std;
@@ -22,11 +22,11 @@ int main(int argc, char* argv[])
 	Menu mainMenu(screen);  //Skapa mainMenu och länka det till skärmen
 	mainMenu.load_background("Images/Gui/background.png");
 	
-	mainMenu.make_textbox("<b>aa<u>aa</u>bb</b> <s>bbb</s> b fds afd asf sda ghfdsjalh flkdfh sa gff jakl fhf gf hjasb b vh vnans djf a fdsaf ökankvjshldaf skdnf vlsahflgjkasdfj bjdsgafjbn vbscjhag djsabvsdytyuerabreab hdsgayfyeurb bfeakgbfasrgyea bfeag",50,50, 300, 500);
-	mainMenu.make_button("New Game",300,100,"make_new_game");
+	 mainMenu.make_textbox("ks bfeag",50,50, 300, 500);
+	//mainMenu.make_button("New Game",300,100,"make_new_game");
 	mainMenu.make_button("Options", 300,200,"options");
-	mainMenu.make_button("Exit", 300,400,"exit");
-	//mainMenu.make_checkbox(50, 50, "", false);
+	mainMenu.make_button("Exit", 300,400,"exit"); 
+	mainMenu.make_checkbox(50, 50, "", false);
 	try
 	{
 		mainMenu.run(); //startar programmet
@@ -37,8 +37,8 @@ int main(int argc, char* argv[])
 	}
 	
 	//avslut, ta bort alla surfaces som skapas (enbart screen just nu) och avsluta TTF, SDL och musiken
-	clean_up({screen});
-    Mix_CloseAudio();
+	cleanUp({screen});
+	Mix_CloseAudio();
 	TTF_Quit();
 	SDL_Quit();
 	

@@ -1,41 +1,41 @@
-#include "object_button.h"
+#include "Button.h"
 
 #include <string>
 
-namespace object
+namespace Object
 {
 
-button::button(const std::string& name, int x, int y, const std::string& command_,const std::string& image, const unsigned& size)
+Button::Button(const std::string& name, int x, int y, const std::string& command_,const std::string& image, const unsigned& size)
 {
 
 	command = command_;
 	active = 0;
 	
 	
-	SDL_Surface* textSurface;
+	SDL_Surface* text_surface;
 	TTF_Font* font;
 	
 	if(name != "")
-	{
-		font = TTF_OpenFont("Fonts/LHANDW.TTF", size);	
-		SDL_Color textColor{0,0,0,0};
-		textSurface = TTF_RenderText_Blended(font, name.c_str(), textColor);
-	}
-	buttonSheet = load_image(image,true); //själva knappskalet
-	box.x = x;
-	box.y = y;
-	box.w = buttonSheet->w;
-	box.h = buttonSheet->h/4;
+	  {
+	    font = TTF_OpenFont("Fonts/LHANDW.TTF", size);        
+	    SDL_Color text_color{0,0,0,0};
+	    text_surface = TTF_RenderText_Blended(font, name.c_str(), text_color);
+	  }
+        button_sheet = loadImage(image,true); //sj�lva knappskalet
+        box.x = x;
+        box.y = y;
+        box.w = button_sheet->w;
+        box.h = button_sheet->h/4;
 	
-	int offset = (box.h - textSurface->h)/2;
+	int offset = (box.h - text_surface->h)/2;
 	if(name != "")
 	{
-		apply_surface((box.w-(textSurface->w))/2    ,offset          ,textSurface,buttonSheet); //text på alla delar av knappen
-		apply_surface((box.w-(textSurface->w))/2    ,offset+box.h    ,textSurface,buttonSheet);
-		apply_surface((box.w-(textSurface->w))/2 +3 ,offset+box.h*2+1,textSurface,buttonSheet);
-		apply_surface((box.w-(textSurface->w))/2    ,offset+box.h*3  ,textSurface,buttonSheet);
+		applySurface((box.w-(text_surface->w))/2    ,offset          ,text_surface,button_sheet); //text på alla delar av knappen
+		applySurface((box.w-(text_surface->w))/2    ,offset+box.h    ,text_surface,button_sheet);
+		applySurface((box.w-(text_surface->w))/2 +3 ,offset+box.h*2+1,text_surface,button_sheet);
+		applySurface((box.w-(text_surface->w))/2    ,offset+box.h*3  ,text_surface,button_sheet);
 
-	clean_up({textSurface},{font});	
+	cleanUp({text_surface},{font});	
 	}
 	SDL_Rect temp;
 	temp.x = 0;
@@ -55,7 +55,7 @@ button::button(const std::string& name, int x, int y, const std::string& command
 	
 	
 }
-bool button::inside( const SDL_Event& event)
+bool Button::inside( const SDL_Event& event)
 {
 	return (event.motion.x > box.x 
 		 && event.motion.x < box.x + box.w
@@ -63,7 +63,7 @@ bool button::inside( const SDL_Event& event)
 		 && event.motion.y < box.y + box.h);
 }
 
-std::string button::handle_event(const SDL_Event& event)
+std::string Button::handleEvent(const SDL_Event& event)
 {
     //If the mouse moved
     if( event.type == SDL_MOUSEMOTION )
@@ -101,10 +101,10 @@ std::string button::handle_event(const SDL_Event& event)
     }
 	return "";
 }
-void button::print(SDL_Surface* to_where)
+void Button::paint(SDL_Surface* to_where)
 {
     //Show the button
-    apply_surface( box.x, box.y, buttonSheet, to_where, &clip.at(active));
+    applySurface( box.x, box.y, button_sheet, to_where, &clip.at(active));
 }
 
 

@@ -1,9 +1,9 @@
-#include "object_check_box.h"
+#include "Checkbox.h"
 
-namespace object
+namespace Object
 {
 
-CheckBox::CheckBox(int x, int y, const std::string& com, bool check)
+Checkbox::Checkbox(int x, int y, const std::string& com, bool check)
 {
 	checked = check;
 	command = com;
@@ -13,7 +13,7 @@ CheckBox::CheckBox(int x, int y, const std::string& com, bool check)
 	box.h = 98;
 	box.w = 100;
 		
-	box_sheet = load_image("Images/Gui/checkbox.png", true); //fixa bilden
+	box_sheet = loadImage("Images/Gui/checkbox.png", true); //fixa bilden
 		
 	SDL_Rect temp_clip;
 	temp_clip.x = 0;
@@ -28,16 +28,16 @@ CheckBox::CheckBox(int x, int y, const std::string& com, bool check)
 	clip.push_back(temp_clip);
 }
 
-void CheckBox::print(SDL_Surface* to_where)
+void Checkbox::paint(SDL_Surface* to_where)
 {
 	if(checked)
-		apply_surface(box.x, box.y, box_sheet, to_where, &clip.at(1));
+		applySurface(box.x, box.y, box_sheet, to_where, &clip.at(1));
 	else
-		apply_surface(box.x, box.y, box_sheet, to_where, &clip.at(0));
+		applySurface(box.x, box.y, box_sheet, to_where, &clip.at(0));
 	
 }
 
-std::string CheckBox::handle_event(const SDL_Event& event)
+std::string Checkbox::handleEvent(const SDL_Event& event)
 {
 	static bool changed = false;
 

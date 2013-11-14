@@ -1,6 +1,6 @@
 #include "SGS.h"
 
-using namespace object;
+using namespace Object;
 
 //Destruktor
 SGS::~SGS(){} //destruering sker i slutet av run!
@@ -15,7 +15,7 @@ SGS::~SGS(){} //destruering sker i slutet av run!
 bool SGS::make_button(const std::string& name, const int& x_pos, const int& y_pos, const std::string& command,
 							const std::string& image, const unsigned& size)
 {
-	button* temp = new button(name, x_pos, y_pos, command, image, size);
+	Button* temp = new Button(name, x_pos, y_pos, command, image, size);
 	if (temp == nullptr)
 		return false;
 	all_objects.push_back(temp);
@@ -23,7 +23,7 @@ bool SGS::make_button(const std::string& name, const int& x_pos, const int& y_po
 }
 bool SGS::make_slider(const int& x_pos, const int& y_pos, const std::string& command)
 {
-	slider* temp = new slider(x_pos, y_pos, command,m.getVolume());
+	Slider* temp = new Slider(x_pos, y_pos, command,m.getVolume());
 	if (temp == nullptr)
 		return false;
 	all_objects.push_back(temp);
@@ -33,7 +33,7 @@ bool SGS::make_slider(const int& x_pos, const int& y_pos, const std::string& com
 bool SGS::make_textbox(const std::string& text, const int& x, const int& y, const int& w , const int& h
 							,const SDL_Color &col, const std::string& font, const unsigned& size)
 {
-	text_box* temp = new text_box(text,x,y,w,h,col,font,size);
+	Textbox* temp = new Textbox(text,x,y,w,h,col,font,size);
 	
 	if (temp == nullptr)
 		return false;
@@ -42,7 +42,7 @@ bool SGS::make_textbox(const std::string& text, const int& x, const int& y, cons
 	return true;
 	
 }
-bool SGS::add_window(object::window* your_window)
+bool SGS::add_window(Object::Window* your_window)
 {
 	if(your_window == nullptr)
 		return false;
@@ -52,7 +52,7 @@ bool SGS::add_window(object::window* your_window)
 
 bool SGS::make_checkbox(int x, int y, const std::string& command, bool checked)
 {
-	CheckBox* tmp = new CheckBox(x,y,command,checked);
+	Checkbox* tmp = new Checkbox(x,y,command,checked);
 	if(tmp == nullptr)
 		return false;
 	all_objects.push_back(tmp);

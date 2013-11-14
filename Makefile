@@ -2,7 +2,7 @@ CCC        =g++
 CFLAGS   +=-L/sw/gcc-${GCC4_V}/lib -static-libstdc++ -std=c++11 -pedantic -Wall -Wextra
 INCLUDE  = -I./objects
 SDLFLAGS +=-lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer
-OBJECTS = main.cpp Menu.o object_button.o object_slider.o object_text_box.o object_check_box.o functions.o object_window.o music.o SGS.o
+OBJECTS = main.cpp Menu.o Button.o Slider.o Textbox.o Checkbox.o Functions.o Window.o music.o SGS.o
 all: $(OBJECTS)
 		@ echo
 		@ echo execute skapas
@@ -14,9 +14,9 @@ all: $(OBJECTS)
 
 		
 		
-functions.o: functions.cpp functions.h
-		@ echo functions.o skapas
-		@$(CCC) $(CFLAGS) -c functions.cpp $(SDLFLAGS)
+Functions.o: Functions.cpp Functions.h
+		@ echo Functions.o skapas
+		@$(CCC) $(CFLAGS) -c Functions.cpp $(SDLFLAGS)
 		
 music.o: music.h music.cpp
 		@ echo music.o skapas
@@ -34,32 +34,30 @@ SGS.o: SGS.cpp SGS.h
 		@ echo SGS.o skapas
 		@$(CCC) $(INCLUDE) $(CFLAGS) -c SGS.cpp $(SDLFLAGS)
 		
-object_button.o: ./objects/object_button.h ./objects/object_button.cpp
-		@ echo object_button.o skapas
-		@$(CCC) $(CFLAGS) -c ./objects/object_button.cpp $(SDLFLAGS)
+Button.o: ./objects/Button.h ./objects/Button.cpp
+		@ echo Button.o skapas
+		@$(CCC) $(CFLAGS) -c ./objects/Button.cpp $(SDLFLAGS)
 		
-object_check_box.o: ./objects/object_check_box.h ./objects/object_check_box.cpp
-		@ echo object_check_box.o skapas
-		@$(CCC) $(CFLAGS) -c ./objects/object_check_box.cpp $(SDLFLAGS)
+Checkbox.o: ./objects/Checkbox.h ./objects/Checkbox.cpp
+		@ echo Checkbox.o skapas
+		@$(CCC) $(CFLAGS) -c ./objects/Checkbox.cpp $(SDLFLAGS)
 		
-object_slider.o: ./objects/object_slider.h ./objects/object_slider.cpp
-		@ echo object_slider.o skapas
-		@$(CCC) $(CFLAGS) -c ./objects/object_slider.cpp $(SDLFLAGS)
+Slider.o: ./objects/Slider.h ./objects/Slider.cpp
+		@ echo Slider.o skapas
+		@$(CCC) $(CFLAGS) -c ./objects/Slider.cpp $(SDLFLAGS)
 		
-object_window.o: ./objects/object_window.h ./objects/object_window.cpp
-		@ echo object_window.o skapas
-		@$(CCC) $(CFLAGS) -c ./objects/object_window.cpp $(SDLFLAGS)
+Window.o: ./objects/Window.h ./objects/Window.cpp
+		@ echo Window.o skapas
+		@$(CCC) $(CFLAGS) -c ./objects/Window.cpp $(SDLFLAGS)
 		
-object_text_box.o: ./objects/object_text_box.h ./objects/object_text_box.cpp
-		@ echo object_text_box.o skapas
-		@$(CCC) $(CFLAGS) -c ./objects/object_text_box.cpp $(SDLFLAGS)
+Textbox.o: ./objects/Textbox.h ./objects/Textbox.cpp
+		@ echo Textbox.o skapas
+		@$(CCC) $(CFLAGS) -c ./objects/Textbox.cpp $(SDLFLAGS)
 			
 		
-		
-		
 clean:
-		@ rm -rf *.o
+		 del *.o
 
 zap: clean
-		@ rm -rf "SGS.exe" *~
+		del *.exe
 		
