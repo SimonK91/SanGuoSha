@@ -6,7 +6,6 @@ void Menu::run()
 	m.play();
 	Uint8 *keystates = SDL_GetKeyState(nullptr);
 	std::string command;
-	
 	while(running) //medans programmet kÃ¶rs
 	{
 		while( SDL_PollEvent( &event)) //sÃ¥ lÃ¤nge som det finns en event
@@ -16,7 +15,7 @@ void Menu::run()
 				 //om objektet Ã¤r ett aktivt objekt och has_window är false(aktiva objekt kan manipulera saker)
 				if(!has_window && dynamic_cast<active_object*>(all_objects.at(i)) != nullptr)
 				{
-					 //kÃ¶r handle event pÃ¥ objektet (detta ser om kriterier Ã¤r uppfyllda fÃ¶r att gÃ¶ra nÃ¥got
+					//kÃ¶r handle event pÃ¥ objektet (detta ser om kriterier Ã¤r uppfyllda fÃ¶r att gÃ¶ra nÃ¥got
 					command = dynamic_cast<active_object*>(all_objects.at(i))->handle_event(event);
 					run_command(command);
 				}

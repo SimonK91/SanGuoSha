@@ -68,10 +68,10 @@ namespace object
     return true;
   }
   
-  bool window::make_text_box(const std::string& text, const int& x, const int& y, const int& w , const int& h
+  bool window::make_textbox(const int& x, const int& y, const int& w , const int& h
 			     ,const SDL_Color &col, const std::string& font, const unsigned& size)
   {
-    text_box* temp = new text_box(text,x,y,w,h,col,font,size);
+    text_box* temp = new text_box(x,y,w,h,col,font,size);
     
     if (temp == nullptr)
       return false;
@@ -80,9 +80,22 @@ namespace object
     return true;
     
   }
-	void window::set_text(const int& where, const std::string& what_text)
+  bool window::make_checkbox(int x, int y, const std::string& command, bool checked)
+{
+	CheckBox* tmp = new CheckBox(x,y,command,checked);
+	if(tmp == nullptr)
+		return false;
+	objects.push_back(tmp);
+	return true;
+}
+
+	bool window::set_text(const int& where, const std::string& what_text)
 	{
 		if(dynamic_cast<text_box*>(objects.at(where)) != nullptr)
+		{
 			dynamic_cast<text_box*>(objects.at(where))->set_text(what_text);
+			return true;
+		}
+		return false;
 	}
 }//slut på namnrymd

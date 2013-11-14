@@ -5,6 +5,7 @@
 #include "object_button.h"
 #include "object_slider.h"
 #include "object_text_box.h"
+#include "object_check_box.h"
 #include "objects.h"
 #include <vector>
 
@@ -66,14 +67,17 @@ namespace object
       }
     ~window();
     std::string handle_event(const SDL_Event&);
+	
     void make_button(const std::string& text, const int& x_pos, const int& y_pos, const std::string& command = "",
 					const std::string& image = "Images/Gui/cleanButton2.png", const unsigned& size = 20);
     bool make_slider(const int& x_pos, const int& y_pos, const std::string& command, const int& value);
     //void make_checkbox(/*konstruktor argument för checkBox*/){}
-    bool make_text_box(const std::string& text, const int& x, const int& y, const int& w, const int& h,
+    bool make_textbox(const int& x, const int& y, const int& w, const int& h,
 					  const SDL_Color &col = {255,255,255,0}, const std::string& font = "Fonts/LHANDW.TTF", const unsigned& size = 13);
+	bool make_checkbox(int x, int y, const std:: string& command, bool checked = false);
+					  
     void print(SDL_Surface* screen);
-	void set_text(const int& where, const std::string& what_text);
+	bool set_text(const int& where, const std::string& what_text);
   };  
 }//namnrymd
 #endif

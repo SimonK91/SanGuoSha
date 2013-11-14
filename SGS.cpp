@@ -1,5 +1,10 @@
 #include "SGS.h"
-
+/*******************************
+ * set_text function added
+ * make_textbox removed string: text
+ *
+ *
+ *******************************/
 using namespace object;
 
 //Destruktor
@@ -30,10 +35,10 @@ bool SGS::make_slider(const int& x_pos, const int& y_pos, const std::string& com
 	return true;
 }
 
-bool SGS::make_textbox(const std::string& text, const int& x, const int& y, const int& w , const int& h
+bool SGS::make_textbox(const int& x, const int& y, const int& w , const int& h
 							,const SDL_Color &col, const std::string& font, const unsigned& size)
 {
-	text_box* temp = new text_box(text,x,y,w,h,col,font,size);
+	text_box* temp = new text_box(x,y,w,h,col,font,size);
 	
 	if (temp == nullptr)
 		return false;
@@ -57,5 +62,14 @@ bool SGS::make_checkbox(int x, int y, const std::string& command, bool checked)
 		return false;
 	all_objects.push_back(tmp);
 	return true;
+}
+bool SGS::set_text(const int& where, const std::string& what_text)
+{
+	if(dynamic_cast<text_box*>(all_objects.at(where)) != nullptr)
+	{
+		dynamic_cast<text_box*>(all_objects.at(where))->set_text(what_text);
+		return true;
+	}
+	return false;
 }
 

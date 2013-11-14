@@ -48,6 +48,13 @@ private:
 protected:
 	int active;
 	std::string command;
+	virtual bool inside(const SDL_Event& event)
+	{
+		return (event.motion.x > box.x 
+				&& event.motion.x < box.x + box.w
+				&& event.motion.y > box.y
+				&& event.motion.y < box.y + box.h);
+	}
 
 public:
 	active_object() : object() , active(0), command(""){}

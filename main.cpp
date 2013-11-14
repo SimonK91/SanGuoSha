@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 	Menu mainMenu(screen);  //Skapa mainMenu och länka det till skärmen
 	mainMenu.load_background("Images/Gui/background.png");
 	
-	mainMenu.make_textbox("<b>aa<u>aa</u>bb</b> <s>bbb</s> b fds afd asf sda ghfdsjalh flkdfh sa gff jakl fhf gf hjasb b vh vnans djf a fdsaf ökankvjshldaf skdnf vlsahflgjkasdfj bjdsgafjbn vbscjhag djsabvsdytyuerabreab hdsgayfyeurb bfeakgbfasrgyea bfeag",50,50, 300, 500);
+	//mainMenu.make_textbox("<b>aa<u>aa</u>bb</b> <s>bbb</s> b fds afd asf sda ghfdsjalh flkdfh sa gff jakl fhf gf hjasb b vh vnans djf a fdsaf ökankvjshldaf skdnf vlsahflgjkasdfj bjdsgafjbn vbscjhag djsabvsdytyuerabreab hdsgayfyeurb bfeakgbfasrgyea bfeag",50,50, 300, 500);
 	mainMenu.make_button("New Game",300,100,"make_new_game");
 	mainMenu.make_button("Options", 300,200,"options");
 	mainMenu.make_button("Exit", 300,400,"exit");

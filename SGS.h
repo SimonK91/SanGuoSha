@@ -3,7 +3,6 @@
 
 #include "music.h"
 #include "functions.h"
-#include "pointer_arrow.h"
 #include "object_button.h"
 #include "object_slider.h"
 #include "object_text_box.h"
@@ -21,7 +20,6 @@ protected:
 	SDL_Surface* background;
 	SDL_Event event;
 	SDL_Surface* screen;
-	//object::pointer_arrow arrow;
 	std::vector<object::object*> all_objects;
 	
 	virtual bool exit() = 0;
@@ -40,7 +38,7 @@ public:
 	}
 	~SGS();
 	//borttagna
-	SGS() = delete;                 //defaultkonstruktor
+	SGS() = delete;           //defaultkonstruktor
 	SGS(const SGS&) = delete; //kopieringskonstruktor
 	SGS(SGS&&) = delete;      //movekonstruktor
 	SGS& operator=(const SGS&) = delete;
@@ -59,8 +57,9 @@ public:
 	bool make_slider(const int& x_pos, const int& y_pos, const std::string& command);
 	bool add_window(object::window* your_window);
 	bool make_checkbox(int x, int y, const std:: string& command, bool checked = false);
-	bool make_textbox(const std::string& text, const int& x, const int& y, const int& w, const int& h,
+	bool make_textbox(const int& x, const int& y, const int& w, const int& h,
 					  const SDL_Color &col = {255,255,255,0}, const std::string& font = "Fonts/LHANDW.TTF", const unsigned& size = 13);
+	bool set_text(const int& where, const std::string& what_text);
 };
 
 

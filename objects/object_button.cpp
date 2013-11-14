@@ -55,13 +55,6 @@ button::button(const std::string& name, int x, int y, const std::string& command
 	
 	
 }
-bool button::inside( const SDL_Event& event)
-{
-	return (event.motion.x > box.x 
-		 && event.motion.x < box.x + box.w
-		 && event.motion.y > box.y
-		 && event.motion.y < box.y + box.h);
-}
 
 std::string button::handle_event(const SDL_Event& event)
 {

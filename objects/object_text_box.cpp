@@ -4,7 +4,7 @@
 #include <queue>
 namespace object
 {
-text_box::text_box(const std::string& text_, const int& x, const int& y, const int& w, const int& h,
+text_box::text_box(const int& x, const int& y, const int& w, const int& h,
 	const SDL_Color& col, const std::string& font_style, const unsigned& size)
 {
 	
@@ -65,8 +65,6 @@ text_box::text_box(const std::string& text_, const int& x, const int& y, const i
 	clip.y = 0;
 	clip.w = w;
 	clip.h = h;
-	
-	set_text(text_);	
 
 }
 		

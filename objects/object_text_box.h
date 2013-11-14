@@ -32,7 +32,7 @@ private:
 	void set_color(std::string&);
 	void apply_text(const std::string&);
 public:
-	text_box(const std::string& text_, const int& x, const int& y, const int& w, const int& h,
+	text_box(const int& x, const int& y, const int& w, const int& h,
 	const SDL_Color& col, const std::string& font_style, const unsigned& size);
 		
 	~text_box(){clean_up({background,textArea},{font});}

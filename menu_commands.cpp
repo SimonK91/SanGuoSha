@@ -12,15 +12,38 @@ void Menu::run_command(const std::string& what_command)
 	}
 	if(what_command == "make_new_game")
 	{
-		m.stop();
-		dynamic_cast<text_box*>(all_objects.at(0))->set_text("You cannot make a new game yet!");
+		//m.stop();
+		//dynamic_cast<text_box*>(all_objects.at(0))->set_text("You cannot make a new game yet!");
+		
+		window* game = new window(160,50,500,450);
+		game->make_button("Host Game", 150,100,"open_lobby");
+		game->make_button("Join Game", 150,200,"get_lobby");
+		game->make_button("Cancel"   , 150,350,"close_window");
+		add_window(game);
+		has_window = true;
+		
 	}
+	
+	if(what_command == "open_lobby")
+	{
+		delete all_objects.back();
+		all_objects.pop_back();
+		//network.host_game("game1");
+		window* game = new window(50,50,600,550);
+		game->make_textbox(300,10,290,330);
+		game->make_button("Cancel",150,350,"close_window");
+		add_window(game);
+		has_window = true;
+		
+	}
+	
 	if(what_command == "options")
 	{
 		window* options = new window(160,50,500,450);
 		options->make_button("Fullscreen",30,20,"toggle_fullscreen");
 		options->make_button("Back",270,390,"close_window");
-		options->make_text_box(("Music volume: " + I2S(m.getVolume())),300,20,150,30);
+		options->make_textbox(300,20,150,30);
+		options->set_text(2,("Music volume: " + I2S(m.getVolume())));
 		options->make_slider(250,60,"set_volume",m.getVolume());
 		add_window(options);
 		has_window = true;
