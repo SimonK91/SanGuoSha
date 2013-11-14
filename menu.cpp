@@ -10,7 +10,7 @@ void Menu::run()
 	std::string command;
 	
 	CardList* cl = new CardList("card_deck");
-	delete cl;
+	//delete cl;
 	while(running) //medans programmet kÃ¶rs
 	{
 

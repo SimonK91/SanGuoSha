@@ -26,6 +26,7 @@ public:
 	{
 		apply_surface(0, 0, image, to_where);
 	} //WTF!!
+	
 };
 
 } //namespace
