@@ -2,7 +2,7 @@
 #define OBJECTS_H
 
 #include "../functions.h"
-//#include "pointer_arrow.h"
+#include "pointer_arrow.h"
 #include <string>
 #include <vector>
 
@@ -15,7 +15,6 @@ class object
 private:
 
 protected:
-
 	//konstruktorer och operatorer som ej används!
 	object() = default;
 	object(const object&) = delete;
@@ -51,6 +50,9 @@ protected:
 	std::string command;
 
 public:
+	active_object() : object() , active(0), command(""){}
+	
+	int isActivated(){ return active; }
 	virtual std::string handle_event(const SDL_Event&) = 0;
 	virtual ~active_object() = default;
  };

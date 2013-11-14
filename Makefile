@@ -72,5 +72,5 @@ clean:
 		@ rm -rf *.o
 
 zap: clean
-		@ rm -rf "SGS.exe" *~
+		@ rm -rf "SanGuoSha.exe" *~
 		
