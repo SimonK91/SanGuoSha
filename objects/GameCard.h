@@ -26,6 +26,7 @@ public:
 	
 	Suit getSuit(){ return suit; }
 	int getNumber(){ return number; }
+	std::string getAbility(){ return abilityID; }
 	
 	std::string handle_event(const SDL_Event& event, const pointer_arrow& pa);
 	void print(SDL_Surface* to_where){} //ska tas bort
