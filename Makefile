@@ -54,7 +54,6 @@ Textbox.o: ./objects/Textbox.h ./objects/Textbox.cpp
 		@ echo Textbox.o skapas
 		@$(CCC) $(CFLAGS) -c ./objects/Textbox.cpp $(SDLFLAGS)
 			
-		
 clean:
 		 del *.o
 

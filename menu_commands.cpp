@@ -36,7 +36,7 @@ void Menu::run_command(const std::string& what_command)
 		//hitta grejer3
 		int volume = S2I(what_command.substr(11,what_command.size()-11));
 		m.setVolume(volume);
-		settings.at(1).second = I2S(volume);
+		//settings.at(1).second = I2S(volume);
 		dynamic_cast<Window*>(all_objects.back())->setText(2,"Music volume: " +  I2S(m.getVolume()));
 	}
 	if(what_command == "toggle_fullscreen")

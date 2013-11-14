@@ -2,13 +2,12 @@
 #include <sstream>
 #include <vector>
 #include <queue>
-#include <iostream>
 namespace Object
 {
-  Textbox::Textbox(const std::string& text_, const int& x, const int& y, const int& w, const int& h,
-		   const SDL_Color& col, const std::string& style, const unsigned& size)
+Textbox::Textbox(const std::string& text_, const int& x, const int& y, const int& w, const int& h,
+	const SDL_Color& col, const std::string& style, const unsigned& size)
 {
-  std::cout << "skapar textbox";
+	
 	//fixar bakgrundsbilden
 	background = loadImage("Images/Gui/windowBackground.png",true);
 	SDL_Surface* tmp_bg;
@@ -52,7 +51,7 @@ namespace Object
 	font_size = size;
 	font_name = style;
 	font = TTF_OpenFont(font_name.c_str(), font_size); 
-	text_color = col;
+	textColor = col;
 	font_bold = false;
 	font_style = 0;
 	font_italic = 0;
@@ -73,9 +72,8 @@ namespace Object
 		
 void Textbox::paint(SDL_Surface* to_where)
 	{
-		//applySurface(box.x, box.y, background, to_where, &clip);
-		applySurface(box.x, box.y, background, to_where, &clip);
-		std::cout << "ritar textbox";
+		//apply_surface(box.x, box.y, background, to_where, &clip);
+		applySurface(box.x, box.y, textArea, to_where, &clip);
 	}
 
 
@@ -105,14 +103,14 @@ void Textbox::setColor(std::string& color)
 	Uint8 r = tmp[0]*16 + tmp[1];					//lagra de två första bitarna i "röd färg",
 	Uint8 g = tmp[2]*16 + tmp[3];					//----grön färg
 	Uint8 b = tmp[4]*16 + tmp[5];					//-----blå färg
-	text_color = SDL_Color{r,g,b,0};					//sätt "textColor" till de nya värdena
+	textColor = SDL_Color{r,g,b,0};					//sätt "textColor" till de nya värdena
 }
 
 void Textbox::applyText(const std::string& what_text)
 {
 	SDL_Surface* tmp_surface;
 	std::string tmp_word;
-	tmp_surface = TTF_RenderText_Blended(font,what_text.c_str(),text_color);	//skapa en yta med ordet
+	tmp_surface = TTF_RenderText_Blended(font,what_text.c_str(),textColor);	//skapa en yta med ordet
 			
 	if(text_x + tmp_surface->w >= box.w - frame_size)								//om ordet inte får plats på den nuvarande raden		
 	{
@@ -120,23 +118,23 @@ void Textbox::applyText(const std::string& what_text)
 		text_y += 24;															//positionera y till nästa rad
 	}
 	
-	applySurface(text_x,text_y, tmp_surface, text_area, nullptr);					//skriv ut den på ytan
+	applySurface(text_x,text_y, tmp_surface, textArea, nullptr);					//skriv ut den på ytan
 	
-	text_area += tmp_surface->w-4;													//ompositionera var nästa ord ska starta
+	text_x += tmp_surface->w-4;													//ompositionera var nästa ord ska starta
 				
 	cleanUp({tmp_surface});													//rensa den temporära ytan med ordet och starta på punkt (1).
 }
 
 void Textbox::setText(const std::string& what_text)
 {
-	if(text_area != nullptr)
+	if(textArea != nullptr)
 	{
-		cleanUp({text_area});				//tömmer den nuvarande ytan om det redan fanns en
+		cleanUp({textArea});				//tömmer den nuvarande ytan om det redan fanns en
 	}
 	//Skapar yta att skriva på
-	text_area = SDL_CreateRGBSurface(0,clip.w,clip.h,32,0,0,0,1);	//skapar en ny tom yta
-	//applySurface(0,0, loadImage("Images/Gui/transparent.png",true),textArea,&clip);
-	applySurface(0,0, background, text_area, &clip);				//ritar ut bakgrunden (ramen)
+	textArea = SDL_CreateRGBSurface(0,clip.w,clip.h,32,0,0,0,1);	//skapar en ny tom yta
+	//apply_surface(0,0, load_image("Images/Gui/transparent.png",true),textArea,&clip);
+	applySurface(0,0, background, textArea, &clip);				//ritar ut bakgrunden (ramen)
 	
 	//laddar variabler
 	std::queue<std::string> string_queue;

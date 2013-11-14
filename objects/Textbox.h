@@ -1,5 +1,5 @@
-#ifndef TEXT_BOX_H
-#define TEXT_BOX_H
+#ifndef TEXTBOX_H
+#define TEXTBOX_H
 
 #include "Objects.h"
 
@@ -13,8 +13,8 @@ private:
 	TTF_Font* font = nullptr;
 	
 	SDL_Surface* background = nullptr;
-	SDL_Surface* text_area  = nullptr;
-	SDL_Color text_color;
+	SDL_Surface* textArea  = nullptr;
+	SDL_Color textColor;
 	
 	std::string file_text;
 	int frame_size;
@@ -33,9 +33,9 @@ private:
 	void applyText(const std::string&);
 public:
 	Textbox(const std::string& text_, const int& x, const int& y, const int& w, const int& h,
-	const SDL_Color& col, const std::string& font_style, const unsigned& size);
+	const SDL_Color& col, const std::string& style, const unsigned& size);
 		
-	~Textbox(){cleanUp({background,text_area},{font});}
+	~Textbox(){cleanUp({background,textArea},{font});}
 	
 	void paint(SDL_Surface* to_where);
 	

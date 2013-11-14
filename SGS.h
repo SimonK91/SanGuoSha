@@ -32,6 +32,8 @@ protected:
 public:
 	//konstruktorer, destruktorer och operatorer
 	SGS(SDL_Surface* scr) : screen(scr){
+	   m.loadMusic("Music/Menu.wav");
+	  loadSettings(settings);
 	}
 	~SGS();
 	//borttagna
@@ -70,8 +72,8 @@ public:
 	void run();
 	~Menu();
 	Menu(SDL_Surface* scr) : SGS(scr){
-	  m.loadMusic("Music/Menu.wav");
-	  loadSettings(settings);
+	  // m.loadMusic("Music/Menu.wav");
+	  //loadSettings(settings);
 	}
 };
 /*
