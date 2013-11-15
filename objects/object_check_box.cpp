@@ -28,7 +28,7 @@ CheckBox::CheckBox(int x, int y, const std::string& com, bool check)
 	clip.push_back(temp_clip);
 }
 
-void CheckBox::print(SDL_Surface* to_where)
+void CheckBox::paint(SDL_Surface* to_where)
 {
 	if(checked)
 		apply_surface(box.x, box.y, box_sheet, to_where, &clip.at(1));

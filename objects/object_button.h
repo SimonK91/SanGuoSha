@@ -25,7 +25,7 @@ public:
 	bool inside( const SDL_Event&);
 	std::string handle_event( const SDL_Event&);
 	
-	void print(SDL_Surface*);
+	void paint(SDL_Surface*);
 };
 
 }//slut på namnrymden

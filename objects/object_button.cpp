@@ -101,7 +101,7 @@ std::string button::handle_event(const SDL_Event& event)
     }
 	return "";
 }
-void button::print(SDL_Surface* to_where)
+void button::paint(SDL_Surface* to_where)
 {
     //Show the button
     apply_surface( box.x, box.y, buttonSheet, to_where, &clip.at(active));

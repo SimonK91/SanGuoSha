@@ -26,7 +26,7 @@ protected:
 	SDL_Rect clip;
 public:
 	virtual ~object(){}
-	virtual void print(SDL_Surface*) = 0;
+	virtual void paint(SDL_Surface*) = 0;
 };
 
 //alla objekt som inte har någon funktion i sig

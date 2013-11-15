@@ -65,7 +65,7 @@ GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) 
 	else
 		suitClip.x = 0;
 			
-	apply_surface(13,7, img, image, &suitClip);
+	apply_surface(13,8, img, image, &suitClip);
 	clean_up({img});
 }
 

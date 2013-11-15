@@ -14,15 +14,18 @@ CardList::CardList(const std::string& setting)
 	image = load_image("Images/Cards/back.png", true);
 	if(!image)
 		throw std::runtime_error("could not open imageFile: Images/Cards/back.png");
-	
-	if(setting == "card_deck")
+	if(setting == "empty")
+	{
+		//do nothing
+	}
+	else if(setting == "standard_playing_cards")
 		loadCardDeck();
 	else if(setting == "hero_deck")
 		loadHeroDeck();
 	else
 		throw std::runtime_error("no such deck type as: " + setting);
 	
-	shuffle(); //blanda listan fint^^
+	//shuffle(); //blanda listan fint^^
 }
 	
 CardList::~CardList()
@@ -38,18 +41,16 @@ CardList::~CardList()
 	
 Card* CardList::drawCard()
 {
-	if(set.empty())
-	{
-		loadCardDeck();
-		shuffle();
-	}
-	
 	Card* c = set.front();
 	set.front() = nullptr; //peka bort så att vi inte tar bort c ^^
 	set.erase(set.begin());
 	return c;
 }
-	
+
+bool CardList::empty()
+{
+	return set.empty();
+}
 void CardList::pushBottom(Card* card)
 {
 	set.push_back(card);
@@ -112,7 +113,7 @@ set.push_back(new GameCard(10,clubs,"attack.png","attack 1 10")); //ability id, 
 set.push_back(new GameCard(11,clubs,"attack.png","attack 1 10")); //ability id, target type, target range
 
 //dodges
-//0 = self-instant, 0 = no range
+//0 = self/instant, 0 = no range
 set.push_back(new GameCard(2,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
 set.push_back(new GameCard(3,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
 set.push_back(new GameCard(4,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range

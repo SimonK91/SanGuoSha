@@ -72,7 +72,7 @@ namespace object
     //void make_checkbox(/*konstruktor argument för checkBox*/){}
     bool make_text_box(const std::string& text, const int& x, const int& y, const int& w, const int& h,
 					  const SDL_Color &col = {255,255,255,0}, const std::string& font = "Fonts/LHANDW.TTF", const unsigned& size = 13);
-    void print(SDL_Surface* screen);
+    void paint(SDL_Surface* screen);
 	void set_text(const int& where, const std::string& what_text);
   };  
 }//namnrymd

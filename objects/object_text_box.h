@@ -37,7 +37,7 @@ public:
 		
 	~text_box(){clean_up({background,textArea},{font});}
 	
-	void print(SDL_Surface* to_where);
+	void paint(SDL_Surface* to_where);
 	
 	void setFileText(int counter); //ej skriven
 	

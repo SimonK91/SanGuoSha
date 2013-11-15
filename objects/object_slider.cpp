@@ -85,7 +85,7 @@ bool slider::inside( const SDL_Event& event)
 		 && event.motion.y < lower_edge);
 }
 
-void slider::print(SDL_Surface* to_where)
+void slider::paint(SDL_Surface* to_where)
 {	
 	
 	apply_surface( box.x, box.y, bg, to_where, nullptr);

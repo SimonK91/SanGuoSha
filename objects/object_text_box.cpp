@@ -70,7 +70,7 @@ text_box::text_box(const std::string& text_, const int& x, const int& y, const i
 
 }
 		
-void text_box::print(SDL_Surface* to_where)
+void text_box::paint(SDL_Surface* to_where)
 	{
 		//apply_surface(box.x, box.y, background, to_where, &clip);
 		apply_surface(box.x, box.y, textArea, to_where, &clip);

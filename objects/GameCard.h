@@ -44,6 +44,11 @@ public:
 	
 	void paint(SDL_Surface* to_where)
 	{
+		if(image == nullptr)
+		{
+			std::cout <<'\'' << abilityID << " ability ID' has no image" << std::endl;
+			return;
+		}
 		apply_surface(box.x , box.y , image, to_where);
 	}
 	void paint(SDL_Surface* to_where, int x, int y)

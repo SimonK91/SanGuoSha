@@ -9,7 +9,8 @@ void Menu::run()
 	Uint8 *keystates = SDL_GetKeyState(nullptr);
 	std::string command;
 	
-	CardList* cl = new CardList("card_deck");
+	CardList* card_deck = new CardList("standard_playing_cards");
+	CardList* discard_deck = new CardList("empty");
 	//delete cl;
 	Card* card;
 	while(running) //medans programmet kÃ¶rs
@@ -40,15 +41,22 @@ void Menu::run()
 			   event.key.keysym.sym == SDLK_F4) //
 				running = false;           		// avsluta programmet
 		}
-		card = cl -> drawCard();
+		if(card_deck -> empty())
+		{
+			std::swap(card_deck,discard_deck);
+			card_deck -> shuffle();
+		}
+		card = card_deck -> drawCard();
 		card -> setPosition(10,10);
-		dynamic_cast<GameCard*>(card) -> paint(screen);
-		delete card;
 		paint();
-		SDL_Delay(45);
+		dynamic_cast<GameCard*>(card) -> paint(screen);
+		discard_deck -> pushTop(card);
+		SDL_Flip(screen);
+		SDL_Delay(500);
 	}
 
-	delete cl;
+	delete card_deck;
+	delete discard_deck;
 	if(!exit())
 	{
 		throw("Could not exit Menu");
@@ -85,9 +93,9 @@ void Menu::paint()
 	apply_surface(0,0,background,screen); //skriv ut bakgrunden att ha som en bas
 	for(unsigned i = 0; i < all_objects.size() ; ++i)
 	{
-		all_objects.at(i)->print(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
+		all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
 	}
-	SDL_Flip(screen);                   // Skriv ut bilden pÃ¥ skÃ¤rmen
+	                   // Skriv ut bilden pÃ¥ skÃ¤rmen
 }
 
 #include "menu_commands.cpp" //enbart fÃ¶r att separera upp alla commands till en annan cpp fil, (detta Ã¤r ej nÃ¶dvÃ¤ndigt att gÃ¶ra)

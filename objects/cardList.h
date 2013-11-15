@@ -21,6 +21,7 @@ public:
 	void pushBottom(Card* card);
 	void pushTop(Card* card);
 	void shuffle();
+	bool empty();
 	
 	void paint(SDL_Surface* to_where)
 	{

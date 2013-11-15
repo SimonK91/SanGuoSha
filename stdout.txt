@@ -1,2 +1,1 @@
-could not open file: Images/Cards/blue_steel_blade.png
 exit OK!

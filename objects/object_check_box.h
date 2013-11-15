@@ -21,7 +21,7 @@ public:
 	
 	~CheckBox(){clean_up({box_sheet});}
 	
-	void print(SDL_Surface* to_where);
+	void paint(SDL_Surface* to_where);
 	
 	std::string handle_event(const SDL_Event& event);
 	

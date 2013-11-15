@@ -28,7 +28,7 @@ public:
 	
 	std::string handle_event(const SDL_Event&);
 	
-	void print(SDL_Surface* to_where);
+	void paint(SDL_Surface* to_where);
 		
 protected:	
 		

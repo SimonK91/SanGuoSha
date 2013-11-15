@@ -38,7 +38,7 @@ namespace object
   }
   
   
-  void window::print(SDL_Surface* screen)
+  void window::paint(SDL_Surface* screen)
   {
     //dessa SDL_Rects används för att se till att backgrunden och ramen "skalas om" till rätt storlek
     SDL_Rect backgroundSize;
@@ -48,9 +48,9 @@ namespace object
     backgroundSize.h = box.h;
     
     //ritar ut alla object som hör till detta window
-    for(auto i : objects)
+    for(unsigned i = 0; i < objects.size() ; ++i)
       {
-	i->print(background);
+	objects.at(i)->paint(background);
       }
     
     //ritar ut fönstrets backgrund och ram
