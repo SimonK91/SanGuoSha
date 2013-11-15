@@ -8,17 +8,32 @@ HeroCard::HeroCard(std::string filename, std::string ID) : Card(filename)
 	std::stringstream ss(ID);
 	std::string strClan;
 	std::string tmp;
-
+	SDL_Rect heroClip;
+	SDL_Surface *img;
+	
 	ss >> maxHP;
+	ss >> heroClip.x ;
+	ss >> heroClip.y;
+	ss >> male;
 	ss >> strClan;
 	clan = str2clan(strClan);
-	ss >> male;
 	ss >> name;
 	
 	while(ss >> tmp)
 	{
 		abilities.push_back(tmp);
 	}
+	
+	//fixa bilder!
+	heroClip.x *= (image -> w) / 9;
+	heroClip.y *= (image -> h) / 5;
+	heroClip.w 	= (image -> w) / 9;
+	heroClip.h 	= (image -> h) / 5;
+	
+	img = SDL_CreateRGBSurface(0, heroClip.w, heroClip.h, 32, 0 ,0 , 0, 0);
+	apply_surface(0,0, image, img, &heroClip);
+	std::swap(image,img);
+	clean_up({img});
 }
 
 std::string HeroCard::getAblility(unsigned index)

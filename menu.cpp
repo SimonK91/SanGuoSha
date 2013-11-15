@@ -1,5 +1,6 @@
 #include "SGS.h"
 #include "cardList.h"
+#include "heroCard.h"
 
 using namespace object;
 
@@ -9,13 +10,16 @@ void Menu::run()
 	Uint8 *keystates = SDL_GetKeyState(nullptr);
 	std::string command;
 	
-	CardList* card_deck = new CardList("standard_playing_cards");
-	CardList* discard_deck = new CardList("empty");
+	// CardList* card_deck = new CardList("standard_playing_cards");
+	// CardList* discard_deck = new CardList("empty");
 	//delete cl;
-	Card* card;
+	// Card* card;
+		
 	while(running) //medans programmet kÃ¶rs
 	{
 
+	HeroCard hc("Characters/all_characters.png" , "4 6 4 0 blue blackBitch wolo");
+	hc.setPosition(10,10);
 		while( SDL_PollEvent( &event)) //sÃ¥ lÃ¤nge som det finns en event
 		{
 			for(unsigned i = 0 ; i < all_objects.size() ; ++i)  //fÃ¶r varje objekt som finns i gamestatet
@@ -41,22 +45,30 @@ void Menu::run()
 			   event.key.keysym.sym == SDLK_F4) //
 				running = false;           		// avsluta programmet
 		}
+		/*
 		if(card_deck -> empty())
 		{
 			std::swap(card_deck,discard_deck);
 			card_deck -> shuffle();
 		}
-		card = card_deck -> drawCard();
-		card -> setPosition(10,10);
+		*/
 		paint();
-		dynamic_cast<GameCard*>(card) -> paint(screen);
-		discard_deck -> pushTop(card);
+		hc.paint(screen);
+		
+		// card = card_deck -> drawCard();
+		// card -> setPosition(10,10);
+		// dynamic_cast<GameCard*>(card) -> paint(screen);
+		// discard_deck -> pushTop(card);
+		
+		
+		
+		
 		SDL_Flip(screen);
-		SDL_Delay(500);
+		SDL_Delay(15);
 	}
 
-	delete card_deck;
-	delete discard_deck;
+	// delete card_deck;
+	// delete discard_deck;
 	if(!exit())
 	{
 		throw("Could not exit Menu");
