@@ -13,15 +13,15 @@ void Menu::run_command(const std::string& what_command)
 	if(what_command == "make_new_game")
 	{
 		m.stop();
-		dynamic_cast<text_box*>(all_objects.at(0))->set_text("You cannot make a new game yet!");
+		dynamic_cast<Textbox*>(all_objects.at(0))->setText("You cannot make a new game yet!");
 	}
 	if(what_command == "options")
 	{
-		window* options = new window(160,50,500,450);
-		options->make_button("Fullscreen",30,20,"toggle_fullscreen");
-		options->make_button("Back",270,390,"close_window");
-		options->make_text_box(("Music volume: " + I2S(m.getVolume())),300,20,150,30);
-		options->make_slider(250,60,"set_volume",m.getVolume());
+		Window* options = new Window(160,50,500,450);
+		options->makeButton("Fullscreen",30,20,"toggle_fullscreen");
+		options->makeButton("Back",270,390,"close_window");
+		options->makeTextbox(("Music volume: " + I2S(m.getVolume())),300,20,150,30);
+		options->makeSlider(250,60,"set_volume",m.getVolume());
 		add_window(options);
 		has_window = true;
 	}
@@ -37,7 +37,7 @@ void Menu::run_command(const std::string& what_command)
 		int volume = S2I(what_command.substr(11,what_command.size()-11));
 		m.setVolume(volume);
 		//settings.at(1).second = I2S(volume);
-		dynamic_cast<window*>(all_objects.back())->set_text(2,"Music volume: " +  I2S(m.getVolume()));
+		dynamic_cast<Window*>(all_objects.back())->setText(2,"Music volume: " +  I2S(m.getVolume()));
 	}
 	if(what_command == "toggle_fullscreen")
 	{

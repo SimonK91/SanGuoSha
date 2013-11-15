@@ -5,10 +5,10 @@
 
 #include <iostream>
 
-namespace object
+namespace Object
 {
 
-class Card : public active_object
+class Card : public ActiveObject
 {
 private:
 	
@@ -17,14 +17,14 @@ protected:
 public:
 	Card(std::string filename);
 	
-	virtual ~Card(){ clean_up({image});  };
+	virtual ~Card(){ cleanUp({image});  };
 	
 	void setPosition(const int& x,const int& y);
 };
 
 enum Suit
 {
-	clubs, heart, spades, diamond
+	clubs, hearts, spades, diamonds
 };
 
 enum Clan

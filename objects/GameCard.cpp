@@ -3,7 +3,7 @@
 #include <sstream>
 #include <stdexcept>
 
-namespace object
+namespace Object
 {
 GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) : Card(filename), suit(suit_), number(valor)
 {	
@@ -16,7 +16,7 @@ GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) 
 	ss >> target_type;
 	ss >> range;
 	//detta sak ändras så att det fungerar bättre o är rätt bild!!
-	img = load_image("Images/Cards/suit.png",true); //suit!
+	img = loadImage("Images/Cards/suit.png",true); //suit!
 	
 	if(!img)
 		throw std::runtime_error ("could not open image file: Images/Card/suits.png");
@@ -24,7 +24,7 @@ GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) 
 	imageOffset = (img -> h) / 2;
 	switch(suit)
 	{
-		case heart:
+		case hearts:
 			suitClip.x = 0;
 			suitClip.y = 0;
 			break;
@@ -36,7 +36,7 @@ GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) 
 			suitClip.x = 0;
 			suitClip.y = imageOffset;
 			break;
-		case diamond:
+		case diamonds:
 			suitClip.x = imageOffset;
 			suitClip.y = 0;
 			break;
@@ -46,11 +46,11 @@ GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) 
 	suitClip.w = imageOffset;
 	suitClip.h = imageOffset;
 	
-	apply_surface(13,27, img, image, &suitClip);
+	applySurface(13,27, img, image, &suitClip);
 	
-	clean_up({img});
+	cleanUp({img});
 	
-	img = load_image("Images/Cards/numbers.png" , true); //nummer
+	img = loadImage("Images/Cards/numbers.png" , true); //nummer
 	
 	if(!img)
 		throw std::runtime_error ("could not open image file: Images/Gui/numbers.png"); //bilden är inte bra än...
@@ -60,16 +60,16 @@ GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) 
 	suitClip.h = img -> h / 13;
 	suitClip.y =  suitClip.h * (valor - 1);
 	
-	if(suit == heart || suit == diamond)
+	if(suit == hearts || suit == diamonds)
 		suitClip.x = img -> w / 2;
 	else
 		suitClip.x = 0;
 			
-	apply_surface(13,7, img, image, &suitClip);
-	clean_up({img});
+	applySurface(13,8, img, image, &suitClip);
+	cleanUp({img});
 }
 
-std::string GameCard::handle_event(const SDL_Event& event)
+std::string GameCard::handleEvent(const SDL_Event& event)
 {
 	//ska fixas mer så att den går att använda på något vettigt sätt :D
 	if(event.type == SDL_MOUSEBUTTONDOWN)

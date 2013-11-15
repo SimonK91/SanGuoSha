@@ -2,15 +2,15 @@
 
 #include <stdexcept>
 
-namespace object
+namespace Object
 {
-Card::Card(std::string filename) : active_object()
+Card::Card(std::string filename) : ActiveObject()
 {
-	image = load_image("Images/Cards/"+filename, true);
+	image = loadImage("Images/Cards/"+filename, true);
 	if(!image)
 		throw std::runtime_error("could not open file: Images/Cards/" +filename);
 	box.w = 200;
-	box.h = 282;
+	box.h = 281;
 }
 
 void Card::setPosition(const int& x, const int& y)

@@ -1,6 +1,6 @@
 #include "HeroCard.h"
 
-namespace object
+namespace Object
 {
 
 HeroCard::HeroCard(std::string filename, std::string ID) : Card(filename)
@@ -30,7 +30,7 @@ std::string HeroCard::getAblility(unsigned index)
 	}
 }
 
-std::string HeroCard::handle_event(const SDL_Event& event)
+std::string HeroCard::handleEvent(const SDL_Event& event)
 {
 	if(event.type == SDL_MOUSEBUTTONDOWN)
 	{

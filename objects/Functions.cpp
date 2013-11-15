@@ -76,7 +76,7 @@ SDL_Surface* Init(const int& SCREEN_WIDTH, const int& SCREEN_HEIGHT, const int& 
 	//Initialize SDL_mixer
     if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
     {
-        return nullptr;    
+        return false;    
     }
 	//Set the window caption
 	SDL_WM_SetCaption( "SanGuoSha", nullptr);
@@ -90,7 +90,7 @@ void cleanUp(std::vector<SDL_Surface*> clean_surface, std::vector<TTF_Font*> cle
 	for(auto it = clean_surface.begin(); it != clean_surface.end(); ++it)
 		SDL_FreeSurface(*it);
 		
-	for(unsigned i = 0 ; i < clean_font.size(); ++i)
+	for(int i = 0 ; i < clean_font.size(); ++i)
 		TTF_CloseFont(clean_font.at(i));
 
 }

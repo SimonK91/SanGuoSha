@@ -8,8 +8,19 @@ id struktur:
 
 <abilityID> <target_type> <range>
 
+target_type:0 = self
+			1 = target
+			2 = pending?
+			3 = ?
+			4 = ?
+			5 = equipment
+			
+range:		0 	= inf
+			1->8= const
+			9  	= 
+			10 	= physical
 */
-namespace object
+namespace Object
 {
 
 class GameCard : public Card
@@ -28,16 +39,21 @@ public:
 	int getNumber(){ return number; }
 	std::string getAbility(){ return abilityID; }
 	
-	std::string handle_event(const SDL_Event& event);
-//	void print(SDL_Surface* to_where){} //ska tas bort
+	std::string handleEvent(const SDL_Event& event);
+	//void print(SDL_Surface* to_where){} //ska tas bort
 	
 	void paint(SDL_Surface* to_where)
 	{
-		apply_surface(box.x , box.y , image, to_where);
+		if(image == nullptr)
+		{
+			std::cout <<'\'' << abilityID << " ability ID' has no image" << std::endl;
+			return;
+		}
+		applySurface(box.x , box.y , image, to_where);
 	}
 	void paint(SDL_Surface* to_where, int x, int y)
 	{
-		apply_surface(x , y , image, to_where);
+		applySurface(x , y , image, to_where);
 	}
 };
 } //namespace
