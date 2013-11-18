@@ -1,6 +1,6 @@
 #include "HeroCard.h"
 
-namespace object
+namespace Object
 {
 
 // ID struktur:
@@ -11,7 +11,6 @@ HeroCard::HeroCard(std::string filename, std::string ID) : Card("Characters/" +f
 	std::stringstream ss(ID);
 	std::string strClan;
 	std::string tmp;
-	SDL_Rect heroClip;
 	
 	//setName
 	name = filename.substr(0,(filename.size() - 4)); //fixas bättre så att den är generell?
@@ -36,7 +35,7 @@ std::string HeroCard::getAblility(unsigned index)
 	}
 }
 
-std::string HeroCard::handle_event(const SDL_Event& event)
+std::string HeroCard::handleEvent(const SDL_Event& event)
 {
 	if(event.type == SDL_MOUSEBUTTONDOWN)
 	{

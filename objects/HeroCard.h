@@ -10,7 +10,7 @@ id struktur:
 <maxHP> <male> <clan> <abilities>
 
 */
-namespace object
+namespace Object
 {
 class HeroCard : public Card
 {
@@ -24,13 +24,12 @@ public:
 	HeroCard(std::string filename, std::string ID);
 	~HeroCard(){}
 	
-	//void print(SDL_Surface* to_where){}
 	void paint(SDL_Surface* to_where)
 	{
-		apply_surface(box.x, box.y, image, to_where);
+		applySurface(box.x, box.y, image, to_where);
 	}
 	std::string getAblility(unsigned index);
-	std::string handle_event(const SDL_Event& event);
+	std::string handleEvent(const SDL_Event& event);
 
 	std::string getName(){ return name; }
 	Clan getClan(){ return clan; }

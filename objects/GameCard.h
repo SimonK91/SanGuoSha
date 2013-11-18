@@ -33,7 +33,7 @@ private:
 	std::string abilityID;
 public:
 	GameCard(int valor, Suit suit_, std::string filename, std::string ID);
-	~GameCard(){}
+	~GameCard(){};
 	
 	Suit getSuit(){ return suit; }
 	int getNumber(){ return number; }
@@ -50,10 +50,6 @@ public:
 			return;
 		}
 		applySurface(box.x , box.y , image, to_where);
-	}
-	void paint(SDL_Surface* to_where, int x, int y)
-	{
-		applySurface(x , y , image, to_where);
 	}
 };
 } //namespace
