@@ -49,7 +49,7 @@ void Menu::run()
 		dynamic_cast<GameCard*>(card) -> paint(screen);
 		discard_deck -> pushBottom(card);
 		SDL_Flip(screen);
-		SDL_Delay(500);
+		SDL_Delay(15);
 	}
 
 	delete card_deck;

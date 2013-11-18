@@ -40,7 +40,7 @@ public:
 	}
 	~SGS();
 	//borttagna
-	SGS() = delete;                 //defaultkonstruktor
+	SGS() = delete;           //defaultkonstruktor
 	SGS(const SGS&) = delete; //kopieringskonstruktor
 	SGS(SGS&&) = delete;      //movekonstruktor
 	SGS& operator=(const SGS&) = delete;
@@ -86,26 +86,30 @@ private:
 	Object::CardList card_deck;
 	Object::CardList discard_pile;
 	Object::CardList hero_deck;
-	std::vector<Player> players;
+	std::vector<Player*> players;
 	//Timer timer;
 	//map<std::string,SDL_Surface*> card_images;
 	
-	void loadup();
-	void setup();
-	void game();
-	void end();
 	void paint();
 	void run_command(const std::string& what_command);
+	void loadup(){} //dne är skriven här
+	void UI();
 public:
-	~Game();
+	~Game() = default;
 	Game();
 	
-	Game(SDL_Surface* scr,std::vector<Player>& players) : SGS(scr),card_deck("standard_playing_cards"),discard_pile("empty")
+	Game(SDL_Surface* scr/*,std::vector<Player>& players*/) : SGS(scr),card_deck("standard_playing_cards"),discard_pile("empty")
 	{
-		  m.loadMusic("Music/Menu.wav");
-	  loadSettings(settings);
-	  }
+		m.loadMusic("Music/Menu.wav");
+		loadSettings(settings);
+		Player* p1 = new Player();
+		p1->setStatus(1);
+		players.push_back(p1);
+	}
 	void run();
+	void setup();
+	void end();
+	bool exit();
 	
 };
 

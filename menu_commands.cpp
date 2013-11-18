@@ -1,4 +1,5 @@
 //using namespace object;
+#include <stdexcept>
 void Menu::run_command(const std::string& what_command)
 {
 	if(what_command == "")
@@ -12,8 +13,19 @@ void Menu::run_command(const std::string& what_command)
 	}
 	if(what_command == "make_new_game")
 	{
+		// m.pause();
 		m.stop();
-		dynamic_cast<Textbox*>(all_objects.at(0))->setText("You cannot make a new game yet!");
+		Game game(screen);
+		game.load_background("Images/Gui/background.png");
+		game.make_button("exit", 350, 50, "exit");
+		game.setup();
+		if(!game.exit())
+			throw std::runtime_error("oups!! game exit failed!!");
+		
+		else{ std::cout << "game.exit() okay!" << std::endl;}
+		// game.run();
+		m.play();	//fungerar inte som den ska :( 
+		// dynamic_cast<Textbox*>(all_objects.at(0))->setText("You cannot make a new game yet!");
 	}
 	if(what_command == "options")
 	{
