@@ -1,19 +1,25 @@
 #include "HeroCard.h"
 
-namespace Object
+namespace object
 {
 
-HeroCard::HeroCard(std::string filename, std::string ID) : Card(filename)
+// ID struktur:
+// <maxHP> <male> <clan> <abilities>
+
+HeroCard::HeroCard(std::string filename, std::string ID) : Card("Characters/" +filename)
 {
 	std::stringstream ss(ID);
 	std::string strClan;
 	std::string tmp;
-
+	SDL_Rect heroClip;
+	
+	//setName
+	name = filename.substr(0,(filename.size() - 4)); //fixas bättre så att den är generell?
+	//fix rest
 	ss >> maxHP;
+	ss >> male;
 	ss >> strClan;
 	clan = str2clan(strClan);
-	ss >> male;
-	ss >> name;
 	
 	while(ss >> tmp)
 	{
@@ -30,7 +36,7 @@ std::string HeroCard::getAblility(unsigned index)
 	}
 }
 
-std::string HeroCard::handleEvent(const SDL_Event& event)
+std::string HeroCard::handle_event(const SDL_Event& event)
 {
 	if(event.type == SDL_MOUSEBUTTONDOWN)
 	{
