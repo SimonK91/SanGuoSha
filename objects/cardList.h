@@ -16,6 +16,7 @@ private:
 	void loadHeroDeck();
 public:
 	CardList(const std::string& setting);
+	CardList() = default;
 	~CardList();
 	
 	Card* drawCard();

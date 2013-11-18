@@ -33,6 +33,7 @@ public:
 	std::string handleEvent(const SDL_Event& event);
 
 	std::string getName(){ return name; }
+	int getHP()   { return maxHP;}
 	Clan getClan(){ return clan; }
 	bool getMale(){ return male; }
 	

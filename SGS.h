@@ -10,6 +10,8 @@
 #include "Checkbox.h"
 #include "CardList.h"
 
+#include "Player.h"
+
 #include <vector>
 
 class SGS
@@ -77,31 +79,34 @@ public:
 	  loadSettings(settings);
 	}
 };
-/*
+
 class Game : public SGS
 {
 private:
-	CardList card_deck;
-	CardList discard_pile;
-	vector<Player> players;
-	Timer timer;
-	map<std::string,SDL_Surface*> card_images;
+	Object::CardList card_deck;
+	Object::CardList discard_pile;
+	Object::CardList hero_deck;
+	std::vector<Player> players;
+	//Timer timer;
+	//map<std::string,SDL_Surface*> card_images;
 	
-	void paint();
+	void loadup();
 	void setup();
 	void game();
 	void end();
+	void paint();
 	void run_command(const std::string& what_command);
 public:
 	~Game();
+	Game();
 	
-	Game(SDL_Surface* scr, Settings& set,vector<Player>& players) : SGS(scr)
+	Game(SDL_Surface* scr,std::vector<Player>& players) : SGS(scr),card_deck("standard_playing_cards"),discard_pile("empty")
 	{
-	  m.loadMusic("Music/Menu.wav");
-	  load_settings(settings);
-	}
+		  m.loadMusic("Music/Menu.wav");
+	  loadSettings(settings);
+	  }
 	void run();
 	
 };
-*/
+
 #endif
