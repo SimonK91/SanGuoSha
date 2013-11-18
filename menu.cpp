@@ -9,18 +9,10 @@ void Menu::run()
 	m.play();
 	Uint8 *keystates = SDL_GetKeyState(nullptr);
 	std::string command;
-	
-	// CardList* card_deck = new CardList("standard_playing_cards");
-	// CardList* discard_deck = new CardList("empty");
-	//delete cl;
-	// Card* card;
 		
 	while(running) //medans programmet kÃ¶rs
 	{
-
-	HeroCard hc("Characters/all_characters.png" , "4 6 4 0 blue blackBitch wolo");
-	hc.setPosition(10,10);
-		while( SDL_PollEvent( &event)) //sÃ¥ lÃ¤nge som det finns en event
+	while( SDL_PollEvent( &event)) //sÃ¥ lÃ¤nge som det finns en event
 		{
 			for(unsigned i = 0 ; i < all_objects.size() ; ++i)  //fÃ¶r varje objekt som finns i gamestatet
 			{
@@ -45,30 +37,9 @@ void Menu::run()
 			   event.key.keysym.sym == SDLK_F4) //
 				running = false;           		// avsluta programmet
 		}
-		/*
-		if(card_deck -> empty())
-		{
-			std::swap(card_deck,discard_deck);
-			card_deck -> shuffle();
-		}
-		*/
 		paint();
-		hc.paint(screen);
-		
-		// card = card_deck -> drawCard();
-		// card -> setPosition(10,10);
-		// dynamic_cast<GameCard*>(card) -> paint(screen);
-		// discard_deck -> pushTop(card);
-		
-		
-		
-		
-		SDL_Flip(screen);
 		SDL_Delay(15);
 	}
-
-	// delete card_deck;
-	// delete discard_deck;
 	if(!exit())
 	{
 		throw("Could not exit Menu");
@@ -107,7 +78,10 @@ void Menu::paint()
 	{
 		all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
 	}
-	                   // Skriv ut bilden pÃ¥ skÃ¤rmen
+
+	// Skriv ut bilden pÃ¥ skÃ¤rmen
+	SDL_Flip(screen);
+
 }
 
 #include "menu_commands.cpp" //enbart fÃ¶r att separera upp alla commands till en annan cpp fil, (detta Ã¤r ej nÃ¶dvÃ¤ndigt att gÃ¶ra)
