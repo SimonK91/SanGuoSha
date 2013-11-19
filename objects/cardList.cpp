@@ -72,9 +72,37 @@ void CardList::shuffle()
 
 //kolla inte här nere... du blir bara ledsen :'(
 
+// <maxHP> <clan> <male> <abilities>
+
 void CardList::loadHeroDeck()
 {
-	
+	//lägger 3 emparors först för att underlätta grejer :)
+	set.push_back(new HeroCard("CaoCao.png", "4 blue 1 ability"));
+	set.push_back(new HeroCard("LiuBei.png", "4 red 1 ability"));
+	set.push_back(new HeroCard("SunQuan.png", "4 green 1 ability"));
+	//resten
+	set.push_back(new HeroCard("DaQiao.png", "3 green 0 ability"));
+	set.push_back(new HeroCard("DiaoChan.png", "3 gray 0 ability"));
+	set.push_back(new HeroCard("ElderZhuge.png", "3 red 1 ability"));
+	set.push_back(new HeroCard("GanNing.png", "4 green 1 ability"));
+	set.push_back(new HeroCard("GuanYu.png", "4 red 1 ability"));
+	set.push_back(new HeroCard("GuoJia.png", "3 blue 1 ability"));
+	set.push_back(new HeroCard("HuangGai.png", "4 green 1 ability"));
+	set.push_back(new HeroCard("HuangYueYing.png", "3 red 0 ability"));
+	set.push_back(new HeroCard("HuaTuo.png", "3 gray 1 ability"));
+	set.push_back(new HeroCard("LuBu.png", "4 gray 1 ability"));
+	set.push_back(new HeroCard("LuMeng.png", "4 green 1 ability"));
+	set.push_back(new HeroCard("LuXun.png", "3 green 1 ability"));
+	set.push_back(new HeroCard("MaChao.png", "4 red 1 ability"));
+	set.push_back(new HeroCard("SiMaYi.png", "3 blue 1 ability"));
+	set.push_back(new HeroCard("SunShangXiang.png", "3 green 0 ability"));
+	set.push_back(new HeroCard("XiaHouDun.png", "4 blue 1 ability"));
+	set.push_back(new HeroCard("XuChu.png", "4 blue 1 ability"));
+	set.push_back(new HeroCard("ZhangFei.png", "4 red 1 ability"));
+	set.push_back(new HeroCard("ZhangLiao.png", "4 blue 1 ability"));
+	set.push_back(new HeroCard("ZhaoYun.png", "4 red 1 ability"));
+	set.push_back(new HeroCard("ZhenJi.png", "3 blue 0 ability"));
+	set.push_back(new HeroCard("ZhouYu.png", "3 green 1 ability"));
 }
 
 void CardList::loadCardDeck()

@@ -3,7 +3,7 @@
 namespace Object
 {
 
-HeroCard::HeroCard(std::string filename, std::string ID) : Card(filename)
+HeroCard::HeroCard(std::string filename, std::string ID) : Card("Characters/" + filename)
 {
 	std::stringstream ss(ID);
 	std::string strClan;

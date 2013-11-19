@@ -7,7 +7,8 @@ void Menu::run()
 	Uint8 *keystates = SDL_GetKeyState(nullptr);
 	std::string command;
 	
-	CardList* card_deck = new CardList("standard_playing_cards");
+	// CardList* card_deck = new CardList("standard_playing_cards");
+	CardList* card_deck = new CardList("hero_deck");
 	CardList* discard_deck = new CardList("empty");
 	Card* card;
 	
@@ -46,10 +47,10 @@ void Menu::run()
 		card = card_deck -> drawCard();
 		card -> setPosition(10,10);
 		paint();
-		dynamic_cast<GameCard*>(card) -> paint(screen);
+		dynamic_cast<HeroCard*>(card) -> paint(screen);
 		discard_deck -> pushBottom(card);
 		SDL_Flip(screen);
-		SDL_Delay(15);
+		SDL_Delay(150);
 	}
 
 	delete card_deck;

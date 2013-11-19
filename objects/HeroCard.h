@@ -7,7 +7,7 @@
 #include <sstream>
 /*
 id struktur:
-<maxHP> <clan> <male> <name> <abilities>
+<maxHP> <clan> <male> <abilities>
 
 */
 namespace Object
