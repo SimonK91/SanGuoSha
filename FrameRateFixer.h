@@ -1,3 +1,5 @@
+#ifndef FRAMES_H
+#define FRAMES_H
 
 //The timer
 class FrameRateFixer
@@ -18,3 +20,5 @@ public:
 	void setFPS(unsigned);
 	unsigned getFrameTime();
 };
+
+#endif

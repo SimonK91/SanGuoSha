@@ -14,11 +14,9 @@ void Menu::run()
 	CardList* discard_deck = new CardList("empty");
 	Card* card;
 	
-	FrameRateFixer fps(2);
-	// fps.setFPS(30);
+	fps.setFPS(2);
 	
 	fps.start();
-	
 	while(running) //medans programmet kÃ¶rs
 	{
 		while( SDL_PollEvent( &event)) //sÃ¥ lÃ¤nge som det finns en event
@@ -30,7 +28,7 @@ void Menu::run()
 				{
 					 //kÃ¶r handle event pÃ¥ objektet (detta ser om kriterier Ã¤r uppfyllda fÃ¶r att gÃ¶ra nÃ¥got
 					command = dynamic_cast<ActiveObject*>(all_objects.at(i))->handleEvent(event);
-					run_command(command);
+					run_command(command);	
 				}
 				 //annars kör enbart handle_event på window
 				else if(dynamic_cast<Window*>(all_objects.at(i)) != nullptr)

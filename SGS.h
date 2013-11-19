@@ -1,6 +1,7 @@
 #ifndef GAME_STATE_H
 #define GAME_STATE_H
 
+#include "FrameRateFixer.h"
 #include "music.h"
 #include "functions.h"
 #include "Button.h"
@@ -27,14 +28,16 @@ protected:
 	virtual bool exit() = 0;
 //variabler som finns för alla commands och liknande
 	Music m;
+	FrameRateFixer fps;
 	bool running = true;
 	bool has_window = false;
 	bool fullscreen = false;
 	std::vector<std::pair<std::string, std::string>> settings;
 	
+	
 public:
 	//konstruktorer, destruktorer och operatorer
-	SGS(SDL_Surface* scr) : screen(scr),m("Music/Menu.wav"){
+	SGS(SDL_Surface* scr) : screen(scr),m("Music/Menu.wav"), fps(30){
 	  //m.loadMusic("Music/Menu.wav");
 	  loadSettings(settings);
 	}
