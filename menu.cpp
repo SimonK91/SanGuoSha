@@ -1,4 +1,6 @@
 #include "SGS.h"
+#include "FrameRateFixer.h"
+
 using namespace Object;
 
 void Menu::run()
@@ -11,6 +13,11 @@ void Menu::run()
 	CardList* card_deck = new CardList("hero_deck");
 	CardList* discard_deck = new CardList("empty");
 	Card* card;
+	
+	FrameRateFixer fps;
+	fps.setFPS(30);
+	
+	fps.start();
 	
 	while(running) //medans programmet kÃ¶rs
 	{
@@ -50,7 +57,7 @@ void Menu::run()
 		dynamic_cast<HeroCard*>(card) -> paint(screen);
 		discard_deck -> pushBottom(card);
 		SDL_Flip(screen);
-		SDL_Delay(150);
+		fps.regulateFPS();
 	}
 
 	delete card_deck;
