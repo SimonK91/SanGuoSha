@@ -11,7 +11,7 @@ class Checkbox : public ActiveObject
 {
 private:
 	bool checked = false;
-	SDL_Surface* box_sheet = NULL;
+	Surface box_sheet;
 	std::vector<SDL_Rect> clip;
 	//bool hover_over(SDL_Event event){return false;}
 	std::string command;
@@ -19,9 +19,9 @@ private:
 public:
 	Checkbox(int x, int y, const std::string& command, bool check = false);
 	
-	~Checkbox(){cleanUp({box_sheet});}
+	~Checkbox() = default;
 	
-	void paint(SDL_Surface* to_where);
+	void paint(Surface& to_where);
 	
 	std::string handleEvent(const SDL_Event& event);
 	

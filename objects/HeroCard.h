@@ -25,7 +25,7 @@ public:
 	~HeroCard(){}
 	
 	//void print(SDL_Surface* to_where){}
-	void paint(SDL_Surface* to_where)
+	void paint(Surface& to_where)
 	{
 		applySurface(box.x, box.y, image, to_where);
 	}

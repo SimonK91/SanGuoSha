@@ -8,14 +8,15 @@ void Menu::run()
 	std::string command;
 	
 	// CardList* card_deck = new CardList("standard_playing_cards");
-	CardList* card_deck = new CardList("hero_deck");
-	CardList* discard_deck = new CardList("empty");
-	Card* card;
-	
+	//CardList* card_deck = new CardList("hero_deck");
+	//CardList* discard_deck = new CardList("empty");
+	//Card* card;
 	while(running) //medans programmet kÃ¶rs
 	{
+	std::cout << "kollar events" << std::endl;
 		while( SDL_PollEvent( &event)) //sÃ¥ lÃ¤nge som det finns en event
 		{
+		std::cout << "för varje objekt" << std::endl;
 			for(unsigned i = 0 ; i < all_objects.size() ; ++i)  //fÃ¶r varje objekt som finns i gamestatet
 			{
 				 //om objektet Ã¤r ett aktivt objekt och has_window är false(aktiva objekt kan manipulera saker)
@@ -32,29 +33,40 @@ void Menu::run()
 					run_command(command);
 				}
 			}
-			
+			std::cout << "om programmet ska stängas" << std::endl;
 			if( event.type == SDL_QUIT)    		// om krysset uppe till hÃ¶ger blev intryckt
 				running = false;      		    //
 			if(keystates[SDLK_LALT] &&			// eller om alt + f4 blev intryckt
 			   event.key.keysym.sym == SDLK_F4) //
 				running = false;           		// avsluta programmet
 		}
-		if(card_deck -> empty())
+		std::cout << "första while-satsen avslutas" << std::endl;
+		// if(card_deck -> empty())
+		// {
+			// std::swap(card_deck,discard_deck);
+			// card_deck -> shuffle();
+		// }
+		std::cout << "utskrift startar" << std::endl;
+		if(running)
 		{
-			std::swap(card_deck,discard_deck);
-			card_deck -> shuffle();
+			//card = card_deck -> drawCard();
+			//card -> setPosition(10,10);
+			std::cout << "paint körs" << std::endl;
+			paint();
+			std::cout << "paint klar" << std::endl;
+			//dynamic_cast<HeroCard*>(card) -> paint(screen);
+			//discard_deck -> pushBottom(card);
+			std::cout << "flip image" << std::endl;
+			SDL_Flip(screen.getImage());
+			std::cout << "flip image klar" << std::endl;
+			SDL_Delay(150);
+			std::cout << "delay klar" << std::endl;
 		}
-		card = card_deck -> drawCard();
-		card -> setPosition(10,10);
-		paint();
-		dynamic_cast<HeroCard*>(card) -> paint(screen);
-		discard_deck -> pushBottom(card);
-		SDL_Flip(screen);
-		SDL_Delay(150);
+		std::cout << "while-satsen startas om\n" << std::endl;
 	}
 
-	delete card_deck;
-	delete discard_deck;
+	//delete card_deck;
+	//delete discard_deck;
 	if(!exit())
 	{
 		throw("Could not exit Menu");
@@ -76,7 +88,6 @@ bool Menu::exit()
 		delete all_objects.back();
 		all_objects.pop_back();
 	}
-	cleanUp({background});
 	}
 	catch(...)
 	{
@@ -87,8 +98,9 @@ bool Menu::exit()
 }
 void Menu::paint()
 {
-
+	std::cout << "paint: bakgrunden skrivs ut" << std::endl;
 	applySurface(0,0,background,screen); //skriv ut bakgrunden att ha som en bas
+	std::cout << "paint: klar" << std::endl;
 	for(unsigned i = 0; i < all_objects.size() ; ++i)
 	{
 		all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen

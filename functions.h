@@ -8,13 +8,39 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <stdexcept>
 
 //using namespace std;
 
+class SGS_error : public std::runtime_error
+{
+public:
+	SGS_error(std::string text) : runtime_error(text){}
+};
+
+class Surface
+{
+private:
+	SDL_Surface* image;
+	std::string name;
+public:
+	//konstruktorer
+	Surface() : image(nullptr){}
+	Surface(std::string name_) : image(nullptr),name(name_) {}
+	~Surface(){ if(image != nullptr) SDL_FreeSurface(image); }
+	Surface& operator=(SDL_Surface*);
+	SDL_Surface* operator->(){return image;}
+	
+	SDL_Surface* getImage(){return image;}
+	void setImage(Surface);//{image = tmp;}
+	void setImage(SDL_Surface*);//{image = tmp;}
+	std::string getName(){return name;}
+};
+
 SDL_Surface* loadImage(const std::string&, bool transparant = false, const Uint8& = 0, const Uint8& = 0, const Uint8& = 0, bool color_key = false);
-void applySurface(int x, int y, SDL_Surface* from_where, SDL_Surface* to_where, SDL_Rect* clip = nullptr);
-SDL_Surface* Init(const int& width, const int& height, const int& Bits_Per_Pixel);
-void cleanUp(std::vector<SDL_Surface*> clean_surface = {}, std::vector<TTF_Font*> clean_font = {});
+void applySurface(int x, int y, Surface& from_where, Surface& to_where, SDL_Rect* clip = nullptr);
+Surface Init(const int& width, const int& height, const int& Bits_Per_Pixel);
+void cleanUp(std::vector<TTF_Font*> clean_font = {});
 std::string I2S(const int&);
 int S2I(const std::string&);
 

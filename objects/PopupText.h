@@ -14,8 +14,8 @@ namespace Object
     
   private:
     TTF_Font* font;
-    SDL_Surface* text_area;
-    SDL_Surface* background;
+    Surface text_area;
+    Surface background;
     SDL_Color text_color;
     SDL_Rect box;
     
@@ -34,7 +34,7 @@ namespace Object
     ~PopupText();
     void setColor(std::string color);
     std::string handleEvent(const SDL_Event& event);
-    void  paint(SDL_Surface* to_where);
+    void  paint(Surface to_where);
     void  setFileText(std::string file, std::string keyword);
     void  setText(std::string text);
     

@@ -18,9 +18,9 @@ class SGS
 {
 protected:
 //basvariabler som behövs för att SGS ska fungera
-	SDL_Surface* background;
+	Surface background;
 	SDL_Event event;
-	SDL_Surface* screen;
+	Surface screen;
 	//object::pointer_arrow arrow;
 	std::vector<Object::Object*> all_objects;
 	
@@ -34,7 +34,7 @@ protected:
 	
 public:
 	//konstruktorer, destruktorer och operatorer
-	SGS(SDL_Surface* scr) : screen(scr),m("Music/Menu.wav"){
+	SGS(Surface& scr) : screen(scr),m("Music/Menu.wav"){
 	  //m.loadMusic("Music/Menu.wav");
 	  loadSettings(settings);
 	}
@@ -74,7 +74,7 @@ private:
 public:
 	void run();
 	~Menu();
-	Menu(SDL_Surface* scr) : SGS(scr){
+	Menu(Surface scr) : SGS(scr){
 	  m.loadMusic("Music/Menu.wav");
 	  loadSettings(settings);
 	}
@@ -83,23 +83,27 @@ public:
 class Game : public SGS
 {
 private:
-	Object::CardList card_deck;
-	Object::CardList discard_pile;
-	Object::CardList hero_deck;
+	Object::CardList* card_deck;
+	Object::CardList* discard_pile;
+	Object::CardList* hero_deck;
 	std::vector<Player*> players;
 	//Timer timer;
 	//map<std::string,SDL_Surface*> card_images;
+	bool run_next;
 	
 	void paint();
 	void run_command(const std::string& what_command);
-	void loadup(){} //dne är skriven här
+	bool loadup(){return true;} //dne är skriven här
 	void UI();
 public:
 	~Game() = default;
 	Game();
 	
-	Game(SDL_Surface* scr/*,std::vector<Player>& players*/) : SGS(scr),card_deck("standard_playing_cards"),discard_pile("empty")
+	Game(Surface scr/*,std::vector<Player>& players*/) : SGS(scr)
 	{
+		card_deck = new Object::CardList("standard_playing_cards");
+		discard_pile = new Object::CardList("empty");
+		hero_deck = new Object::CardList("hero_deck");
 		m.loadMusic("Music/Menu.wav");
 		loadSettings(settings);
 		Player* p1 = new Player();
@@ -107,8 +111,8 @@ public:
 		players.push_back(p1);
 	}
 	void run();
-	void setup();
-	void end();
+	bool setup();
+	bool end();
 	bool exit();
 	
 };

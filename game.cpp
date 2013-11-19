@@ -4,8 +4,9 @@
 
 using namespace Object;
 
-void Game::setup()
+bool Game::setup()
 {
+	run_next = true;
 	std::vector<int> role{0,2,3,1,3,3,1,3,1,2};
 	unsigned emperor = 0;
 	unsigned step = 1;
@@ -57,19 +58,40 @@ void Game::setup()
 			// // makeTimedtext("Player: " + players.at(i).get_name() + " is the emperor.",300,300,3000)
 		// }
 		
-	// //step 5)
-	// //shuffle character cards
-	// //and give emperor 5 characters to choose between
+	//step 5)
+	//shuffle character cards
+	//and give emperor 5 characters to choose between
 		else if(step == 5)
 		{
-			hero_deck.shuffle();
 		
-			Window* characters = new Window(200,200,400,300);
+		
+			Card* hero1 = hero_deck->drawCard(); //the three emperors
+			Card* hero2 = hero_deck->drawCard();
+			Card* hero3 = hero_deck->drawCard();
+			std::cout << "Emperor-cards drawn" << std::endl;	
+			for(int i = 0 ; i < 5 ; ++i)
+			{
+				hero_deck->shuffle();
+				SDL_Delay(2);
+			}
+			std::cout << "hero_deck shuffled" << std::endl;
+			Card* hero4 = hero_deck->drawCard();
+			Card* hero5 = hero_deck->drawCard();
+			std::cout << "two more cards drawn" << std::endl;
+			Window* characters = new Window(100,100,600,550);
+			characters->addCard(hero1,0,0);
+			characters->addCard(hero2,200,0);
+			characters->addCard(hero3,400,0);
+			characters->addCard(hero4,100,250);
+			characters->addCard(hero5,300,250);
+			characters->makeButton("Choose",0,500,"pick_hero");
 			add_window(characters);
 			// delete characters;
-		
+			step = 6;
 		}
 	
+	//step 6)
+	//wait for emperor to choose character
 
 //step 7)
 //announce emperor's character
@@ -90,6 +112,7 @@ void Game::setup()
 		UI();
 	}
 	
+	return run_next;
 }
 
 //game
@@ -139,7 +162,7 @@ void Game::run()
 	
 }
 
-void Game::end()
+bool Game::end()
 {
 //show score-table
 //keep chat open
@@ -158,7 +181,6 @@ bool Game::exit()
 		delete all_objects.back();
 		all_objects.pop_back();
 	}
-	cleanUp({background});
 	}
 	catch(...)
 	{
@@ -191,12 +213,12 @@ void Game::UI()
 				run_command(command);
 			}
 		}
-		
-		if( event.type == SDL_QUIT)    		// om krysset uppe till hÃ¶ger blev intryckt
-			running = false;      		    //
-		if(keystates[SDLK_LALT] &&			// eller om alt + f4 blev intryckt
-		   event.key.keysym.sym == SDLK_F4) //
-			running = false;           		// avsluta programmet
+		   // om krysset uppe till hÃ¶ger eller alt + F4 blev intryckt
+		if( event.type == SDL_QUIT || (keystates[SDLK_LALT] && event.key.keysym.sym == SDLK_F4))
+		{
+			running = false;
+			run_next = false;
+		}
 	}
 	paint();
 	SDL_Delay(15);
@@ -238,6 +260,6 @@ void Game::paint()
 	{
 		all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
 	}
-	SDL_Flip(screen);                   // Skriv ut bilden pÃ¥ skÃ¤rmen
+	SDL_Flip(screen.getImage());                   // Skriv ut bilden pÃ¥ skÃ¤rmen
 }
 #include "game_commands.cpp"

@@ -14,7 +14,7 @@ namespace Object
   Picture::~Picture()
   {
   }
-  void Picture::Paint(SDL_Surface* to_where)
+  void Picture::Paint(Surface& to_where)
   {
     applySurface(pos.x, pos.y, image, to_where, &clip);
   }

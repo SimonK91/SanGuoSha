@@ -12,8 +12,6 @@ namespace Object
 CardList::CardList(const std::string& setting)
 {
 	image = loadImage("Images/Cards/back.png", true);
-	if(!image)
-		throw std::runtime_error("could not open imageFile: Images/Cards/back.png");
 	if(setting == "empty")
 	{
 		//do nothing
@@ -30,7 +28,6 @@ CardList::CardList(const std::string& setting)
 	
 CardList::~CardList()
 {
-	cleanUp({image}); 
 		
 	while(!set.empty())
 	{

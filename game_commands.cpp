@@ -4,15 +4,25 @@ void Game::run_command(const std::string& what_command)
 		return;
 		
 	
-	if(what_command == "exit")
+	if(what_command == "close")
 	{
 		running = false;
 		return;
 	}
-	if(what_command == "make_new_game")
+	if(what_command == "pick_hero")
 	{
-		m.stop();
-		dynamic_cast<Textbox*>(all_objects.at(0))->setText("You cannot make a new game yet!");
+		Window* hero_window;
+		for(int i = 0 ; i < all_objects.size() ; ++i)
+		{
+			hero_window = dynamic_cast<Window*>(all_objects.at(i));
+			if(hero_window != nullptr)
+			{
+				if(hero_window->isActive())
+				{
+					std::cout << "wolololololoololoololololo" << std::endl;
+				}
+			}	// if(dynamic_cast<HeroCard*>(
+		}
 	}
 	if(what_command == "options")
 	{

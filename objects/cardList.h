@@ -10,7 +10,7 @@ namespace Object
 class CardList
 {
 private:
-	SDL_Surface* image;
+	Surface image;
 	std::vector<Card*> set;
 	void loadCardDeck();
 	void loadHeroDeck();
@@ -25,7 +25,7 @@ public:
 	void shuffle();
 	bool empty();
 	
-	void paint(SDL_Surface* to_where)
+	void paint(Surface& to_where)
 	{
 		applySurface(0, 0, image, to_where);
 	} //WTF!!

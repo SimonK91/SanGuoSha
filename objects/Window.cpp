@@ -10,11 +10,10 @@ namespace Object
   
   Window::~Window()
   {
-    cleanUp( {background} );
     for(auto i : objects)
-      {
-	delete i;
-      }
+    {
+		delete i;
+    }
   }  
   
   std::string Window::handleEvent(const SDL_Event& event)
@@ -38,7 +37,7 @@ namespace Object
   }
   
   
-  void Window::paint(SDL_Surface* screen)
+  void Window::paint(Surface& screen)
   {
     //dessa SDL_Rects används för att se till att backgrunden och ramen "skalas om" till rätt storlek
     SDL_Rect backgroundSize;
@@ -82,5 +81,11 @@ namespace Object
   {
     if(dynamic_cast<Textbox*>(objects.at(where)) != nullptr)
       dynamic_cast<Textbox*>(objects.at(where))->setText(what_text);
+  }
+  void Window::addCard(Card* card, int xPos, int yPos)
+  {
+    objects.push_back(card);
+	card->setPosition(xPos,yPos);
+	
   }
 }//slut på namnrymd

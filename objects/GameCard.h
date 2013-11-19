@@ -42,18 +42,14 @@ public:
 	std::string handleEvent(const SDL_Event& event);
 	//void print(SDL_Surface* to_where){} //ska tas bort
 	
-	void paint(SDL_Surface* to_where)
+	void paint(Surface& to_where)
 	{
-		if(image == nullptr)
+		if(image.getImage() == nullptr)
 		{
 			std::cout <<'\'' << abilityID << " ability ID' has no image" << std::endl;
 			return;
 		}
 		applySurface(box.x , box.y , image, to_where);
-	}
-	void paint(SDL_Surface* to_where, int x, int y)
-	{
-		applySurface(x , y , image, to_where);
 	}
 };
 } //namespace

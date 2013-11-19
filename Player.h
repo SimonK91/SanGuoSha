@@ -55,8 +55,8 @@ class Player
 
   void setPlayerNr(int);
   
-  void paint(SDL_Surface*, bool);
-  void paint(SDL_Surface*, int, int);
+  void paint(Surface, bool);
+  void paint(Surface, int, int);
   
   void getHand();
   

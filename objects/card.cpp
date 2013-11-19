@@ -7,7 +7,7 @@ namespace Object
 Card::Card(std::string filename) : ActiveObject()
 {
 	image = loadImage("Images/Cards/"+filename, true);
-	if(!image)
+	if(!image.getImage())
 		throw std::runtime_error("could not open file: Images/Cards/" +filename);
 	box.w = 200;
 	box.h = 281;

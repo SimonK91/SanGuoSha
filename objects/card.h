@@ -13,11 +13,11 @@ class Card : public ActiveObject
 private:
 	
 protected:
-	SDL_Surface* image;
+	Surface image;
 public:
 	Card(std::string filename);
 	
-	virtual ~Card(){ cleanUp({image});  };
+	virtual ~Card() = default;
 	
 	void setPosition(const int& x,const int& y);
 };

@@ -12,7 +12,7 @@ Button::Button(const std::string& name, int x, int y, const std::string& command
 	active = 0;
 	
 	
-	SDL_Surface* text_surface;
+	Surface text_surface;
 	TTF_Font* font;
 	
 	if(name != "")
@@ -35,7 +35,7 @@ Button::Button(const std::string& name, int x, int y, const std::string& command
 		applySurface((box.w-(text_surface->w))/2 +3 ,offset+box.h*2+1,text_surface,button_sheet);
 		applySurface((box.w-(text_surface->w))/2    ,offset+box.h*3  ,text_surface,button_sheet);
 
-	cleanUp({text_surface},{font});	
+	cleanUp({font});	
 	}
 	SDL_Rect temp;
 	temp.x = 0;
@@ -101,7 +101,7 @@ std::string Button::handleEvent(const SDL_Event& event)
     }
 	return "";
 }
-void Button::paint(SDL_Surface* to_where)
+void Button::paint(Surface& to_where)
 {
     //Show the button
     applySurface( box.x, box.y, button_sheet, to_where, &clip.at(active));

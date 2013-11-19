@@ -17,8 +17,9 @@ void Menu::run_command(const std::string& what_command)
 		m.stop();
 		Game game(screen);
 		game.load_background("Images/Gui/background.png");
-		game.make_button("exit", 350, 50, "exit");
-		game.setup();
+		game.make_button("exit", 350, 50, "close");
+		if(!game.setup())
+			running = false;
 		if(!game.exit())
 			throw std::runtime_error("oups!! game exit failed!!");
 		
@@ -55,13 +56,13 @@ void Menu::run_command(const std::string& what_command)
 	{
 		if(!fullscreen)
 		{
-			screen = SDL_SetVideoMode(800,600,32, screen->flags+SDL_FULLSCREEN);
+			screen = SDL_SetVideoMode(1024,768,32, screen->flags+SDL_FULLSCREEN);
 			fullscreen = true;
 			//settings.at(2).second = "on";
 		}
 		else
 		{
-			screen = SDL_SetVideoMode(800,600,32, screen->flags-SDL_FULLSCREEN);
+			screen = SDL_SetVideoMode(1024,768,32, screen->flags-SDL_FULLSCREEN);
 			fullscreen = false;
 			//settings.at(2).second = "off";
 		}

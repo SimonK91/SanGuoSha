@@ -10,41 +10,33 @@ Textbox::Textbox(const std::string& text_, const int& x, const int& y, const int
 	
 	//fixar bakgrundsbilden
 	background = loadImage("Images/Gui/windowBackground.png",true);
-	SDL_Surface* tmp_bg;
+	Surface tmp_bg;
 	
 	//övre ramen
 	tmp_bg = loadImage("Images/Gui/window/tb.png",true);
 	applySurface(0,0, tmp_bg, background, nullptr);
 	frame_size = tmp_bg->h;
-	cleanUp({tmp_bg});
 	//vänstra ramen
 	tmp_bg = loadImage("Images/Gui/window/lb.png",true);
 	applySurface(0,0, tmp_bg, background, nullptr);
-	cleanUp({tmp_bg});
 	//nedre ramen
 	tmp_bg = loadImage("Images/Gui/window/bb.png",true);
 	applySurface(0,h - tmp_bg->h, tmp_bg, background, nullptr);
-	cleanUp({tmp_bg});
 	//högra ramen
 	tmp_bg = loadImage("Images/Gui/window/rb.png",true);
 	applySurface(w - tmp_bg->w,0, tmp_bg, background, nullptr);
-	cleanUp({tmp_bg});
 	//övre vänstra hörnet
 	tmp_bg = loadImage("Images/Gui/window/ltc.png",true);
 	applySurface(0,0, tmp_bg, background, nullptr);
-	cleanUp({tmp_bg});
 	//övre högra hörnet
 	tmp_bg = loadImage("Images/Gui/window/rtc.png",true);
 	applySurface(w - tmp_bg->w,0, tmp_bg, background, nullptr);
-	cleanUp({tmp_bg});
 	//nedre vänstra hörnet
 	tmp_bg = loadImage("Images/Gui/window/lbc.png",true);
 	applySurface(0,h - tmp_bg->h, tmp_bg, background, nullptr);
-	cleanUp({tmp_bg});
 	//nedre högra hörnet
 	tmp_bg = loadImage("Images/Gui/window/rbc.png",true);
 	applySurface(w - tmp_bg->w, h - tmp_bg->h, tmp_bg, background, nullptr);
-	cleanUp({tmp_bg});
 	
 	//öppnar fonten
 	
@@ -70,7 +62,7 @@ Textbox::Textbox(const std::string& text_, const int& x, const int& y, const int
 
 }
 		
-void Textbox::paint(SDL_Surface* to_where)
+void Textbox::paint(Surface& to_where)
 	{
 		//apply_surface(box.x, box.y, background, to_where, &clip);
 		applySurface(box.x, box.y, textArea, to_where, &clip);
@@ -108,7 +100,7 @@ void Textbox::setColor(std::string& color)
 
 void Textbox::applyText(const std::string& what_text)
 {
-	SDL_Surface* tmp_surface;
+	Surface tmp_surface;
 	std::string tmp_word;
 	tmp_surface = TTF_RenderText_Blended(font,what_text.c_str(),textColor);	//skapa en yta med ordet
 			
@@ -120,17 +112,11 @@ void Textbox::applyText(const std::string& what_text)
 	
 	applySurface(text_x,text_y, tmp_surface, textArea, nullptr);					//skriv ut den på ytan
 	
-	text_x += tmp_surface->w-4;													//ompositionera var nästa ord ska starta
-				
-	cleanUp({tmp_surface});													//rensa den temporära ytan med ordet och starta på punkt (1).
+	text_x += tmp_surface->w-4;													//ompositionera var nästa ord ska starta				
 }
 
 void Textbox::setText(const std::string& what_text)
 {
-	if(textArea != nullptr)
-	{
-		cleanUp({textArea});				//tömmer den nuvarande ytan om det redan fanns en
-	}
 	//Skapar yta att skriva på
 	textArea = SDL_CreateRGBSurface(0,clip.w,clip.h,32,0,0,0,1);	//skapar en ny tom yta
 	//apply_surface(0,0, load_image("Images/Gui/transparent.png",true),textArea,&clip);

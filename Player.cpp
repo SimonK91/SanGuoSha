@@ -88,7 +88,7 @@ void Player::setPlayerNr(int nr)
   player_nr = nr;
 }
 
-void Player::paint(SDL_Surface* screen, bool current_player)
+void Player::paint(Surface screen, bool current_player)
 {
   //rita ut handen längst ner på skärmen
   if(current_player == true)
@@ -104,7 +104,7 @@ void Player::paint(SDL_Surface* screen, bool current_player)
   //rita ut equipment
 }
 
-void Player::paint(SDL_Surface* screen, int x_pos, int y_pos)
+void Player::paint(Surface screen, int x_pos, int y_pos)
 {
   
   hero->setPosition(x_pos, y_pos);
