@@ -10,7 +10,7 @@ private:
 	
     unsigned get_ticks();
 public:
-    FrameRateFixer();
+    FrameRateFixer(unsigned fps = 30);
 	~FrameRateFixer() = default;
 	
 	void start();

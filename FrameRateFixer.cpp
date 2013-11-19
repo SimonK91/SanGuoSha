@@ -2,7 +2,7 @@
 #include "SDL/SDL.h"
 #include <iostream>
 
-FrameRateFixer::FrameRateFixer() : FPS(30) {}
+FrameRateFixer::FrameRateFixer(unsigned fps) : FPS(fps) {}
 
 void FrameRateFixer::start()
 {

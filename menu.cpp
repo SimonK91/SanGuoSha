@@ -14,8 +14,8 @@ void Menu::run()
 	CardList* discard_deck = new CardList("empty");
 	Card* card;
 	
-	FrameRateFixer fps;
-	fps.setFPS(30);
+	FrameRateFixer fps(2);
+	// fps.setFPS(30);
 	
 	fps.start();
 	
