@@ -57,6 +57,7 @@ void Menu::run()
 		dynamic_cast<HeroCard*>(card) -> paint(screen);
 		discard_deck -> pushBottom(card);
 		SDL_Flip(screen);
+		
 		fps.regulateFPS();
 	}
 

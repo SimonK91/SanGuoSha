@@ -1,22 +1,19 @@
 #include "FrameRateFixer.h"
 #include "SDL/SDL.h"
+#include <iostream>
 
-FrameRateFixer::FrameRateFixer()
-{
-    //Initialize the variables
-    startTicks = 0;
-	FPS = 60;
-	frameDelay = 1000 / FPS;
-}
+FrameRateFixer::FrameRateFixer() : FPS(30) {}
 
 void FrameRateFixer::start()
 {
     startTicks = SDL_GetTicks();
-	frames = 0;
+	lastTick = get_ticks();
+	frameDelay = 1000/FPS;
 }
 
 void FrameRateFixer::regulateFPS()
 {
+	
     if(get_ticks() < frameDelay) 
 	{
         //Sleep the remaining frame time
@@ -25,13 +22,23 @@ void FrameRateFixer::regulateFPS()
 	frameDelay += 1000 / FPS;
 }
 
-void FrameRateFixer::setFPS(int framesPerSecond)
+void FrameRateFixer::setFPS(unsigned framesPerSecond)
 {
 	FPS = framesPerSecond;
 }
 
-long FrameRateFixer::get_ticks()
+unsigned FrameRateFixer::get_ticks()
 {
     //Return the current time minus the start time
     return SDL_GetTicks() - startTicks;
+}
+
+//first frametime is bonkers but rest is okay
+unsigned FrameRateFixer::getFrameTime()
+{
+	unsigned frameTime = get_ticks() - lastTick;
+	
+	lastTick = get_ticks();
+	
+	return frameTime;
 }
