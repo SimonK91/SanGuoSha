@@ -26,6 +26,7 @@ void Menu::run_command(const std::string& what_command)
 		else{ std::cout << "game.exit() okay!" << std::endl;}
 		// game.run();
 		m.play();	//fungerar inte som den ska :( 
+		fps.start();
 		// dynamic_cast<Textbox*>(all_objects.at(0))->setText("You cannot make a new game yet!");
 	}
 	if(what_command == "options")

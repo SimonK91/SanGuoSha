@@ -2,7 +2,7 @@ CCC        =g++
 CFLAGS   +=-L/sw/gcc-${GCC4_V}/lib -static-libstdc++ -std=c++11 -pedantic -Wall -Wextra
 INCLUDE  = -I./objects
 SDLFLAGS +=-lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer
-OBJECTS = main.cpp Player.o gameCard.o heroCard.o card.o menu.o game.o Button.o Slider.o Textbox.o Checkbox.o Functions.o Window.o music.o SGS.o cardList.o
+OBJECTS = main.cpp Player.o gameCard.o heroCard.o card.o menu.o game.o Button.o Slider.o Textbox.o Checkbox.o Functions.o Window.o music.o SGS.o cardList.o FrameRateFixer.o
 all: $(OBJECTS)
 		@ echo
 		@ echo execute skapas
@@ -13,6 +13,9 @@ all: $(OBJECTS)
 		@ echo
 
 		
+FrameRateFixer.o: FrameRateFixer.cpp FrameRateFixer.h
+		@ echo FrameRateFixer.o skapas
+		@$(CCC) $(CFLAGS) -c FrameRateFixer.cpp $(SDLFLAGS)
 		
 Functions.o: functions.cpp functions.h
 		@ echo functions.o skapas

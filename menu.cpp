@@ -1,4 +1,6 @@
 #include "SGS.h"
+#include "FrameRateFixer.h"
+
 using namespace Object;
 
 void Menu::run()
@@ -6,11 +8,14 @@ void Menu::run()
 	m.play();
 	Uint8 *keystates = SDL_GetKeyState(nullptr);
 	std::string command;
+
+	CardList* card_deck = new CardList("hero_deck");
+	CardList* discard_deck = new CardList("empty");
+	Card* card;
 	
-	// CardList* card_deck = new CardList("standard_playing_cards");
-	//CardList* card_deck = new CardList("hero_deck");
-	//CardList* discard_deck = new CardList("empty");
-	//Card* card;
+	fps.setFPS(30);
+	
+	fps.start();
 	while(running) //medans programmet kÃ¶rs
 	{
 	std::cout << "kollar events" << std::endl;
@@ -24,7 +29,7 @@ void Menu::run()
 				{
 					 //kÃ¶r handle event pÃ¥ objektet (detta ser om kriterier Ã¤r uppfyllda fÃ¶r att gÃ¶ra nÃ¥got
 					command = dynamic_cast<ActiveObject*>(all_objects.at(i))->handleEvent(event);
-					run_command(command);
+					run_command(command);	
 				}
 				 //annars kör enbart handle_event på window
 				else if(dynamic_cast<Window*>(all_objects.at(i)) != nullptr)
@@ -59,10 +64,10 @@ void Menu::run()
 			std::cout << "flip image" << std::endl;
 			SDL_Flip(screen.getImage());
 			std::cout << "flip image klar" << std::endl;
-			SDL_Delay(150);
 			std::cout << "delay klar" << std::endl;
 		}
-		std::cout << "while-satsen startas om\n" << std::endl;
+	
+		fps.regulateFPS();
 	}
 
 	//delete card_deck;
@@ -71,11 +76,6 @@ void Menu::run()
 	{
 		throw("Could not exit Menu");
 	}
-}
-
-
-Menu::~Menu()
-{
 }
 
 bool Menu::exit()
