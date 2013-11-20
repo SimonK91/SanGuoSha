@@ -37,8 +37,8 @@ protected:
 	
 public:
 	//konstruktorer, destruktorer och operatorer
-
-	SGS(Surface scr) : screen(scr),m("Music/Menu.wav"), fps(30){
+	SGS(Surface scr) : screen(scr),m("Music/Menu.wav"), fps(30)
+	{
 	  //m.loadMusic("Music/Menu.wav");
 	  loadSettings(settings);
 	}

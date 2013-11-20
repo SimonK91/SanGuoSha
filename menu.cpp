@@ -66,7 +66,6 @@ void Menu::run()
 			std::cout << "flip image klar" << std::endl;
 			std::cout << "delay klar" << std::endl;
 		}
-	
 		fps.regulateFPS();
 	}
 
