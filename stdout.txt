@@ -64,38 +64,6 @@ flip image
 flip image klar
 delay klar
 kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
 första while-satsen avslutas
 utskrift startar
 paint körs
@@ -142,6 +110,18 @@ delay klar
 kollar events
 för varje objekt
 om programmet ska stängas
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
 första while-satsen avslutas
 utskrift startar
 paint körs
@@ -154,6 +134,40 @@ delay klar
 kollar events
 för varje objekt
 om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
 första while-satsen avslutas
 utskrift startar
 paint körs
@@ -296,6 +310,8 @@ Load settings okay!
 Emperor-cards drawn
 hero_deck shuffled
 two more cards drawn
+hero pickad!! wolololololoololoololololo
+hero pickad!! wolololololoololoololololo
 game.exit() okay!
 om programmet ska stängas
 första while-satsen avslutas
@@ -308,8 +324,6 @@ flip image
 flip image klar
 delay klar
 kollar events
-för varje objekt
-om programmet ska stängas
 första while-satsen avslutas
 utskrift startar
 paint körs
@@ -320,8 +334,6 @@ flip image
 flip image klar
 delay klar
 kollar events
-för varje objekt
-om programmet ska stängas
 första while-satsen avslutas
 utskrift startar
 paint körs
@@ -332,236 +344,6 @@ flip image
 flip image klar
 delay klar
 kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-paint: klar
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
 första while-satsen avslutas
 utskrift startar
 paint körs
@@ -668,6 +450,120 @@ delay klar
 kollar events
 för varje objekt
 om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
 första while-satsen avslutas
 utskrift startar
 paint körs

@@ -19,7 +19,7 @@ void Game::run_command(const std::string& what_command)
 			{
 				if(hero_window->isActive())
 				{
-					std::cout << "wolololololoololoololololo" << std::endl;
+					std::cout << "hero pickad!! wolololololoololoololololo" << std::endl;
 				}
 			}	// if(dynamic_cast<HeroCard*>(
 		}

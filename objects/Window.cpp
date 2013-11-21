@@ -45,25 +45,24 @@ namespace Object
   {
     //dessa SDL_Rects används för att se till att backgrunden och ramen "skalas om" till rätt storlek
     SDL_Rect backgroundSize;
-	// Surface windowSurface;
-	// windowSurface = background.getImage(); 	//kanske fungerar?
+	Surface windowSurface;
+	windowSurface = SDL_CreateRGBSurface(0, box.w, box.h, 32, 0, 0, 0, 0);
     backgroundSize.x = 0;
     backgroundSize.y = 0;
     backgroundSize.w = box.w;
     backgroundSize.h = box.h;
     
+	//rita ut bakgrunden på bilden
+	applySurface(0, 0, background, windowSurface);
 	
     //ritar ut alla Object som hör till detta window
     for(auto i : objects)
     {
-		i->paint(background);
-		// i->paint(windowSurface);
+		i->paint(windowSurface);
     }
     
-    //ritar ut fönstrets backgrund och ram
-    applySurface(box.x, box.y, background, screen, &backgroundSize);
-    // applySurface(box.x, box.y, windowSurface, screen, &backgroundSize);
-	// windowSurface.setImage(nullptr);
+    //ritar ut fönstret på skärmen
+    applySurface(box.x, box.y, windowSurface, screen, &backgroundSize);
   }
   
   bool Window::makeSlider(const int& x_pos, const int& y_pos, const std::string& command, const int& value)
