@@ -108,7 +108,7 @@ bool Game::setup()
 //step 11)
 //start the game
 	
-	std::cout << step << " " << players.at(0)->entered() << std::endl;
+	//std::cout << step << " " << players.at(0)->entered() << std::endl;
 		UI();
 	}
 	
@@ -195,6 +195,7 @@ void Game::UI()
 	Uint8 *keystates = SDL_GetKeyState(nullptr);
 	std::string command;
 	
+	fps.start();
 	while( SDL_PollEvent( &event)) //sÃ¥ lÃ¤nge som det finns en event
 	{
 		for(unsigned i = 0 ; i < all_objects.size() ; ++i)  //fÃ¶r varje objekt som finns i gamestatet
@@ -221,7 +222,8 @@ void Game::UI()
 		}
 	}
 	paint();
-	SDL_Delay(15);
+	// SDL_Delay(15);
+	fps.regulateFPS();
 }
 
 //från menyn

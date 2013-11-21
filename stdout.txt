@@ -4,126 +4,6 @@ Load settings okay!
 Load settings okay!
 bakgrundsbilden laddas
 en button skapas
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 mainMenu startas
 kollar events
 för varje objekt
@@ -142,37 +22,7 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint klar
 flip image
 flip image klar
@@ -184,37 +34,7 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint klar
 flip image
 flip image klar
@@ -226,37 +46,7 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint klar
 flip image
 flip image klar
@@ -268,37 +58,7 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint klar
 flip image
 flip image klar
@@ -310,37 +70,47 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
 paint klar
 flip image
 flip image klar
@@ -352,37 +122,7 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint klar
 flip image
 flip image klar
@@ -394,81 +134,7 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-för varje objekt
-om programmet ska stängas
-för varje objekt
-om programmet ska stängas
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint klar
 flip image
 flip image klar
@@ -480,37 +146,7 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint klar
 flip image
 flip image klar
@@ -522,37 +158,7 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint klar
 flip image
 flip image klar
@@ -564,37 +170,7 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint klar
 flip image
 flip image klar
@@ -606,37 +182,7 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint klar
 flip image
 flip image klar
@@ -648,37 +194,7 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint klar
 flip image
 flip image klar
@@ -690,37 +206,7 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint klar
 flip image
 flip image klar
@@ -732,37 +218,7 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint klar
 flip image
 flip image klar
@@ -774,37 +230,7 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint klar
 flip image
 flip image klar
@@ -816,37 +242,17 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
 paint klar
 flip image
 flip image klar
@@ -858,37 +264,45 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+Load settings okay!
+Load settings okay!
+Emperor-cards drawn
+hero_deck shuffled
+two more cards drawn
+game.exit() okay!
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
 paint klar
 flip image
 flip image klar
@@ -900,37 +314,7 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint klar
 flip image
 flip image klar
@@ -942,37 +326,7 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint klar
 flip image
 flip image klar
@@ -984,237 +338,7 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint klar
 flip image
 flip image klar
@@ -1226,37 +350,307 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
 paint klar
 flip image
 flip image klar
@@ -1266,37 +660,19 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
+paint klar
+flip image
+flip image klar
+delay klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+paint körs
+paint: bakgrunden skrivs ut
+paint: klar
 paint klar
 flip image
 flip image klar
@@ -1306,157 +682,7 @@ första while-satsen avslutas
 utskrift startar
 paint körs
 paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-paint klar
-flip image
-flip image klar
-delay klar
-kollar events
-första while-satsen avslutas
-utskrift startar
-paint körs
-paint: bakgrunden skrivs ut
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-paint: klar
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
-apply surface: 1
-apply surface: 2
-apply surface: 3
-apply surface: 4
-apply surface: 5
 paint klar
 flip image
 flip image klar

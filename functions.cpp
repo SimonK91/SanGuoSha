@@ -72,21 +72,21 @@ SDL_Surface* loadImage(const string& filename,bool transparant, const Uint8& red
 void applySurface(int x, int y, Surface& source, Surface& destination, SDL_Rect* clip)
 {
 int counter = 0;
-std::cout << "apply surface: " << ++counter << std::endl;
+// std::cout << "apply surface: " << ++counter << std::endl;
 	if(source.getImage() == nullptr)
 	{
 		std::cout << "apply surface in if: " << counter << std::endl;
 		throw SGS_error("applySurface failed - nullpointer exception, source: "+source.getName());
 		std::cout << "apply surface in if: " << counter << std::endl;
 	}
-	std::cout << "apply surface: " << ++counter << std::endl;
+	// std::cout << "apply surface: " << ++counter << std::endl;
 	SDL_Rect offset;
-	std::cout << "apply surface: " << ++counter << std::endl;
+	// std::cout << "apply surface: " << ++counter << std::endl;
 	offset.x = x;
 	offset.y = y;
-	std::cout << "apply surface: " << ++counter << std::endl;
+	// std::cout << "apply surface: " << ++counter << std::endl;
 	SDL_BlitSurface( source.getImage(), clip, destination.getImage(), &offset );
-	std::cout << "apply surface: " << ++counter << std::endl;
+	// std::cout << "apply surface: " << ++counter << std::endl;
 }
 
 Surface Init(const int& SCREEN_WIDTH, const int& SCREEN_HEIGHT, const int& SCREEN_BPP)
