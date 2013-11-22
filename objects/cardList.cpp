@@ -60,9 +60,12 @@ void CardList::pushTop(Card* card)
 	card = nullptr; 
 }
 	
-void CardList::shuffle()
+void CardList::shuffle(unsigned leSeed)
 {
-	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+	if(leSeed == 0)
+		seed = std::chrono::system_clock::now().time_since_epoch().count();
+	else
+		seed = leSeed;
 
 	std::shuffle (set.begin(), set.end(), std::default_random_engine(seed));
 }

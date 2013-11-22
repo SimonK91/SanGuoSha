@@ -9,11 +9,16 @@ void Menu::run()
 	Uint8 *keystates = SDL_GetKeyState(nullptr);
 	std::string command;
 
-	CardList* card_deck = new CardList("hero_deck");
-	CardList* discard_deck = new CardList("empty");
-	Card* card;
+	CardList* card_deck1 = new CardList("hero_deck");
+	CardList* card_deck2 = new CardList("hero_deck");
 	
-	fps.setFPS(30);
+	CardList* discard_deck1 = new CardList("empty");
+	CardList* discard_deck2 = new CardList("empty");
+	
+	Card* card1;
+	Card* card2;
+	
+	fps.setFPS(2);
 	
 	fps.start();
 	while(running) //medans programmet kÃ¶rs
@@ -46,32 +51,46 @@ void Menu::run()
 				running = false;           		// avsluta programmet
 		}
 		std::cout << "första while-satsen avslutas" << std::endl;
-		// if(card_deck -> empty())
-		// {
-			// std::swap(card_deck,discard_deck);
-			// card_deck -> shuffle();
-		// }
+		if(card_deck1 -> empty())
+		{
+			std::swap(card_deck1,discard_deck1);
+			card_deck1 -> shuffle();
+			
+			unsigned seed = card_deck1 -> getSeed();
+			
+			std::swap(card_deck2,discard_deck2);
+			card_deck2 -> shuffle(seed);
+		}
 		std::cout << "utskrift startar" << std::endl;
 		if(running)
 		{
-			//card = card_deck -> drawCard();
-			//card -> setPosition(10,10);
-			std::cout << "paint körs" << std::endl;
+			std::cout << "ska dra kort.." << std::endl;
+			card1 = card_deck1 -> drawCard();
+			card2 = card_deck2 -> drawCard();
+			std::cout << "kort dragna" << std::endl;
+			card1 -> setPosition(10,10);
+			card2 -> setPosition(210,10);
+			// std::cout << "paint körs" << std::endl;
 			paint();
-			std::cout << "paint klar" << std::endl;
-			//dynamic_cast<HeroCard*>(card) -> paint(screen);
-			//discard_deck -> pushBottom(card);
-			std::cout << "flip image" << std::endl;
+			// std::cout << "paint klar" << std::endl;
+			dynamic_cast<HeroCard*>(card1) -> paint(screen);
+			dynamic_cast<HeroCard*>(card2) -> paint(screen);
+			discard_deck1 -> pushBottom(card1);
+			discard_deck2 -> pushBottom(card2);
+
+			// std::cout << "flip image" << std::endl;
 			SDL_Flip(screen.getImage());
-			std::cout << "flip image klar" << std::endl;
-			std::cout << "delay klar" << std::endl;
+			// std::cout << "flip image klar" << std::endl;
+			// std::cout << "delay klar" << std::endl;
 		}
 		
 		fps.regulateFPS();
 	}
 
-	//delete card_deck;
-	//delete discard_deck;
+	delete card_deck1;
+	delete card_deck2;
+	delete discard_deck1;
+	delete discard_deck2;
 	if(!exit())
 	{
 		throw("Could not exit Menu");
