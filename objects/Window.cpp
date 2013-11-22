@@ -45,9 +45,7 @@ namespace Object
   {
     //dessa SDL_Rects används för att se till att backgrunden och ramen "skalas om" till rätt storlek
     SDL_Rect backgroundSize;
-	Surface windowSurface;
-	windowSurface = SDL_CreateRGBSurface(0, box.w, box.h, 32, 0, 0, 0, 0);
-    backgroundSize.x = 0;
+	backgroundSize.x = 0;
     backgroundSize.y = 0;
     backgroundSize.w = box.w;
     backgroundSize.h = box.h;

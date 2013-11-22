@@ -15,6 +15,7 @@ namespace Object
   class Window : public ActiveObject
   {
   private:
+	Surface windowSurface;
     Surface background;
     SDL_Rect box;
     std::vector<Object*> objects;
@@ -56,7 +57,10 @@ namespace Object
 	tmp_bg = loadImage("Images/Gui/window/rbc.png",true);
 	applySurface(w - tmp_bg->w, h - tmp_bg->h, tmp_bg, background, nullptr);
 	
-      }
+	//skapa en yta som vi ska rita på
+	windowSurface = SDL_CreateRGBSurface(0, box.w, box.h, 32, 0, 0, 0, 0);
+    
+    }
     ~Window();
     std::string handleEvent(const SDL_Event&);
     void makeButton(const std::string& text, const int& x_pos, const int& y_pos, const std::string& command = "",
