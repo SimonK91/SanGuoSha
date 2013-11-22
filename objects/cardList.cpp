@@ -38,6 +38,8 @@ CardList::~CardList()
 	
 Card* CardList::drawCard()
 {
+	if(empty())
+		throw SGS_error("CardDeck is empty and cannot draw a card");
 	Card* c = set.front();
 	set.front() = nullptr; //peka bort så att vi inte tar bort c ^^
 	set.erase(set.begin());
