@@ -68,8 +68,7 @@ StringInput.o: StringInput.h StringInput.cpp
 																						
 			
 clean:
-		 del *.o
+		@ rm -rf *.o
 
 zap: clean
-		del *.exe
-		
+		@ rm -rf "SanGuoSha.exe" *~
