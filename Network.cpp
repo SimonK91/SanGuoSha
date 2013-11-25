@@ -33,8 +33,8 @@ void Network::sendChat(std::string message)
     }
   if( outgoing != NULL )
     {
-      message += "|";
-      message += name;
+      //message += "|";
+      // message += name;
       SDLNet_TCP_Send(outgoing, (void*)message.c_str(), message.length());
     }
   
@@ -67,10 +67,11 @@ void Network::getChat()
 	      if(recieved != "")
 		{
 		  
-		  name = recieved.substr(0,7);
-		  message = recieved.substr(8,15);
+		  name = recieved.substr(0,8);
+		  message = recieved.substr(8,recieved.size());
 		  chat_log.push_back(std::make_pair(name,message));
 		}  
+	      
 	    }
 	  else
 	    {

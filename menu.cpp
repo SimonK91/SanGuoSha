@@ -73,8 +73,16 @@ void Menu::run()
 			      }
 			    if(event.key.keysym.sym == SDLK_2)
 			      {
-				net->sendChat("en jätte glad client!!");
+				net->sendChat("en glad client!!");
 			      }
+			    if(event.key.keysym.sym == SDLK_3)
+			      {
+				net->sendChat("HEEEEJSAN!");
+			      }
+			    if(event.key.keysym.sym == SDLK_4)
+			      {
+				net->sendChat("44444444444444444");
+			      }/*
 			    if(event.key.keysym.sym == SDLK_5)
 			      {
 				net->getChat();
@@ -92,7 +100,7 @@ void Menu::run()
 				tmp_str += "   |   ";
 				tmp_str += net->getLog().at(1).second;
 				dynamic_cast<Textbox*>(all_objects.at(0)) -> setText(tmp_str);
-			      }
+				}*/
 			    if(event.key.keysym.sym == SDLK_p)
 			      {
 				net->showMeDasLog();

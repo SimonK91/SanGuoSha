@@ -1,0 +1,22 @@
+förbi accept
+förbi recv
+join
+130.236.211.138
+förbi accept
+förbi recv
+en glad client!!Pl
+tagit emot en strang
+skickar sträng
+skickar strängen: client Xen glad client!!Pl
+förbi accept
+förbi recv
+HEEEEJSAN!ient!!Pl
+tagit emot en strang
+skickar sträng
+skickar strängen: client XHEEEEJSAN!ient!!Pl
+förbi accept
+förbi recv
+44444444444444444l
+tagit emot en strang
+skickar sträng
+skickar strängen: client X44444444444444444l

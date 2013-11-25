@@ -37,10 +37,10 @@ int main(int argc, char* argv[])
   //positionen där ett nytt medelande ritas ut
 
   //SDLNet variabler  
-  TCPsocket sd, csd;
+  TCPsocket sd;//, csd;
   IPaddress ip, ip2;
-  int len;
-  char buffer[512];
+  //int len;
+  //char buffer[512];
   TCPsocket newsocket = NULL;
   
   std::vector<TCPsocket> all_clients; 
@@ -66,15 +66,15 @@ int main(int argc, char* argv[])
 
   SDLNet_SocketSet clients;
   SDLNet_SocketSet server_set;
+
   server_set = SDLNet_AllocSocketSet(2);
   SDLNet_TCP_AddSocket(server_set, sd);
-  TCPsocket client1;
-  IPaddress ip11;
-  TCPsocket client2;
-  IPaddress ip22;
+  
+
   IPaddress* remoteIP;
-  IPaddress new_ip;
+
   Uint32 ipaddr;
+  std::vector<IPaddress> ip_addresses;
   
   clients = SDLNet_AllocSocketSet(3);
   
@@ -135,25 +135,38 @@ int main(int argc, char* argv[])
 		      //std::cout << "client has joined" << std::endl;
 		      tmp_address = ss.str();
 		      std::cout << tmp_address << std::endl;
+
+
 		      all_clients.push_back(TCPsocket());
-		      SDLNet_ResolveHost(&new_ip, tmp_address.c_str(), 1442);
-		      SDLNet_TCP_AddSocket(clients, all_clients.back());
+		      ip_addresses.push_back(IPaddress());
+		      SDLNet_ResolveHost(&ip_addresses.back(), tmp_address.c_str(), 1442);
+		      //SDLNet_TCP_AddSocket(clients, all_clients.back());
 		    }
 		  else 
 		    {
+		      
 		      chat_queue.push(receivedStr);
 		      std::cout << "tagit emot en strang" << std::endl;
-		      newsocket = SDLNet_TCP_Open(&new_ip);
-		      if( newsocket != NULL)
-			{
-			  std::cout << "skickar sträng" << std::endl;
-			  std::string tmp_send =  chat_queue.front();;
-			  chat_queue.pop();
+		      for(auto i : ip_addresses)
+		      {
+			newsocket = SDLNet_TCP_Open(&i);//&ip_addresses.at(0));
+			  if( newsocket != NULL )
+			    {
+			       std::cout << "skickar sträng" << std::endl;
+			      std::string tmp_send = "client X"; 
+				tmp_send += chat_queue.front();
+			      // chat_queue.pop();
+				std::cout << "skickar strängen: " << tmp_send << std::endl;
+			      SDLNet_TCP_Send(newsocket, (void*) tmp_send.c_str(), tmp_send.length());
+			      
+			      SDLNet_TCP_Close(newsocket);
+			    }
+			  }
+			  if(!chat_queue.empty())
+			    {
+			      chat_queue.pop();
+			    }
 		      
-			  SDLNet_TCP_Send(newsocket, (void*) tmp_send.c_str(), tmp_send.length());
-			  
-			  SDLNet_TCP_Close(newsocket);
-			}
 		    }
 		}
 	    }
@@ -164,6 +177,7 @@ int main(int argc, char* argv[])
 
 
 	  //socketsettest-.------------
+      /*
       if(( csd = SDLNet_TCP_Accept(sd)))
 	{
 	  char bufferten[512];
@@ -187,7 +201,7 @@ int main(int argc, char* argv[])
 	      SDLNet_TCP_Close(csd);
 	    }
 	}
-
+      */
       
       SDL_BlitSurface(background,NULL,screen, &backRect);
       
@@ -197,7 +211,7 @@ int main(int argc, char* argv[])
     }//mainloop
   
   //städar inför avslut
-  std::cout << chat_queue.front() << std::endl;
+  // std::cout << chat_queue.front() << std::endl;
   SDL_FreeSurface(background);
   TTF_Quit();
   SDLNet_TCP_Close(sd);
