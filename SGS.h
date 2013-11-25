@@ -67,6 +67,7 @@ private:
 	void run_command(const std::string& what_command);
 	void paint();
 	bool exit();
+	int networkThread(void* data); 
 		
 public:
 	void run();

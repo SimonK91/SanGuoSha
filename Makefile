@@ -1,8 +1,8 @@
 CCC        =g++
 CFLAGS   +=-L/sw/gcc-${GCC4_V}/lib -static-libstdc++ -std=c++11 -pedantic -Wall -Wextra
 INCLUDE  = -I./objects
-SDLFLAGS +=-lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer
-OBJECTS = main.cpp Menu.o Button.o Slider.o Textbox.o Checkbox.o Functions.o Window.o music.o SGS.o
+SDLFLAGS +=-lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer -lSDL_net
+OBJECTS = main.cpp Menu.o Button.o Slider.o Textbox.o Checkbox.o Functions.o Window.o music.o SGS.o Network.o Timer.o StringInput.o
 all: $(OBJECTS)
 		@ echo
 		@ echo execute skapas
@@ -53,6 +53,19 @@ Window.o: ./objects/Window.h ./objects/Window.cpp
 Textbox.o: ./objects/Textbox.h ./objects/Textbox.cpp
 		@ echo Textbox.o skapas
 		@$(CCC) $(CFLAGS) -c ./objects/Textbox.cpp $(SDLFLAGS)
+		
+Network.o: Network.h Network.cpp
+		@ echo Network.o skapas
+		@$(CCC) $(INCLUDE) $(CFLAGS) -c Network.cpp $(SDLFLAGS)
+
+Timer.o: Timer.h Timer.cpp
+		@ echo Timer.o skapas
+		@$(CCC) $(INCLUDE) $(CFLAGS) -c Timer.cpp $(SDLFLAGS)	
+
+StringInput.o: StringInput.h StringInput.cpp
+			@ echo Input.o skapas
+			@$(CCC) $(INCLUDE) $(CFLAGS) -c StringInput.cpp $(SDLFLAGS)
+																						
 			
 clean:
 		 del *.o
