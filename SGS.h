@@ -37,11 +37,7 @@ protected:
 	
 public:
 	//konstruktorer, destruktorer och operatorer
-	SGS(Surface scr) : screen(scr),m("Music/Menu.wav"), fps(30)
-	{
-	  //m.loadMusic("Music/Menu.wav");
-	  loadSettings(settings);
-	}
+	SGS(Surface scr) : screen(scr),m("Music/Menu.wav"), fps(30){}
 	~SGS();
 	//borttagna
 	SGS() = delete;           //defaultkonstruktor
@@ -63,8 +59,9 @@ public:
 	bool make_slider(const int& x_pos, const int& y_pos, const std::string& command);
 	bool add_window(Object::Window* your_window);
 	bool make_checkbox(int x, int y, const std:: string& command, bool checked = false);
-	bool make_textbox(const std::string& text, const int& x, const int& y, const int& w, const int& h,
+	bool make_textbox(const int& x, const int& y, const int& w, const int& h,
 					  const SDL_Color &col = {255,255,255,0}, const std::string& font = "Fonts/LHANDW.TTF", const unsigned& size = 13);
+					  void set_text(const int& where, const std::string& what_text);
 };
 
 
@@ -87,6 +84,7 @@ public:
 class Game : public SGS
 {
 private:
+	unsigned self;
 	Object::CardList* card_deck;
 	Object::CardList* discard_pile;
 	Object::CardList* hero_deck;
@@ -101,18 +99,24 @@ private:
 	void UI();
 public:
 	~Game() = default;
-	Game();
+	Game() = default;
 	
 	Game(Surface scr/*,std::vector<Player>& players*/) : SGS(scr)
 	{
+		self = 0; //ska komma utifrån!!
 		card_deck = new Object::CardList("standard_playing_cards");
 		discard_pile = new Object::CardList("empty");
 		hero_deck = new Object::CardList("hero_deck");
 		m.loadMusic("Music/Menu.wav");
 		loadSettings(settings);
-		Player* p1 = new Player();
-		p1->setStatus(1);
-		players.push_back(p1);
+		Player* p1;
+		for(unsigned i = 0 ; i < 5 ; ++i)
+		{
+			p1 = new Player();
+			p1->setStatus(1);
+			players.push_back(p1);
+			
+		}
 	}
 	void run();
 	bool setup();

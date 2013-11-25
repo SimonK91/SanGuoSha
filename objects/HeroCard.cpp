@@ -30,24 +30,24 @@ std::string HeroCard::getAblility(unsigned index)
 	}
 }
 
-std::string HeroCard::handleEvent(const SDL_Event& event)
-{
-	if(event.type == SDL_MOUSEBUTTONDOWN)
-	{
-		if(active == 1)
-		{
-			active = 0;
-			box.y += 20;
-		}
-		else if(active == 0 && event.motion.x > box.x && event.motion.x < box.x + box.w && event.motion.y > box.y && event.motion.y < box.y + box.h)
-		{
-			active = 1;
-			box.y -= 20;
-			return "HeroCardInUse";		//fortfarande ett frågetecken :D
-		}
-	}
-	return "";
-}
+// std::string HeroCard::handleEvent(const SDL_Event& event)
+// {
+	// if(event.type == SDL_MOUSEBUTTONDOWN)
+	// {
+		// if(active == 1)
+		// {
+			// active = 0;
+			// box.y += 20;
+		// }
+		// else if(active == 0 && event.motion.x > box.x && event.motion.x < box.x + box.w && event.motion.y > box.y && event.motion.y < box.y + box.h)
+		// {
+			// active = 1;
+			// box.y -= 20;
+			// return "HeroCardInUse";		//fortfarande ett frågetecken :D
+		// }
+	// }
+	// return "";
+// }
 } //namespace
 
 

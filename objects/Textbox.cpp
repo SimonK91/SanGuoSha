@@ -4,13 +4,13 @@
 #include <queue>
 namespace Object
 {
-Textbox::Textbox(const std::string& text_, const int& x, const int& y, const int& w, const int& h,
-	const SDL_Color& col, const std::string& style, const unsigned& size)
+Textbox::Textbox(const int& x, const int& y, const int& w, const int& h,
+	const SDL_Color& col, const std::string& style, const unsigned& size) : background("textbox background"),textArea("textArea")
 {
 	
 	//fixar bakgrundsbilden
 	background = loadImage("Images/Gui/windowBackground.png",true);
-	Surface tmp_bg;
+	Surface tmp_bg("tmp_bg");
 	
 	//övre ramen
 	tmp_bg = loadImage("Images/Gui/window/tb.png",true);
@@ -58,8 +58,8 @@ Textbox::Textbox(const std::string& text_, const int& x, const int& y, const int
 	clip.w = w;
 	clip.h = h;
 	
-	setText(text_);	
-
+	textArea = SDL_CreateRGBSurface(0,clip.w,clip.h,32,0,0,0,1);	//skapar en ny tom yta
+	applySurface(0,0, background, textArea, &clip);	
 }
 		
 void Textbox::paint(Surface& to_where)

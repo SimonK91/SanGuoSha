@@ -22,15 +22,17 @@ namespace Object
 	event2.motion.x -= box.x;
 	event2.motion.y -= box.y;
     std::string tmpCommand = "";
-    for(auto i: objects)
-      {
-	if(dynamic_cast<ActiveObject*>(i) != nullptr)
-	  {
-	    tmpCommand = dynamic_cast<ActiveObject*>(i)->handleEvent(event2);
-	  }
-	if(tmpCommand != "")
-	  break;
-      }
+    for(int i = objects.size()-1;i >= 0 ; --i)
+    {
+		if(dynamic_cast<ActiveObject*>(objects.at(i)) != nullptr)
+		{
+			tmpCommand = dynamic_cast<ActiveObject*>(objects.at(i))->handleEvent(event2);
+		}
+		if(tmpCommand != "")
+		{
+			break;
+		}
+    }
     
     return tmpCommand;
     
@@ -65,10 +67,10 @@ namespace Object
     return true;
   }
   
-  bool Window::makeTextbox(const std::string& text, const int& x, const int& y, const int& w , const int& h
+  bool Window::makeTextbox(const int& x, const int& y, const int& w , const int& h
 			     ,const SDL_Color &col, const std::string& font, const unsigned& size)
   {
-    Textbox* temp = new Textbox(text,x,y,w,h,col,font,size);
+    Textbox* temp = new Textbox(x,y,w,h,col,font,size);
     
     if (temp == nullptr)
       return false;
@@ -88,4 +90,42 @@ namespace Object
 	card->setPosition(xPos,yPos);
 	
   }
+  
+  
+  
+	void Window::loadBackground(int x, int y, int w, int h)
+	{
+	box.x = x;
+	box.y = y;
+	box.w = w;
+	box.h = h;
+	background = loadImage("Images/Gui/Window/background.png", false);
+	Surface tmp_bg;
+	
+	//övre ramen
+	tmp_bg = loadImage("Images/Gui//window/tb.png",true);
+	applySurface(0,0, tmp_bg, background, nullptr);
+	//vänstra ramen
+	tmp_bg = loadImage("Images/Gui/window/lb.png",true);
+	applySurface(0,0, tmp_bg, background, nullptr);
+	//nedre ramen
+	tmp_bg = loadImage("Images/Gui/window/bb.png",true);
+	applySurface(0,h - tmp_bg->h, tmp_bg, background, nullptr);
+	//högra ramen
+	tmp_bg = loadImage("Images/Gui/window/rb.png",true);
+	applySurface(w - tmp_bg->w,0, tmp_bg, background, nullptr);
+	//övre vänstra hörnet
+	tmp_bg = loadImage("Images/Gui/window/ltc.png",true);
+	applySurface(0,0, tmp_bg, background, nullptr);
+	//övre högra hörnet
+	tmp_bg = loadImage("Images/Gui/window/rtc.png",true);
+	applySurface(w - tmp_bg->w,0, tmp_bg, background, nullptr);
+	//nedre vänstra hörnet
+	tmp_bg = loadImage("Images/Gui/window/lbc.png",true);
+	applySurface(0,h - tmp_bg->h, tmp_bg, background, nullptr);
+	//nedre högra hörnet
+	tmp_bg = loadImage("Images/Gui/window/rbc.png",true);
+	applySurface(w - tmp_bg->w, h - tmp_bg->h, tmp_bg, background, nullptr);
+	}
+  
 }//slut på namnrymd

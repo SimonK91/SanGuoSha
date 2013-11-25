@@ -18,6 +18,26 @@ void Card::setPosition(const int& x, const int& y)
 	box.x = x;
 	box.y = y;
 }
+std::string Card::handleEvent(const SDL_Event& event)
+{
+	//ska fixas mer så att den går att använda på något vettigt sätt :D
+	if(event.type == SDL_MOUSEBUTTONUP)
+	{
+		if(active == 1)
+		{
+			active = 0;
+			box.y += 20;
+			//return abilityID;
+		}
+		else if(active == 0 && event.motion.x > box.x && event.motion.x < box.x + box.w && event.motion.y > box.y && event.motion.y < box.y + box.h)
+		{
+			active = 1;
+			box.y -= 20;
+			//return "gameCardInUse";
+		}
+	}
+	return "";
+}
 
 Clan str2clan(const std::string& str)
 {

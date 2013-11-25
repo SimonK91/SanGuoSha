@@ -15,28 +15,21 @@ struct Equipment
 
 class Player
 {
- private:
-  
-  
-  int role;
-  int current_life;
-  int max_life;
-  bool male;
+private:
+    
+	int role;
+	int current_life;
+	int max_life;
+	bool male;
+	Equipment eq;
+	int game_status;
+	int player_nr;
+	std::vector<Object::GameCard*> hand;
+	Object::HeroCard* hero;
+	std::stack<Object::GameCard*> judgement_cards;
+	bool has_hero;
 
-  Equipment eq;
-
-  int game_status;
-
-  int player_nr;
-  
-  std::vector<Object::GameCard*> hand;
-
-  Object::HeroCard* hero;
-
-  std::stack<Object::GameCard> judgement_cards;
-
-
- public:
+public:
   Player();
   ~Player();
 
@@ -63,6 +56,7 @@ class Player
   void setRole(int r){role = r;}
   int getRole(){return role;}
 
+  bool hasHero(){return has_hero;}
   void fixCardPosition();
 
 };

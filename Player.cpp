@@ -3,13 +3,24 @@
 
 using namespace Object;
 
-Player::Player()
+Player::Player() : role(-1),current_life(0),max_life(0), has_hero(false)
 {
   
 }
 
 Player::~Player()
 {
+	while(hand.size() != 0)
+	{
+		delete hand.front();
+		hand.erase(hand.begin());
+	}
+	while(judgement_cards.size() != 0)
+	{
+		delete judgement_cards.top();
+		judgement_cards.pop();
+	}
+	delete hero;
 }
 
 void Player::setHero(HeroCard* character)
@@ -18,6 +29,7 @@ void Player::setHero(HeroCard* character)
   current_life = character->getHP();
   male = character->getMale();
   hero = character;
+  has_hero = true;
 }
 
 GameCard* Player::playCard(int index)
@@ -60,6 +72,7 @@ GameCard* Player::loseEquipment(int index)
 void Player::doEffect(std::string what_effect)
 {
   //implementera senare
+  std::cout << what_effect << std::endl;
 
 }
 
@@ -99,7 +112,7 @@ void Player::paint(Surface screen, bool current_player)
 	}
     }
   
-  hero->paint(screen);
+  //hero->paint(screen);
 
   //rita ut equipment
 }

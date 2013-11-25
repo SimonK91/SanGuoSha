@@ -4,13 +4,14 @@
 
 using namespace Object;
 
+
 bool Game::setup()
 {
 	run_next = true;
 	std::vector<int> role{0,2,3,1,3,3,1,3,1,2};
-	unsigned emperor = 0;
+	int emperor = -1;
 	unsigned step = 1;
-	// bool running = true;
+	players.at(1)->setStatus(1);
 	
 	while(running)
 	{
@@ -23,18 +24,22 @@ bool Game::setup()
 			for(unsigned i = 0; i < players.size() ; ++i)
 			{
 				if(!players.at(i)->entered())
+				{
 					step = 1;
+				}
 			}
 		}
+		
 	// //step 2)
 	// //shuffle role cards
 		else if(step == 2)
 		{
 			unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-			//note to self: -1 spelare ska användas. använder 0 spelare nu XD
-			std::shuffle (role.begin(), role.begin()+players.size()-1, std::default_random_engine(seed));
+			std::shuffle (role.begin(), role.begin()+players.size(), std::default_random_engine(seed));
+			
 			step = 3;
 		}
+		
 	// //step 3)
 	// //distribute role cards
 		else if(step == 3)
@@ -44,71 +49,132 @@ bool Game::setup()
 				players.at(i)->setRole(role.at(i));
 				
 				if(role.at(i) == 0)
-					emperor = i+1;
+					emperor = i;
 			}
-			step = 5; //skip announcement
+			step = 4;
 		}
-		
-	// //step 4)
-	// //announce emperor
-// /*	for(unsigned i = 0; i < players.size() ; ++i)
-	// {
-		// if(players.at(i).get_role() == 0)
-		// {
-			// // makeTimedtext("Player: " + players.at(i).get_name() + " is the emperor.",300,300,3000)
-		// }
-		
-	//step 5)
+	//step 4)
 	//shuffle character cards
 	//and give emperor 5 characters to choose between
-		else if(step == 5)
+		else if(step == 4)
 		{
-		
-		
 			Card* hero1 = hero_deck->drawCard(); //the three emperors
 			Card* hero2 = hero_deck->drawCard();
 			Card* hero3 = hero_deck->drawCard();
 			std::cout << "Emperor-cards drawn" << std::endl;	
-			for(int i = 0 ; i < 5 ; ++i)
-			{
-				hero_deck->shuffle();
-				SDL_Delay(2);
-			}
+			
+			hero_deck->shuffle();
 			std::cout << "hero_deck shuffled" << std::endl;
+			
 			Card* hero4 = hero_deck->drawCard();
 			Card* hero5 = hero_deck->drawCard();
 			std::cout << "two more cards drawn" << std::endl;
-			Window* characters = new Window(100,100,600,550);
-			characters->addCard(hero1,0,0);
-			characters->addCard(hero2,200,0);
-			characters->addCard(hero3,400,0);
-			characters->addCard(hero4,100,250);
-			characters->addCard(hero5,300,250);
-			characters->makeButton("Choose",0,500,"pick_hero");
-			add_window(characters);
-			// delete characters;
+			
+			if(emperor == self)
+			{
+				Window* characters = new Window(100,100,600,550);
+				characters->addCard(hero1,0,0);
+				characters->addCard(hero2,200,0);
+				characters->addCard(hero3,400,0);
+				characters->addCard(hero4,100,250);
+				characters->addCard(hero5,300,250);
+				characters->makeButton("Choose",0,500,"pick_hero");
+				add_window(characters);
+			}
 			step = 6;
 		}
 	
 	//step 6)
 	//wait for emperor to choose character
+	else if(step == 6)
+	{
+		if(players.at(self)->hasHero())
+		{
+			++self;
+			step = 8;
+			std::cout << "step 8" << std::endl;
+		}
+	}
 
 //step 7)
 //announce emperor's character
 
 //step 8)
 //shuffle all remaining characters
+	else if(step == 8)
+	{
+		for(int i = 0 ; i < 5 ; ++i)
+		{
+			hero_deck->shuffle();
+			SDL_Delay(2);
+		}
+		step = 9;
+			std::cout << "step 9 - shuffle" << std::endl;
+		
+	}
 
 //step 9)
 //give everyone else 3 characters to choose between
+	else if(step == 9)
+	{
+		//for(unsigned i = 0 ; i < players.size() ; ++i)
+		//{
+			
+			std::cout << "spelare: " << self << std::endl;
+			if(!players.at(self)->hasHero())
+			{
+				Card* hero1 = hero_deck->drawCard();
+				Card* hero2 = hero_deck->drawCard();
+				Card* hero3 = hero_deck->drawCard();
+				Window* characters = new Window(100,100,600,550);
+				characters->addCard(hero1,0,0);
+				characters->addCard(hero2,200,0);
+				characters->addCard(hero3,400,0);
+				characters->makeButton("Choose",0,500,"pick_hero");
+				if(self == self)
+					add_window(characters);
+				else
+					delete characters;
+				//break;
+			}
+		// }
+		step = 10;
+		std::cout << "step 10" << std::endl;
+	
+	}
 
 //step 10)
+//wait for everyone to have chosen a character
+	else if(step == 10)
+	{
+		step = 11;
+		for(auto p : players)
+			if(!p->hasHero())
+				step = 10;
+		
+
+	}
+//step 10)
 //distribute 4 playing cards to each player
+		else if(step == 11)
+		{
+			card_deck->shuffle();
+			for(auto& p : players)
+			{
+				p->recieveCard(dynamic_cast<GameCard*>(card_deck->drawCard()));
+				p->recieveCard(dynamic_cast<GameCard*>(card_deck->drawCard()));
+				p->recieveCard(dynamic_cast<GameCard*>(card_deck->drawCard()));
+				p->recieveCard(dynamic_cast<GameCard*>(card_deck->drawCard()));
+			}
+			step = 12;
+			std::cout << "step 11" << std::endl;
+		}
 
 //step 11)
 //start the game
+		else if(step == 12)
+			return run_next;
 	
-	std::cout << step << " " << players.at(0)->entered() << std::endl;
 		UI();
 	}
 	
@@ -167,7 +233,7 @@ bool Game::end()
 //show score-table
 //keep chat open
 //make exit button
-
+return false;
 }
 
 bool Game::exit()
@@ -207,7 +273,7 @@ void Game::UI()
 				run_command(command);
 			}
 			 //annars kör enbart handle_event på window
-			else if(dynamic_cast<Window*>(all_objects.at(i)) != nullptr)
+			else if(has_window && dynamic_cast<Window*>(all_objects.at(i)) != nullptr)
 			{
 				command = dynamic_cast<Window*>(all_objects.at(i))->handleEvent(event); //kÃ¶r handle event pÃ¥ objektet (detta ser om kriterier Ã¤r uppfyllda fÃ¶r att gÃ¶ra nÃ¥got
 				run_command(command);

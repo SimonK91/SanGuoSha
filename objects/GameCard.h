@@ -39,18 +39,8 @@ public:
 	int getNumber(){ return number; }
 	std::string getAbility(){ return abilityID; }
 	
-	std::string handleEvent(const SDL_Event& event);
+	//std::string handleEvent(const SDL_Event& event);
 	//void print(SDL_Surface* to_where){} //ska tas bort
-	
-	void paint(Surface& to_where)
-	{
-		if(image.getImage() == nullptr)
-		{
-			std::cout <<'\'' << abilityID << " ability ID' has no image" << std::endl;
-			return;
-		}
-		applySurface(box.x , box.y , image, to_where);
-	}
 };
 } //namespace
 

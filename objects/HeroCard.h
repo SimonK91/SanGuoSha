@@ -23,14 +23,8 @@ private:
 public:
 	HeroCard(std::string filename, std::string ID);
 	~HeroCard(){}
-	
-	//void print(SDL_Surface* to_where){}
-	void paint(Surface& to_where)
-	{
-		applySurface(box.x, box.y, image, to_where);
-	}
 	std::string getAblility(unsigned index);
-	std::string handleEvent(const SDL_Event& event);
+	// std::string handleEvent(const SDL_Event& event);
 
 	std::string getName(){ return name; }
 	int getHP()   { return maxHP;}

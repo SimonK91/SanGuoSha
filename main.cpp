@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 	cout << "bakgrundsbilden laddas" << endl;
 	mainMenu.load_background("Images/Gui/background.png");
 	cout << "en button skapas" << endl;
-	mainMenu.make_textbox("ks bfeag",50,50, 300, 500);
+	mainMenu.make_textbox(50,50, 300, 500);
 	mainMenu.make_button("New Game",300,100,"make_new_game");
 	mainMenu.make_button("Options", 300,200,"options");
 	mainMenu.make_button("Exit", 300,400,"exit"); 

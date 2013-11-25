@@ -17,7 +17,20 @@ void Menu::run_command(const std::string& what_command)
 		m.stop();
 		Game game(screen);
 		game.load_background("Images/Gui/background.png");
-		game.make_button("exit", 350, 50, "close");
+		
+		//skapa spelets layout
+		//game.make_button("exit", 350, 50, "close");
+		Window* hand = new Window(200,550,600,218);
+		Window* profile = new Window(800,550,224,218);
+		Window* equipment = new Window(0,550,200,218);
+		Window* chat = new Window(800,0,224,550);
+		game.make_textbox(50,50,150,400);
+		game.set_text(0,"wololololoW test test test");
+		chat->makeButton("Exit",10,10,"close");
+		game.add_window(hand);
+		game.add_window(profile);
+		game.add_window(equipment);
+		game.add_window(chat);
 		if(!game.setup())
 			running = false;
 		if(!game.exit())
@@ -34,7 +47,8 @@ void Menu::run_command(const std::string& what_command)
 		Window* options = new Window(160,50,500,450);
 		options->makeButton("Fullscreen",30,20,"toggle_fullscreen");
 		options->makeButton("Back",270,390,"close_window");
-		options->makeTextbox(("Music volume: " + I2S(m.getVolume())),300,20,150,30);
+		options->makeTextbox(300,20,150,30);
+		options->setText(2,"Music volume: " + I2S(m.getVolume()));
 		options->makeSlider(250,60,"set_volume",m.getVolume());
 		add_window(options);
 		has_window = true;
