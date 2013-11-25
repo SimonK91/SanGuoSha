@@ -1,22 +1,52 @@
 förbi accept
+receivedStr:  ; size: 0
 förbi recv
+receivedStr: join ; size: 4
 join
-130.236.211.138
+130.236.215.7
 förbi accept
+receivedStr:  ; size: 0
 förbi recv
-en glad client!!Pl
-tagit emot en strang
+receivedStr: en glad client!!Pˆ ; size: 19
+en glad client!!Pˆ
+tagit emot en strang            en glad client!!Pˆ
 skickar sträng
-skickar strängen: client Xen glad client!!Pl
+skickar strängen: client Xen glad client!!Pˆ
 förbi accept
+receivedStr:  ; size: 0
 förbi recv
-HEEEEJSAN!ient!!Pl
-tagit emot en strang
+receivedStr: HEEEEJSAN!ient!!Pˆ ; size: 19
+HEEEEJSAN!ient!!Pˆ
+tagit emot en strang            HEEEEJSAN!ient!!Pˆ
 skickar sträng
-skickar strängen: client XHEEEEJSAN!ient!!Pl
+skickar strängen: client XHEEEEJSAN!ient!!Pˆ
 förbi accept
+receivedStr:  ; size: 0
 förbi recv
-44444444444444444l
-tagit emot en strang
+receivedStr: 44444444444444444ˆ ; size: 19
+44444444444444444ˆ
+tagit emot en strang            44444444444444444ˆ
 skickar sträng
-skickar strängen: client X44444444444444444l
+skickar strängen: client X44444444444444444ˆ
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: HEEEEJSAN!4444444ˆ ; size: 19
+HEEEEJSAN!4444444ˆ
+tagit emot en strang            HEEEEJSAN!4444444ˆ
+skickar sträng
+skickar strängen: client XHEEEEJSAN!4444444ˆ
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: en glad client!!4ˆ ; size: 19
+en glad client!!4ˆ
+tagit emot en strang            en glad client!!4ˆ
+skickar sträng
+skickar strängen: client Xen glad client!!4ˆ
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: joinlad client!!4ˆ ; size: 19
+joinlad client!!4ˆ
+130.236.215.7

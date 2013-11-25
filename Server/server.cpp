@@ -59,7 +59,11 @@ int main(int argc, char* argv[])
 
   background = IMG_Load("background.png");
   bool running = true;
-
+	// TTF_Init();
+// SDL_Surface * text;
+	// TTF_Font* font;
+// SDL_Color textColor = {0,0,0};
+		// font = TTF_OpenFont("arial.ttf", 30);
 
 
 
@@ -105,8 +109,11 @@ int main(int argc, char* argv[])
 
 	  if(SDLNet_TCP_Recv(recieve_socket, bufferten, 512) > 0)
 	    { 
+			receivedStr = "";
+std::cout << "receivedStr: " << receivedStr << " ; size: " << receivedStr.size() << std::endl; 
 	      std::cout << "förbi recv" << std::endl;
 	      receivedStr = bufferten;
+std::cout << "receivedStr: " << receivedStr << " ; size: " << receivedStr.size() << std::endl;
 	      std::cout << receivedStr << std::endl;
 	      if(receivedStr != "")
 		{
@@ -146,7 +153,8 @@ int main(int argc, char* argv[])
 		    {
 		      
 		      chat_queue.push(receivedStr);
-		      std::cout << "tagit emot en strang" << std::endl;
+				// text = TTF_RenderText_Solid(font, chat_queue.front().c_str(), textColor);
+		      std::cout << "tagit emot en strang            " << receivedStr <<std::endl;
 		      for(auto i : ip_addresses)
 		      {
 			newsocket = SDLNet_TCP_Open(&i);//&ip_addresses.at(0));
@@ -202,9 +210,11 @@ int main(int argc, char* argv[])
 	    }
 	}
       */
-      
-      SDL_BlitSurface(background,NULL,screen, &backRect);
-      
+		// SDL_Rect textRect;
+		// textRect.x = 50;
+			// textRect.y = 100;
+		SDL_BlitSurface(background,NULL,screen, &backRect);
+		// SDL_BlitSurface(text, NULL, screen, &textRect);
       //ritar ut alla inkomna medelanden
      
       SDL_Flip(screen);
@@ -213,7 +223,7 @@ int main(int argc, char* argv[])
   //städar inför avslut
   // std::cout << chat_queue.front() << std::endl;
   SDL_FreeSurface(background);
-  TTF_Quit();
+  // TTF_Quit();
   SDLNet_TCP_Close(sd);
   SDLNet_Quit();
   SDL_Quit();
