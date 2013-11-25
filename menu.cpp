@@ -18,7 +18,7 @@ void Menu::run()
 	Card* card1;
 	Card* card2;
 	
-	fps.setFPS(2);
+	fps.setFPS(30);
 	
 	fps.start();
 	while(running) //medans programmet kÃ¶rs
@@ -73,8 +73,8 @@ void Menu::run()
 			// std::cout << "paint körs" << std::endl;
 			paint();
 			// std::cout << "paint klar" << std::endl;
-			dynamic_cast<HeroCard*>(card1) -> paint(screen);
-			dynamic_cast<HeroCard*>(card2) -> paint(screen);
+			// dynamic_cast<HeroCard*>(card1) -> paint(screen);
+			// dynamic_cast<HeroCard*>(card2) -> paint(screen);
 			discard_deck1 -> pushBottom(card1);
 			discard_deck2 -> pushBottom(card2);
 
