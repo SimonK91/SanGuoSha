@@ -88,9 +88,8 @@ bool Game::setup()
 	//wait for emperor to choose character
 	else if(step == 6)
 	{
-		if(players.at(self)->hasHero())
+		if(players.at(emperor)->hasHero())
 		{
-			++self;
 			step = 8;
 			std::cout << "step 8" << std::endl;
 		}
@@ -121,6 +120,8 @@ bool Game::setup()
 		//{
 			
 			std::cout << "spelare: " << self << std::endl;
+
+			
 			if(!players.at(self)->hasHero())
 			{
 				Card* hero1 = hero_deck->drawCard();
@@ -167,7 +168,7 @@ bool Game::setup()
 				p->recieveCard(dynamic_cast<GameCard*>(card_deck->drawCard()));
 			}
 			step = 12;
-			std::cout << "step 11" << std::endl;
+			std::cout << "step 12" << std::endl;
 		}
 
 //step 11)

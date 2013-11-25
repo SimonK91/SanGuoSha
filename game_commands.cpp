@@ -45,8 +45,6 @@ void Game::run_command(const std::string& what_command)
 							std::cout << "normal delete" << std::endl;
 							delete hero_window->getObject(j);
 						}
-						//sätt positionen till nullptr
-						//hero_window->getObject(j) = nullptr;
 					}
 					//ta bort fönstret
 					all_objects.pop_back();

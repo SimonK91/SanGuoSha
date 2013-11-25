@@ -110,7 +110,7 @@ public:
 		m.loadMusic("Music/Menu.wav");
 		loadSettings(settings);
 		Player* p1;
-		for(unsigned i = 0 ; i < 5 ; ++i)
+		for(unsigned i = 0 ; i < 1 ; ++i)
 		{
 			p1 = new Player();
 			p1->setStatus(1);

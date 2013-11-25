@@ -1,37 +1,42 @@
 Initialize is okay!
 mainMenu skapas
 Load settings okay!
-Load settings okay!
 bakgrundsbilden laddas
 en button skapas
 mainMenu startas
 Load settings okay!
+Emperor-cards drawn
+hero_deck shuffled
+two more cards drawn
+game.exit() okay!
 Load settings okay!
-02313
-02313
+Emperor-cards drawn
+hero_deck shuffled
+two more cards drawn
+game.exit() okay!
+Load settings okay!
 Emperor-cards drawn
 hero_deck shuffled
 two more cards drawn
 hero 0
 hero 1
 hero 2
-hero 3
-hero 4
-hero 0
-hero 1
-hero 2
-hero 3
-hero 4
-hero 0
-hero 1
-hero 2
-hero 3
-hero 4
-hero 0
-hero 1
-hero 2
-hero 3
-hero 4
+HERO 2 active
+ger kortet
+för objekt 0:
+dynamic cast success
+för objekt 1:
+dynamic cast success
+för objekt 2:
+dynamic cast success
+för objekt 3:
+dynamic cast success
+för objekt 4:
+normal delete
+step 8
+step 9 - shuffle
+spelare: 1
+step 10
 hero 0
 hero 1
 HERO 1 active
@@ -39,19 +44,9 @@ ger kortet
 för objekt 0:
 dynamic cast success
 för objekt 1:
-normal delete
+dynamic cast success
 för objekt 2:
-dynamic cast success
-för objekt 3:
-dynamic cast success
-för objekt 4:
-dynamic cast success
-för objekt 5:
 normal delete
-step 8
-step 9 - shuffle
-spelare: 1
-step 10
 game.exit() okay!
 Write settings okay!
 exit OK!
