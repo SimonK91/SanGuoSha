@@ -115,8 +115,16 @@ bool Game::setup()
 	return run_next;
 }
 
+void Game::run()
+{
 //game
-
+	//kortlekar
+	GameCard* card;
+	CardList cardPile;
+	CardList discardPile;
+	
+	for(Player p : players){
+		
 //phase 1)
 //start of turn
 //special hero abilities trigger here
@@ -131,7 +139,9 @@ bool Game::setup()
 //drawing phase
 //special hero abilities trigger here
 //draw 2 cards
-
+		card = cardPile.drawCard();
+	//fuck!!!
+	
 //phase 4
 //action phase
 //many hero abilities available
@@ -149,7 +159,8 @@ bool Game::setup()
 //special hero abilities can trigger here (shapeshifter, diao chan
 
 //next player, start from phase 1
-
+	}
+	
 //if a player dies, check for winning conditions
 //if an equipment is added/removed, update player stats
 //if a card is active, check rule-book for targets
@@ -157,8 +168,6 @@ bool Game::setup()
 //if a player is targetted by an effect, check possible plays.
 //if a tool-card is played, check every player for negate card.
 
-void Game::run()
-{
 	
 }
 
