@@ -12,8 +12,14 @@ all: $(OBJECTS)
 		@ echo Filnamnet ar SanGuoSha.exe
 		@ echo
 
-		
-		
+server: server/server.cpp
+		@ echo
+		@ echo server skapas
+		@$(CCC) $(CFLAGS) server/server.cpp $(SDLFLAGS) -o "server.exe"
+		@ echo
+		@ echo Filen lyckades att skapa
+		@ echo Filnamnet ar server.exe
+		@ echo
 Functions.o: Functions.cpp Functions.h
 		@ echo Functions.o skapas
 		@$(CCC) $(CFLAGS) -c Functions.cpp $(SDLFLAGS)

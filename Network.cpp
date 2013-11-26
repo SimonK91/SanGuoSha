@@ -6,7 +6,7 @@ Network::Network()
 {
   SDLNet_Init();
   
-  SDLNet_ResolveHost(&server_ip, "130.236.211.138", 1443);
+  SDLNet_ResolveHost(&server_ip, "130.236.226.197", 1443);
   SDLNet_ResolveHost(&program_ip, NULL, 1442);
  
   incomming = SDLNet_TCP_Open(&program_ip);
@@ -36,6 +36,7 @@ void Network::sendChat(std::string message)
       //message += "|";
       // message += name;
       SDLNet_TCP_Send(outgoing, (void*)message.c_str(), message.length());
+	  std::cout << "message: " << message << "  length: " << message.length() << "  size: " << message.size() << std::endl;
     }
   
     SDLNet_TCP_Close(outgoing);
@@ -49,7 +50,7 @@ void Network::sendCommand(std::string command)
 
 void Network::getChat()
 {
-
+	char buffer[512] = {0};
   std::string recieved = "";
   std::string name = "";
   std::string message = "";

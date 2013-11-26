@@ -20,7 +20,7 @@ class Network
   SDLNet_SocketSet in_set;
 
   //i bufferten landar datat som emot från servern
-  char buffer[512];
+  
 
   TCPsocket incomming;
   TCPsocket outgoing;

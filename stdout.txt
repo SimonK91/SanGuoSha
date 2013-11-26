@@ -1,4 +1,128 @@
 ready: 0
+ready: 0line 220
+line 220
+bufferten: 
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: join ; size: 4
+join
+127.0.0.1
+line 220
+bufferten: 
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: en glad client!! ; size: 16
+en glad client!!
+tagit emot en strang            en glad client!!
+skickar sträng
+skickar strängen: client Xen glad client!!
+line 220
+bufferten: 
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: HEEEEJSAN! ; size: 10
+HEEEEJSAN!
+tagit emot en strang            HEEEEJSAN!
+skickar sträng
+skickar strängen: client XHEEEEJSAN!
+line 220
+bufferten: 
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: 44444444444444444 ; size: 17
+44444444444444444
+tagit emot en strang            44444444444444444
+skickar sträng
+skickar strängen: client X44444444444444444
+line 220
+bufferten: 
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: 44444444444444444 ; size: 17
+44444444444444444
+tagit emot en strang            44444444444444444
+skickar sträng
+skickar strängen: client X44444444444444444
+line 220
+bufferten: 
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: HEEEEJSAN! ; size: 10
+HEEEEJSAN!
+tagit emot en strang            HEEEEJSAN!
+skickar sträng
+skickar strängen: client XHEEEEJSAN!
+line 220
+bufferten: 
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: en glad client!! ; size: 16
+en glad client!!
+tagit emot en strang            en glad client!!
+skickar sträng
+skickar strängen: client Xen glad client!!
+line 220
+bufferten: 
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: HEEEEJSAN! ; size: 10
+HEEEEJSAN!
+tagit emot en strang            HEEEEJSAN!
+skickar sträng
+skickar strängen: client XHEEEEJSAN!
+line 220
+bufferten: 
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: en glad client!! ; size: 16
+en glad client!!
+tagit emot en strang            en glad client!!
+skickar sträng
+skickar strängen: client Xen glad client!!
+line 220
+bufferten: 
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: HEEEEJSAN! ; size: 10
+HEEEEJSAN!
+tagit emot en strang            HEEEEJSAN!
+skickar sträng
+skickar strängen: client XHEEEEJSAN!
+line 220
+bufferten: 
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: 44444444444444444 ; size: 17
+44444444444444444
+tagit emot en strang            44444444444444444
+skickar sträng
+skickar strängen: client X44444444444444444
+line 220
+bufferten: 
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: en glad client!! ; size: 16
+en glad client!!
+tagit emot en sready: 1
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+message: HEEEEJSAN!  length: 10  sibufferteready: 1
 ready: 0
 ready: 0
 ready: 0
@@ -12,33 +136,12 @@ ready: 0
 ready: 0
 ready: 0
 ready: 0
+message: HEEEEJSAN!  length: 10  size: 10
+ready: 1
 ready: 0
 ready: 0
 ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
+message: 44444444444444444  length: 17  size: 17
 ready: 1
 ready: 0
 ready: 0
@@ -57,6 +160,14 @@ ready: 0
 ready: 0
 ready: 0
 ready: 0
+message: en glad client!!  length: 16  size: 16
+ready: 1
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+message: HEEEEJSAN!  length: 10  size: 10
+ready: 1
 ready: 0
 ready: 0
 ready: 0
@@ -65,6 +176,10 @@ ready: 0
 ready: 0
 ready: 0
 ready: 0
+ready: 0
+ready: 0
+ready: 0
+message: 44444444444444444  length: 17  size: 17
 ready: 1
 ready: 0
 ready: 0
@@ -80,34 +195,10 @@ ready: 0
 ready: 0
 ready: 0
 ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
-ready: 0
+message: HEEEEJSAN!  length: 10  size: 10
 ready: 1
-ready: 0
+message: en glad client!!  length: 16  size: 16
+ready: 1
 ready: 0
 ready: 0
 ready: 0
@@ -150,3 +241,89 @@ ready: 0
 ready: 0
 ready: 0
 exit OK!
+bi recv
+receivedStr: HEEEEJSAN! ; size: 10
+HEEEEJSAN!
+tagit emot en strang            HEEEEJSAN!
+skickar sträng
+skickar strängen: client XHEEEEJSAN!
+line 220
+bufferten: 
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: en glad client!! ; size: 16
+en glad client!!
+tagit emot en strang            en glad client!!
+skickar sträng
+skickar strängen: client Xen glad client!!
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
