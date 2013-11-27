@@ -13,10 +13,10 @@ class StringInput
   std::string str;
   
   //text surface
-  SDL_Surface* text;
+  // SDL_Surface* text;
 
-  TTF_Font* font;
-  SDL_Color textColor;
+  // TTF_Font* font;
+  // SDL_Color textColor;
   
 public:
 
@@ -27,7 +27,7 @@ public:
 
   void handleInput(SDL_Event& userEvent);
   
-  void showCentered(SDL_Surface* screen);
+  // void paint(SDL_Surface* screen, int x_pos, int y_pos);
   std::string getStr();
   void clear();
 };

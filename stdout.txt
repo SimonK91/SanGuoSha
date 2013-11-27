@@ -1,5 +1,9 @@
 ready: 0
+ready: 0
+ready: 0
+ready: 0
 ready: 0line 220
+line 220
 line 220
 bufferten: 
 förbi accept
@@ -7,122 +11,225 @@ receivedStr:  ; size: 0
 förbi recv
 receivedStr: join ; size: 4
 join
-127.0.0.1
+130.236.210.37
+line 220
+bufferten: 
+förbi accept
+line 220
 line 220
 bufferten: 
 förbi accept
 receivedStr:  ; size: 0
 förbi recv
-receivedStr: en glad client!! ; size: 16
-en glad client!!
-tagit emot en strang            en glad client!!
+receivedStr: hejsan hej ; size: 10
+hejsan hej
+tagit emot en strang            hejsan hej
 skickar sträng
-skickar strängen: client Xen glad client!!
+skickar strängen: client Xhejsan hej
+line 220
+bufferten: 
+förbi accept
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
 line 220
 bufferten: 
 förbi accept
 receivedStr:  ; size: 0
 förbi recv
-receivedStr: HEEEEJSAN! ; size: 10
-HEEEEJSAN!
-tagit emot en strang            HEEEEJSAN!
+receivedStr: woooooohooooooooooooooooooooooo ; size: 31
+woooooohooooooooooooooooooooooo
+tagit emot en strang            woooooohooooooooooooooooooooooo
 skickar sträng
-skickar strängen: client XHEEEEJSAN!
+skickar strängen: client Xwoooooohooooooooooooooooooooooo
+line 220
+bufferten: 
+förbi accept
+line 220
 line 220
 bufferten: 
 förbi accept
 receivedStr:  ; size: 0
 förbi recv
-receivedStr: 44444444444444444 ; size: 17
-44444444444444444
-tagit emot en strang            44444444444444444
+receivedStr: asdasd ; size: 6
+asdasd
+tagit emot en strang            asdasd
 skickar sträng
-skickar strängen: client X44444444444444444
+skickar strängen: client Xasdasd
+line 220
+bufferten: 
+förbi accept
 line 220
 bufferten: 
 förbi accept
 receivedStr:  ; size: 0
 förbi recv
-receivedStr: 44444444444444444 ; size: 17
-44444444444444444
-tagit emot en strang            44444444444444444
+receivedStr: qweqwe ; size: 6
+qweqwe
+tagit emot en strang            qweqwe
 skickar sträng
-skickar strängen: client X44444444444444444
+skickar strängen: client Xqweqwe
+line 220
+bufferten: 
+förbi accept
+line 220
 line 220
 bufferten: 
 förbi accept
 receivedStr:  ; size: 0
 förbi recv
-receivedStr: HEEEEJSAN! ; size: 10
-HEEEEJSAN!
-tagit emot en strang            HEEEEJSAN!
+receivedStr: lolqw ; size: 5
+lolqw
+tagit emot en strang            lolqw
 skickar sträng
-skickar strängen: client XHEEEEJSAN!
+skickar strängen: client Xlolqw
+line 220
+bufferten: 
+förbi accept
+line 220
 line 220
 bufferten: 
 förbi accept
 receivedStr:  ; size: 0
 förbi recv
-receivedStr: en glad client!! ; size: 16
-en glad client!!
-tagit emot en strang            en glad client!!
+receivedStr: 123123 ; size: 6
+123123
+tagit emot en strang            123123
 skickar sträng
-skickar strängen: client Xen glad client!!
+skickar strängen: client X123123
+line 220
+bufferten: 
+förbi accept
+line 220
 line 220
 bufferten: 
 förbi accept
 receivedStr:  ; size: 0
 förbi recv
-receivedStr: HEEEEJSAN! ; size: 10
-HEEEEJSAN!
-tagit emot en strang            HEEEEJSAN!
+receivedStr: asdl ; size: 4
+asdl
+tagit emot en strang            asdl
 skickar sträng
-skickar strängen: client XHEEEEJSAN!
+skickar strängen: client Xasdl
+line 220
+bufferten: 
+förbi accept
 line 220
 bufferten: 
 förbi accept
 receivedStr:  ; size: 0
 förbi recv
-receivedStr: en glad client!! ; size: 16
-en glad client!!
-tagit emot en strang            en glad client!!
+receivedStr: 123 ; size: 3
+123
+tagit emot en strang            123
 skickar sträng
-skickar strängen: client Xen glad client!!
+skickar strängen: client X123
+line 220
+bufferten: 
+förbi accept
 line 220
 bufferten: 
 förbi accept
 receivedStr:  ; size: 0
 förbi recv
-receivedStr: HEEEEJSAN! ; size: 10
-HEEEEJSAN!
-tagit emot en strang            HEEEEJSAN!
+receivedStr: 123 ; size: 3
+123
+tagit emot en strang            123
 skickar sträng
-skickar strängen: client XHEEEEJSAN!
+skickar strängen: client X123
+line 220
+bufferten: 
+förbi accept
 line 220
 bufferten: 
 förbi accept
 receivedStr:  ; size: 0
 förbi recv
-receivedStr: 44444444444444444 ; size: 17
-44444444444444444
-tagit emot en strang            44444444444444444
+receivedStr: 123 ; size: 3
+123
+tagit emot en strang            123
 skickar sträng
-skickar strängen: client X44444444444444444
+skickar strängen: client X123
+line 220
+bufferten: 
+förbi accept
 line 220
 bufferten: 
 förbi accept
 receivedStr:  ; size: 0
 förbi recv
-receivedStr: en glad client!! ; size: 16
-en glad client!!
-tagit emot en sready: 1
+receivedStr: 123 ; size: 3
+123
+tagit emot en strang            123
+skickar sträng
+skickar strängen: client X123
+line 220
+bufferten: 
+förbi accept
+line 220
+line 220
+bufferten: 
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: join ; size: 4
+join
+130.236.210.37
+line 220
+bufferten: 
+förbi accept
+line 220
+line 220
+bufferten: 
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: join ; size: 4
+join
+130.236.210.37
+line 220
+bufferten: 
+förbi accept
+line 220
+line 220
+line 220
+bufferten: 
+förbi accept
+receivedStr:  ; size: 0
+förbi recv
+receivedStr: lololllol ; size: 9
+lololllol
+tagit emot en strang            lololllol
+skickar sträng
+skickar strängen: client Xlololllol
+skickar sträng
+skickar strängen: client Xlololllol
+skickar sträng
+skickar strängen: client Xlololllol
+line 220
+bufferten: 
+förbi accept
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
+line 220
 ready: 0
 ready: 0
 ready: 0
 ready: 0
 ready: 0
 ready: 0
-message: HEEEEJSAN!  length: 10  sibufferteready: 1
 ready: 0
 ready: 0
 ready: 0
@@ -136,12 +243,179 @@ ready: 0
 ready: 0
 ready: 0
 ready: 0
-message: HEEEEJSAN!  length: 10  size: 10
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+message: woooooohooooooooooooooooooooooo  length: 31  size: 31
+message:   length: 0  size: 0
 ready: 1
 ready: 0
 ready: 0
 ready: 0
-message: 44444444444444444  length: 17  size: 17
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+message: asdasd  length: 6  size: 6
+message:   length: 0  size: 0
 ready: 1
 ready: 0
 ready: 0
@@ -160,13 +434,67 @@ ready: 0
 ready: 0
 ready: 0
 ready: 0
-message: en glad client!!  length: 16  size: 16
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+message: qweqwe  length: 6  size: 6
+message:   length: 0  size: 0
 ready: 1
 ready: 0
 ready: 0
 ready: 0
 ready: 0
-message: HEEEEJSAN!  length: 10  size: 10
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+message: lolqw  length: 5  size: 5
+message:   length: 0  size: 0
 ready: 1
 ready: 0
 ready: 0
@@ -179,7 +507,34 @@ ready: 0
 ready: 0
 ready: 0
 ready: 0
-message: 44444444444444444  length: 17  size: 17
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+message: 123123  length: 6  size: 6
+message:   length: 0  size: 0
 ready: 1
 ready: 0
 ready: 0
@@ -195,10 +550,434 @@ ready: 0
 ready: 0
 ready: 0
 ready: 0
-message: HEEEEJSAN!  length: 10  size: 10
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+message: asdl  length: 4  size: 4
+message:   length: 0  size: 0
 ready: 1
-message: en glad client!!  length: 16  size: 16
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+message: 123  length: 3  size: 3
+message:   length: 0  size: 0
 ready: 1
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+message: 123  length: 3  size: 3
+message:   length: 0  size: 0
+ready: 1
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+message: 123  length: 3  size: 3
+message:   length: 0  size: 0
+ready: 1
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+message: 123  length: 3  size: 3
+message:   length: 0  size: 0
+ready: 1
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+message: join  length: 4  size: 4
+message:   length: 0  size: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+message: join  length: 4  size: 4
+message:   length: 0  size: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+message: lololllol  length: 9  size: 9
+message:   length: 0  size: 0
+ready: 1
+ready: 1
+ready: 1
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
+ready: 0
 ready: 0
 ready: 0
 ready: 0
@@ -241,89 +1020,3 @@ ready: 0
 ready: 0
 ready: 0
 exit OK!
-bi recv
-receivedStr: HEEEEJSAN! ; size: 10
-HEEEEJSAN!
-tagit emot en strang            HEEEEJSAN!
-skickar sträng
-skickar strängen: client XHEEEEJSAN!
-line 220
-bufferten: 
-förbi accept
-receivedStr:  ; size: 0
-förbi recv
-receivedStr: en glad client!! ; size: 16
-en glad client!!
-tagit emot en strang            en glad client!!
-skickar sträng
-skickar strängen: client Xen glad client!!
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220
-line 220

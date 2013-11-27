@@ -34,7 +34,7 @@ void Menu::run()
 	  network_timer.start();
 		while( SDL_PollEvent( &event)) //sÃ¥ lÃ¤nge som det finns en event
 		{
-		  // inp->handleInput(event);
+		   
 			for(unsigned i = 0 ; i < all_objects.size() ; ++i)  //fÃ¶r varje objekt som finns i gamestatet
 			{
 				 //om objektet Ã¤r ett aktivt objekt och has_window är false(aktiva objekt kan manipulera saker)
@@ -61,16 +61,17 @@ void Menu::run()
 			   running = false;// avsluta programmet
 			if(event.type == SDL_KEYDOWN)
 			  {
-			    // inp->handleInput(event);
+			    inp->handleInput(event);
+			   
 			    if(event.key.keysym.sym == SDLK_RETURN)
 			      {
 				net->sendChat(inp->getStr());
 				inp->clear();
 			      }
-			    if(event.key.keysym.sym == SDLK_1)
+			    /* if(event.key.keysym.sym == SDLK_1)
 			      {
 				net->sendChat("join");
-			      }
+				}
 			    if(event.key.keysym.sym == SDLK_2)
 			      {
 				net->sendChat("en glad client!!");
@@ -101,6 +102,12 @@ void Menu::run()
 				tmp_str += net->getLog().at(1).second;
 				dynamic_cast<Textbox*>(all_objects.at(0)) -> setText(tmp_str);
 				}*/
+			    if(event.key.keysym.sym == SDLK_RETURN)
+			      {
+				net->sendChat(inp->getStr());
+				inp->clear();
+				//net->sendChat(inp->getStr());
+			      }
 			    if(event.key.keysym.sym == SDLK_p)
 			      {
 				net->showMeDasLog();
@@ -108,7 +115,7 @@ void Menu::run()
 			  }
 		}
 		
-		
+		dynamic_cast<Textbox*>( all_objects.at(4))->setText(inp->getStr());
 		net->getChat();
 		std::string tmp_str = "";
 		for(auto i : net->getLog())
@@ -122,7 +129,6 @@ void Menu::run()
 		dynamic_cast<Textbox*>(all_objects.at(0)) -> setText(tmp_str);
 
 		paint();
-		inp->showCentered(screen);
 		SDL_Flip(screen);  
 		SDL_Delay(15);
 	}

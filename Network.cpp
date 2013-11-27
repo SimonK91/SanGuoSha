@@ -6,7 +6,7 @@ Network::Network()
 {
   SDLNet_Init();
   
-  SDLNet_ResolveHost(&server_ip, "130.236.226.197", 1443);
+  SDLNet_ResolveHost(&server_ip, "130.236.210.37", 1443);
   SDLNet_ResolveHost(&program_ip, NULL, 1442);
  
   incomming = SDLNet_TCP_Open(&program_ip);

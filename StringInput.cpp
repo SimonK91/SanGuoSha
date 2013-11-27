@@ -4,21 +4,21 @@
 StringInput::StringInput()
 {
   
-  TTF_Init();
+  //TTF_Init();
   str = "";
-  text = NULL;
+  //text = NULL;
   
-  font = TTF_OpenFont("arial.ttf", 30);
+  /*font = TTF_OpenFont("arial.ttf", 30);
   textColor.r = 0;
   textColor.g = 0;
-  textColor.b = 0;
+  textColor.b = 0;*/
   SDL_EnableUNICODE(SDL_ENABLE);
   
 }
 
 StringInput::~StringInput()
 {
-  SDL_FreeSurface(text);
+  //SDL_FreeSurface(text);
   SDL_EnableUNICODE(SDL_DISABLE);
 }
 
@@ -28,7 +28,7 @@ void StringInput::handleInput(SDL_Event& event)
     {
       std::string tmp = str;
       
-      if(str.length() <= 16)
+      if(str.length() <= 30)
 	{
 	  //if space
 	  if(event.key.keysym.unicode == (Uint16)' ')
@@ -59,27 +59,27 @@ void StringInput::handleInput(SDL_Event& event)
 	      
 	 
       //kolla om strängen ändrats
-      if(str != tmp)
+	  /* if(str != tmp)
 	{
 	  SDL_FreeSurface(text);
 
 	  text = TTF_RenderText_Solid(font, str.c_str(), textColor);
-	}
+	  }*/
     }
 }
 
-
-void StringInput::showCentered(SDL_Surface* screen)
+/*
+void StringInput::paint(SDL_Surface* screen, int x_pos, int y_pos)
 {
   SDL_Rect tmpRect;
-  tmpRect.x = 100;
-  tmpRect.y = 280;
+  tmpRect.x = x_pos;
+  tmpRect.y = y_pos;
   if(text != NULL)
   {
       SDL_BlitSurface(text, NULL, screen, &tmpRect);
   } 
 }
-
+*/
 std::string StringInput::getStr()
 {
   return str;
@@ -87,6 +87,6 @@ std::string StringInput::getStr()
 void StringInput::clear()
 {
   str = "";
-  SDL_FreeSurface(text);
-  text = TTF_RenderText_Solid(font, str.c_str(), textColor);
+  // SDL_FreeSurface(text);
+  // text = TTF_RenderText_Solid(font, str.c_str(), textColor);
 }
