@@ -19,6 +19,7 @@ if(!fs.is_open())
 
 string tmp;
 int i = 0;
+fs >> tmp; //ta bort FullScreen:
 fs >> tmp;
 
 if(tmp == "1")
@@ -26,6 +27,7 @@ if(tmp == "1")
 else
 	fullscreen == false;
 
+fs >> tmp; //ta bort Vol:
 fs >> i;
 fs.close();
 
@@ -42,7 +44,7 @@ void Settings::writeSettings(const string& s){
 
 ofstream fs;
 fs.open(s);
-fs << fullscreen << " " << volume;
+fs << "Fullscreen: " << fullscreen << endl << "Vol: " << volume;
 fs.close();
 
 }//Settings::writeSettings
