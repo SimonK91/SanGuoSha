@@ -101,5 +101,6 @@ void Game::run_command(const std::string& what_command)
 	{
 		throw SGS_error("Command: \"play_card\" not implemented yet");
 	}
+
 	return;
 }

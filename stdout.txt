@@ -4,7 +4,5 @@ Load settings okay!
 bakgrundsbilden laddas
 en button skapas
 mainMenu startas
-Load settings okay!
-players size: 3
-Command: "play_card" not implemented yet
+Write settings okay!
 exit OK!
