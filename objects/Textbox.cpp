@@ -5,7 +5,7 @@
 namespace Object
 {
 Textbox::Textbox(const int& x, const int& y, const int& w, const int& h,
-	const SDL_Color& col, const std::string& style, const unsigned& size) : background("textbox background"),textArea("textArea")
+	const std::string& style, const unsigned& size) : background("textbox background"),textArea("textArea")
 {
 	
 	//fixar bakgrundsbilden
@@ -43,7 +43,7 @@ Textbox::Textbox(const int& x, const int& y, const int& w, const int& h,
 	font_size = size;
 	font_name = style;
 	font = TTF_OpenFont(font_name.c_str(), font_size); 
-	textColor = col;
+	textColor = {255,255,255,0};
 	font_bold = false;
 	font_style = 0;
 	font_italic = 0;

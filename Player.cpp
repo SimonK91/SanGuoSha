@@ -3,7 +3,7 @@
 
 using namespace Object;
 
-Player::Player() : role(-1),current_life(0),max_life(0), has_hero(false)
+Player::Player() : role(-1),current_life(0),max_life(0)
 {
   current_player = false;
 }
@@ -29,7 +29,6 @@ void Player::setHero(HeroCard* character)
   current_life = character->getHP();
   male = character->getMale();
   hero = character;
-  has_hero = true;
 }
 
 GameCard* Player::playCard(int index)

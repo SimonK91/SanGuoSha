@@ -17,7 +17,8 @@ void Menu::run_command(const std::string& what_command)
 		gameOptions->makeButton("Network",30,70,"play_on_network");
 		gameOptions->makeButton("Hotseat",260,70,"play_on_hotseat");
 		gameOptions->makeButton("Back",140,190,"close_window");
-		gameOptions->makeTextbox("wich playing mode do you want?" ,110,20,270,30);
+		gameOptions->makeTextbox(30,15,440,40, 20);
+		gameOptions->setText(3,"which playing mode do you want?");
 		add_window(gameOptions);
 		has_window = true;
 		// dynamic_cast<Textbox*>(all_objects.at(0))->setText("You cannot make a new game yet!");
@@ -38,7 +39,6 @@ void Menu::run_command(const std::string& what_command)
 		m.stop();
 		Game game(screen);
 		game.load_background("Images/Gui/background.png");
-<<<<<<< HEAD
 		
 		//skapa spelets layout
 		//game.make_button("exit", 350, 50, "close");
@@ -55,8 +55,6 @@ void Menu::run_command(const std::string& what_command)
 		game.add_window(chat);
 		if(!game.setup())
 			running = false;
-=======
-		game.make_button("exit", 350, 50, "close");
 		// if(!game.setup())
 			// running = false;
 			
@@ -64,8 +62,6 @@ void Menu::run_command(const std::string& what_command)
 		game.make_button("play card", 10, 50, "play_card");
 		//bara preliminärt!
 		game.run();
-		
->>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
 		if(!game.exit())
 			throw std::runtime_error("oups!! game exit failed!!");
 		
@@ -73,6 +69,7 @@ void Menu::run_command(const std::string& what_command)
 		// game.run();
 		m.play();	//fungerar inte som den ska :( 
 		fps.start();
+		// dynamic_cast<Textbox*>(all_objects.at(0))->setText("You cannot make a new game yet!");
 	}
 	if(what_command == "options")
 	{

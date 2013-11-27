@@ -75,11 +75,7 @@ SDL_Surface* loadImage(const string& filename,bool transparant, const Uint8& red
 
 void applySurface(int x, int y, Surface& source, Surface& destination, SDL_Rect* clip)
 {
-<<<<<<< HEAD
 // int counter = 0;
-=======
-int counter = 0;
->>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
 // std::cout << "apply surface: " << ++counter << std::endl;
 	if(source.getImage() == nullptr)
 	{

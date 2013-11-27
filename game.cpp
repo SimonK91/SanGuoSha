@@ -11,7 +11,7 @@ bool Game::setup()
 	std::vector<int> role{0,2,3,1,3,3,1,3,1,2};
 	int emperor = -1;
 	unsigned step = 1;
-	players.at(1)->setStatus(1);
+	//players.at(1)->setStatus(1);
 	
 	while(running)
 	{
@@ -70,7 +70,7 @@ bool Game::setup()
 			Card* hero5 = hero_deck->drawCard();
 			std::cout << "two more cards drawn" << std::endl;
 			
-			if(emperor == self)
+			if(unsigned(emperor) == self)
 			{
 				Window* characters = new Window(100,100,600,550);
 				characters->addCard(hero1,0,0);
@@ -176,10 +176,6 @@ bool Game::setup()
 		else if(step == 12)
 			return run_next;
 	
-<<<<<<< HEAD
-=======
-	//std::cout << step << " " << players.at(0)->entered() << std::endl;
->>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
 		UI();
 	}
 	
@@ -218,7 +214,8 @@ void Game::run()
 	std::cout << "players size: " << players.size() << std::endl;
 	// running = true;
 	
-	for(int i = 0; running ; ){
+	for(int i = 0; running ; )
+	{
 	//phase 1)
 	//start of turn
 	//special hero abilities trigger here
@@ -302,13 +299,6 @@ void Game::run()
 //if a valid target is selected, activate button "play card"
 //if a player is targetted by an effect, check possible plays.
 //if a tool-card is played, check every player for negate card.
-	
-	//clean up!
-	while(!players.empty())
-	{
-		delete players.back();
-		players.pop_back();
-	}
 }
 
 bool Game::end()
@@ -316,11 +306,7 @@ bool Game::end()
 //show score-table
 //keep chat open
 //make exit button
-<<<<<<< HEAD
-return false;
-=======
 	return true; //:D
->>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
 }
 
 bool Game::exit()
@@ -382,6 +368,34 @@ void Game::UI()
 	fps.regulateFPS();
 }
 
+//från menyn
+/*
+game.setup();
+game.run();
+
+run()
+{
+	//fixa alla faser o grejer!
+	
+	manageEvents
+	
+	paint();
+}
+
+paint()
+{
+	//rita ut alla objekt + kort
+	
+	//eller så får den ha faser!
+}
+
+UI()
+{
+	manageEvents;
+	paint;
+}
+
+*/
 void Game::paint()
 {
 

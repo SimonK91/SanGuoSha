@@ -37,14 +37,7 @@ protected:
 	
 public:
 	//konstruktorer, destruktorer och operatorer
-<<<<<<< HEAD
 	SGS(Surface scr) : screen(scr),m("Music/Menu.wav"), fps(30){}
-=======
-	SGS(Surface scr) : screen(scr),m("Music/Menu.wav"), fps(30)
-	{
-	  loadSettings(settings);
-	}
->>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
 	~SGS();
 	//borttagna
 	SGS() = delete;           //defaultkonstruktor
@@ -67,7 +60,7 @@ public:
 	bool add_window(Object::Window* your_window);
 	bool make_checkbox(int x, int y, const std:: string& command, bool checked = false);
 	bool make_textbox(const int& x, const int& y, const int& w, const int& h,
-					  const SDL_Color &col = {255,255,255,0}, const std::string& font = "Fonts/LHANDW.TTF", const unsigned& size = 13);
+					  const unsigned& size = 13, const std::string& font = "Fonts/LHANDW.TTF");
 					  void set_text(const int& where, const std::string& what_text);
 };
 
@@ -115,19 +108,14 @@ public:
 		discard_pile = new Object::CardList("empty");
 		hero_deck = new Object::CardList("hero_deck");
 		m.loadMusic("Music/Menu.wav");
-<<<<<<< HEAD
-		loadSettings(settings);
 		Player* p1;
 		for(unsigned i = 0 ; i < 1 ; ++i)
 		{
 			p1 = new Player();
 			p1->setStatus(1);
 			players.push_back(p1);
-			
 		}
-=======
 		state = 1;
->>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
 	}
 	void run();
 	bool setup();

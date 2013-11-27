@@ -1,29 +1,17 @@
 Initialize is okay!
 mainMenu skapas
-Load settings okay!
 bakgrundsbilden laddas
 en button skapas
 mainMenu startas
-<<<<<<< HEAD
-Load settings okay!
-<<<<<<< HEAD
-Emperor-cards drawn
-hero_deck shuffled
-two more cards drawn
-game.exit() okay!
-Load settings okay!
-Emperor-cards drawn
-hero_deck shuffled
-two more cards drawn
-game.exit() okay!
-Load settings okay!
 Emperor-cards drawn
 hero_deck shuffled
 two more cards drawn
 hero 0
 hero 1
 hero 2
-HERO 2 active
+hero 3
+hero 4
+HERO 4 active
 ger kortet
 för objekt 0:
 dynamic cast success
@@ -37,25 +25,9 @@ för objekt 4:
 normal delete
 step 8
 step 9 - shuffle
-spelare: 1
+spelare: 0
 step 10
-hero 0
-hero 1
-HERO 1 active
-ger kortet
-för objekt 0:
-dynamic cast success
-för objekt 1:
-dynamic cast success
-för objekt 2:
-normal delete
-game.exit() okay!
-Write settings okay!
-=======
+step 12
 players size: 3
 Command: "play_card" not implemented yet
->>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
-=======
-Write settings okay!
->>>>>>> 4e9840ee56a9232b87753cc920d93d8bb72ac5d7
 exit OK!

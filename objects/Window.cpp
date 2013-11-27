@@ -1,5 +1,4 @@
 #include "Window.h"
-#include <algorithm>
 
 namespace Object
 {
@@ -23,7 +22,6 @@ namespace Object
 	event2.motion.x -= box.x;
 	event2.motion.y -= box.y;
     std::string tmpCommand = "";
-<<<<<<< HEAD
     for(int i = objects.size()-1;i >= 0 ; --i)
     {
 		if(dynamic_cast<ActiveObject*>(objects.at(i)) != nullptr)
@@ -38,23 +36,6 @@ namespace Object
     
     return tmpCommand;
     
-=======
-	std::string command = "";
-	
-    for(auto i: objects)
-    {
-		if(dynamic_cast<ActiveObject*>(i) != nullptr)
-			tmpCommand = dynamic_cast<ActiveObject*>(i)->handleEvent(event2);
-		if(tmpCommand != "")
-		{
-			command = tmpCommand;
-			//destory the event!
-			event2.motion.x *= -1;
-			event2.motion.y *= -1;
-		}
-	}
-    return command;
->>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
   }
   
   
@@ -62,10 +43,12 @@ namespace Object
   {
     //dessa SDL_Rects används för att se till att backgrunden och ramen "skalas om" till rätt storlek
     SDL_Rect backgroundSize;
-	backgroundSize.x = 0;
+    backgroundSize.x = 0;
     backgroundSize.y = 0;
     backgroundSize.w = box.w;
     backgroundSize.h = box.h;
+	windowSurface = SDL_CreateRGBSurface(0, box.w, box.h, 32,
+                                   0, 0, 0, 0);
     
 	//rita ut bakgrunden på bilden
 	applySurface(0, 0, background, windowSurface);
@@ -89,10 +72,10 @@ namespace Object
     return true;
   }
   
-  bool Window::makeTextbox(const int& x, const int& y, const int& w , const int& h
-			     ,const SDL_Color &col, const std::string& font, const unsigned& size)
+  bool Window::makeTextbox(const int& x, const int& y, const int& w , const int& h,
+			               const unsigned& size, const std::string& font)
   {
-    Textbox* temp = new Textbox(x,y,w,h,col,font,size);
+    Textbox* temp = new Textbox(x,y,w,h,font,size);
     
     if (temp == nullptr)
       return false;

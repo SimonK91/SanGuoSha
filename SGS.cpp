@@ -37,10 +37,10 @@ bool SGS::make_slider(const int& x_pos, const int& y_pos, const std::string& com
 	return true;
 }
 
-bool SGS::make_textbox(const int& x, const int& y, const int& w , const int& h
-							,const SDL_Color &col, const std::string& font, const unsigned& size)
+bool SGS::make_textbox(const int& x, const int& y, const int& w , const int& h,
+					   const unsigned& size, const std::string& font)
 {
-	Textbox* temp = new Textbox(x,y,w,h,col,font,size);
+	Textbox* temp = new Textbox(x,y,w,h,font,size);
 	
 	if (temp == nullptr)
 		return false;

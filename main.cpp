@@ -38,6 +38,14 @@ int main(int argc, char* argv[])
 	{
 		cout << re.what() << endl;
 	}
+	catch(logic_error le)
+	{
+		cout << le.what() << endl;
+	}
+	catch(exception e)
+	{
+		cout << e.what() << endl;
+	}
 	catch(...)
 	{
 		cout << "an error occured" << endl;
