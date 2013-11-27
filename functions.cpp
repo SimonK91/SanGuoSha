@@ -26,7 +26,11 @@ void Surface::setImage(SDL_Surface* tmp)
 Surface& Surface::operator=(SDL_Surface* other)
 {
 	if(other)
+	{
+		if(image != nullptr)
+			SDL_FreeSurface(image);
 		image = other;
+	}
 	else
 		throw SGS_error("Could not set surface: " + name);
 		
@@ -71,7 +75,11 @@ SDL_Surface* loadImage(const string& filename,bool transparant, const Uint8& red
 
 void applySurface(int x, int y, Surface& source, Surface& destination, SDL_Rect* clip)
 {
+<<<<<<< HEAD
 // int counter = 0;
+=======
+int counter = 0;
+>>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
 // std::cout << "apply surface: " << ++counter << std::endl;
 	if(source.getImage() == nullptr)
 	{

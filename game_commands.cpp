@@ -11,9 +11,14 @@ void Game::run_command(const std::string& what_command)
 	}
 	if(what_command == "pick_hero")
 	{
+<<<<<<< HEAD
 		Window* hero_window = dynamic_cast<Window*>(all_objects.back());
 		HeroCard* hero;
 		for(unsigned i = 0 ; i < hero_window->getSize() ; ++i)
+=======
+		Window* hero_window;
+		for(unsigned i = 0 ; i < all_objects.size() ; ++i)
+>>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
 		{
 			hero = dynamic_cast<HeroCard*>(hero_window->getObject(i));
 			if(hero!=nullptr)
@@ -21,6 +26,7 @@ void Game::run_command(const std::string& what_command)
 				std::cout << "hero " << i << std::endl;
 				if(hero->isActive())
 				{
+<<<<<<< HEAD
 					std::cout << "HERO " << i << " active" << std::endl;
 					//ge dig själv hero-kortet
 					players.at(self)->setHero(hero);
@@ -49,6 +55,9 @@ void Game::run_command(const std::string& what_command)
 					//ta bort fönstret
 					all_objects.pop_back();
 					i = hero_window->getSize();
+=======
+					std::cout << "hero pickad!! wolololololoololoololololo" << std::endl;
+>>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
 				}
 			}			
 		}
@@ -122,5 +131,13 @@ void Game::run_command(const std::string& what_command)
 			fullscreen = false;
 		}
 	  }
+	if(what_command == "end_turn")
+	{
+		state = 5;	//go to discard phase in game
+	}
+	if(what_command == "play_card")
+	{
+		throw SGS_error("Command: \"play_card\" not implemented yet");
+	}
 	return;
 }

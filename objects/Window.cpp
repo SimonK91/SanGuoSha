@@ -1,4 +1,5 @@
 #include "Window.h"
+#include <algorithm>
 
 namespace Object
 {
@@ -22,6 +23,7 @@ namespace Object
 	event2.motion.x -= box.x;
 	event2.motion.y -= box.y;
     std::string tmpCommand = "";
+<<<<<<< HEAD
     for(int i = objects.size()-1;i >= 0 ; --i)
     {
 		if(dynamic_cast<ActiveObject*>(objects.at(i)) != nullptr)
@@ -36,6 +38,23 @@ namespace Object
     
     return tmpCommand;
     
+=======
+	std::string command = "";
+	
+    for(auto i: objects)
+    {
+		if(dynamic_cast<ActiveObject*>(i) != nullptr)
+			tmpCommand = dynamic_cast<ActiveObject*>(i)->handleEvent(event2);
+		if(tmpCommand != "")
+		{
+			command = tmpCommand;
+			//destory the event!
+			event2.motion.x *= -1;
+			event2.motion.y *= -1;
+		}
+	}
+    return command;
+>>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
   }
   
   
@@ -43,19 +62,22 @@ namespace Object
   {
     //dessa SDL_Rects används för att se till att backgrunden och ramen "skalas om" till rätt storlek
     SDL_Rect backgroundSize;
-    backgroundSize.x = 0;
+	backgroundSize.x = 0;
     backgroundSize.y = 0;
     backgroundSize.w = box.w;
     backgroundSize.h = box.h;
     
+	//rita ut bakgrunden på bilden
+	applySurface(0, 0, background, windowSurface);
+	
     //ritar ut alla Object som hör till detta window
     for(auto i : objects)
-      {
-	i->paint(background);
-      }
+    {
+		i->paint(windowSurface);
+    }
     
-    //ritar ut fönstrets backgrund och ram
-    applySurface(box.x, box.y, background, screen, &backgroundSize);
+    //ritar ut fönstret på skärmen
+    applySurface(box.x, box.y, windowSurface, screen, &backgroundSize);
   }
   
   bool Window::makeSlider(const int& x_pos, const int& y_pos, const std::string& command, const int& value)

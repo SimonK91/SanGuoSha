@@ -12,6 +12,8 @@ class CardList
 private:
 	Surface image;
 	std::vector<Card*> set;
+	unsigned seed;
+	
 	void loadCardDeck();
 	void loadHeroDeck();
 public:
@@ -20,9 +22,10 @@ public:
 	~CardList();
 	
 	Card* drawCard();
+	unsigned getSeed(){ return seed; }
 	void pushBottom(Card* card);
 	void pushTop(Card* card);
-	void shuffle();
+	void shuffle(unsigned s = 0);
 	bool empty();
 	
 	void paint(Surface& to_where)

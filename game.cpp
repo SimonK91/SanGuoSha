@@ -176,57 +176,139 @@ bool Game::setup()
 		else if(step == 12)
 			return run_next;
 	
+<<<<<<< HEAD
+=======
+	//std::cout << step << " " << players.at(0)->entered() << std::endl;
+>>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
 		UI();
 	}
 	
 	return run_next;
 }
 
+void Game::run()
+{
 //game
+	//clean up!
+	while(!players.empty())
+	{
+		delete players.back();
+		players.pop_back();
+	}
+	
+	GameCard* card = nullptr;
+	//simulerade spelare:
+	Player* player = new Player();
+	player -> setRole(0); //emparor
+	player -> setHero(new HeroCard("CaoCao.png", "4 blue 1 ability"));
+	players.push_back(player);
+	
+	player = new Player();
+	player -> setRole(1); 
+	player -> setHero(new HeroCard("DiaoChan.png", "3 gray 0 ability"));
+	players.push_back(player);
+	
+	player = new Player();
+	player -> setRole(2);
+	player -> setHero(new HeroCard("DaQiao.png", "3 green 0 ability"));
+	players.push_back(player);
+	
+	player = nullptr;
+	
+	std::cout << "players size: " << players.size() << std::endl;
+	// running = true;
+	
+	for(int i = 0; running ; ){
+	//phase 1)
+	//start of turn
+	//special hero abilities trigger here
+		if(state == 1)
+		{
+			players.at(i) -> setCurrentPlayer(true);
+			state = 2;
+		}
+	//phase 2
+	//judgement phase
+	//pending cards activate in stacked order
+	//negate can remove pending card
+	//else judge
+		else if(state == 2)
+		{
+			state = 3;
+		}
+	//phase 3
+	//drawing phase
+	//special hero abilities trigger here
+	//draw 2 cards
+		else if(state == 3)
+		{
+			//check if card_deck is empty
+			if(card_deck -> empty())
+			{
+				std::swap(card_deck,discard_pile);
+			}
+			//draw 2 cards
+			card = dynamic_cast<GameCard*>(card_deck -> drawCard());
+			players.at(i) -> recieveCard(card);
+			
+			card = dynamic_cast<GameCard*>(card_deck -> drawCard());
+			players.at(i) -> recieveCard(card);
+			
+			card = nullptr;
+				/*
+				<insert hero abilitys here>
+				*/
+			state = 4;
+		}
+		
+	//phase 4
+	//action phase
+	//many hero abilities available
+	//on-hand cards can be used
+	//max 1 attack unless buff active
 
-//phase 1)
-//start of turn
-//special hero abilities trigger here
+		else if(state == 4)
+		{
+			
+			//do stuff :D 
+		}
+	//phase 5
+	//discard phase
+	//lü meng ability active here
+	//on-hand cards have to be same as current life
+	//other cards are discarded
+		else if(state == 5)
+		{
+			state = 6;
+		}
 
-//phase 2
-//judgement phase
-//pending cards activate in stacked order
-//negate can remove pending card
-//else judge
+	//phase 6
+	//ending phase
+	//special hero abilities can trigger here (shapeshifter, diao chan
+		else if(state == 6)
+		{	
+			players.at(i) -> setCurrentPlayer(false);
+			i = (i + 1) % players.size();
+			state = 1;
+		}
+	//next player, start from phase 1
 
-//phase 3
-//drawing phase
-//special hero abilities trigger here
-//draw 2 cards
-
-//phase 4
-//action phase
-//many hero abilities available
-//on-hand cards can be used
-//max 1 attack unless buff active
-
-//phase 5
-//discard phase
-//lü meng ability active here
-//on-hand cards have to be same as current life
-//other cards are discarded
-
-//phase 6
-//ending phase
-//special hero abilities can trigger here (shapeshifter, diao chan
-
-//next player, start from phase 1
-
+		UI(); //call the UI for repaint
+	}//player loop
+	
 //if a player dies, check for winning conditions
 //if an equipment is added/removed, update player stats
 //if a card is active, check rule-book for targets
 //if a valid target is selected, activate button "play card"
 //if a player is targetted by an effect, check possible plays.
 //if a tool-card is played, check every player for negate card.
-
-void Game::run()
-{
 	
+	//clean up!
+	while(!players.empty())
+	{
+		delete players.back();
+		players.pop_back();
+	}
 }
 
 bool Game::end()
@@ -234,7 +316,11 @@ bool Game::end()
 //show score-table
 //keep chat open
 //make exit button
+<<<<<<< HEAD
 return false;
+=======
+	return true; //:D
+>>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
 }
 
 bool Game::exit()
@@ -243,11 +329,14 @@ bool Game::exit()
 	try
 	{
 	// writeSettings(settings);
-	while(!all_objects.empty())
-	{
-		delete all_objects.back();
-		all_objects.pop_back();
-	}
+		while(!all_objects.empty())
+		{
+			delete all_objects.back();
+			all_objects.pop_back();
+		}
+		delete card_deck;
+		delete hero_deck;
+		delete discard_pile;
 	}
 	catch(...)
 	{
@@ -262,6 +351,7 @@ void Game::UI()
 	Uint8 *keystates = SDL_GetKeyState(nullptr);
 	std::string command;
 	
+	fps.start();
 	while( SDL_PollEvent( &event)) //sÃ¥ lÃ¤nge som det finns en event
 	{
 		for(unsigned i = 0 ; i < all_objects.size() ; ++i)  //fÃ¶r varje objekt som finns i gamestatet
@@ -288,37 +378,10 @@ void Game::UI()
 		}
 	}
 	paint();
-	SDL_Delay(15);
+	// SDL_Delay(15);
+	fps.regulateFPS();
 }
 
-//från menyn
-/*
-game.setup();
-game.run();
-
-run()
-{
-	//fixa alla faser o grejer!
-	
-	manageEvents
-	
-	paint();
-}
-
-paint()
-{
-	//rita ut alla objekt + kort
-	
-	//eller så får den ha faser!
-}
-
-UI()
-{
-	manageEvents;
-	paint;
-}
-
-*/
 void Game::paint()
 {
 
@@ -326,6 +389,11 @@ void Game::paint()
 	for(unsigned i = 0; i < all_objects.size() ; ++i)
 	{
 		all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
+	}
+	for(unsigned i = 0; i < players.size(); ++i)
+	{
+		if(players.at(i) -> isCurrentPlayer())
+				players.at(i) -> paint(screen,10,400);		
 	}
 	SDL_Flip(screen.getImage());                   // Skriv ut bilden pÃ¥ skÃ¤rmen
 }

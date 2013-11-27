@@ -15,6 +15,7 @@ struct Equipment
 
 class Player
 {
+<<<<<<< HEAD
 private:
     
 	int role;
@@ -30,6 +31,22 @@ private:
 	bool has_hero;
 
 public:
+=======
+ private:
+  int role;
+  int current_life;
+  int max_life;
+  bool male;
+  bool current_player;
+  Equipment eq;
+  int game_status;
+  int player_nr;
+  std::vector<Object::GameCard*> hand;
+  Object::HeroCard* hero;
+  std::stack<Object::GameCard> judgement_cards;
+
+ public:
+>>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
   Player();
   ~Player();
 
@@ -42,6 +59,8 @@ public:
   void doEffect(std::string);
 
   void setStatus(unsigned);
+  void setCurrentPlayer(bool cp){ current_player = cp; }
+  bool isCurrentPlayer(){ return current_player; }
   bool entered();
   bool loading();
   bool left();

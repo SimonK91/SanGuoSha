@@ -5,6 +5,7 @@ bakgrundsbilden laddas
 en button skapas
 mainMenu startas
 Load settings okay!
+<<<<<<< HEAD
 Emperor-cards drawn
 hero_deck shuffled
 two more cards drawn
@@ -49,4 +50,8 @@ för objekt 2:
 normal delete
 game.exit() okay!
 Write settings okay!
+=======
+players size: 3
+Command: "play_card" not implemented yet
+>>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
 exit OK!

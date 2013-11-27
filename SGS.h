@@ -37,7 +37,14 @@ protected:
 	
 public:
 	//konstruktorer, destruktorer och operatorer
+<<<<<<< HEAD
 	SGS(Surface scr) : screen(scr),m("Music/Menu.wav"), fps(30){}
+=======
+	SGS(Surface scr) : screen(scr),m("Music/Menu.wav"), fps(30)
+	{
+	  loadSettings(settings);
+	}
+>>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
 	~SGS();
 	//borttagna
 	SGS() = delete;           //defaultkonstruktor
@@ -77,7 +84,6 @@ public:
 	~Menu() = default;
 	Menu(Surface scr) : SGS(scr){
 	  m.loadMusic("Music/Menu.wav");
-	  loadSettings(settings);
 	}
 };
 
@@ -89,6 +95,7 @@ private:
 	Object::CardList* discard_pile;
 	Object::CardList* hero_deck;
 	std::vector<Player*> players;
+	unsigned state;
 	//Timer timer;
 	//map<std::string,SDL_Surface*> card_images;
 	bool run_next;
@@ -108,6 +115,7 @@ public:
 		discard_pile = new Object::CardList("empty");
 		hero_deck = new Object::CardList("hero_deck");
 		m.loadMusic("Music/Menu.wav");
+<<<<<<< HEAD
 		loadSettings(settings);
 		Player* p1;
 		for(unsigned i = 0 ; i < 1 ; ++i)
@@ -117,6 +125,9 @@ public:
 			players.push_back(p1);
 			
 		}
+=======
+		state = 1;
+>>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
 	}
 	void run();
 	bool setup();

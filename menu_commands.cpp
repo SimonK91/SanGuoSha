@@ -17,6 +17,7 @@ void Menu::run_command(const std::string& what_command)
 		m.stop();
 		Game game(screen);
 		game.load_background("Images/Gui/background.png");
+<<<<<<< HEAD
 		
 		//skapa spelets layout
 		//game.make_button("exit", 350, 50, "close");
@@ -33,6 +34,17 @@ void Menu::run_command(const std::string& what_command)
 		game.add_window(chat);
 		if(!game.setup())
 			running = false;
+=======
+		game.make_button("exit", 350, 50, "close");
+		// if(!game.setup())
+			// running = false;
+			
+		game.make_button("end turn", 10, 10, "end_turn");
+		game.make_button("play card", 10, 50, "play_card");
+		//bara preliminärt!
+		game.run();
+		
+>>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
 		if(!game.exit())
 			throw std::runtime_error("oups!! game exit failed!!");
 		

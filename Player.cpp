@@ -5,7 +5,7 @@ using namespace Object;
 
 Player::Player() : role(-1),current_life(0),max_life(0), has_hero(false)
 {
-  
+  current_player = false;
 }
 
 Player::~Player()
