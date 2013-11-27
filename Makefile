@@ -2,7 +2,7 @@ CCC        =g++
 CFLAGS   +=-L/sw/gcc-${GCC4_V}/lib -static-libstdc++ -std=c++11 -pedantic -Wall -Wextra
 INCLUDE  = -I./objects
 SDLFLAGS +=-lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer -lSDL_net
-OBJECTS = main.cpp Menu.o Button.o Slider.o Textbox.o Checkbox.o Functions.o Window.o music.o SGS.o Network.o Timer.o StringInput.o
+OBJECTS = main.cpp Menu.o Button.o Slider.o Textbox.o Checkbox.o Functions.o Window.o music.o SGS.o Network.o Timer.o StringInput.o SgsServer.o
 all: $(OBJECTS)
 		@ echo
 		@ echo execute skapas
@@ -71,7 +71,10 @@ Timer.o: Timer.h Timer.cpp
 StringInput.o: StringInput.h StringInput.cpp
 			@ echo Input.o skapas
 			@$(CCC) $(INCLUDE) $(CFLAGS) -c StringInput.cpp $(SDLFLAGS)
-																						
+
+SgsServer.o: sgsServer.h sgsServer.cpp
+			@ echo sgsServer.o skapas
+			@$(CCC) $(INCLUDE) $(CFLAGS) -c sgsServer.cpp $(SDLFLAGS)
 			
 clean:
 		@ rm -rf *.o

@@ -22,6 +22,8 @@ void Menu::run_command(const std::string& what_command)
 		options->makeButton("Back",270,390,"close_window");
 		options->makeTextbox(("Music volume: " + I2S(m.getVolume())),300,20,150,30);
 		options->makeSlider(250,60,"set_volume",m.getVolume());
+		options->makeTextbox("Player 1", 50, 300,200,30);
+		
 		add_window(options);
 		has_window = true;
 	}

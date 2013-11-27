@@ -28,7 +28,7 @@ void StringInput::handleInput(SDL_Event& event)
     {
       std::string tmp = str;
       
-      if(str.length() <= 30)
+      if(str.length() <= 100)
 	{
 	  //if space
 	  if(event.key.keysym.unicode == (Uint16)' ')

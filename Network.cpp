@@ -6,7 +6,7 @@ Network::Network()
 {
   SDLNet_Init();
   
-  SDLNet_ResolveHost(&server_ip, "130.236.210.37", 1443);
+  SDLNet_ResolveHost(&server_ip, "130.236.210.127", 1443);
   SDLNet_ResolveHost(&program_ip, NULL, 1442);
  
   incomming = SDLNet_TCP_Open(&program_ip);
@@ -36,7 +36,7 @@ void Network::sendChat(std::string message)
       //message += "|";
       // message += name;
       SDLNet_TCP_Send(outgoing, (void*)message.c_str(), message.length());
-	  std::cout << "message: " << message << "  length: " << message.length() << "  size: " << message.size() << std::endl;
+      //std::cout << "message: " << message << "  length: " << message.length() << "  size: " << message.size() << std::endl;
     }
   
     SDLNet_TCP_Close(outgoing);
@@ -50,14 +50,14 @@ void Network::sendCommand(std::string command)
 
 void Network::getChat()
 {
-	char buffer[512] = {0};
+  char buffer[512] = {0};
   std::string recieved = "";
   std::string name = "";
   std::string message = "";
   int ready = -1;
   ready = SDLNet_CheckSockets(in_set, 10);
  
-      std::cout << "ready: " << ready << std::endl;
+  // std::cout << "ready: " << ready << std::endl;
       if(SDLNet_SocketReady(incomming))
 	{
 	  program_socket = SDLNet_TCP_Accept(incomming);
@@ -72,7 +72,6 @@ void Network::getChat()
 		  message = recieved.substr(8,recieved.size());
 		  chat_log.push_back(std::make_pair(name,message));
 		}  
-	      
 	    }
 	  else
 	    {

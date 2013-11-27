@@ -2,8 +2,16 @@
 #include <iostream>
 #include <string>
 #include "SGS.h"
+#include "sgsServer.h"
 
 using namespace std;
+
+int network_thread(void* data);
+//global test variabel ska fixas
+bool quit_network = false;
+SDL_Thread* thread = NULL;
+SgsServer network;
+
 
 int main(int argc, char* argv[])
 {
@@ -11,6 +19,9 @@ int main(int argc, char* argv[])
 	const int SCREEN_WIDTH  = 800;
 	const int SCREEN_HEIGHT = 600;
 	const int SCREEN_BPP    = 32;
+	
+	//nätverkstråden
+
 	
 	// Initialize	
 	SDL_Surface* screen = nullptr;
@@ -29,6 +40,9 @@ int main(int argc, char* argv[])
 	//mainMenu.make_checkbox(50, 50, "", false);
 	mainMenu.make_textbox("", 50, 530,450, 50);
 	
+	//skapar tråden för nätverk
+	thread = SDL_CreateThread(network_thread, NULL);
+	
 	try
 	{
 		mainMenu.run(); //startar programmet
@@ -39,6 +53,8 @@ int main(int argc, char* argv[])
 	}
 	
 	//avslut, ta bort alla surfaces som skapas (enbart screen just nu) och avsluta TTF, SDL och musiken
+	quit_network = true;
+	SDL_KillThread(thread);
 	cleanUp({screen});
 	Mix_CloseAudio();
 	TTF_Quit();
@@ -46,4 +62,17 @@ int main(int argc, char* argv[])
 	
 	cout << "exit OK!" << endl;
 	return 0;
+}
+
+int network_thread(void* data)
+{
+  
+  
+  while(quit_network == false)
+    {
+      network.run();
+    }
+
+
+  return 0;
 }

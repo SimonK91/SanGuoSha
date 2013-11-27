@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
   SDL_Init(SDL_INIT_EVERYTHING);
   SDLNet_Init();
   TTF_Init();
-
+  
   // std::string chosenIP = "130.236.211.138";
   std::string chosenIP = "130.236.226.197";
   

@@ -7,7 +7,7 @@
 #include "Textbox.h"
 #include "Objects.h"
 #include <vector>
-
+#include "../StringInput.h"
 
 namespace Object
 {
@@ -17,6 +17,7 @@ namespace Object
     SDL_Surface* background = nullptr;
     SDL_Rect box;
     std::vector<Object*> objects;
+    StringInput inp;
     
   public:
     //notera att  fönstret bör vara minst 10x10 pixlar stort

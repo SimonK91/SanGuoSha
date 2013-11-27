@@ -31,8 +31,16 @@ namespace Object
 	  }
 	if(tmpCommand != "")
 	  break;
-      }
-    
+      }/*
+    if(event.type == SDL_KEYDOWN)
+      {
+	inp.handleInput(event2);
+
+	if(event.key.keysym.sym == SDLK_RETURN)
+	  {
+	    //sätt settings name
+	  }
+	  }*/
     return tmpCommand;
     
   }
