@@ -5,7 +5,7 @@ using namespace Object;
 
 Player::Player()
 {
-  
+  current_player = false;
 }
 
 Player::~Player()

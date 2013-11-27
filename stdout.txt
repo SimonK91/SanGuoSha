@@ -1,0 +1,1279 @@
+Initialize is okay!
+mainMenu skapas
+Load settings okay!
+bakgrundsbilden laddas
+en button skapas
+mainMenu startas
+kollar events
+för varje objekt
+om programmet ska stängas
+för varje objekt
+om programmet ska stängas
+för varje objekt
+om programmet ska stängas
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+Load settings okay!
+players size: 3
+game.exit() okay!
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+första while-satsen avslutas
+utskrift startar
+ska dra kort..
+kort dragna
+paint: bakgrunden skrivs ut
+paint: klar
+kollar events
+för varje objekt
+om programmet ska stängas
+första while-satsen avslutas
+utskrift startar
+Write settings okay!
+exit OK!

@@ -12,7 +12,7 @@ void Game::run_command(const std::string& what_command)
 	if(what_command == "pick_hero")
 	{
 		Window* hero_window;
-		for(int i = 0 ; i < all_objects.size() ; ++i)
+		for(unsigned i = 0 ; i < all_objects.size() ; ++i)
 		{
 			hero_window = dynamic_cast<Window*>(all_objects.at(i));
 			if(hero_window != nullptr)
@@ -93,5 +93,13 @@ void Game::run_command(const std::string& what_command)
 			fullscreen = false;
 		}
 	  }
+	if(what_command == "end_turn")
+	{
+		state = 5;	//go to discard phase in game
+	}
+	if(what_command == "play_card")
+	{
+		throw SGS_error("Command: \"play_card\" not implemented yet");
+	}
 	return;
 }

@@ -18,8 +18,14 @@ void Menu::run_command(const std::string& what_command)
 		Game game(screen);
 		game.load_background("Images/Gui/background.png");
 		game.make_button("exit", 350, 50, "close");
-		if(!game.setup())
-			running = false;
+		game.make_button("end turn", 10, 10, "end_turn");
+		game.make_button("play card", 10, 50, "play_card");
+		// if(!game.setup())
+			// running = false;
+			
+		//bara preliminärt!
+		game.run();
+		
 		if(!game.exit())
 			throw std::runtime_error("oups!! game exit failed!!");
 		

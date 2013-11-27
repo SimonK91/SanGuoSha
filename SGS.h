@@ -39,7 +39,6 @@ public:
 	//konstruktorer, destruktorer och operatorer
 	SGS(Surface scr) : screen(scr),m("Music/Menu.wav"), fps(30)
 	{
-	  //m.loadMusic("Music/Menu.wav");
 	  loadSettings(settings);
 	}
 	~SGS();
@@ -80,7 +79,6 @@ public:
 	~Menu() = default;
 	Menu(Surface scr) : SGS(scr){
 	  m.loadMusic("Music/Menu.wav");
-	  loadSettings(settings);
 	}
 };
 
@@ -91,6 +89,7 @@ private:
 	Object::CardList* discard_pile;
 	Object::CardList* hero_deck;
 	std::vector<Player*> players;
+	unsigned state;
 	//Timer timer;
 	//map<std::string,SDL_Surface*> card_images;
 	bool run_next;
@@ -109,10 +108,11 @@ public:
 		discard_pile = new Object::CardList("empty");
 		hero_deck = new Object::CardList("hero_deck");
 		m.loadMusic("Music/Menu.wav");
-		loadSettings(settings);
-		Player* p1 = new Player();
-		p1->setStatus(1);
-		players.push_back(p1);
+		
+		// Player* p1 = new Player();
+		// p1->setStatus(1);
+		// players.push_back(p1);
+		state = 1;
 	}
 	void run();
 	bool setup();
