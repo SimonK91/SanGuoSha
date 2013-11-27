@@ -4,12 +4,12 @@ void Game::run_command(const std::string& what_command)
 		return;
 		
 	
-	if(what_command == "close")
+	else if(what_command == "close")
 	{
 		running = false;
 		return;
 	}
-	if(what_command == "pick_hero")
+	else if(what_command == "pick_hero")
 	{
 		Window* hero_window = dynamic_cast<Window*>(all_objects.back());
 		HeroCard* hero;
@@ -53,7 +53,7 @@ void Game::run_command(const std::string& what_command)
 			}			
 		}
 	}
-	if(what_command == "options")
+	else if(what_command == "options")
 	{
 		Window* options = new Window(160,50,500,450);
 		options->makeButton("Fullscreen",30,20,"toggle_fullscreen");
@@ -63,13 +63,13 @@ void Game::run_command(const std::string& what_command)
 		add_window(options);
 		has_window = true;
 	}
-	if(what_command == "close_window")
+	else if(what_command == "close_window")
 	{
 		delete all_objects.back();
 		all_objects.pop_back();
 		has_window = false;
 	}
-	if(what_command.substr(0,10) == "set_volume")
+	else if(what_command.substr(0,10) == "set_volume")
 	{
 		//hitta grejer3
 		int volume = S2I(what_command.substr(11,what_command.size()-11));
@@ -77,7 +77,7 @@ void Game::run_command(const std::string& what_command)
 		//settings.at(1).second = I2S(volume);
 		dynamic_cast<Window*>(all_objects.back())->setText(2,"Music volume: " +  I2S(m.getVolume()));
 	}
-	if(what_command == "toggle_fullscreen")
+	else if(what_command == "toggle_fullscreen")
 	{
 		if(!fullscreen)
 		{
@@ -94,7 +94,7 @@ void Game::run_command(const std::string& what_command)
 	}
 
 
-	if(what_command == "set_settings")
+	else if(what_command == "set_settings")
 	  {
 	    
 	    //toggle sounds not yet implementet
@@ -122,14 +122,50 @@ void Game::run_command(const std::string& what_command)
 			fullscreen = false;
 		}
 	  }
-	if(what_command == "end_turn")
+	else if(what_command == "end_turn")
 	{
 		state = 5;	//go to discard phase in game
 	}
-	if(what_command == "play_card")
+	else if(what_command == "play_card")
 	{
-		throw SGS_error("Command: \"play_card\" not implemented yet");
+		std::vector<GameCard*> hand;
+		for(Player* p : players)
+		{
+			if(p -> isCurrentPlayer())
+			{
+				hand = p -> getHand();
+				for(unsigned i = 0; i < hand.size() ; ++i)
+				{
+					if(hand.at(i) -> isActive())
+					{
+						GameCard* card = p -> playCard(i);
+						run_command(card -> getAbility());
+						discard_pile -> pushBottom(card);
+					}
+				}
+			}
+		}
 	}
-
+	else if(what_command == "draw2")
+	{
+		for(Player* p: players)
+		{
+			if(p -> isCurrentPlayer())
+			{	
+				GameCard* card = dynamic_cast<GameCard*>(card_deck -> drawCard());
+				p -> recieveCard(card);
+			
+				card = dynamic_cast<GameCard*>(card_deck -> drawCard());
+				p -> recieveCard(card);
+			}
+		}
+	}
+	else
+	{
+		// throw SGS_error("Command: \"" + what_command + "\" is not found in command list");
+		std::cout << "Command: \"" + what_command + "\" is not found in command list" << std::endl;
+	}
 	return;
 }
+
+//include "SGS_commands.h"

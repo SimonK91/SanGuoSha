@@ -17,6 +17,7 @@ bool Game::setup()
 	{
 		//step 1)
 		//wait for everyone to enter
+		// std::cout << "step: " << step << std::endl;
 		if(step == 1)
 		{
 			step = 2;
@@ -91,7 +92,6 @@ bool Game::setup()
 		if(players.at(emperor)->hasHero())
 		{
 			step = 8;
-			std::cout << "step 8" << std::endl;
 		}
 	}
 
@@ -108,8 +108,6 @@ bool Game::setup()
 			SDL_Delay(2);
 		}
 		step = 9;
-			std::cout << "step 9 - shuffle" << std::endl;
-		
 	}
 
 //step 9)
@@ -140,8 +138,6 @@ bool Game::setup()
 			}
 		// }
 		step = 10;
-		std::cout << "step 10" << std::endl;
-	
 	}
 
 //step 10)
@@ -160,7 +156,7 @@ bool Game::setup()
 		else if(step == 11)
 		{
 			card_deck->shuffle();
-			for(auto& p : players)
+			for(auto p : players)
 			{
 				p->recieveCard(dynamic_cast<GameCard*>(card_deck->drawCard()));
 				p->recieveCard(dynamic_cast<GameCard*>(card_deck->drawCard()));
@@ -168,7 +164,6 @@ bool Game::setup()
 				p->recieveCard(dynamic_cast<GameCard*>(card_deck->drawCard()));
 			}
 			step = 12;
-			std::cout << "step 12" << std::endl;
 		}
 
 //step 11)
@@ -176,6 +171,7 @@ bool Game::setup()
 		else if(step == 12)
 			return run_next;
 	
+		// std::cout << "painting" << std::endl;
 		UI();
 	}
 	
@@ -191,6 +187,8 @@ void Game::run()
 		delete players.back();
 		players.pop_back();
 	}
+	//blanda leken :D
+	card_deck -> shuffle();
 	
 	GameCard* card = nullptr;
 	//simulerade spelare:
@@ -219,6 +217,7 @@ void Game::run()
 	//phase 1)
 	//start of turn
 	//special hero abilities trigger here
+		// std::cout << "the state: " << state << std::endl;
 		if(state == 1)
 		{
 			players.at(i) -> setCurrentPlayer(true);
@@ -251,7 +250,6 @@ void Game::run()
 			card = dynamic_cast<GameCard*>(card_deck -> drawCard());
 			players.at(i) -> recieveCard(card);
 			
-			card = nullptr;
 				/*
 				<insert hero abilitys here>
 				*/
@@ -268,6 +266,8 @@ void Game::run()
 		{
 			
 			//do stuff :D 
+			
+			//preferebly whit the buttons :D
 		}
 	//phase 5
 	//discard phase
@@ -356,6 +356,16 @@ void Game::UI()
 				run_command(command);
 			}
 		}
+		
+		//fixa med players o deras event!
+		for(unsigned i = 0; i < players.size(); ++i)
+		{
+			if(players.at(i) -> isCurrentPlayer())
+			{
+				players.at(i) -> handleEvent(event);
+			}
+		}
+		
 		   // om krysset uppe till hÃ¶ger eller alt + F4 blev intryckt
 		if( event.type == SDL_QUIT || (keystates[SDLK_LALT] && event.key.keysym.sym == SDLK_F4))
 		{
@@ -363,8 +373,9 @@ void Game::UI()
 			run_next = false;
 		}
 	}
+
+	//måla lite fint
 	paint();
-	// SDL_Delay(15);
 	fps.regulateFPS();
 }
 
@@ -405,9 +416,8 @@ void Game::paint()
 		all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
 	}
 	for(unsigned i = 0; i < players.size(); ++i)
-	{
-		if(players.at(i) -> isCurrentPlayer())
-				players.at(i) -> paint(screen,10,400);		
+	{	
+		players.at(i) -> paint(screen);
 	}
 	SDL_Flip(screen.getImage());                   // Skriv ut bilden pÃ¥ skÃ¤rmen
 }

@@ -3,7 +3,7 @@
 
 using namespace Object;
 
-Player::Player() : role(-1),current_life(0),max_life(0)
+Player::Player() : role(-1),current_life(0),max_life(0), hero(nullptr)
 {
   current_player = false;
 }
@@ -100,19 +100,18 @@ void Player::setPlayerNr(int nr)
   player_nr = nr;
 }
 
-void Player::paint(Surface screen, bool current_player)
+void Player::paint(Surface screen)
 {
   //rita ut handen längst ner på skärmen
   if(current_player == true)
     {
-      for(auto i : hand)
-	{
-	  i->paint(screen);
-	}
+		for(auto i : hand)
+		{
+			i->paint(screen);
+		}
+		hero ->paint(screen);
     }
   
-  //hero->paint(screen);
-
   //rita ut equipment
 }
 
@@ -134,6 +133,25 @@ void Player::fixCardPosition()
   for(auto i : hand)
     {
       i->setPosition(x_pos, y_pos);
+	  x_pos += 150;
     }
-  hero->setPosition(550, 475);
+  hero->setPosition(805, 555);
 }
+
+std::string Player::handleEvent(const SDL_Event& event)
+{
+	std::string command;
+	std::string tmpCommand;
+	for(unsigned i = 0; i < hand.size(); ++i)
+	{
+		tmpCommand = hand.at(i) -> handleEvent(event);
+		if(tmpCommand != "")
+			command = tmpCommand;
+	}
+	return command;
+}
+
+
+
+
+

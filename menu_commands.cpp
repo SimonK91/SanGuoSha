@@ -55,8 +55,6 @@ void Menu::run_command(const std::string& what_command)
 		game.add_window(chat);
 		if(!game.setup())
 			running = false;
-		// if(!game.setup())
-			// running = false;
 			
 		game.make_button("end turn", 10, 10, "end_turn");
 		game.make_button("play card", 10, 50, "play_card");

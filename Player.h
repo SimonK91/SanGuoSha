@@ -48,12 +48,12 @@ class Player
   bool loading();
   bool left();
 
+  std::string handleEvent(const SDL_Event& event);
   void setPlayerNr(int);
-  
-  void paint(Surface, bool);
+  void paint(Surface);
   void paint(Surface, int, int);
   
-  void getHand();
+  const std::vector<Object::GameCard*>& getHand(){ return hand; } //only read not whrite
   
   void setRole(int r){role = r;}
   int getRole(){return role;}

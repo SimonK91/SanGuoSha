@@ -3,31 +3,15 @@ mainMenu skapas
 bakgrundsbilden laddas
 en button skapas
 mainMenu startas
-Emperor-cards drawn
-hero_deck shuffled
-two more cards drawn
-hero 0
-hero 1
-hero 2
-hero 3
-hero 4
-HERO 4 active
-ger kortet
-för objekt 0:
-dynamic cast success
-för objekt 1:
-dynamic cast success
-för objekt 2:
-dynamic cast success
-för objekt 3:
-dynamic cast success
-för objekt 4:
-normal delete
-step 8
-step 9 - shuffle
-spelare: 0
-step 10
-step 12
 players size: 3
-Command: "play_card" not implemented yet
+Command: "heal" is not found in command list
+Command: "steal" is not found in command list
+Command: "off_horse" is not found in command list
+Command: "heal" is not found in command list
+Command: "peach_garden" is not found in command list
+Command: "negate" is not found in command list
+Command: "acedia" is not found in command list
+Command: "steal" is not found in command list
+game.exit() okay!
+Write settings okay!
 exit OK!
