@@ -26,7 +26,11 @@ void Surface::setImage(SDL_Surface* tmp)
 Surface& Surface::operator=(SDL_Surface* other)
 {
 	if(other)
+	{
+		if(image != nullptr)
+			SDL_FreeSurface(image);
 		image = other;
+	}
 	else
 		throw SGS_error("Could not set surface: " + name);
 		

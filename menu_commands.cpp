@@ -18,11 +18,11 @@ void Menu::run_command(const std::string& what_command)
 		Game game(screen);
 		game.load_background("Images/Gui/background.png");
 		game.make_button("exit", 350, 50, "close");
-		game.make_button("end turn", 10, 10, "end_turn");
-		game.make_button("play card", 10, 50, "play_card");
 		// if(!game.setup())
 			// running = false;
 			
+		game.make_button("end turn", 10, 10, "end_turn");
+		game.make_button("play card", 10, 50, "play_card");
 		//bara preliminärt!
 		game.run();
 		

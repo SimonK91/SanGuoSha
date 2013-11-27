@@ -108,10 +108,6 @@ public:
 		discard_pile = new Object::CardList("empty");
 		hero_deck = new Object::CardList("hero_deck");
 		m.loadMusic("Music/Menu.wav");
-		
-		// Player* p1 = new Player();
-		// p1->setStatus(1);
-		// players.push_back(p1);
 		state = 1;
 	}
 	void run();

@@ -3,7 +3,14 @@
 using namespace Object;
 
 //Destruktor
-SGS::~SGS(){} //destruering sker i slutet av run!
+SGS::~SGS()
+{
+	while(!all_objects.empty())
+	{
+		delete all_objects.back();
+		all_objects.pop_back();
+	}	
+} //destruering sker i slutet av run!
 
 
 //Mainfunktionen i GameState

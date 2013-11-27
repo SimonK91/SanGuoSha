@@ -182,6 +182,8 @@ void Game::run()
 			
 			card = dynamic_cast<GameCard*>(card_deck -> drawCard());
 			players.at(i) -> recieveCard(card);
+			
+			card = nullptr;
 				/*
 				<insert hero abilitys here>
 				*/
@@ -252,11 +254,14 @@ bool Game::exit()
 	try
 	{
 	// writeSettings(settings);
-	while(!all_objects.empty())
-	{
-		delete all_objects.back();
-		all_objects.pop_back();
-	}
+		while(!all_objects.empty())
+		{
+			delete all_objects.back();
+			all_objects.pop_back();
+		}
+		delete card_deck;
+		delete hero_deck;
+		delete discard_pile;
 	}
 	catch(...)
 	{
