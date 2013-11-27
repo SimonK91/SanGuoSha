@@ -4,6 +4,7 @@ Load settings okay!
 bakgrundsbilden laddas
 en button skapas
 mainMenu startas
+<<<<<<< HEAD
 Load settings okay!
 <<<<<<< HEAD
 Emperor-cards drawn
@@ -54,4 +55,7 @@ Write settings okay!
 players size: 3
 Command: "play_card" not implemented yet
 >>>>>>> b6c42506200800403f570648d135ab4c318fe7f6
+=======
+Write settings okay!
+>>>>>>> 4e9840ee56a9232b87753cc920d93d8bb72ac5d7
 exit OK!

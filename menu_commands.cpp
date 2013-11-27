@@ -13,7 +13,28 @@ void Menu::run_command(const std::string& what_command)
 	}
 	if(what_command == "make_new_game")
 	{
-		// m.pause();
+		Window* gameOptions = new Window(160,50,500,250);
+		gameOptions->makeButton("Network",30,70,"play_on_network");
+		gameOptions->makeButton("Hotseat",260,70,"play_on_hotseat");
+		gameOptions->makeButton("Back",140,190,"close_window");
+		gameOptions->makeTextbox("wich playing mode do you want?" ,110,20,270,30);
+		add_window(gameOptions);
+		has_window = true;
+		// dynamic_cast<Textbox*>(all_objects.at(0))->setText("You cannot make a new game yet!");
+	}
+	
+	if(what_command == "play_on_network")
+	{
+		throw SGS_error("Command: "+ what_command +" not implemented yet");
+	}
+	
+	if(what_command == "play_on_hotseat")
+	{
+		//remove chois window
+		delete all_objects.back();
+		all_objects.pop_back();
+		has_window = false;
+
 		m.stop();
 		Game game(screen);
 		game.load_background("Images/Gui/background.png");
@@ -52,7 +73,6 @@ void Menu::run_command(const std::string& what_command)
 		// game.run();
 		m.play();	//fungerar inte som den ska :( 
 		fps.start();
-		// dynamic_cast<Textbox*>(all_objects.at(0))->setText("You cannot make a new game yet!");
 	}
 	if(what_command == "options")
 	{
