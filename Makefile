@@ -2,7 +2,7 @@ CCC        =g++
 CFLAGS   +=-L/sw/gcc-${GCC4_V}/lib -static-libstdc++ -std=c++11 -pedantic -Wall -Wextra
 INCLUDE  = -I./objects
 SDLFLAGS +=-lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer
-OBJECTS = main.cpp gameCard.o heroCard.o card.o Menu.o Button.o Slider.o Textbox.o Checkbox.o Functions.o Window.o music.o SGS.o cardList.o
+OBJECTS = main.cpp gameCard.o heroCard.o card.o Menu.o Button.o ClickBox.o Slider.o Textbox.o Checkbox.o Functions.o Window.o music.o SGS.o cardList.o
 all: $(OBJECTS)
 		@ echo
 		@ echo execute skapas
@@ -38,6 +38,10 @@ Button.o: ./objects/Button.h ./objects/Button.cpp
 		@ echo Button.o skapas
 		@$(CCC) $(CFLAGS) -c ./objects/Button.cpp $(SDLFLAGS)
 		
+ClickBox.o: ./objects/ClickBox.h ./objects/ClickBox.cpp
+		@ echo ClickBox.o skapas
+		@$(CCC) $(CFLAGS) -c ./objects/ClickBox.cpp $(SDLFLAGS)
+		
 Checkbox.o: ./objects/Checkbox.h ./objects/Checkbox.cpp
 		@ echo Checkbox.o skapas
 		@$(CCC) $(CFLAGS) -c ./objects/Checkbox.cpp $(SDLFLAGS)
@@ -56,7 +60,7 @@ Textbox.o: ./objects/Textbox.h ./objects/Textbox.cpp
 			
 gameCard.o: ./objects/gameCard.h ./objects/gameCard.cpp
 		@ echo gameCard.o skapas
-		@$(CCC) $(CFLAGS) -c ./objects/gameCard.cpp $(SDLFLAGS)
+		@$(CCC) $(INCLUDE) $(CFLAGS) -c ./objects/gameCard.cpp $(SDLFLAGS)
 		
 heroCard.o: ./objects/heroCard.h ./objects/heroCard.cpp
 		@ echo heroCard.o skapas
