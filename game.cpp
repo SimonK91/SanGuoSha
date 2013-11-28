@@ -17,24 +17,32 @@ bool Game::setup()
 	{
 		//step 1)
 		//wait for everyone to enter
-		// std::cout << "step: " << step << std::endl;
+		// std::cerr << "step: " << step << std::endl;
 		if(step == 1)
 		{
+		
+		// std::cerr << "step: " << step << std::endl;
 			step = 2;
 		
 			for(unsigned i = 0; i < players.size() ; ++i)
 			{
+				// std::cerr << "in loop" << std::endl;
 				if(!players.at(i)->entered())
 				{
+					// std::cerr << "in if" << std::endl;
 					step = 1;
 				}
+				// std::cerr << "after if" << std::endl;
 			}
+			// std::cerr << "post loop" << std::endl;
 		}
 		
 	// //step 2)
 	// //shuffle role cards
 		else if(step == 2)
 		{
+		
+		// std::cerr << "step: " << step << std::endl;
 			unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 			std::shuffle (role.begin(), role.begin()+players.size(), std::default_random_engine(seed));
 			
@@ -45,6 +53,8 @@ bool Game::setup()
 	// //distribute role cards
 		else if(step == 3)
 		{
+		
+		// std::cerr << "step: " << step << std::endl;
 			for(unsigned i = 0; i < players.size() ; ++i)
 			{
 				players.at(i)->setRole(role.at(i));
@@ -59,6 +69,8 @@ bool Game::setup()
 	//and give emperor 5 characters to choose between
 		else if(step == 4)
 		{
+		
+		std::cerr << "step: " << step << std::endl;
 			Card* hero1 = hero_deck->drawCard(); //the three emperors
 			Card* hero2 = hero_deck->drawCard();
 			Card* hero3 = hero_deck->drawCard();
@@ -71,7 +83,7 @@ bool Game::setup()
 			Card* hero5 = hero_deck->drawCard();
 			std::cout << "two more cards drawn" << std::endl;
 			
-			if(unsigned(emperor) == self)
+			if(emperor == self)
 			{
 				Window* characters = new Window(100,100,600,550);
 				characters->addCard(hero1,0,0);
@@ -89,6 +101,7 @@ bool Game::setup()
 	//wait for emperor to choose character
 	else if(step == 6)
 	{
+		std::cerr << "emperor: " << emperor << std::endl;
 		if(players.at(emperor)->hasHero())
 		{
 			step = 8;
@@ -171,8 +184,9 @@ bool Game::setup()
 		else if(step == 12)
 			return run_next;
 	
-		// std::cout << "painting" << std::endl;
+		// std::cerr << "painting" << std::endl;
 		UI();
+		// std::cerr << "post painting" << std::endl;
 	}
 	
 	return run_next;
@@ -207,6 +221,10 @@ void Game::run()
 	player -> setHero(new HeroCard("DaQiao.png", "3 green 0 ability"));
 	players.push_back(player);
 	
+	player = new Player();
+	player -> setRole(2);
+	player -> setHero(new HeroCard("ElderZhuge.png", "3 red 1 ability"));
+	players.push_back(player);	
 	player = nullptr;
 	
 	std::cout << "players size: " << players.size() << std::endl;
@@ -240,13 +258,15 @@ void Game::run()
 		{
 			//check if card_deck is empty
 			if(card_deck -> empty())
-			{
 				std::swap(card_deck,discard_pile);
-			}
+				
 			//draw 2 cards
 			card = dynamic_cast<GameCard*>(card_deck -> drawCard());
 			players.at(i) -> recieveCard(card);
 			
+			if(card_deck -> empty())
+				std::swap(card_deck,discard_pile);
+						
 			card = dynamic_cast<GameCard*>(card_deck -> drawCard());
 			players.at(i) -> recieveCard(card);
 			
@@ -276,7 +296,10 @@ void Game::run()
 	//other cards are discarded
 		else if(state == 5)
 		{
-			state = 6;
+			if(players.at(i) -> getCurrentHP() >= players.at(i) -> getHandSize())
+			{
+				state = 6;
+			}
 		}
 
 	//phase 6
@@ -288,6 +311,11 @@ void Game::run()
 			i = (i + 1) % players.size();
 			state = 1;
 		}
+		
+		// if(i == 1)
+		// {
+			// //winning test!
+		// }
 	//next player, start from phase 1
 
 		UI(); //call the UI for repaint
@@ -336,6 +364,7 @@ void Game::UI()
 {
 	Uint8 *keystates = SDL_GetKeyState(nullptr);
 	std::string command;
+	static Button* discard_button = new Button("Discard", 10, 90, "discard_card","Images/Gui/cleanButton2.png",20);
 	
 	fps.start();
 	while( SDL_PollEvent( &event)) //sÃ¥ lÃ¤nge som det finns en event
@@ -357,14 +386,15 @@ void Game::UI()
 			}
 		}
 		
+		if(state == 5)
+			run_command(discard_button -> handleEvent(event));
+			
 		//fixa med players o deras event!
-		for(unsigned i = 0; i < players.size(); ++i)
+		for(Player* p : players)
 		{
-			if(players.at(i) -> isCurrentPlayer())
-			{
-				players.at(i) -> handleEvent(event);
-			}
+			p -> handleEvent(event);
 		}
+		
 		
 		   // om krysset uppe till hÃ¶ger eller alt + F4 blev intryckt
 		if( event.type == SDL_QUIT || (keystates[SDLK_LALT] && event.key.keysym.sym == SDLK_F4))
@@ -376,6 +406,9 @@ void Game::UI()
 
 	//måla lite fint
 	paint();
+	if(state == 5)
+		discard_button -> paint(screen);
+	SDL_Flip(screen.getImage());                   // Skriv ut bilden pÃ¥ skÃ¤rmen
 	fps.regulateFPS();
 }
 
@@ -415,10 +448,23 @@ void Game::paint()
 	{
 		all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
 	}
-	for(unsigned i = 0; i < players.size(); ++i)
+	
+	int x = 250;
+	for(Player* p : players)
 	{	
-		players.at(i) -> paint(screen);
+		if(p -> isCurrentPlayer())
+		{
+			p -> paint(screen);
+		}
+		else
+		{
+			p -> paint(screen,x,50);
+			x += 200;
+		}
 	}
-	SDL_Flip(screen.getImage());                   // Skriv ut bilden pÃ¥ skÃ¤rmen
 }
+
+
 #include "game_commands.cpp"
+
+

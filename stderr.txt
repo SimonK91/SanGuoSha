@@ -1,0 +1,5 @@
+step: 1
+in loop
+after if
+post loop
+painting

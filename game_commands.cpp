@@ -141,11 +141,35 @@ void Game::run_command(const std::string& what_command)
 						GameCard* card = p -> playCard(i);
 						run_command(card -> getAbility());
 						discard_pile -> pushBottom(card);
+						break; //safty if 2 cards is active!
 					}
 				}
 			}
 		}
 	}
+	else if(what_command == "discard_card")
+	{
+		std::vector<GameCard*> hand;
+		for(Player* p : players)
+		{
+			if(p -> isCurrentPlayer())
+			{
+				hand = p -> getHand();
+				for(unsigned i = 0; i < hand.size(); ++i)
+				{
+					if(hand.at(i) -> isActive())	//den är fel kommer aldrig hit!
+					{
+						GameCard* card = p -> loseCard(i);
+						discard_pile -> pushBottom(card);
+						break; //safty if 2 cards is active!
+					}
+				}
+			}
+		}
+	}
+//---------------------------------
+//--------ALL CARD COMMANDS--------
+//---------------------------------
 	else if(what_command == "draw2")
 	{
 		for(Player* p: players)
@@ -160,12 +184,13 @@ void Game::run_command(const std::string& what_command)
 			}
 		}
 	}
+//---------------------------------
+//--------ELSE COUT COMMAND--------
+//---------------------------------
 	else
 	{
-		// throw SGS_error("Command: \"" + what_command + "\" is not found in command list");
-		std::cout << "Command: \"" + what_command + "\" is not found in command list" << std::endl;
+			std::cout << "Command: \"" + what_command + "\" is not found in command list" << std::endl;
 	}
 	return;
 }
 
-//include "SGS_commands.h"

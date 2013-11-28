@@ -103,14 +103,15 @@ void Player::setPlayerNr(int nr)
 void Player::paint(Surface screen)
 {
   //rita ut handen längst ner på skärmen
-  if(current_player == true)
-    {
+  // if(current_player == true)
+    // {
 		for(auto i : hand)
 		{
 			i->paint(screen);
 		}
-		hero ->paint(screen);
-    }
+		hero -> setPosition(805,555);
+		hero -> paint(screen);
+    // }
   
   //rita ut equipment
 }
@@ -142,12 +143,18 @@ std::string Player::handleEvent(const SDL_Event& event)
 {
 	std::string command;
 	std::string tmpCommand;
-	for(unsigned i = 0; i < hand.size(); ++i)
+	if(current_player)
 	{
-		tmpCommand = hand.at(i) -> handleEvent(event);
-		if(tmpCommand != "")
-			command = tmpCommand;
+		for(unsigned i = 0; i < hand.size(); ++i)
+		{
+			tmpCommand = hand.at(i) -> handleEvent(event);
+		}
 	}
+	else
+	{
+		hero -> handleEvent(event);
+	}
+	
 	return command;
 }
 

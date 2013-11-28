@@ -54,6 +54,8 @@ class Player
   void paint(Surface, int, int);
   
   const std::vector<Object::GameCard*>& getHand(){ return hand; } //only read not whrite
+  unsigned getHandSize(){ return hand.size(); }
+  unsigned getCurrentHP(){ return current_life; }
   
   void setRole(int r){role = r;}
   int getRole(){return role;}
