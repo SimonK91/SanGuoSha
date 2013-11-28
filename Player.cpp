@@ -118,11 +118,12 @@ void Player::paint(Surface screen)
 
 void Player::paint(Surface screen, int x_pos, int y_pos)
 {
-  
-  hero->setPosition(x_pos, y_pos);
-  hero->paint(screen);
-
-  //rita ut equipment
+	if(hero != nullptr)
+	{
+		hero->setPosition(x_pos, y_pos);
+		hero->paint(screen);
+	}
+	//rita ut equipment
 
 }
 
@@ -143,16 +144,22 @@ std::string Player::handleEvent(const SDL_Event& event)
 {
 	std::string command;
 	std::string tmpCommand;
+	std::cerr << "player line 146" << std::endl;
 	if(current_player)
 	{
+	std::cerr << "player line 149" << std::endl;
 		for(unsigned i = 0; i < hand.size(); ++i)
 		{
 			tmpCommand = hand.at(i) -> handleEvent(event);
 		}
+		std::cerr << "player line 154" << std::endl;
 	}
 	else
 	{
-		hero -> handleEvent(event);
+	std::cerr << "player line 158" << std::endl;
+		if(hero != nullptr)
+			hero -> handleEvent(event);
+		std::cerr << "player line 160" << std::endl;
 	}
 	
 	return command;

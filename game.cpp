@@ -17,24 +17,17 @@ bool Game::setup()
 	{
 		//step 1)
 		//wait for everyone to enter
-		// std::cerr << "step: " << step << std::endl;
 		if(step == 1)
 		{
 		
-		// std::cerr << "step: " << step << std::endl;
 			step = 2;
-		
 			for(unsigned i = 0; i < players.size() ; ++i)
 			{
-				// std::cerr << "in loop" << std::endl;
 				if(!players.at(i)->entered())
 				{
-					// std::cerr << "in if" << std::endl;
 					step = 1;
 				}
-				// std::cerr << "after if" << std::endl;
 			}
-			// std::cerr << "post loop" << std::endl;
 		}
 		
 	// //step 2)
@@ -42,19 +35,18 @@ bool Game::setup()
 		else if(step == 2)
 		{
 		
-		// std::cerr << "step: " << step << std::endl;
 			unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 			std::shuffle (role.begin(), role.begin()+players.size(), std::default_random_engine(seed));
 			
 			step = 3;
 		}
 		
+		
 	// //step 3)
 	// //distribute role cards
 		else if(step == 3)
 		{
 		
-		// std::cerr << "step: " << step << std::endl;
 			for(unsigned i = 0; i < players.size() ; ++i)
 			{
 				players.at(i)->setRole(role.at(i));
@@ -70,7 +62,6 @@ bool Game::setup()
 		else if(step == 4)
 		{
 		
-		std::cerr << "step: " << step << std::endl;
 			Card* hero1 = hero_deck->drawCard(); //the three emperors
 			Card* hero2 = hero_deck->drawCard();
 			Card* hero3 = hero_deck->drawCard();
@@ -97,11 +88,11 @@ bool Game::setup()
 			step = 6;
 		}
 	
+
 	//step 6)
 	//wait for emperor to choose character
 	else if(step == 6)
 	{
-		std::cerr << "emperor: " << emperor << std::endl;
 		if(players.at(emperor)->hasHero())
 		{
 			step = 8;
@@ -129,10 +120,7 @@ bool Game::setup()
 	{
 		//for(unsigned i = 0 ; i < players.size() ; ++i)
 		//{
-			
-			std::cout << "spelare: " << self << std::endl;
-
-			
+						
 			if(!players.at(self)->hasHero())
 			{
 				Card* hero1 = hero_deck->drawCard();
@@ -183,7 +171,8 @@ bool Game::setup()
 //start the game
 		else if(step == 12)
 			return run_next;
-	
+
+			
 		// std::cerr << "painting" << std::endl;
 		UI();
 		// std::cerr << "post painting" << std::endl;
@@ -227,7 +216,6 @@ void Game::run()
 	players.push_back(player);	
 	player = nullptr;
 	
-	std::cout << "players size: " << players.size() << std::endl;
 	// running = true;
 	
 	for(int i = 0; running ; )
@@ -385,7 +373,6 @@ void Game::UI()
 				run_command(command);
 			}
 		}
-		
 		if(state == 5)
 			run_command(discard_button -> handleEvent(event));
 			
@@ -393,6 +380,7 @@ void Game::UI()
 		for(Player* p : players)
 		{
 			p -> handleEvent(event);
+			
 		}
 		
 		
@@ -442,24 +430,34 @@ UI()
 */
 void Game::paint()
 {
-
+std::cerr << "player line 466" << std::endl;
+	
 	applySurface(0,0,background,screen); //skriv ut bakgrunden att ha som en bas
+	std::cerr << "player line 469" << std::endl;
+	
 	for(unsigned i = 0; i < all_objects.size() ; ++i)
 	{
 		all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
 	}
+	std::cerr << "line 475" << std::endl;
 	
 	int x = 250;
 	for(Player* p : players)
 	{	
+	std::cerr << "line 480" << std::endl;
+	
 		if(p -> isCurrentPlayer())
 		{
+		std::cerr << "line 484" << std::endl;
 			p -> paint(screen);
+		std::cerr << "line 486" << std::endl;
 		}
 		else
 		{
+		std::cerr << "line 490" << std::endl;
 			p -> paint(screen,x,50);
 			x += 200;
+		std::cerr << "line 493" << std::endl;
 		}
 	}
 }

@@ -3,3 +3,61 @@ mainMenu skapas
 bakgrundsbilden laddas
 en button skapas
 mainMenu startas
+Emperor-cards drawn
+hero_deck shuffled
+two more cards drawn
+hero 0
+hero 1
+HERO 1 active
+ger kortet
+för objekt 0:
+dynamic cast success
+för objekt 1:
+dynamic cast success
+för objekt 2:
+dynamic cast success
+för objekt 3:
+dynamic cast success
+för objekt 4:
+normal delete
+game.exit() okay!
+Emperor-cards drawn
+hero_deck shuffled
+two more cards drawn
+hero 0
+hero 1
+hero 2
+hero 3
+hero 4
+HERO 4 active
+ger kortet
+för objekt 0:
+dynamic cast success
+för objekt 1:
+dynamic cast success
+för objekt 2:
+dynamic cast success
+för objekt 3:
+dynamic cast success
+för objekt 4:
+normal delete
+game.exit() okay!
+Emperor-cards drawn
+hero_deck shuffled
+two more cards drawn
+hero 0
+HERO 0 active
+ger kortet
+för objekt 0:
+dynamic cast success
+för objekt 1:
+dynamic cast success
+för objekt 2:
+dynamic cast success
+för objekt 3:
+dynamic cast success
+för objekt 4:
+normal delete
+game.exit() okay!
+Write settings okay!
+exit OK!
