@@ -29,7 +29,7 @@ menu.o: menu.cpp menu_commands.cpp
 		@ echo Menu.o skapas
 		@$(CCC) $(INCLUDE) $(CFLAGS) -c menu.cpp $(SDLFLAGS)
 		
-game.o: game.cpp game_commands.cpp
+game.o: game.cpp game_commands.cpp card_commands.cpp
 		@ echo Game.o skapas
 		@$(CCC) $(INCLUDE) $(CFLAGS) -c game.cpp $(SDLFLAGS)
 		

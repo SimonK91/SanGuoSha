@@ -217,7 +217,8 @@ void Game::run()
 	player = nullptr;
 	
 	// running = true;
-	
+	card_deck -> pushTop(new GameCard(7,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+
 	for(int i = 0; running ; )
 	{
 	//phase 1)
@@ -227,6 +228,7 @@ void Game::run()
 		if(state == 1)
 		{
 			players.at(i) -> setCurrentPlayer(true);
+			current_player = players.at(i);
 			state = 2;
 		}
 	//phase 2
@@ -273,8 +275,7 @@ void Game::run()
 		else if(state == 4)
 		{
 			
-			//do stuff :D 
-			
+			//do stuff :D 		
 			//preferebly whit the buttons :D
 		}
 	//phase 5
@@ -379,8 +380,10 @@ void Game::UI()
 		//fixa med players o deras event!
 		for(Player* p : players)
 		{
-			p -> handleEvent(event);
-			
+			if(p -> handleEvent(event))
+			{
+				target_player = p;
+			}
 		}
 		
 		
@@ -464,5 +467,6 @@ std::cerr << "player line 466" << std::endl;
 
 
 #include "game_commands.cpp"
+#include "card_commands.cpp"
 
 

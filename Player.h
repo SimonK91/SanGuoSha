@@ -41,6 +41,8 @@ class Player
 
   void doEffect(std::string);
 
+  void modifyLife(int mod){ current_life += mod; }
+  int getLife(){ return current_life; }
   void setStatus(unsigned);
   void setCurrentPlayer(bool cp){ current_player = cp; }
   bool isCurrentPlayer(){ return current_player; }
@@ -48,7 +50,7 @@ class Player
   bool loading();
   bool left();
 
-  std::string handleEvent(const SDL_Event& event);
+  bool handleEvent(const SDL_Event& event);
   void setPlayerNr(int);
   void paint(Surface);
   void paint(Surface, int, int);

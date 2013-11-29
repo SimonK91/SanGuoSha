@@ -33,7 +33,7 @@ std::string Card::handleEvent(const SDL_Event& event)
 		{
 			active = 1;
 			box.y -= 20;
-			//return "gameCardInUse";
+			return "activated";
 		}
 	}
 	return "";

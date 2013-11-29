@@ -139,7 +139,7 @@ void Game::run_command(const std::string& what_command)
 					if(hand.at(i) -> isActive())
 					{
 						GameCard* card = p -> playCard(i);
-						run_command(card -> getAbility());
+						run_effect(card -> getAbility());
 						discard_pile -> pushBottom(card);
 						break; //safty if 2 cards is active!
 					}
@@ -167,26 +167,6 @@ void Game::run_command(const std::string& what_command)
 			}
 		}
 	}
-//---------------------------------
-//--------ALL CARD COMMANDS--------
-//---------------------------------
-	else if(what_command == "draw2")
-	{
-		for(Player* p: players)
-		{
-			if(p -> isCurrentPlayer())
-			{	
-				GameCard* card = dynamic_cast<GameCard*>(card_deck -> drawCard());
-				p -> recieveCard(card);
-			
-				card = dynamic_cast<GameCard*>(card_deck -> drawCard());
-				p -> recieveCard(card);
-			}
-		}
-	}
-//---------------------------------
-//--------ELSE COUT COMMAND--------
-//---------------------------------
 	else
 	{
 			std::cout << "Command: \"" + what_command + "\" is not found in command list" << std::endl;

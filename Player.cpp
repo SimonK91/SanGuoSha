@@ -140,29 +140,24 @@ void Player::fixCardPosition()
   hero->setPosition(805, 555);
 }
 
-std::string Player::handleEvent(const SDL_Event& event)
-{
-	std::string command;
-	std::string tmpCommand;
-	std::cerr << "player line 146" << std::endl;
+bool Player::handleEvent(const SDL_Event& event)
+{	
 	if(current_player)
 	{
-	std::cerr << "player line 149" << std::endl;
 		for(unsigned i = 0; i < hand.size(); ++i)
 		{
-			tmpCommand = hand.at(i) -> handleEvent(event);
+			hand.at(i) -> handleEvent(event);
 		}
-		std::cerr << "player line 154" << std::endl;
 	}
 	else
 	{
-	std::cerr << "player line 158" << std::endl;
+		std::string com = "";
 		if(hero != nullptr)
-			hero -> handleEvent(event);
-		std::cerr << "player line 160" << std::endl;
-	}
-	
-	return command;
+			com = hero -> handleEvent(event);
+		if(com != "")
+			return true;	//den blev fucking klickad!
+	}	
+	return false;
 }
 
 

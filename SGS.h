@@ -84,24 +84,30 @@ class Game : public SGS
 {
 private:
 	unsigned self;
+	unsigned state;
+	bool run_next;
+	
+	Player* target_player;
+	Player* current_player;
+	Object::GameCard* selected_card;
+	
 	Object::CardList* card_deck;
 	Object::CardList* discard_pile;
 	Object::CardList* hero_deck;
 	std::vector<Player*> players;
-	unsigned state;
 	//Timer timer;
 	//map<std::string,SDL_Surface*> card_images;
-	bool run_next;
 	
 	void paint();
 	void run_command(const std::string& what_command);
+	void run_effect(const std::string& effect);
 	bool loadup(){return true;} //dne är skriven här
 	void UI();
 public:
 	~Game() = default;
 	Game() = default;
 	
-	Game(Surface scr/*,std::vector<Player>& players*/) : SGS(scr)
+	Game(Surface scr) : SGS(scr), selected_card(nullptr), target_player(nullptr), current_player(nullptr)
 	{
 		self = 0; //ska komma utifrån!!
 		card_deck = new Object::CardList("standard_playing_cards");
