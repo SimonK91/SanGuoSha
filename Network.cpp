@@ -24,7 +24,7 @@ Network::~Network()
 void Network::sendChat(std::string message)
 {
   std::string type = "chat";
-  std::string name = "Anders";
+  std::string name = "ClientX";
   outgoing = SDLNet_TCP_Open(&server_ip);
   if(outgoing == NULL)
     {

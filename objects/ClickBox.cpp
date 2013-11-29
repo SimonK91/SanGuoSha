@@ -25,7 +25,7 @@ ClickBox::ClickBox(const int& x, const int& y, const int& w, const int& h,
         box.x = x;
         box.y = y;
         box.w = w;
-        box.h = h/4;
+        box.h = h;
 	
 	//int offset = (box.h - text_surface->h)/2;
 	/*if(name != "")
