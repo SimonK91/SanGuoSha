@@ -2,7 +2,7 @@ CCC        =g++
 CFLAGS   +=-L/sw/gcc-${GCC4_V}/lib -static-libstdc++ -std=c++11 -pedantic -Wall -Wextra
 INCLUDE  = -I./objects
 SDLFLAGS +=-lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer -lSDL_net
-OBJECTS = main.cpp Menu.o Button.o Slider.o Textbox.o Checkbox.o Functions.o Window.o music.o SGS.o Network.o Timer.o StringInput.o SgsServer.o Settings.o
+OBJECTS = main.cpp Menu.o Button.o Slider.o Textbox.o Checkbox.o Functions.o Window.o music.o SGS.o Network.o Timer.o StringInput.o SgsServer.o Settings.o Clickbox.o
 all: $(OBJECTS)
 		@ echo
 		@ echo execute skapas
@@ -47,6 +47,10 @@ Button.o: ./objects/Button.h ./objects/Button.cpp
 Checkbox.o: ./objects/Checkbox.h ./objects/Checkbox.cpp
 		@ echo Checkbox.o skapas
 		@$(CCC) $(CFLAGS) -c ./objects/Checkbox.cpp $(SDLFLAGS)
+	
+Clickbox.o: ./objects/ClickBox.cpp ./objects/ClickBox.h
+		@ echo Clickbox.o skapas
+		@$(CCC) $(CFLAGS) -c ./objects/ClickBox.cpp $(SDLFLAGS)
 		
 Slider.o: ./objects/Slider.h ./objects/Slider.cpp
 		@ echo Slider.o skapas

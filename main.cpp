@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
 	//mainMenu.make_checkbox(50, 50, "", false);
 	mainMenu.make_textbox("", 50, 530,450, 50);
 	mainMenu.make_textbox("", 515, 50, 250, 450);
-
+	mainMenu.makeClickBox(50,530,450,50, "chat");
 	
 	//skapar tråden för nätverk
 	thread = SDL_CreateThread(network_thread, NULL);

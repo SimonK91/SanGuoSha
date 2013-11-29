@@ -8,7 +8,7 @@
 #include "Textbox.h"
 #include "Window.h"
 #include "Checkbox.h"
-
+#include "ClickBox.h"
 #include <vector>
 
 class SGS
@@ -58,6 +58,7 @@ public:
 	bool make_checkbox(int x, int y, const std:: string& command, bool checked = false);
 	bool make_textbox(const std::string& text, const int& x, const int& y, const int& w, const int& h,
 					  const SDL_Color &col = {255,255,255,0}, const std::string& font = "Fonts/LHANDW.TTF", const unsigned& size = 13);
+	bool makeClickBox(int x, int y, int w, int h, std::string command);
 };
 
 
@@ -68,6 +69,7 @@ private:
 	void paint();
 	bool exit();
 	int networkThread(void* data); 
+	bool chat_active;
 		
 public:
 	void run();
@@ -75,6 +77,7 @@ public:
 	Menu(SDL_Surface* scr) : SGS(scr){
 	  // m.loadMusic("Music/Menu.wav");
 	  //loadSettings(settings);
+	  chat_active = false;
 	}
 };
 /*

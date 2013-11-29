@@ -33,6 +33,19 @@ void Menu::run_command(const std::string& what_command)
 		all_objects.pop_back();
 		has_window = false;
 	}
+	if(what_command == "chat")
+	  {
+	    std::cout << "SÄTTER CHAT ACTIVE" << std::endl;
+	    if(chat_active == true)
+	      {
+		chat_active = false;
+	      }
+	    else
+	      {
+		chat_active = true;
+	      }
+	    
+	  }
 	if(what_command.substr(0,10) == "set_volume")
 	{
 		//hitta grejer3

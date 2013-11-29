@@ -59,3 +59,9 @@ bool SGS::make_checkbox(int x, int y, const std::string& command, bool checked)
 	return true;
 }
 
+bool SGS::makeClickBox(int x, int y, int w, int h, std::string command)
+{
+  ClickBox* tmp = new ClickBox(x,y,w,h, command);
+  all_objects.push_back(tmp);
+  return true;
+}

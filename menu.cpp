@@ -11,7 +11,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
-
+#include "ClickBox.h"
 
 using namespace Object;
 
@@ -25,7 +25,7 @@ void Menu::run()
   Timer network_timer;
   Network* net = new Network();
   net->connectToServer("130.236.211.76");
-  bool chat_active = false;
+
 	m.play();
 	Uint8 *keystates = SDL_GetKeyState(nullptr);
 	std::string command;
@@ -62,7 +62,7 @@ void Menu::run()
 			   running = false;// avsluta programmet
 			if(event.type == SDL_KEYDOWN)
 			  {
-			    if(chat_active)
+			    if(chat_active == true)
 			      {
 				inp->handleInput(event);
 				if(event.key.keysym.sym == SDLK_RETURN)
@@ -153,7 +153,6 @@ bool Menu::exit()
 }
 void Menu::paint()
 {
-
 	applySurface(0,0,background,screen); //skriv ut bakgrunden att ha som en bas
 	for(unsigned i = 0; i < all_objects.size() ; ++i)
 	{

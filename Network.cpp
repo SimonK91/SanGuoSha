@@ -133,7 +133,7 @@ void Network::connectToServer(std::string server_ip_string)
   SDLNet_ResolveHost(&server_ip, server_ip_string.c_str(), 1443);
   outgoing = SDLNet_TCP_Open(&server_ip);
   
-  std::string name = "anders";
+  std::string name = "ClientX";
   std::string join_server = "join";
   join_server += name;
   SDLNet_TCP_Send(outgoing, (void*)join_server.c_str(),join_server.length());
