@@ -3,6 +3,7 @@
 #include <string>
 #include "SGS.h"
 #include "sgsServer.h"
+#include <stdexcept>
 
 using namespace std;
 
@@ -49,10 +50,23 @@ int main(int argc, char* argv[])
 	{
 		mainMenu.run(); //startar programmet
 	}
+	catch(runtime_error re)
+	{
+	  cout << "re" << re.what() << endl;
+	}
+	catch(logic_error le)
+	{
+	  cout << "le" << le.what() << endl;
+	}
+	catch(exception ex)
+	{
+	  cout << "ex" << ex.what() << endl;
+	}
 	catch(...)
 	{
 		cout << "an error occured" << endl;
 	}
+	
 	
 	//avslut, ta bort alla surfaces som skapas (enbart screen just nu) och avsluta TTF, SDL och musiken
 	quit_network = true;

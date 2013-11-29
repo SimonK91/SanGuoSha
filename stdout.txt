@@ -1,271 +1,479 @@
 socket ready
 TYPE: join
 IP: 130.236.211.76
-SÄTTER CHAT ACTIVE
+socket ready
+TYPE: join
+IP: 130.236.214.173
+socket ready
+TYPE: join
+IP: 130.236.127.73
 socket ready
 TYPE: chat
-skickar chat:chatClientX|hejsan
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 16  length: 16
+skickar chat:chatClientX|yolo
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 16  length: 16
+skickar chat:chatClientX|yolo
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 16  length: 16
+skickar chat:chatClientX|yolo
+socket ready
+TYPE: chat
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 16  length: 16
+skickar chat:chatClientX|yolo
+öppnar socket
+tog bort in disconnectad klient
+öppnad socket
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 32  length: 32
+skickar chat:chatderp|en client disconnectade
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 32  length: 32
+skickar chat:chatderp|en client disconnectade
+socket ready
+TYPE: chat
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 17  length: 17
+skickar chat:chatClientX|hej D
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 17  length: 17
+skickar chat:chatClientX|hej D
+socket ready
+TYPE: chat
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 21  length: 21
+skickar chat:chatClientX|va roligt
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 21  length: 21
+skickar chat:chatClientX|va roligt
+socket ready
+TYPE: chat
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 17  length: 17
+skickar chat:chatClientX|hejda
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 17  length: 17
+skickar chat:chatClientX|hejda
+socket ready
+TYPE: join
+IP: 130.236.127.73
 socket ready
 TYPE: join
 IP: 130.236.214.173
 socket ready
 TYPE: chat
-skickar chat:chatClientX|test
-skickar chat:chatClientX|testClientX|test
-SÄTTER CHAT ACTIVE
-SÄTTER CHAT ACTIVE
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 28  length: 28
+skickar chat:chatClientX|kan man komma in
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 28  length: 28
+skickar chat:chatClientX|kan man komma in
+socket ready
+TYPE: chat
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 18  length: 18
+skickar chat:chatClientX|kanske
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 18  length: 18
+skickar chat:chatClientX|kanske
+socket ready
+TYPE: chat
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 15  length: 15
+skickar chat:chatClientX|yey
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 15  length: 15
+skickar chat:chatClientX|yey
 socket ready
 TYPE: join
-IP: 130.236.127.73
-SÄTTER CHAT ACTIVE
-SÄTTER CHAT ACTIVE
+IP: 130.236.214.173
 socket ready
 TYPE: chat
-skickar chat:chatClientX|hej justus
-skickar chat:chatClientX|hej justusClientX|hej justusClientX|hej justus
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 18  length: 18
+skickar chat:chatClientX|roligt
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 18  length: 18
+skickar chat:chatClientX|roligt
 socket ready
 TYPE: chat
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 17  length: 17
+skickar chat:chatClientX|hallu
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 17  length: 17
+skickar chat:chatClientX|hallu
+socket ready
+TYPE: join
+IP: 130.236.214.173
+socket ready
+TYPE: chat
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 19  length: 19
+skickar chat:chatClientX|du flop
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 19  length: 19
+skickar chat:chatClientX|du flop
+socket ready
+TYPE: chat
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 17  length: 17
+skickar chat:chatClientX|flarp
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 17  length: 17
+skickar chat:chatClientX|flarp
+socket ready
+TYPE: chat
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 22  length: 22
+skickar chat:chatClientX|yolo simon
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 22  length: 22
+skickar chat:chatClientX|yolo simon
+socket ready
+TYPE: chat
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 16  length: 16
+skickar chat:chatClientX|derp
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 16  length: 16
+skickar chat:chatClientX|derp
+socket ready
+TYPE: chat
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 16  length: 16
+skickar chat:chatClientX|jolo
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 16  length: 16
+skickar chat:chatClientX|jolo
+socket ready
+TYPE: chat
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 16  length: 16
+skickar chat:chatClientX|jaoi
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 16  length: 16
+skickar chat:chatClientX|jaoi
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefend
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefend
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattack
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commsteal
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefend
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commsteal
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefend
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commsteal
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefend
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commsteal
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefend
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commsteal
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefend
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commsteal
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefend
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commsteal
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefend
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commsteal
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefend
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commsteal
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefend
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commsteal
+socket ready
+TYPE: chat
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 72  length: 72
+skickar chat:chatClientX|121321231213123123123123123123123123123123123123121231312213
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 72  length: 72
+skickar chat:chatClientX|121321231213123123123123123123123123123123123123121231312213
+socket ready
+TYPE: chat
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 21  length: 21
+skickar chat:chatClientX|321321321
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 21  length: 21
+skickar chat:chatClientX|321321321
+socket ready
+TYPE: chat
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 27  length: 27
+skickar chat:chatClientX|dsahjfdsahsfdka
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 27  length: 27
+skickar chat:chatClientX|dsahjfdsahsfdka
+socket ready
+TYPE: chat
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 17  length: 17
+skickar chat:chatClientX|wooop
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 17  length: 17
+skickar chat:chatClientX|wooop
+socket ready
+TYPE: chat
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 15  length: 15
 skickar chat:chatClientX|hej
-skickar chat:chatClientX|hejClientX|hejClientX|hej
-socket ready
-TYPE: chat
-skickar chat:chatClientX|wop wop D
-skickar chat:chatClientX|wop wop DClientX|wop wop DClientX|wop wop D
-socket ready
-TYPE: chat
-skickar chat:chatClientX|hej hej hej hej
-skickar chat:chatClientX|hej hej hej hejClientX|hej hej hej hej
-skickar chat:chatClientX|hej hej hej hejClientX|hej hej hej hejClientX|hej hej hej hej
-socket ready
-TYPE: chat
-skickar chat:chatClientX|a
-skickar chat:chatClientX|aClientX|a
-skickar chat:chatClientX|aClientX|aClientX|a
-socket ready
-TYPE: chat
-skickar chat:chatClientX|durka durka
-skickar chat:chatClientX|durka durkaClientX|durka durka
-skickar chat:chatClientX|durka durkaClientX|durka durkaClientX|durka durka
-socket ready
-TYPE: join
-IP: 130.236.214.173
-socket ready
-TYPE: chat
-skickar chat:chatClientX|lol
-skickar chat:chatClientX|lolClientX|lol
-skickar chat:chatClientX|lolClientX|lolClientX|lol
-SÄTTER CHAT ACTIVE
-socket ready
-TYPE: comm
-servern la till: attack
-i send command server
-skickar kommando: commattack
-skickar kommando: commattackattack
-skickar kommando: commattackattackattack
-socket ready
-TYPE: comm
-servern la till: defend
-i send command server
-skickar kommando: commdefend
-skickar kommando: commdefenddefend
-skickar kommando: commdefenddefenddefend
-socket ready
-TYPE: comm
-servern la till: steal
-i send command server
-skickar kommando: commsteal
-skickar kommando: commstealsteal
-skickar kommando: commstealstealsteal
-socket ready
-TYPE: comm
-servern la till: attack
-i send command server
-skickar kommando: commattack
-skickar kommando: commattackattack
-skickar kommando: commattackattackattack
-socket ready
-TYPE: comm
-servern la till: defend
-i send command server
-skickar kommando: commdefend
-skickar kommando: commdefenddefend
-skickar kommando: commdefenddefenddefend
-socket ready
-TYPE: comm
-servern la till: steal
-i send command server
-skickar kommando: commsteal
-skickar kommando: commstealsteal
-skickar kommando: commstealstealsteal
-socket ready
-TYPE: comm
-servern la till: attack
-i send command server
-skickar kommando: commattack
-skickar kommando: commattackattack
-skickar kommando: commattackattackattack
-socket ready
-TYPE: comm
-servern la till: attack
-i send command server
-skickar kommando: commattack
-skickar kommando: commattackattack
-skickar kommando: commattackattackattack
-socket ready
-TYPE: comm
-servern la till: defend
-i send command server
-skickar kommando: commdefend
-skickar kommando: commdefenddefend
-skickar kommando: commdefenddefenddefend
-socket ready
-TYPE: comm
-servern la till: steal
-i send command server
-skickar kommando: commsteal
-skickar kommando: commstealsteal
-skickar kommando: commstealstealsteal
-socket ready
-TYPE: comm
-servern la till: attack
-i send command server
-skickar kommando: commattack
-skickar kommando: commattackattack
-skickar kommando: commattackattackattack
-socket ready
-TYPE: comm
-servern la till: defend
-i send command server
-skickar kommando: commdefend
-skickar kommando: commdefenddefend
-skickar kommando: commdefenddefenddefend
-socket ready
-TYPE: comm
-servern la till: steal
-i send command server
-skickar kommando: commsteal
-skickar kommando: commstealsteal
-skickar kommando: commstealstealsteal
-socket ready
-TYPE: comm
-servern la till: attack
-i send command server
-skickar kommando: commattack
-skickar kommando: commattackattack
-skickar kommando: commattackattackattack
-socket ready
-TYPE: comm
-servern la till: defend
-i send command server
-skickar kommando: commdefend
-skickar kommando: commdefenddefend
-skickar kommando: commdefenddefenddefend
-socket ready
-TYPE: comm
-servern la till: steal
-i send command server
-skickar kommando: commsteal
-skickar kommando: commstealsteal
-skickar kommando: commstealstealsteal
-socket ready
-TYPE: comm
-servern la till: attack
-i send command server
-skickar kommando: commattack
-skickar kommando: commattackattack
-skickar kommando: commattackattackattack
-socket ready
-TYPE: comm
-servern la till: defend
-i send command server
-skickar kommando: commdefend
-skickar kommando: commdefenddefend
-skickar kommando: commdefenddefenddefend
-socket ready
-TYPE: comm
-servern la till: steal
-i send command server
-skickar kommando: commsteal
-skickar kommando: commstealsteal
-skickar kommando: commstealstealsteal
-socket ready
-TYPE: comm
-servern la till: attack
-i send command server
-skickar kommando: commattack
-skickar kommando: commattackattack
-skickar kommando: commattackattackattack
-socket ready
-TYPE: comm
-servern la till: defend
-i send command server
-skickar kommando: commdefend
-skickar kommando: commdefenddefend
-skickar kommando: commdefenddefenddefend
-socket ready
-TYPE: comm
-servern la till: steal
-i send command server
-skickar kommando: commsteal
-skickar kommando: commstealsteal
-skickar kommando: commstealstealsteal
-socket ready
-TYPE: comm
-servern la till: attack
-i send command server
-skickar kommando: commattack
-skickar kommando: commattackattack
-skickar kommando: commattackattackattack
-socket ready
-TYPE: comm
-servern la till: defend
-i send command server
-skickar kommando: commdefend
-skickar kommando: commdefenddefend
-skickar kommando: commdefenddefenddefend
-socket ready
-TYPE: comm
-servern la till: attack
-i send command server
-skickar kommando: commattack
-skickar kommando: commattackattack
-skickar kommando: commattackattackattack
-socket ready
-TYPE: comm
-servern la till: defend
-i send command server
-skickar kommando: commdefend
-skickar kommando: commdefenddefend
-skickar kommando: commdefenddefenddefend
-socket ready
-TYPE: comm
-servern la till: steal
-i send command server
-skickar kommando: commsteal
-skickar kommando: commstealsteal
-skickar kommando: commstealstealsteal
-socket ready
-TYPE: comm
-servern la till: attack
-i send command server
-skickar kommando: commattack
-skickar kommando: commattackattack
-skickar kommando: commattackattackattack
-socket ready
-TYPE: comm
-servern la till: steal
-i send command server
-skickar kommando: commsteal
-skickar kommando: commstealsteal
-skickar kommando: commstealstealsteal
-socket ready
-TYPE: comm
-servern la till: defend
-i send command server
-skickar kommando: commdefend
-skickar kommando: commdefenddefend
-skickar kommando: commdefenddefenddefend
-socket ready
-TYPE: join
-IP: 130.236.127.73
+öppnar socket
+socket ej null
+öppnad socket
+Skickade bytes: 15  length: 15
+skickar chat:chatClientX|hej
 exit OK!

@@ -74,8 +74,7 @@ void SgsServer::run()
 			  ip_and_name.push_back(std::make_pair(ip_to_be_added, name));
 			  all_clients.push_back(TCPsocket());
 			  ip_addresses.push_back(IPaddress());
-			  SDLNet_ResolveHost(&ip_addresses.back(), ip_to_be_added.c_str(), 1442);
-			  
+			  SDLNet_ResolveHost(&ip_addresses.back(), ip_to_be_added.c_str(), 1442);  
 			}
 		    }
 		  
@@ -118,18 +117,39 @@ void SgsServer::sendToClients()
   //chat till klienter
   while( !chat_queue.empty() )
     {
-      std::string send_chat = "chat"; 
-      for(auto i : ip_addresses)
+     
+      for(unsigned i = 0; i < ip_addresses.size(); ++i)
 	{
-	  TCPsocket send_to_socket = SDLNet_TCP_Open(&i);
+	  std::string send_chat = "chat"; 
+	  std::cout << "öppnar socket" << std::endl;
+	  TCPsocket send_to_socket = SDLNet_TCP_Open(&ip_addresses.at(i));
 	  send_chat += chat_queue.front();
 	  
+	  if(send_to_socket == NULL)
+	    {
+	      ip_addresses.erase(ip_addresses.begin()+i);
+	      std::cout << "tog bort in disconnectad klient" << std::endl;
+	      chat_queue.push("derp|en client disconnectade");
+	    }
+	  else
+	    {
+	      std::cout << "socket ej null" << std::endl;
+	    }
+	  
+	  std::cout << "öppnad socket" << std::endl;
 	  if( send_to_socket != NULL)
 	    {
-	      SDLNet_TCP_Send(send_to_socket, (void*) send_chat.c_str(), send_chat.length());
+	      int bytes_sent = 0;
+	      bytes_sent = SDLNet_TCP_Send(send_to_socket, (void*) send_chat.c_str(), send_chat.length());
+	      std::cout << "Skickade bytes: " << bytes_sent << "  length: " << send_chat.length() << std::endl; 
+	      if(bytes_sent < send_chat.length())
+		{
+		  
+		}
 	      SDLNet_TCP_Close(send_to_socket);
 	      std::cout << "skickar chat:" << send_chat << std::endl;
 	    } 
+	  
 	}
       chat_queue.pop();
     }
@@ -137,9 +157,10 @@ void SgsServer::sendToClients()
   while( !command_queue.empty() )
     {
       std::cout << "i send command server" << std::endl;
-      std::string send_command = "comm";
+     
       for(auto i : ip_addresses)
 	{
+	  std::string send_command = "comm";
 	  TCPsocket send_to_socket = SDLNet_TCP_Open(&i);
 	  send_command += command_queue.front();
 	  
