@@ -1,29 +1,271 @@
 socket ready
 TYPE: join
 IP: 130.236.211.76
-socket ready
-TYPE: comm
-servern la till: attack
-i send command server
-skickar kommando: commattack
-socket ready
-TYPE: comm
-servern la till: defend
-i send command server
-skickar kommando: commdefend
-socket ready
-TYPE: comm
-servern la till: steal
-i send command server
-skickar kommando: commsteal
 SÄTTER CHAT ACTIVE
 socket ready
 TYPE: chat
 skickar chat:chatClientX|hejsan
 socket ready
-TYPE: chat
-skickar chat:chatClientX|gott
+TYPE: join
+IP: 130.236.214.173
 socket ready
 TYPE: chat
-skickar chat:chatClientX|gtt
+skickar chat:chatClientX|test
+skickar chat:chatClientX|testClientX|test
+SÄTTER CHAT ACTIVE
+SÄTTER CHAT ACTIVE
+socket ready
+TYPE: join
+IP: 130.236.127.73
+SÄTTER CHAT ACTIVE
+SÄTTER CHAT ACTIVE
+socket ready
+TYPE: chat
+skickar chat:chatClientX|hej justus
+skickar chat:chatClientX|hej justusClientX|hej justusClientX|hej justus
+socket ready
+TYPE: chat
+skickar chat:chatClientX|hej
+skickar chat:chatClientX|hejClientX|hejClientX|hej
+socket ready
+TYPE: chat
+skickar chat:chatClientX|wop wop D
+skickar chat:chatClientX|wop wop DClientX|wop wop DClientX|wop wop D
+socket ready
+TYPE: chat
+skickar chat:chatClientX|hej hej hej hej
+skickar chat:chatClientX|hej hej hej hejClientX|hej hej hej hej
+skickar chat:chatClientX|hej hej hej hejClientX|hej hej hej hejClientX|hej hej hej hej
+socket ready
+TYPE: chat
+skickar chat:chatClientX|a
+skickar chat:chatClientX|aClientX|a
+skickar chat:chatClientX|aClientX|aClientX|a
+socket ready
+TYPE: chat
+skickar chat:chatClientX|durka durka
+skickar chat:chatClientX|durka durkaClientX|durka durka
+skickar chat:chatClientX|durka durkaClientX|durka durkaClientX|durka durka
+socket ready
+TYPE: join
+IP: 130.236.214.173
+socket ready
+TYPE: chat
+skickar chat:chatClientX|lol
+skickar chat:chatClientX|lolClientX|lol
+skickar chat:chatClientX|lolClientX|lolClientX|lol
+SÄTTER CHAT ACTIVE
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattackattack
+skickar kommando: commattackattackattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefenddefend
+skickar kommando: commdefenddefenddefend
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commstealsteal
+skickar kommando: commstealstealsteal
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattackattack
+skickar kommando: commattackattackattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefenddefend
+skickar kommando: commdefenddefenddefend
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commstealsteal
+skickar kommando: commstealstealsteal
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattackattack
+skickar kommando: commattackattackattack
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattackattack
+skickar kommando: commattackattackattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefenddefend
+skickar kommando: commdefenddefenddefend
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commstealsteal
+skickar kommando: commstealstealsteal
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattackattack
+skickar kommando: commattackattackattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefenddefend
+skickar kommando: commdefenddefenddefend
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commstealsteal
+skickar kommando: commstealstealsteal
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattackattack
+skickar kommando: commattackattackattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefenddefend
+skickar kommando: commdefenddefenddefend
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commstealsteal
+skickar kommando: commstealstealsteal
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattackattack
+skickar kommando: commattackattackattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefenddefend
+skickar kommando: commdefenddefenddefend
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commstealsteal
+skickar kommando: commstealstealsteal
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattackattack
+skickar kommando: commattackattackattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefenddefend
+skickar kommando: commdefenddefenddefend
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commstealsteal
+skickar kommando: commstealstealsteal
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattackattack
+skickar kommando: commattackattackattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefenddefend
+skickar kommando: commdefenddefenddefend
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattackattack
+skickar kommando: commattackattackattack
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefenddefend
+skickar kommando: commdefenddefenddefend
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commstealsteal
+skickar kommando: commstealstealsteal
+socket ready
+TYPE: comm
+servern la till: attack
+i send command server
+skickar kommando: commattack
+skickar kommando: commattackattack
+skickar kommando: commattackattackattack
+socket ready
+TYPE: comm
+servern la till: steal
+i send command server
+skickar kommando: commsteal
+skickar kommando: commstealsteal
+skickar kommando: commstealstealsteal
+socket ready
+TYPE: comm
+servern la till: defend
+i send command server
+skickar kommando: commdefend
+skickar kommando: commdefenddefend
+skickar kommando: commdefenddefenddefend
+socket ready
+TYPE: join
+IP: 130.236.127.73
 exit OK!

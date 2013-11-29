@@ -73,7 +73,6 @@ void Menu::run()
 			      }
 			    else
 			      {
-			
 				if(event.key.keysym.sym == SDLK_1)
 				  {
 				    net->sendCommand("attack");
