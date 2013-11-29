@@ -51,6 +51,7 @@ void SgsServer::run()
 		  type_received.append(received_string.begin(), received_string.begin()+4);
 		  std::cout << "TYPE: " << type_received << std::endl;
 		  
+		  
 		  //en klient som vill ansluta
 		  if(std::string(received_string.begin(),received_string.begin()+4) == "join")
 		    {
@@ -84,7 +85,7 @@ void SgsServer::run()
 		      addChat(received_string);
 		    }
 		  //ett kommando togs emot
-		  else if( type_received == "command" )
+		  else if( type_received == "comm" )
 		    {
 		      addCommand(received_string);
 		    }
@@ -108,7 +109,7 @@ void SgsServer::addCommand(std::string received_command)
 {
   std::string command = "";
   command.append(received_command.begin()+4, received_command.end());
-  
+  std::cout << "servern la till: " << command << std::endl;
   command_queue.push(command);		 
 }
 
@@ -135,6 +136,7 @@ void SgsServer::sendToClients()
   //commandon till klienter
   while( !command_queue.empty() )
     {
+      std::cout << "i send command server" << std::endl;
       std::string send_command = "comm";
       for(auto i : ip_addresses)
 	{

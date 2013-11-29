@@ -40,6 +40,7 @@ class Network
   void sendCommand(std::string command);
   void getData();
   const std::vector<std::pair<std::string,std::string>>& getLog();
+  std::queue<std::string>& getCommandQueue();
   void showMeDasLog();
   void connectToServer(std::string);
 

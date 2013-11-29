@@ -114,6 +114,11 @@ const std::vector<std::pair<std::string,std::string>>& Network::getLog()
   return chat_log;
 }
 
+std::queue<std::string>& Network::getCommandQueue()
+{
+  return command_queue;
+}
+
 void Network::showMeDasLog()
 {
   for(auto i : chat_log)

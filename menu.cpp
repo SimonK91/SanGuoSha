@@ -29,7 +29,7 @@ void Menu::run()
 	m.play();
 	Uint8 *keystates = SDL_GetKeyState(nullptr);
 	std::string command;
-	
+	std::vector<std::string> tmp_commands;
 	while(running) //medans programmet kÃ¶rs
 	{
 	  network_timer.start();
@@ -62,56 +62,30 @@ void Menu::run()
 			   running = false;// avsluta programmet
 			if(event.type == SDL_KEYDOWN)
 			  {
-			    inp->handleInput(event);
-			   
-			    if(event.key.keysym.sym == SDLK_RETURN)
+			    if(chat_active)
 			      {
-				net->sendChat(inp->getStr());
-				inp->clear();
+				inp->handleInput(event);
+				if(event.key.keysym.sym == SDLK_RETURN)
+				  {
+				    net->sendChat(inp->getStr());
+				    inp->clear();
+				  }
 			      }
-			     if(event.key.keysym.sym == SDLK_1)
+			    else
 			      {
-				net->sendChat("join");
-				}/*
-			    if(event.key.keysym.sym == SDLK_2)
-			      {
-				net->sendChat("en glad client!!");
-			      }
-			    if(event.key.keysym.sym == SDLK_3)
-			      {
-				net->sendChat("HEEEEJSAN!");
-			      }
-			    if(event.key.keysym.sym == SDLK_4)
-			      {
-				net->sendChat("44444444444444444");
-			      }/*
-			    if(event.key.keysym.sym == SDLK_5)
-			      {
-				net->getChat();
-				std::string tmp_str = "";
-				tmp_str += net->getLog().at(0).first;
-				tmp_str += "   |   ";
-				tmp_str += net->getLog().at(0).second;
-				dynamic_cast<Textbox*>(all_objects.at(0)) -> setText(tmp_str);
-			      }
-			    if(event.key.keysym.sym == SDLK_6)
-			      {
-				net->getChat();
-				std::string tmp_str = "";
-				tmp_str += net->getLog().at(1).first;
-				tmp_str += "   |   ";
-				tmp_str += net->getLog().at(1).second;
-				dynamic_cast<Textbox*>(all_objects.at(0)) -> setText(tmp_str);
-				}*/
-			    /* if(event.key.keysym.sym == SDLK_RETURN)
-			      {
-				net->sendChat(inp->getStr());
-				inp->clear();
-				//net->sendChat(inp->getStr());
-				}*/
-			    if(event.key.keysym.sym == SDLK_p)
-			      {
-				net->showMeDasLog();
+			
+				if(event.key.keysym.sym == SDLK_1)
+				  {
+				    net->sendCommand("attack");
+				  }
+				if(event.key.keysym.sym == SDLK_2)
+				  {
+				    net->sendCommand("defend");
+				  }
+				if(event.key.keysym.sym == SDLK_3)
+				  {
+				    net->sendCommand("steal");
+				  }
 			      }
 			  }
 		}
@@ -128,7 +102,20 @@ void Menu::run()
 		    
 		  }
 		dynamic_cast<Textbox*>(all_objects.at(0)) -> setText(tmp_str);
-
+		
+		if( !net->getCommandQueue().empty() )
+		  {
+		    tmp_commands.push_back(net->getCommandQueue().front());
+		    net->getCommandQueue().pop();
+		  }
+		
+		std::string tmp_str2 = " ";
+		for(auto i : tmp_commands)
+		  {
+		    tmp_str2 += i;
+		    tmp_str2 += "<\n> ";
+		  }
+		dynamic_cast<Textbox*>(all_objects.at(5)) ->setText(tmp_str2);
 		paint();
 		SDL_Flip(screen);  
 		SDL_Delay(15);
