@@ -14,6 +14,7 @@
 #include <iostream>
 #include <queue>
 #include <sstream>
+#include <utility>
 
 
 class SgsServer
@@ -27,6 +28,8 @@ private:
   std::vector<IPaddress> ip_addresses;
   std::vector<TCPsocket> all_clients;
 
+  //vektor med ip adresser och knytna namn för att undvika dubbla andlutningar
+  std::vector< std::pair<std::string, std::string> > ip_and_name;
   //används ej
   SDLNet_SocketSet clients;
 
@@ -35,20 +38,25 @@ private:
   IPaddress server_ip;
   SDLNet_SocketSet server_set;
   
-  std::string received_string;
+  
   std::string send_string;
 
-  //temporär lagring av inkommen chat
+  //2 köer som lagrar inkommen chat / kommandon
   std::queue< std::string> chat_queue; 
-
+  std::queue< std::string> command_queue;
 
   bool running;
+
+  std::string calculateIp(Uint32);
+  void sendToClients();
+  
+  void addChat(std::string);
+  void addCommand(std::string);
+
 public:
   SgsServer();
   ~SgsServer();
-
   void run();
   
-
 };
 #endif

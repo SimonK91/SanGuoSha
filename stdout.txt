@@ -1,12 +1,19 @@
 socket ready
-recv
-strangen: join mottogs
-Join
-130.236.210.127
-IP: 130.236.210.127
+TYPE: join
+IP: 130.236.211.76
 socket ready
+TYPE: chat
+skickar chat:chatAnders|hejsan
 socket ready
-recv
-strangen: hejsan mottogs
-skicar :Client Xhejsan
+TYPE: chat
+skickar chat:chatAnders|asdasdasd
 socket ready
+TYPE: chat
+skickar chat:chatAnders|asd
+socket ready
+TYPE: chat
+skickar chat:chatAnders|asd
+socket ready
+TYPE: chat
+skickar chat:chatAnders|asd
+exit OK!

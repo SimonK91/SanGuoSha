@@ -2,20 +2,18 @@
 #include <iostream>
 #include <sstream>
 
+
 Network::Network()
 {
   SDLNet_Init();
   
-  SDLNet_ResolveHost(&server_ip, "130.236.210.127", 1443);
+ 
   SDLNet_ResolveHost(&program_ip, NULL, 1442);
  
   incomming = SDLNet_TCP_Open(&program_ip);
   in_set =  SDLNet_AllocSocketSet(1);
   SDLNet_TCP_AddSocket(in_set, incomming);
  
-  /* out_set = SDLNet_AöllocSocketSet(1);
-  SDLNet_TCP_AddSocket(out_set, outgoing);
-  */
 }
 
 
@@ -25,52 +23,81 @@ Network::~Network()
 
 void Network::sendChat(std::string message)
 {
-  std::string name = "";
+  std::string type = "chat";
+  std::string name = "Anders";
   outgoing = SDLNet_TCP_Open(&server_ip);
-  if(outgoing ==  NULL)
+  if(outgoing == NULL)
     {
-      std::cout << "nope" << std::endl;
+      std::cerr << "Kunde inte skicka chat messages till servern" << std::endl;
     }
-  if( outgoing != NULL )
+  else
     {
-      //message += "|";
-      // message += name;
-      SDLNet_TCP_Send(outgoing, (void*)message.c_str(), message.length());
-      //std::cout << "message: " << message << "  length: " << message.length() << "  size: " << message.size() << std::endl;
+      std::string complete_message = type;
+      complete_message += name;
+      complete_message += "|";
+      complete_message += message;
+      SDLNet_TCP_Send(outgoing, (void*)complete_message.c_str(), complete_message.length());
     }
-  
     SDLNet_TCP_Close(outgoing);
 }
 
 void Network::sendCommand(std::string command)
 {
+  std::string type = "comm";
   
+  outgoing = SDLNet_TCP_Open(&server_ip);
+  if(outgoing == NULL)
+    {
+      std::cerr << "Kunde inte skicka kommandon till servern" << std::endl;
+    }
+  else
+    {
+      std::string complete_command = type;
+      complete_command += command;
+      SDLNet_TCP_Send(outgoing, (void*)complete_command.c_str(), complete_command.length());
+    }
+  SDLNet_TCP_Close(outgoing);
   
 }
 
-void Network::getChat()
+void Network::getData()
 {
   char buffer[512] = {0};
-  std::string recieved = "";
-  std::string name = "";
-  std::string message = "";
+  std::string received = "";
+  std::string type_received = "";
+
   int ready = -1;
   ready = SDLNet_CheckSockets(in_set, 10);
- 
-  // std::cout << "ready: " << ready << std::endl;
+
       if(SDLNet_SocketReady(incomming))
 	{
 	  program_socket = SDLNet_TCP_Accept(incomming);
 	  
 	  if(SDLNet_TCP_Recv(program_socket, buffer, 512) > 0)
 	    {
-	      recieved = buffer;
-	      if(recieved != "")
+	      received = buffer;
+	      if(received != "")
 		{
-		  
-		  name = recieved.substr(0,8);
-		  message = recieved.substr(8,recieved.size());
-		  chat_log.push_back(std::make_pair(name,message));
+		  type_received.append(received.begin(), received.begin()+4);
+		  if(type_received == "chat")
+		    {
+		      std::string name = "";
+		      std::string message = "";
+		      size_t string_pos = received.find_first_of("|");
+		      name.append(received.begin()+4, received.begin()+string_pos);
+		      message.append(received.begin()+string_pos+1, received.end() );
+		      chat_log.push_back(std::make_pair(name,message));
+		    }
+		  else if(type_received == "comm")
+		    {
+		      std::string command = "";
+		      command.append(received.begin()+4, received.end());
+		      command_queue.push(command);
+		    }
+		  else
+		    {
+		      std::cerr << "Oväntad data från server: " << received << "  av typ: " << type_received << std::endl;
+		    }
 		}  
 	    }
 	  else
@@ -81,10 +108,6 @@ void Network::getChat()
 
 }
 
-bool Network::getCommand()
-{
-  return false;
-}
 
 const std::vector<std::pair<std::string,std::string>>& Network::getLog()
 {
@@ -98,22 +121,16 @@ void Network::showMeDasLog()
       std::cout << i.first << "   " << i.second << std::endl;
     }
 
-  Uint32* dotQuad = &program_ip.host;
- 
-  std::stringstream ss;
-  ss << dotQuad;
-  
-  std::string my_ip_address;
-  my_ip_address = ss.str();
-  /*
-  my_ip_address += (unsigned short)dotQuad[0];
-  my_ip_address += ".";
-  my_ip_address += (unsigned short)dotQuad[1];
-  my_ip_address += ".";
-  my_ip_address += (unsigned short)dotQuad[2];
-  my_ip_address += ".";
-  my_ip_address += (unsigned short)dotQuad[3];
-  */
-  std::cout << "my ip is:  " << my_ip_address  << std::endl;
+}
 
+void Network::connectToServer(std::string server_ip_string)
+{
+  SDLNet_ResolveHost(&server_ip, server_ip_string.c_str(), 1443);
+  outgoing = SDLNet_TCP_Open(&server_ip);
+  
+  std::string name = "anders";
+  std::string join_server = "join";
+  join_server += name;
+  SDLNet_TCP_Send(outgoing, (void*)join_server.c_str(),join_server.length());
+  SDLNet_TCP_Close(outgoing);
 }

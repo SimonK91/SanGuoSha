@@ -5,6 +5,8 @@
 #include <string>
 #include "SDL/SDL_thread.h"
 #include <vector>
+#include "settings.h"
+#include <queue>
 
 class Network
 {
@@ -26,7 +28,9 @@ class Network
   TCPsocket outgoing;
 
   std::vector< std::pair<std::string,std::string> >  chat_log;
+  std::queue< std::string> command_queue;
   
+  //Settings set;
   
  public:
   Network();
@@ -34,10 +38,10 @@ class Network
 
   void sendChat(std::string message);
   void sendCommand(std::string command);
-  void getChat();
-  bool getCommand();
+  void getData();
   const std::vector<std::pair<std::string,std::string>>& getLog();
   void showMeDasLog();
+  void connectToServer(std::string);
 
 
 

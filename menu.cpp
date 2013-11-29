@@ -24,7 +24,8 @@ void Menu::run()
   bool quit = false;
   Timer network_timer;
   Network* net = new Network();
-  //
+  net->connectToServer("130.236.211.76");
+  bool chat_active = false;
 	m.play();
 	Uint8 *keystates = SDL_GetKeyState(nullptr);
 	std::string command;
@@ -68,10 +69,10 @@ void Menu::run()
 				net->sendChat(inp->getStr());
 				inp->clear();
 			      }
-			    /* if(event.key.keysym.sym == SDLK_1)
+			     if(event.key.keysym.sym == SDLK_1)
 			      {
 				net->sendChat("join");
-				}
+				}/*
 			    if(event.key.keysym.sym == SDLK_2)
 			      {
 				net->sendChat("en glad client!!");
@@ -102,12 +103,12 @@ void Menu::run()
 				tmp_str += net->getLog().at(1).second;
 				dynamic_cast<Textbox*>(all_objects.at(0)) -> setText(tmp_str);
 				}*/
-			    if(event.key.keysym.sym == SDLK_RETURN)
+			    /* if(event.key.keysym.sym == SDLK_RETURN)
 			      {
 				net->sendChat(inp->getStr());
 				inp->clear();
 				//net->sendChat(inp->getStr());
-			      }
+				}*/
 			    if(event.key.keysym.sym == SDLK_p)
 			      {
 				net->showMeDasLog();
@@ -116,12 +117,12 @@ void Menu::run()
 		}
 		
 		dynamic_cast<Textbox*>( all_objects.at(4))->setText(inp->getStr());
-		net->getChat();
-		std::string tmp_str = "";
+		net->getData();
+		std::string tmp_str = " ";
 		for(auto i : net->getLog())
 		  {
 		    tmp_str += i.first;
-		    tmp_str += "   |   ";
+		    tmp_str += " | ";
 		    tmp_str += i.second;
 		    tmp_str += "<\n> " ;
 		    
