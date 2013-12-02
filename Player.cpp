@@ -28,7 +28,9 @@ Player::~Player()
 void Player::setHero(HeroCard* character)
 {
   max_life = character->getHP();
-  current_life = character->getHP();
+  if(role == 0)
+	++max_life;
+  current_life = max_life;
   male = character->getMale();
   hero = character;
 
