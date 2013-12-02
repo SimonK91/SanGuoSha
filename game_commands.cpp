@@ -146,6 +146,7 @@ void Game::run_command(const std::string& what_command)
 					}
 				}
 			}
+			p -> setSelected(false);
 		}
 	}
 	else if(what_command == "discard_card")
@@ -201,14 +202,13 @@ void Game::run_command(const std::string& what_command)
 		
 		
 		// std::cout << "fixed discard_pile" << std::endl;
-		target_player = nullptr;
-		delete all_objects.back();
-		all_objects.pop_back();
 		
 		target_player -> setCurrentPlayer(false);
 		target_player = nullptr;
 		current_player -> setCurrentPlayer(true);
 
+		delete all_objects.back();
+		all_objects.pop_back();
 		// std::cout << "dodge done!" << std::endl;
 	}
 	else if(what_command == "take_damage")
@@ -220,7 +220,10 @@ void Game::run_command(const std::string& what_command)
 				self = i;
 			}
 		}
+		std::cout << "current hp: " << target_player -> getCurrentHP() << std::endl;
 		target_player -> modifyLife(-1);
+		
+		std::cout << "current hp after mod: " << target_player -> getCurrentHP() << std::endl;
 		target_player -> setCurrentPlayer(false);
 		target_player = nullptr;
 		

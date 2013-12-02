@@ -96,6 +96,7 @@ void applySurface(int x, int y, Surface& source, Surface& destination, SDL_Rect*
 Surface Init(const int& SCREEN_WIDTH, const int& SCREEN_HEIGHT, const int& SCREEN_BPP)
 {
 	Surface* screen = new Surface("screen");
+
 	//Initialize all SDL subsystems
 	if( SDL_Init( SDL_INIT_EVERYTHING ) == -1)
 	{

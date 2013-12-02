@@ -220,7 +220,7 @@ void Game::run()
 	card_deck -> pushTop(new GameCard(6,spades,"blue_steel_blade.png","weapon_blue_steel_blade 5 0")); //ability id, target type, target range
 	card_deck -> pushTop(new GameCard(2,spades,"double_gender_sword.png","weapon_double_gender_sword_equip 5 0")); //ability id, target type, target range
 	
-	for(; running ; )
+	while(running)
 	{
 	//phase 1)
 	//start of turn
@@ -230,6 +230,10 @@ void Game::run()
 		{
 			players.at(self) -> setCurrentPlayer(true);
 			current_player = players.at(self);
+			for(auto p : players)
+			  {
+			    p->setSelected(false);
+			  }
 			state = 2;
 		}
 	//phase 2
@@ -387,10 +391,19 @@ void Game::UI()
 		//fixa med players o deras event!
 		for(Player* p : players)
 		{
-			if(p -> handleEvent(event))
+		 
+		  if(p -> handleEvent(event))
+		    {
+		      target_player = p;
+		      p->setSelected(true);
+		      for(Player* other_players : players)
 			{
-				target_player = p;
+			  if(other_players != p)
+			    {
+			      other_players->setSelected(false);
+			    }
 			}
+		    }
 		}
 		
 		

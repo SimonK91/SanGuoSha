@@ -121,5 +121,3 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 	
 	return gameCard;
 }
-
-
