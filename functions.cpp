@@ -13,7 +13,7 @@ void Surface::setImage(Surface tmp)
 	if(image != nullptr)
 		SDL_FreeSurface( image );
 	image = tmp.getImage();
-
+	name = tmp.getName();
 }
 void Surface::setImage(SDL_Surface* tmp)
 {
@@ -43,7 +43,7 @@ SDL_Surface* loadImage(const string& filename,bool transparant, const Uint8& red
 	SDL_Surface* loadedImage = nullptr;
 	
 	//The optimized image that will be used
-	SDL_Surface* optimizedImage = nullptr;
+	SDL_Surface* optimizedImage;
 	
 	// laddar in bilden till temporÃ¤ra
 	loadedImage = IMG_Load( filename.c_str() );
@@ -96,7 +96,6 @@ void applySurface(int x, int y, Surface& source, Surface& destination, SDL_Rect*
 Surface Init(const int& SCREEN_WIDTH, const int& SCREEN_HEIGHT, const int& SCREEN_BPP)
 {
 	Surface* screen = new Surface("screen");
-
 	//Initialize all SDL subsystems
 	if( SDL_Init( SDL_INIT_EVERYTHING ) == -1)
 	{

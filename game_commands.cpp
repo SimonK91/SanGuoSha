@@ -139,8 +139,9 @@ void Game::run_command(const std::string& what_command)
 					if(hand.at(i) -> isActive())
 					{
 						GameCard* card = p -> playCard(i);
-						run_effect(card -> getAbility());
-						discard_pile -> pushBottom(card);
+						card = run_effect(card);
+						if(card != nullptr)
+							discard_pile -> pushBottom(card);
 						break; //safty if 2 cards is active!
 					}
 				}
@@ -166,6 +167,68 @@ void Game::run_command(const std::string& what_command)
 				}
 			}
 		}
+	}
+	else if(what_command == "dodge")
+	{
+		// std::cout << "dodge begin" << std::endl;
+		for(int i = 0; i < players.size(); ++i)
+		{
+			if(current_player == players.at(i))
+			{
+				self = i;
+			}
+		}
+		
+		// std::cout << "player fixed" << std::endl;
+		std::vector<GameCard*> hand = target_player -> getHand();
+		GameCard* card = nullptr;
+		
+		// std::cout << "target player used" << std::endl;
+		for(int i = 0; i < hand.size(); ++i)
+		{
+			if(hand.at(i) -> getAbility() == "dodge")
+			{
+				card = target_player -> playCard(i);
+				break;
+			}
+		}
+		
+		// std::cout << "hand gone through" << std::endl;
+		if(card == nullptr)
+			target_player -> modifyLife(-1);
+		else
+			discard_pile -> pushBottom(card);
+		
+		
+		// std::cout << "fixed discard_pile" << std::endl;
+		target_player = nullptr;
+		delete all_objects.back();
+		all_objects.pop_back();
+		
+		target_player -> setCurrentPlayer(false);
+		target_player = nullptr;
+		current_player -> setCurrentPlayer(true);
+
+		// std::cout << "dodge done!" << std::endl;
+	}
+	else if(what_command == "take_damage")
+	{
+		for(int i = 0; i < players.size(); ++i)
+		{
+			if(current_player == players.at(i))
+			{
+				self = i;
+			}
+		}
+		target_player -> modifyLife(-1);
+		target_player -> setCurrentPlayer(false);
+		target_player = nullptr;
+		
+		current_player -> setCurrentPlayer(true);
+		
+		target_player = nullptr;
+		delete all_objects.back();
+		all_objects.pop_back();
 	}
 	else
 	{

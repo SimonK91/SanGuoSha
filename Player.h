@@ -9,8 +9,21 @@
 
 struct Equipment
 {
-  std::vector<Object::GameCard*> equipment;
-  
+	Object::GameCard* def_horse = nullptr;
+	Object::GameCard* off_horse = nullptr;
+	Object::GameCard* weapon = nullptr;
+	Object::GameCard* shield = nullptr;
+	~Equipment()
+	{
+	if(weapon != nullptr)
+		delete weapon;
+	if(shield != nullptr)
+		delete shield;
+	if(off_horse != nullptr)
+		delete off_horse;
+	if(def_horse != nullptr)
+		delete def_horse;
+	}
 };
 
 class Player
@@ -21,7 +34,6 @@ class Player
   int max_life;
   bool male;
   bool current_player;
-  Equipment eq;
   int game_status;
   int player_nr;
   std::vector<Object::GameCard*> hand;
@@ -31,6 +43,8 @@ class Player
  public:
   Player();
   ~Player();
+  Equipment equipment;
+  
 
   void setHero(Object::HeroCard*);
   Object::GameCard* playCard(int);
@@ -41,7 +55,21 @@ class Player
 
   void doEffect(std::string);
 
-  void modifyLife(int mod){ current_life += mod; }
+  void modifyLife(int mod)
+  { 
+	if(current_life < max_life)
+		current_life += mod; 
+  }
+  void addJudgementCard(Object::GameCard* gc)
+  {
+	judgement_cards.push(gc);
+  }
+  Object::GameCard* getJudgementCard()
+  {
+	Object::GameCard* gc = judgement_cards.top();
+	judgement_cards.pop();
+	return gc;
+  }
   int getLife(){ return current_life; }
   void setStatus(unsigned);
   void setCurrentPlayer(bool cp){ current_player = cp; }

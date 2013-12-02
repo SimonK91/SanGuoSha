@@ -100,14 +100,14 @@ private:
 	
 	void paint();
 	void run_command(const std::string& what_command);
-	void run_effect(const std::string& effect);
+	Object::GameCard* run_effect(Object::GameCard* gc);
 	bool loadup(){return true;} //dne är skriven här
 	void UI();
 public:
 	~Game() = default;
 	Game() = default;
 	
-	Game(Surface scr) : SGS(scr), selected_card(nullptr), target_player(nullptr), current_player(nullptr)
+	Game(Surface scr) : SGS(scr), target_player(nullptr),current_player(nullptr), selected_card(nullptr)
 	{
 		self = 0; //ska komma utifrån!!
 		card_deck = new Object::CardList("standard_playing_cards");

@@ -217,9 +217,10 @@ void Game::run()
 	player = nullptr;
 	
 	// running = true;
-	card_deck -> pushTop(new GameCard(7,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-
-	for(int i = 0; running ; )
+	card_deck -> pushTop(new GameCard(6,spades,"blue_steel_blade.png","weapon_blue_steel_blade 5 0")); //ability id, target type, target range
+	card_deck -> pushTop(new GameCard(2,spades,"double_gender_sword.png","weapon_double_gender_sword_equip 5 0")); //ability id, target type, target range
+	
+	for(; running ; )
 	{
 	//phase 1)
 	//start of turn
@@ -227,8 +228,8 @@ void Game::run()
 		// std::cout << "the state: " << state << std::endl;
 		if(state == 1)
 		{
-			players.at(i) -> setCurrentPlayer(true);
-			current_player = players.at(i);
+			players.at(self) -> setCurrentPlayer(true);
+			current_player = players.at(self);
 			state = 2;
 		}
 	//phase 2
@@ -252,13 +253,13 @@ void Game::run()
 				
 			//draw 2 cards
 			card = dynamic_cast<GameCard*>(card_deck -> drawCard());
-			players.at(i) -> recieveCard(card);
+			players.at(self) -> recieveCard(card);
 			
 			if(card_deck -> empty())
 				std::swap(card_deck,discard_pile);
 						
 			card = dynamic_cast<GameCard*>(card_deck -> drawCard());
-			players.at(i) -> recieveCard(card);
+			players.at(self) -> recieveCard(card);
 			
 				/*
 				<insert hero abilitys here>
@@ -285,7 +286,7 @@ void Game::run()
 	//other cards are discarded
 		else if(state == 5)
 		{
-			if(players.at(i) -> getCurrentHP() >= players.at(i) -> getHandSize())
+			if(players.at(self) -> getCurrentHP() >= players.at(self) -> getHandSize())
 			{
 				state = 6;
 			}
@@ -296,9 +297,10 @@ void Game::run()
 	//special hero abilities can trigger here (shapeshifter, diao chan
 		else if(state == 6)
 		{	
-			players.at(i) -> setCurrentPlayer(false);
-			i = (i + 1) % players.size();
+			players.at(self) -> setCurrentPlayer(false);
+			self = (self + 1) % players.size();
 			state = 1;
+			target_player = nullptr;
 		}
 		
 		// if(i == 1)
@@ -336,6 +338,11 @@ bool Game::exit()
 		{
 			delete all_objects.back();
 			all_objects.pop_back();
+		}
+		while(!players.empty())
+		{
+			delete players.back();
+			players.pop_back();
 		}
 		delete card_deck;
 		delete hero_deck;

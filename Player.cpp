@@ -19,7 +19,7 @@ Player::~Player()
 	{
 		delete judgement_cards.top();
 		judgement_cards.pop();
-	}
+	}		
 	delete hero;
 }
 
@@ -59,10 +59,25 @@ void Player::recieveCard(GameCard* new_card)
 
 GameCard* Player::loseEquipment(int index)
 {
-  GameCard* lost_equipment = eq.equipment.at(index);
+	GameCard* lost_equipment = nullptr;
   
-  std::vector<GameCard*>::iterator it = eq.equipment.begin() + index;
-  eq.equipment.erase(it);
+	switch(index)
+	{
+	case 0:
+		lost_equipment = equipment.def_horse;
+		break;
+	case 1:
+		lost_equipment = equipment.off_horse;
+		break;
+	case 2:
+		lost_equipment = equipment.weapon;
+		break;
+	case 3:
+		lost_equipment = equipment.shield;
+		break;
+	}
+  // std::vector<GameCard*>::iterator it = eq.equipment.begin() + index;
+  // eq.equipment.erase(it);
 
   return lost_equipment;
   

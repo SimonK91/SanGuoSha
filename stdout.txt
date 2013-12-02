@@ -1,4 +1,6 @@
+skapa skreen
 Initialize is okay!
+screen skapad
 mainMenu skapas
 bakgrundsbilden laddas
 en button skapas
@@ -20,8 +22,6 @@ för objekt 3:
 dynamic cast success
 för objekt 4:
 normal delete
-life: 4
-life: 3
 game.exit() okay!
 Write settings okay!
 exit OK!

@@ -7,10 +7,11 @@ namespace Object
 Card::Card(std::string filename) : ActiveObject()
 {
 	image = loadImage("Images/Cards/"+filename, true);
+	image.setName(filename.substr(0,filename.size()-4));
 	if(!image.getImage())
 		throw std::runtime_error("could not open file: Images/Cards/" +filename);
-	box.w = 200;
-	box.h = 281;
+	box.w = image -> w;
+	box.h = image -> h;
 }
 
 void Card::setPosition(const int& x, const int& y)
