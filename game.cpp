@@ -76,6 +76,7 @@ bool Game::setup()
 			
 			if(emperor == self)
 			{
+				has_window = true;
 				Window* characters = new Window(100,100,600,550);
 				characters->addCard(hero1,0,0);
 				characters->addCard(hero2,200,0);
@@ -183,6 +184,7 @@ bool Game::setup()
 
 void Game::run()
 {
+	game_stage = 1;
 //game
 	//clean up!
 	while(!players.empty())
@@ -222,7 +224,7 @@ void Game::run()
 	players.push_back(player);	
 	player = nullptr;
 	
-	// running = true;
+	running = true;
 	card_deck -> pushTop(new GameCard(6,spades,"blue_steel_blade.png","weapon_blue_steel_blade 5 0")); //ability id, target type, target range
 	card_deck -> pushTop(new GameCard(2,spades,"double_gender_sword.png","weapon_double_gender_sword_equip 5 0")); //ability id, target type, target range
 	
@@ -232,6 +234,7 @@ void Game::run()
 	  std::string cmp = timer->time_ran_out();
 	  if(cmp != "")
 	   {
+	     std::cout << "Kor kommandot: " << cmp << std::endl;
 	     run_command(cmp);
 	     //timer->stop();
 	   }
@@ -268,7 +271,6 @@ void Game::run()
 	//draw 2 cards
 		else if(state == 3)
 		{
-		 
 			//check if card_deck is empty
 			if(card_deck -> empty())
 				std::swap(card_deck,discard_pile);
@@ -308,13 +310,10 @@ void Game::run()
 	//other cards are discarded
 		else if(state == 5)
 		{
-		  
-		  
 			if(players.at(self) -> getCurrentHP() >= players.at(self) -> getHandSize())
 			{
 				state = 6;
 			}
-			
 		}
 
 	//phase 6
@@ -333,12 +332,15 @@ void Game::run()
 			    timer->setCommand("end_turn");
 			  }
 		}
-		
-		// if(i == 1)
-		// {
-			// //winning test!
-		// }
-	//next player, start from phase 1
+	//phase 7
+        //other player phase
+        //other heroes responds to your played cards
+		else if(state == 7)
+		  {
+		    
+		    
+		  }
+
 
 		UI(); //call the UI for repaint
 	}//player loop
@@ -391,10 +393,10 @@ void Game::UI()
 {
 	Uint8 *keystates = SDL_GetKeyState(nullptr);
 	std::string command;
-	static Button* discard_button = new Button("Disc", 800, 685, "discard_card","Images/Gui/smallButton.png",20);
-	static Button* play_button = new Button("Play", 800, 575, "play_card","Images/Gui/smallButton.png",20);
-	static Button* end_button = new Button("End", 800, 630, "end_turn","Images/Gui/smallButton.png",20);
-	
+	static Button discard_button("Discard", 800, 685, "discard_card","Images/Gui/smallButton.png",20);
+	static Button play_button("Play", 800, 575, "play_card", "Images/Gui/smallButton.png",20);
+	static Button end_button("End", 800, 630, "end_turn", "Images/Gui/smallButton.png",20);
+
 	fps.start();
 	while( SDL_PollEvent( &event)) //sÃ¥ lÃ¤nge som det finns en event
 	{
@@ -414,34 +416,63 @@ void Game::UI()
 				run_command(command);
 			}
 		}
-		
+
+		std::string button_command;
 		if(state == 5)
 		  {
-			run_command(discard_button -> handleEvent(event));
+			button_command = discard_button.handleEvent(event);
+			run_command(button_command);
 		  }
 		else
 		  {
-		    run_command(play_button -> handleEvent(event));
-		    run_command(end_button -> handleEvent(event));
-		  }
-		//fixa med players o deras event!
-		for(Player* p : players)
+		    button_command = play_button.handleEvent(event);
+		    run_command(button_command);
+		    if(button_command == "")
+		      {
+			button_command = end_button.handleEvent(event);
+			if(button_command != "")
+			  {
+			    SDL_Event temp_event = event;
+			    temp_event.motion.x = -100;
+			    temp_event.motion.y = -100;
+			    current_player -> handleHand(temp_event);
+			    run_command(button_command);
+			  }
+		      }
+		  }	
+		//kolla spelare och nuvarande handen
+		if(event.type == SDL_MOUSEBUTTONUP && !has_window && game_stage == 1)
 		{
-		 
-		  if(p -> handleEvent(event))
-		    {
-		      target_player = p;
-		      p->setSelected(true);
-		      for(Player* other_players : players)
+			//om inte, gör detta!
+			if(button_command == "")
 			{
-			  if(other_players != p)
-			    {
-			      other_players->setSelected(false);
-			    }
+				bool player_pressed = false;
+				//rensa selection
+				for(Player* p : players)
+				{
+					p->setSelected(false);
+				}
+				target_player = nullptr;
+			
+				//fixa med players o deras event!
+				for(Player* p : players)
+				{
+					if(p -> handleEvent(event))
+					{
+						target_player = p;
+						p->setSelected(true);
+						player_pressed = true;
+						break;
+					}
+				}
+				if(!player_pressed && button_command == "")
+				{
+					if(current_player != nullptr)
+						current_player -> handleHand(event);
+					current_player -> fixCardPosition();
+				}
 			}
-		    }
 		}
-		
 		
 		   // om krysset uppe till hÃ¶ger eller alt + F4 blev intryckt
 		if( event.type == SDL_QUIT || (keystates[SDLK_LALT] && event.key.keysym.sym == SDLK_F4))
@@ -453,16 +484,14 @@ void Game::UI()
 
 	//måla lite fint
 	paint();
-	
-	
 	if(state == 5)
 	  {
-		discard_button -> paint(screen);
+		discard_button.paint(screen);
 	  }
 	else
 	  {
-	    play_button ->paint(screen);
-	    end_button ->paint(screen);
+	    play_button.paint(screen);
+	    end_button.paint(screen);
 	  }
 	SDL_Flip(screen.getImage());                   // Skriv ut bilden pÃ¥ skÃ¤rmen
 	fps.regulateFPS();

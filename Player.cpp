@@ -28,7 +28,9 @@ Player::~Player()
 void Player::setHero(HeroCard* character)
 {
   max_life = character->getHP();
-  current_life = character->getHP();
+  if(role == 0)
+	++max_life;
+  current_life = max_life;
   male = character->getMale();
   hero = character;
 
@@ -209,50 +211,78 @@ void Player::paint(Surface screen, int x_pos, int y_pos)
 
 void Player::fixCardPosition()
 {
-  int x_pos = 161;
+	int active = -1;
+	for (int i = 0 ; i < hand.size() ; ++i)
+	{
+		if(hand.at(i)->isActive())
+			active = i;
+	}
+	
+  double x_pos = 161;
   int y_pos = 551;
-  int offset;
-  if(500/hand.size()-1 > 153)
-    {
-      offset = 153;
-    }
-  else
-    {
-      offset = 500/hand.size()-1;
-    }
+  double offset;
+	if(hand.size() > 4 && ( active == -1 || hand.size()-1 == active)) // handen större än 4 OCH (inget kort är aktivt, eller sista kortet är aktivt)
+		offset = 480 / (hand.size()-1.0);
+	else if(hand.size() > 4)
+		offset = (480 - 135) / (hand.size()-2.0);
+	else
+		offset = 153;
  
-  for(auto i : hand)
+  for(int i = 0 ; i < hand.size() ; ++i)
     {
-      i->setPosition(x_pos, y_pos);
-      x_pos += offset;
+	  if(i != active)
+	  {
+        hand.at(i)->setPosition((int)x_pos, y_pos);
+		x_pos += offset;
+	  }
+	  else if(hand.size() <= 4)
+      {
+	    hand.at(i)->setPosition((int)x_pos, y_pos-20);
+		x_pos += offset;
+	  }
+	  else
+      {
+	    hand.at(i)->setPosition((int)x_pos, y_pos-20);
+		x_pos += 135;
+	  }
     }
-  hero->setPosition(8, 555);
+	if(hero != nullptr)
+		hero->setPosition(8, 555);	
 }
 
+
+bool Player::handleHand(const SDL_Event& event)
+{
+	for(int i = hand.size()-1 ; i >= 0 ; --i)
+	{
+		if(hand.at(i) -> handleEvent(event) != "")
+		{
+			SDL_Event event2 = event;
+			event2.motion.x = -100;
+			event2.motion.y = -100;
+			for(int j = i-1 ; j >= 0 ; --j)
+				hand.at(j) -> handleEvent(event2);
+			return true;
+		}
+	}
+	return false;
+}
 bool Player::handleEvent(const SDL_Event& event)
 {	
   if(hero != nullptr)
     {
-	if(current_player)
-	{
-		for(unsigned i = 0; i < hand.size(); ++i)
+		if(!current_player)
 		{
-			hand.at(i) -> handleEvent(event);
+			std::string com = "";
+			if(hero != nullptr)
+			{
+				com = hero -> handleEvent(event);
+			}
+			if(com != "")
+			{
+				return true;	//den blev fucking klickad!
+			}
 		}
-	}
-	else
-	{
-		std::string com = "";
-		if(hero != nullptr)
-		  {
-			com = hero -> handleEvent(event);
-		  }
-		if(com != "")
-		  {
-
-			return true;	//den blev fucking klickad!
-		  }
-	}
     }	
 	return false;
 }

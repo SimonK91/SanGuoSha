@@ -125,6 +125,30 @@ line 475
 player line 466
 player line 469
 line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
 libpng warning: Interlace handling should be turned on when using png_read_image
 libpng warning: Interlace handling should be turned on when using png_read_image
 player line 466
@@ -161,6 +185,1563 @@ libpng warning: Interlace handling should be turned on when using png_read_image
 libpng warning: Interlace handling should be turned on when using png_read_image
 libpng warning: Interlace handling should be turned on when using png_read_image
 libpng warning: Interlace handling should be turned on when using png_read_image
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
+player line 466
+player line 469
+line 475
 player line 466
 player line 469
 line 475
