@@ -24,7 +24,7 @@ namespace Object
   
   PopupText::~PopupText()
   {
-    cleanUp( {background, text_area},{font});
+    cleanUp({font});
   }
   
   void PopupText::setColor(std::string color)
@@ -79,7 +79,7 @@ namespace Object
     return "";
   }
   
-  void PopupText::paint(SDL_Surface* to_where)
+  void PopupText::paint(Surface& to_where)
   {
     SDL_Rect text_rect;
     text_rect.x = 0;
@@ -136,35 +136,27 @@ namespace Object
     tmp_border = loadImage("Images/Gui/window/tb.png", true);
     applySurface(0,0, tmp_border, background, nullptr);
     frame_size = tmp_border->h;
-    SDL_FreeSurface(tmp_border);
     
     tmp_border = loadImage("Images/Gui/window/lb.png", true);
     applySurface(0,0, tmp_border, background, nullptr);
-    SDL_FreeSurface(tmp_border);
 
     tmp_border = loadImage("Images/Gui/window/bb.png", true);
     applySurface(0,text_rect.h - tmp_border->h, tmp_border, background, nullptr);
-    SDL_FreeSurface(tmp_border);
 
     tmp_border = loadImage("Images/Gui/window/rb.png", true);
     applySurface(text_rect.w - tmp_border->w, 0, tmp_border, background, nullptr);
-    SDL_FreeSurface(tmp_border);
 
     tmp_border = loadImage("Images/Gui/window/ltc.png", true);
     applySurface(0,0, tmp_border, background, nullptr);
-    SDL_FreeSurface(tmp_border);
-    
+        
     tmp_border = loadImage("Images/Gui/window/rtc.png", true);
     applySurface(text_rect.w - tmp_border->w,0, tmp_border, background, nullptr);
-    SDL_FreeSurface(tmp_border);
-    
+        
     tmp_border = loadImage("Images/Gui/window/lbc.png", true);
     applySurface(0, text_rect.h - tmp_border->h, tmp_border, background, nullptr);
-    SDL_FreeSurface(tmp_border);
- 
+     
     tmp_border = loadImage("Images/Gui/window/rbc.png", true);
     applySurface(text_rect.w - tmp_border->w, text_rect.h - tmp_border->h, tmp_border, background, nullptr);
-    SDL_FreeSurface(tmp_border);
-  }
+    }
   
 }//namespace

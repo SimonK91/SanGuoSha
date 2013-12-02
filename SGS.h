@@ -1,6 +1,7 @@
 #ifndef GAME_STATE_H
 #define GAME_STATE_H
 
+#include "FrameRateFixer.h"
 #include "music.h"
 #include "functions.h"
 #include "Button.h"
@@ -10,21 +11,24 @@
 #include "Checkbox.h"
 #include "CardList.h"
 
+#include "Player.h"
+
 #include <vector>
 
 class SGS
 {
 protected:
 //basvariabler som behövs för att SGS ska fungera
-	SDL_Surface* background;
+	Surface background;
 	SDL_Event event;
-	SDL_Surface* screen;
+	Surface screen;
 	//object::pointer_arrow arrow;
 	std::vector<Object::Object*> all_objects;
 	
 	virtual bool exit() = 0;
 //variabler som finns för alla commands och liknande
 	Music m;
+	FrameRateFixer fps;
 	bool running = true;
 	bool has_window = false;
 	bool fullscreen = false;
@@ -32,13 +36,10 @@ protected:
 	
 public:
 	//konstruktorer, destruktorer och operatorer
-	SGS(SDL_Surface* scr) : screen(scr),m("Music/Menu.wav"){
-	  //m.loadMusic("Music/Menu.wav");
-	  loadSettings(settings);
-	}
+	SGS(Surface scr) : screen(scr),m("Music/Menu.wav"), fps(30){}
 	~SGS();
 	//borttagna
-	SGS() = delete;                 //defaultkonstruktor
+	SGS() = delete;           //defaultkonstruktor
 	SGS(const SGS&) = delete; //kopieringskonstruktor
 	SGS(SGS&&) = delete;      //movekonstruktor
 	SGS& operator=(const SGS&) = delete;
@@ -57,8 +58,9 @@ public:
 	bool make_slider(const int& x_pos, const int& y_pos, const std::string& command);
 	bool add_window(Object::Window* your_window);
 	bool make_checkbox(int x, int y, const std:: string& command, bool checked = false);
-	bool make_textbox(const std::string& text, const int& x, const int& y, const int& w, const int& h,
-					  const SDL_Color &col = {255,255,255,0}, const std::string& font = "Fonts/LHANDW.TTF", const unsigned& size = 13);
+	bool make_textbox(const int& x, const int& y, const int& w, const int& h,
+					  const unsigned& size = 13, const std::string& font = "Fonts/LHANDW.TTF");
+					  void set_text(const int& where, const std::string& what_text);
 };
 
 
@@ -71,37 +73,60 @@ private:
 		
 public:
 	void run();
-	~Menu();
-	Menu(SDL_Surface* scr) : SGS(scr){
+	~Menu() = default;
+	Menu(Surface scr) : SGS(scr){
 	  m.loadMusic("Music/Menu.wav");
-	  loadSettings(settings);
 	}
 };
-/*
+
 class Game : public SGS
 {
 private:
-	CardList card_deck;
-	CardList discard_pile;
-	vector<Player> players;
-	Timer timer;
-	map<std::string,SDL_Surface*> card_images;
+	unsigned self;
+	unsigned state;
+	bool run_next;
+	
+	Player* target_player;
+	Player* current_player;
+	Object::GameCard* selected_card;
+	
+	Object::CardList* card_deck;
+	Object::CardList* discard_pile;
+	Object::CardList* hero_deck;
+	std::vector<Player*> players;
+	//Timer timer;
+	//map<std::string,SDL_Surface*> card_images;
 	
 	void paint();
-	void setup();
-	void game();
-	void end();
 	void run_command(const std::string& what_command);
+	Object::GameCard* run_effect(Object::GameCard* gc);
+	bool loadup(){return true;} //dne är skriven här
+	void UI();
 public:
-	~Game();
+	~Game() = default;
+	Game() = default;
 	
-	Game(SDL_Surface* scr, Settings& set,vector<Player>& players) : SGS(scr)
+	Game(Surface scr) : SGS(scr), target_player(nullptr),current_player(nullptr), selected_card(nullptr)
 	{
-	  m.loadMusic("Music/Menu.wav");
-	  load_settings(settings);
+		self = 0; //ska komma utifrån!!
+		card_deck = new Object::CardList("standard_playing_cards");
+		discard_pile = new Object::CardList("empty");
+		hero_deck = new Object::CardList("hero_deck");
+		m.loadMusic("Music/Menu.wav");
+		Player* p1;
+		for(unsigned i = 0 ; i < 1 ; ++i)
+		{
+			p1 = new Player();
+			p1->setStatus(1);
+			players.push_back(p1);
+		}
+		state = 1;
 	}
 	void run();
+	bool setup();
+	bool end();
+	bool exit();
 	
 };
-*/
+
 #endif

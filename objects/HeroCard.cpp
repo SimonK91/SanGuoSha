@@ -3,22 +3,17 @@
 namespace Object
 {
 
-// ID struktur:
-// <maxHP> <male> <clan> <abilities>
-
-HeroCard::HeroCard(std::string filename, std::string ID) : Card("Characters/" +filename)
+HeroCard::HeroCard(std::string filename, std::string ID) : Card("Characters/" + filename)
 {
 	std::stringstream ss(ID);
 	std::string strClan;
 	std::string tmp;
-	
-	//setName
-	name = filename.substr(0,(filename.size() - 4)); //fixas bättre så att den är generell?
-	//fix rest
+
 	ss >> maxHP;
-	ss >> male;
 	ss >> strClan;
 	clan = str2clan(strClan);
+	ss >> male;
+	ss >> name;
 	
 	while(ss >> tmp)
 	{
@@ -35,24 +30,24 @@ std::string HeroCard::getAblility(unsigned index)
 	}
 }
 
-std::string HeroCard::handleEvent(const SDL_Event& event)
-{
-	if(event.type == SDL_MOUSEBUTTONDOWN)
-	{
-		if(active == 1)
-		{
-			active = 0;
-			box.y += 20;
-		}
-		else if(active == 0 && event.motion.x > box.x && event.motion.x < box.x + box.w && event.motion.y > box.y && event.motion.y < box.y + box.h)
-		{
-			active = 1;
-			box.y -= 20;
-			return "HeroCardInUse";		//fortfarande ett frågetecken :D
-		}
-	}
-	return "";
-}
+// std::string HeroCard::handleEvent(const SDL_Event& event)
+// {
+	// if(event.type == SDL_MOUSEBUTTONDOWN)
+	// {
+		// if(active == 1)
+		// {
+			// active = 0;
+			// box.y += 20;
+		// }
+		// else if(active == 0 && event.motion.x > box.x && event.motion.x < box.x + box.w && event.motion.y > box.y && event.motion.y < box.y + box.h)
+		// {
+			// active = 1;
+			// box.y -= 20;
+			// return "HeroCardInUse";		//fortfarande ett frågetecken :D
+		// }
+	// }
+	// return "";
+// }
 } //namespace
 
 

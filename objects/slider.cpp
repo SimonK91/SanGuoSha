@@ -86,7 +86,7 @@ bool Slider::inside( const SDL_Event& event)
                  && event.motion.y < lower_edge);
 }
 
-void Slider::paint(SDL_Surface* to_where)
+void Slider::paint(Surface& to_where)
 {        
         
         applySurface( box.x, box.y, bg, to_where, nullptr);
@@ -97,7 +97,6 @@ void Slider::paint(SDL_Surface* to_where)
 
 Slider::~Slider()
 {
-        cleanUp({bg, btn});
 }
 
 }//slut på namespace

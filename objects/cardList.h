@@ -10,21 +10,25 @@ namespace Object
 class CardList
 {
 private:
-	SDL_Surface* image;
+	Surface image;
 	std::vector<Card*> set;
+	unsigned seed;
+	
 	void loadCardDeck();
 	void loadHeroDeck();
 public:
 	CardList(const std::string& setting);
+	CardList() = default;
 	~CardList();
 	
 	Card* drawCard();
+	unsigned getSeed(){ return seed; }
 	void pushBottom(Card* card);
 	void pushTop(Card* card);
-	void shuffle();
+	void shuffle(unsigned s = 0);
 	bool empty();
 	
-	void paint(SDL_Surface* to_where)
+	void paint(Surface& to_where)
 	{
 		applySurface(0, 0, image, to_where);
 	} //WTF!!

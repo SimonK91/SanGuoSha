@@ -5,6 +5,38 @@
 #include <fstream>
 #include <utility>
 using namespace std;
+
+void Surface::setImage(Surface tmp)
+{
+	if(tmp.getImage() == nullptr)
+		return;
+	if(image != nullptr)
+		SDL_FreeSurface( image );
+	image = tmp.getImage();
+	name = tmp.getName();
+}
+void Surface::setImage(SDL_Surface* tmp)
+{
+	if(tmp == nullptr)
+		return;
+	if(image != nullptr)
+		SDL_FreeSurface( image );
+	image = tmp;
+}
+Surface& Surface::operator=(SDL_Surface* other)
+{
+	if(other)
+	{
+		if(image != nullptr)
+			SDL_FreeSurface(image);
+		image = other;
+	}
+	else
+		throw SGS_error("Could not set surface: " + name);
+		
+	return *this;
+}
+
 SDL_Surface* loadImage(const string& filename,bool transparant, const Uint8& red, const Uint8& green, const Uint8& blue, bool color_key)
 {
 	//Temporary storage for the image that's loaded
@@ -34,65 +66,74 @@ SDL_Surface* loadImage(const string& filename,bool transparant, const Uint8& red
 		//free the old image
 		SDL_FreeSurface( loadedImage );
 	}
-	
+	else
+	{
+		throw SGS_error("could not open file: "+filename+'.');
+	}
 	return optimizedImage;
 }
 
-void applySurface(int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip)
+void applySurface(int x, int y, Surface& source, Surface& destination, SDL_Rect* clip)
 {
+// int counter = 0;
+// std::cout << "apply surface: " << ++counter << std::endl;
+	if(source.getImage() == nullptr)
+	{
+		// std::cout << "apply surface in if: " << counter << std::endl;
+		throw SGS_error("applySurface failed - nullpointer exception, source: "+source.getName());
+		// std::cout << "apply surface in if: " << counter << std::endl;
+	}
+	// std::cout << "apply surface: " << ++counter << std::endl;
 	SDL_Rect offset;
-	
+	// std::cout << "apply surface: " << ++counter << std::endl;
 	offset.x = x;
 	offset.y = y;
-	
-	SDL_BlitSurface( source, clip, destination, &offset );
+	// std::cout << "apply surface: " << ++counter << std::endl;
+	SDL_BlitSurface( source.getImage(), clip, destination.getImage(), &offset );
+	// std::cout << "apply surface: " << ++counter << std::endl;
 }
 
-SDL_Surface* Init(const int& SCREEN_WIDTH, const int& SCREEN_HEIGHT, const int& SCREEN_BPP)
+Surface Init(const int& SCREEN_WIDTH, const int& SCREEN_HEIGHT, const int& SCREEN_BPP)
 {
-	SDL_Surface* screen;
-
+	Surface* screen = new Surface("screen");
 	//Initialize all SDL subsystems
 	if( SDL_Init( SDL_INIT_EVERYTHING ) == -1)
 	{
-		return nullptr;
+		throw SGS_error("Init - SDL_Init failed to open");
 	}
 	
 	//Set up the screen
-	screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_SWSURFACE);
+	*screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_SWSURFACE);
 	
 	//If there was an error in setting up the screen
-	if (screen == nullptr)
+	if (screen->getImage() == nullptr)
 	{
-		return nullptr;
+		throw SGS_error("Init - Could not set up the screen");
 	}
 	
 	//Initialize SDL_ttf
 	if (TTF_Init() == -1)
 	{
-		return nullptr;
+		throw SGS_error("Init - TTF_Init failed to open");
 	}
 	 
 	//Initialize SDL_mixer
     if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
     {
-        return nullptr;    
+        throw SGS_error("Init - Mix_OpenAudio failed to open");
     }
 	//Set the window caption
 	SDL_WM_SetCaption( "SanGuoSha", nullptr);
 	
 	//If everything is ok
-	return screen;
+	std::cout << "Initialize is okay!" << std::endl;
+	return *screen;
 }
 
-void cleanUp(std::vector<SDL_Surface*> clean_surface, std::vector<TTF_Font*> clean_font)
+void cleanUp(std::vector<TTF_Font*> clean_font)
 {
-	for(auto it = clean_surface.begin(); it != clean_surface.end(); ++it)
-		SDL_FreeSurface(*it);
-		
 	for(unsigned i = 0 ; i < clean_font.size(); ++i)
 		TTF_CloseFont(clean_font.at(i));
-
 }
 
 //Integer to string
@@ -122,7 +163,7 @@ bool loadSettings(std::vector<std::pair<std::string, std::string>>& settings)
   if(!read_from.is_open())
     {
       //filen kunde inte �ppnas
-      return false;
+      throw SGS_error("Settings - Could not open \"Data/settings.txt\"");
     }
   
   std::string tmpSetting = "";
@@ -136,7 +177,7 @@ bool loadSettings(std::vector<std::pair<std::string, std::string>>& settings)
     }
   
   read_from.close();
-  
+  std::cout << "Load settings okay!" << std::endl;
   return true;
 }
 
@@ -147,7 +188,7 @@ bool writeSettings(std::vector< std::pair<std::string, std::string>> settings)
   if(!write_to.is_open())
     {
       //filen kunde inte �ppnas
-      return false;
+      throw SGS_error("Settings - Could not open \"Data/settings.txt\"");
     }
   write_to.clear();
   for(auto i : settings)
@@ -155,6 +196,6 @@ bool writeSettings(std::vector< std::pair<std::string, std::string>> settings)
       write_to << i.first << " " << i.second << std::endl;
     }
   write_to.close();
-  
+  std::cout << "Write settings okay!" << std::endl;
   return true;
 }

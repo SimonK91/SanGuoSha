@@ -2,7 +2,6 @@
 #define OBJECTS_H
 
 #include "../functions.h"
-// #include "pointer_arrow.h"
 #include <string>
 #include <vector>
 
@@ -15,6 +14,7 @@ class Object
 private:
 
 protected:
+
 	//konstruktorer och operatorer som ej används!
 	Object() = default;
 	Object(const Object&) = delete;
@@ -26,7 +26,7 @@ protected:
 	SDL_Rect clip;
 public:
 	virtual ~Object(){}
-	virtual void paint(SDL_Surface*) = 0;
+	virtual void paint(Surface&) = 0;
 };
 
 //alla objekt som inte har någon funktion i sig
@@ -50,11 +50,9 @@ protected:
 	std::string command;
 
 public:
-	ActiveObject() : Object() , active(0), command(""){}
-	
-	int isActivated(){ return active; }
 	virtual std::string handleEvent(const SDL_Event&) = 0;
 	virtual ~ActiveObject() = default;
+	bool isActive(){return active != 0;}
  };
 
 

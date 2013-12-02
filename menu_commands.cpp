@@ -1,4 +1,5 @@
 //using namespace object;
+#include <stdexcept>
 void Menu::run_command(const std::string& what_command)
 {
 	if(what_command == "")
@@ -12,15 +13,69 @@ void Menu::run_command(const std::string& what_command)
 	}
 	if(what_command == "make_new_game")
 	{
+		Window* gameOptions = new Window(160,50,500,250);
+		gameOptions->makeButton("Network",30,70,"play_on_network");
+		gameOptions->makeButton("Hotseat",260,70,"play_on_hotseat");
+		gameOptions->makeButton("Back",140,190,"close_window");
+		gameOptions->makeTextbox(30,15,440,40, 20);
+		gameOptions->setText(3,"which playing mode do you want?");
+		add_window(gameOptions);
+		has_window = true;
+		// dynamic_cast<Textbox*>(all_objects.at(0))->setText("You cannot make a new game yet!");
+	}
+	
+	if(what_command == "play_on_network")
+	{
+		throw SGS_error("Command: "+ what_command +" not implemented yet");
+	}
+	
+	if(what_command == "play_on_hotseat")
+	{
+		//remove chois window
+		delete all_objects.back();
+		all_objects.pop_back();
+		has_window = false;
+
 		m.stop();
-		dynamic_cast<Textbox*>(all_objects.at(0))->setText("You cannot make a new game yet!");
+		Game game(screen);
+		game.load_background("Images/Gui/background.png");
+		
+		//skapa spelets layout
+		//game.make_button("exit", 350, 50, "close");
+		Window* hand = new Window(200,550,600,218);
+		Window* profile = new Window(800,550,224,218);
+		Window* equipment = new Window(0,550,200,218);
+		Window* chat = new Window(800,0,224,550);
+		game.make_textbox(50,50,150,400);
+		game.set_text(0,"wololololoW test test test");
+		chat->makeButton("Exit",10,10,"close");
+		game.add_window(hand);
+		game.add_window(profile);
+		game.add_window(equipment);
+		game.add_window(chat);
+		if(!game.setup())
+			running = false;
+			
+		game.make_button("end turn", 10, 10, "end_turn");
+		game.make_button("play card", 10, 50, "play_card");
+		//bara preliminärt!
+		game.run();
+		if(!game.exit())
+			throw std::runtime_error("oups!! game exit failed!!");
+		
+		else{ std::cout << "game.exit() okay!" << std::endl;}
+		// game.run();
+		m.play();	//fungerar inte som den ska :( 
+		fps.start();
+		// dynamic_cast<Textbox*>(all_objects.at(0))->setText("You cannot make a new game yet!");
 	}
 	if(what_command == "options")
 	{
 		Window* options = new Window(160,50,500,450);
 		options->makeButton("Fullscreen",30,20,"toggle_fullscreen");
 		options->makeButton("Back",270,390,"close_window");
-		options->makeTextbox(("Music volume: " + I2S(m.getVolume())),300,20,150,30);
+		options->makeTextbox(300,20,150,30);
+		options->setText(2,"Music volume: " + I2S(m.getVolume()));
 		options->makeSlider(250,60,"set_volume",m.getVolume());
 		add_window(options);
 		has_window = true;
@@ -43,13 +98,13 @@ void Menu::run_command(const std::string& what_command)
 	{
 		if(!fullscreen)
 		{
-			screen = SDL_SetVideoMode(800,600,32, screen->flags+SDL_FULLSCREEN);
+			screen = SDL_SetVideoMode(1024,768,32, screen->flags+SDL_FULLSCREEN);
 			fullscreen = true;
 			//settings.at(2).second = "on";
 		}
 		else
 		{
-			screen = SDL_SetVideoMode(800,600,32, screen->flags-SDL_FULLSCREEN);
+			screen = SDL_SetVideoMode(1024,768,32, screen->flags-SDL_FULLSCREEN);
 			fullscreen = false;
 			//settings.at(2).second = "off";
 		}

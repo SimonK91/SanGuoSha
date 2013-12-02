@@ -10,8 +10,8 @@ namespace Object
   class Slider : public ActiveObject
   {
   private:
-    SDL_Surface* bg = nullptr;
-    SDL_Surface* btn = nullptr;
+    Surface bg;
+    Surface btn;
     SDL_Rect btn_box;
     int offset;
     int box_min;
@@ -28,7 +28,7 @@ namespace Object
         
         std::string handleEvent(const SDL_Event&);
         
-        void paint(SDL_Surface* to_where);
+        void paint(Surface& to_where);
         
   protected:        
 	

@@ -33,24 +33,14 @@ private:
 	std::string abilityID;
 public:
 	GameCard(int valor, Suit suit_, std::string filename, std::string ID);
-	~GameCard(){};
+	~GameCard(){}
 	
 	Suit getSuit(){ return suit; }
 	int getNumber(){ return number; }
 	std::string getAbility(){ return abilityID; }
 	
-	std::string handleEvent(const SDL_Event& event);
+	//std::string handleEvent(const SDL_Event& event);
 	//void print(SDL_Surface* to_where){} //ska tas bort
-	
-	void paint(SDL_Surface* to_where)
-	{
-		if(image == nullptr)
-		{
-			std::cout <<'\'' << abilityID << " ability ID' has no image" << std::endl;
-			return;
-		}
-		applySurface(box.x , box.y , image, to_where);
-	}
 };
 } //namespace
 

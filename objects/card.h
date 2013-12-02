@@ -13,12 +13,13 @@ class Card : public ActiveObject
 private:
 	
 protected:
-	SDL_Surface* image;
+	Surface image;
 public:
 	Card(std::string filename);
-	
-	virtual ~Card(){ cleanUp({image});  };
-	
+	std::string getName(){ return image.getName(); }
+	std::string handleEvent(const SDL_Event& event);
+	virtual ~Card() = default;
+	void paint(Surface& to_where){applySurface(box.x , box.y , image, to_where);}
 	void setPosition(const int& x,const int& y);
 };
 

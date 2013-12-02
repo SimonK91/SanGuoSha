@@ -12,8 +12,8 @@ class Textbox : public DeadObject
 private:
 	TTF_Font* font = nullptr;
 	
-	SDL_Surface* background = nullptr;
-	SDL_Surface* textArea  = nullptr;
+	Surface background;
+	Surface textArea;
 	SDL_Color textColor;
 	
 	std::string file_text;
@@ -32,12 +32,12 @@ private:
 	void setColor(std::string&);
 	void applyText(const std::string&);
 public:
-	Textbox(const std::string& text_, const int& x, const int& y, const int& w, const int& h,
-	const SDL_Color& col, const std::string& style, const unsigned& size);
+	Textbox(const int& x, const int& y, const int& w, const int& h,
+	        const std::string& style, const unsigned& size);
 		
-	~Textbox(){cleanUp({background,textArea},{font});}
+	~Textbox(){cleanUp({font});}
 	
-	void paint(SDL_Surface* to_where);
+	void paint(Surface& to_where);
 	
 	void setFileText(int counter); //ej skriven
 	

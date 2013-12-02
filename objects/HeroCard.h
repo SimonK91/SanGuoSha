@@ -7,7 +7,7 @@
 #include <sstream>
 /*
 id struktur:
-<maxHP> <male> <clan> <abilities>
+<maxHP> <clan> <male> <abilities>
 
 */
 namespace Object
@@ -23,15 +23,11 @@ private:
 public:
 	HeroCard(std::string filename, std::string ID);
 	~HeroCard(){}
-	
-	void paint(SDL_Surface* to_where)
-	{
-		applySurface(box.x, box.y, image, to_where);
-	}
 	std::string getAblility(unsigned index);
-	std::string handleEvent(const SDL_Event& event);
+	// std::string handleEvent(const SDL_Event& event);
 
 	std::string getName(){ return name; }
+	int getHP()   { return maxHP;}
 	Clan getClan(){ return clan; }
 	bool getMale(){ return male; }
 	

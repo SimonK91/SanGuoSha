@@ -7,16 +7,37 @@ namespace Object
 Card::Card(std::string filename) : ActiveObject()
 {
 	image = loadImage("Images/Cards/"+filename, true);
-	if(!image)
+	image.setName(filename.substr(0,filename.size()-4));
+	if(!image.getImage())
 		throw std::runtime_error("could not open file: Images/Cards/" +filename);
-	box.w = 200;
-	box.h = 281;
+	box.w = image -> w;
+	box.h = image -> h;
 }
 
 void Card::setPosition(const int& x, const int& y)
 {
 	box.x = x;
 	box.y = y;
+}
+std::string Card::handleEvent(const SDL_Event& event)
+{
+	//ska fixas mer så att den går att använda på något vettigt sätt :D
+	if(event.type == SDL_MOUSEBUTTONUP)
+	{
+		if(active == 1)
+		{
+			active = 0;
+			box.y += 20;
+			//return abilityID;
+		}
+		else if(active == 0 && event.motion.x > box.x && event.motion.x < box.x + box.w && event.motion.y > box.y && event.motion.y < box.y + box.h)
+		{
+			active = 1;
+			box.y -= 20;
+			return "activated";
+		}
+	}
+	return "";
 }
 
 Clan str2clan(const std::string& str)

@@ -11,7 +11,7 @@ class Button : public ActiveObject
 {
 private:
 	std::vector<SDL_Rect> clip;
-	SDL_Surface* button_sheet = nullptr;
+	Surface button_sheet;
 	
 	
 public:
@@ -20,12 +20,12 @@ public:
 	Button(const std::string& name, int x, int y, const std::string& command,
 			const std::string& image, const unsigned& size);
 	
-	~Button(){cleanUp({button_sheet});}
+	~Button() = default;
 	
 	bool inside( const SDL_Event&);
 	std::string handleEvent( const SDL_Event&);
 	
-	void paint(SDL_Surface*);
+	void paint(Surface&);
 };
 
 }//slut på namnrymden
