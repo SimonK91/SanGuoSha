@@ -45,7 +45,6 @@ class Player
   ~Player();
   Equipment equipment;
   
-
   void setHero(Object::HeroCard*);
   Object::GameCard* playCard(int);
   Object::GameCard* loseCard(int);
@@ -83,7 +82,7 @@ class Player
   void paint(Surface);
   void paint(Surface, int, int);
   
-  const std::vector<Object::GameCard*>& getHand(){ return hand; } //only read not whrite
+  std::vector<Object::GameCard*> getHand(){ return hand; } //only read not whrite
   unsigned getHandSize(){ return hand.size(); }
   unsigned getCurrentHP(){ return current_life; }
   

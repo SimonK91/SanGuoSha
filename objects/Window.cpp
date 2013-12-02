@@ -62,7 +62,7 @@ namespace Object
     //ritar ut fönstret på skärmen
     applySurface(box.x, box.y, windowSurface, screen, &backgroundSize);
   }
-  
+
   bool Window::makeSlider(const int& x_pos, const int& y_pos, const std::string& command, const int& value)
   {
     Slider* temp = new Slider(x_pos, y_pos, command, value);

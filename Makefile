@@ -83,5 +83,5 @@ clean:
 		@ rm -rf *.o
 
 zap: clean
-		@ rm -rf "SanGuoSha.exe" *~
+		@ rm -rf "SanGuoSha.exe" *~ stdout.txt stderr.txt
 		

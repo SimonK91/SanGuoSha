@@ -109,11 +109,24 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		target_player -> addJudgementCard(gameCard);
 		gameCard = nullptr;
 	}
-	// else if(effect == "steal")
-	// {
-		// // Window* stealWindow = new Window(50,50,500,500);
-		
-	// }
+	else if(effect == "steal")
+	{
+		if(target_player != nullptr)
+		{
+			Window* stealWindow = new Window(50,150,600,350);
+			//getEquipment() måste implementeras!
+			std::vector<GameCard*> targetHand = target_player -> getHand();
+			for(int i = 0; i < targetHand.size(); ++i)
+			{
+				stealWindow -> addCard(targetHand.at(i),100 * i, 20);
+			}
+			stealWindow -> makeButton("Steal",170,250, "steal_card");
+			add_window(stealWindow);
+			has_window = true;
+		}
+		else
+			std::cout << "No steal... :(" << std::endl;
+	}
 	else
 	{
 		std::cout << "Card command: \"" + effect + "\" does not exist in the list" << std::endl;

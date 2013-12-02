@@ -230,6 +230,32 @@ void Game::run_command(const std::string& what_command)
 		delete all_objects.back();
 		all_objects.pop_back();
 	}
+	else if(what_command == "steal_card")
+	{
+		Window* stealWindow = dynamic_cast<Window*>(all_objects.back());
+		GameCard* card;
+		
+		for(unsigned i = 0 ; i < stealWindow->getSize() ; ++i)
+		{
+			card = dynamic_cast<GameCard*>(stealWindow -> getObject(i));
+			if(card != nullptr && card -> isActive())
+			{
+			// hittat rätt kort som ska stjälas
+				current_player -> recieveCard( target_player -> loseCard(i));
+			}
+		}
+		//fix window so it wont fuck thins up!
+		delete stealWindow -> remove(stealWindow -> getSize()-1);
+		
+		while(stealWindow -> getSize() != 0)
+			stealWindow -> remove(0);
+		
+		has_window = false;
+		target_player = nullptr;
+		
+		delete all_objects.back();
+		all_objects.pop_back();
+	}
 	else
 	{
 			std::cout << "Command: \"" + what_command + "\" is not found in command list" << std::endl;
