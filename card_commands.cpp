@@ -27,7 +27,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 					self = i;
 				}
 			}
-			
+			has_window = true;
 			Window* dodgeWindow = new Window(160,250,500,250);
 			dodgeWindow -> makeButton("Dodge",37,70,"dodge");
 			dodgeWindow -> makeButton("Take damage",260,70, "take_damage");
@@ -40,10 +40,12 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 	}
 	else if(effect == "heal")
 	{
+		std::cout << "heal effect:" << std::endl;
+		std::cout << "target_player == nullptr: " << std::boolalpha << (target_player == nullptr) <<std::endl;
+		std::cout << "current_player == nullptr: " << std::boolalpha << (current_player == nullptr) <<std::endl;
 		if(target_player != nullptr  && target_player -> getLife() <= 0)
 		{
 			target_player -> modifyLife(1);
-			target_player = nullptr;
 		}
 		else
 			current_player -> modifyLife(1);

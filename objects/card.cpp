@@ -22,7 +22,7 @@ void Card::setPosition(const int& x, const int& y)
 std::string Card::handleEvent(const SDL_Event& event)
 {
 	//ska fixas mer så att den går att använda på något vettigt sätt :D
-	if(event.type == SDL_MOUSEBUTTONUP)
+	if(event.type == SDL_MOUSEBUTTONUP	)
 	{
 		if(active == 1)
 		{
