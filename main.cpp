@@ -30,6 +30,10 @@ int main(int argc, char* argv[])
 	mainMenu.make_button("Exit", 300,400,"exit"); 
 	cout << "mainMenu startas" << endl;
 	
+	for(int i = 0; i < argc ; ++i)
+	{
+		cout << "argument " << i << ": " << argv[i] << endl;
+	}
 	
 		mainMenu.run(); //startar programmet
 	}

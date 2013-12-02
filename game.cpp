@@ -5,7 +5,7 @@
 using namespace Object;
 
 
-bool Game::setup()
+void Game::setup()
 {
 	run_next = true;
 	std::vector<int> role{0,2,3,1,3,3,1,3,1,2};
@@ -74,7 +74,7 @@ bool Game::setup()
 			Card* hero5 = hero_deck->drawCard();
 			std::cout << "two more cards drawn" << std::endl;
 			
-			if(emperor == self)
+			if(emperor == (int)self)
 			{
 				has_window = true;
 				Window* characters = new Window(100,100,600,550);
@@ -171,7 +171,7 @@ bool Game::setup()
 //step 11)
 //start the game
 		else if(step == 12)
-			return run_next;
+			return;
 
 			
 		// std::cerr << "painting" << std::endl;
@@ -179,11 +179,12 @@ bool Game::setup()
 		// std::cerr << "post painting" << std::endl;
 	}
 	
-	return run_next;
+	//return run_next;
 }
 
 void Game::run()
 {
+	//run_next = true;
 	game_stage = 1;
 //game
 	//clean up!
@@ -345,14 +346,16 @@ void Game::run()
 //if a valid target is selected, activate button "play card"
 //if a player is targetted by an effect, check possible plays.
 //if a tool-card is played, check every player for negate card.
+
+	//return run_next;
 }
 
-bool Game::end()
+void Game::end()
 {
 //show score-table
 //keep chat open
 //make exit button
-	return true; //:D
+	//return true; //:D
 }
 
 bool Game::exit()
@@ -453,6 +456,7 @@ void Game::UI()
 						break;
 					}
 				}
+				//om varken player eller knappar är tryckta, kolla om kort i hand är tryckta
 				if(!player_pressed && button_command == "")
 				{
 					if(current_player != nullptr)

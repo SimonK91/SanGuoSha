@@ -88,8 +88,8 @@ private:
 	
 	int game_stage;
 	
-	Object::Button* play_card = new Object::Button("play card", 800, 630, "play_card", "Images/Gui/cleanButton2.png", 20);
-	Object::Button* end_turn = new Object::Button("end turn", 800, 575, "end_turn", "Images/Gui/cleanButton2.png", 20);
+	Object::Button* play_card = new Object::Button("play card", 800, 630, "play_card", "Images/Gui/smallButton.png", 20);
+	Object::Button* end_turn = new Object::Button("end turn", 800, 575, "end_turn", "Images/Gui/smallButton.png", 20);
 	
 	Player* target_player;
 	Player* current_player;
@@ -111,7 +111,7 @@ public:
 	~Game() = default;
 	Game() = default;
 	
-	Game(Surface scr) : SGS(scr), target_player(nullptr),current_player(nullptr), selected_card(nullptr), game_stage(0)
+	Game(Surface scr) : SGS(scr), game_stage(0), target_player(nullptr), current_player(nullptr), selected_card(nullptr)
 	{
 		self = 0; //ska komma utifrån!!
 		card_deck = new Object::CardList("standard_playing_cards");
@@ -127,9 +127,11 @@ public:
 		}
 		state = 1;
 	}
+	
+	bool runNext(){return run_next;}
 	void run();
-	bool setup();
-	bool end();
+	void setup();
+	void end();
 	bool exit();
 	
 };

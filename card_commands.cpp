@@ -20,7 +20,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 	{
 		if(target_player != nullptr)
 		{
-			for(int i = 0; i < players.size(); ++i)
+			for(unsigned i = 0; i < players.size(); ++i)
 			{
 				if(players.at(i) == target_player)
 				{

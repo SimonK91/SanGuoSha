@@ -53,14 +53,17 @@ void Menu::run_command(const std::string& what_command)
 		game.add_window(profile);
 		game.add_window(equipment);
 		game.add_window(chat);
-		if(!game.setup())
-		  {
-		    running = false;
-		  }
+		game.setup();
+		if(game.runNext())
+		{
+			game.run();
+		}
+	
+		if(!game.runNext())
+			running = false;
 		//game.make_button("end turn", 800, 575, "end_turn");
 		//game.make_button("play card", 800, 630, "play_card");
 		//bara preliminärt!
-		game.run();
 		if(!game.exit())
 			throw std::runtime_error("oups!! game exit failed!!");
 		

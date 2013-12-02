@@ -111,7 +111,7 @@ void Game::run_command(const std::string& what_command)
 	else if(what_command == "dodge")
 	{
 		// std::cout << "dodge begin" << std::endl;
-		for(int i = 0; i < players.size(); ++i)
+		for(unsigned i = 0; i < players.size(); ++i)
 		{
 			if(current_player == players.at(i))
 			{
@@ -124,27 +124,22 @@ void Game::run_command(const std::string& what_command)
 		GameCard* card = nullptr;
 		
 		// std::cout << "target player used" << std::endl;
-		for(int i = 0; i < hand.size(); ++i)
+		for(unsigned i = 0; i < hand.size(); ++i)
 		{
 			if(hand.at(i) -> getAbility() == "dodge")
 			{
-				std::cout << "test1" << std::endl;
 				card = target_player -> playCard(i);
 				break;
 			}
 		}
 		
-		std::cout << "hand gone through" << std::endl;
 		if(card == nullptr)
 		{
-			std::cout << "test2" << std::endl;
 			target_player -> modifyLife(-1);
 		}
 		else
 		{
-			std::cout << "test3" << std::endl;
 			discard_pile -> pushBottom(card);
-			std::cout << "test4" << std::endl;
 		}
 		
 		// std::cout << "fixed discard_pile" << std::endl;
@@ -156,26 +151,18 @@ void Game::run_command(const std::string& what_command)
 		delete all_objects.back();
 		all_objects.pop_back();
 		has_window = false;
-		// std::cout << "dodge done!" << std::endl;
 	}
 	else if(what_command == "take_damage")
 	{
-		std::cout << "Current player == nullptr: " << std::boolalpha << (current_player == nullptr) << std::endl;
-		std::cout << "Target player == nullptr: " << std::boolalpha << (target_player == nullptr) << std::endl;
-		std::cout << "Player size: " << players.size() << (current_player == nullptr) << std::endl;
-		for(int i = 0; i < players.size(); ++i)
+		for(unsigned i = 0; i < players.size(); ++i)
 		{
-			std::cout << "var i = " << i << std::endl;
 			if(current_player == players.at(i))
 			{
 				self = i;
 			}
-			std::cout << "var self = " << self << std::endl;
 		}
-		std::cout << "current hp: " << target_player -> getCurrentHP() << std::endl;
 		target_player -> modifyLife(-1);
 		
-		std::cout << "current hp after mod: " << target_player -> getCurrentHP() << std::endl;
 		target_player -> setCurrentPlayer(false);
 		
 		current_player -> setCurrentPlayer(true);

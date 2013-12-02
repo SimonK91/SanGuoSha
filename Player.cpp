@@ -159,7 +159,7 @@ void Player::paint(Surface screen)
 		 //ritar ut liv
 		int x_offset_life = 872 + 30;
 		int y_offset_life = 555 + 5;
-		for(unsigned i = 0; i < max_life; ++i, x_offset_life += 17)
+		for(int i = 0; i < max_life; ++i, x_offset_life += 17)
 		  {
 		    if(i < current_life)
 		      {
@@ -187,7 +187,7 @@ void Player::paint(Surface screen, int x_pos, int y_pos)
 	  //ritar ut liv
 	  int x_offset_life = x_pos + 30;
 	  int y_offset_life = y_pos + 5;
-	  for(unsigned i = 0; i < max_life; ++i, x_offset_life += 17)
+	  for(int i = 0; i < max_life; ++i, x_offset_life += 17)
 	    {
 	      if(i < current_life)
 		{
@@ -212,7 +212,7 @@ void Player::paint(Surface screen, int x_pos, int y_pos)
 void Player::fixCardPosition()
 {
 	int active = -1;
-	for (int i = 0 ; i < hand.size() ; ++i)
+	for (unsigned i = 0 ; i < hand.size() ; ++i)
 	{
 		if(hand.at(i)->isActive())
 			active = i;
@@ -221,16 +221,16 @@ void Player::fixCardPosition()
   double x_pos = 161;
   int y_pos = 551;
   double offset;
-	if(hand.size() > 4 && ( active == -1 || hand.size()-1 == active)) // handen större än 4 OCH (inget kort är aktivt, eller sista kortet är aktivt)
+	if(hand.size() > 4 && ( active == -1 || (int)(hand.size()-1) == active)) // handen större än 4 OCH (inget kort är aktivt, eller sista kortet är aktivt)
 		offset = 480 / (hand.size()-1.0);
 	else if(hand.size() > 4)
 		offset = (480 - 135) / (hand.size()-2.0);
 	else
 		offset = 153;
  
-  for(int i = 0 ; i < hand.size() ; ++i)
+  for(unsigned i = 0 ; i < hand.size() ; ++i)
     {
-	  if(i != active)
+	  if(i != (unsigned)active)
 	  {
         hand.at(i)->setPosition((int)x_pos, y_pos);
 		x_pos += offset;
