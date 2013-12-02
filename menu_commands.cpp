@@ -57,8 +57,8 @@ void Menu::run_command(const std::string& what_command)
 		  {
 		    running = false;
 		  }
-		game.make_button("end turn", 800, 575, "end_turn");
-		game.make_button("play card", 800, 630, "play_card");
+		//game.make_button("end", 800, 575, "end_turn", "Images/Gui/smallButton.png");
+		//game.make_button("play", 800, 630, "play_card", "Images/Gui/smallButton.png");
 		//bara preliminärt!
 		game.run();
 		if(!game.exit())

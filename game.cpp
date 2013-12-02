@@ -216,25 +216,42 @@ void Game::run()
 	players.push_back(player);	
 	player = nullptr;
 	
+	player = new Player();
+	player -> setRole(3);
+	player -> setHero(new HeroCard("SiMaYi.png", "3 blue 2 ability"));
+	players.push_back(player);	
+	player = nullptr;
+	
 	// running = true;
 	card_deck -> pushTop(new GameCard(6,spades,"blue_steel_blade.png","weapon_blue_steel_blade 5 0")); //ability id, target type, target range
 	card_deck -> pushTop(new GameCard(2,spades,"double_gender_sword.png","weapon_double_gender_sword_equip 5 0")); //ability id, target type, target range
 	
 	while(running)
 	{
+	 
+	  std::string cmp = timer->time_ran_out();
+	  if(cmp != "")
+	   {
+	     run_command(cmp);
+	     //timer->stop();
+	   }
+	   // std::cout << timer->time_ran_out() << std::endl;
 	//phase 1)
 	//start of turn
 	//special hero abilities trigger here
 		// std::cout << "the state: " << state << std::endl;
 		if(state == 1)
 		{
-			players.at(self) -> setCurrentPlayer(true);
-			current_player = players.at(self);
-			for(auto p : players)
-			  {
-			    p->setSelected(false);
-			  }
-			state = 2;
+		  //timer
+		  timer->start(5);
+
+		  players.at(self) -> setCurrentPlayer(true);
+		  current_player = players.at(self);
+		  for(auto p : players)
+		    {
+		      p->setSelected(false);
+		    }
+		  state = 2;
 		}
 	//phase 2
 	//judgement phase
@@ -251,6 +268,7 @@ void Game::run()
 	//draw 2 cards
 		else if(state == 3)
 		{
+		 
 			//check if card_deck is empty
 			if(card_deck -> empty())
 				std::swap(card_deck,discard_pile);
@@ -290,10 +308,13 @@ void Game::run()
 	//other cards are discarded
 		else if(state == 5)
 		{
+		  
+		  
 			if(players.at(self) -> getCurrentHP() >= players.at(self) -> getHandSize())
 			{
 				state = 6;
 			}
+			
 		}
 
 	//phase 6
@@ -305,6 +326,12 @@ void Game::run()
 			self = (self + 1) % players.size();
 			state = 1;
 			target_player = nullptr;
+
+			if(timer->checkStarted() == true)
+			  {
+			    timer->stop();
+			    timer->setCommand("end_turn");
+			  }
 		}
 		
 		// if(i == 1)
@@ -364,7 +391,9 @@ void Game::UI()
 {
 	Uint8 *keystates = SDL_GetKeyState(nullptr);
 	std::string command;
-	static Button* discard_button = new Button("Discard", 10, 90, "discard_card","Images/Gui/cleanButton2.png",20);
+	static Button* discard_button = new Button("Disc", 800, 685, "discard_card","Images/Gui/smallButton.png",20);
+	static Button* play_button = new Button("Play", 800, 575, "play_card","Images/Gui/smallButton.png",20);
+	static Button* end_button = new Button("End", 800, 630, "end_turn","Images/Gui/smallButton.png",20);
 	
 	fps.start();
 	while( SDL_PollEvent( &event)) //sÃ¥ lÃ¤nge som det finns en event
@@ -385,9 +414,16 @@ void Game::UI()
 				run_command(command);
 			}
 		}
+		
 		if(state == 5)
+		  {
 			run_command(discard_button -> handleEvent(event));
-			
+		  }
+		else
+		  {
+		    run_command(play_button -> handleEvent(event));
+		    run_command(end_button -> handleEvent(event));
+		  }
 		//fixa med players o deras event!
 		for(Player* p : players)
 		{
@@ -417,8 +453,17 @@ void Game::UI()
 
 	//måla lite fint
 	paint();
+	
+	
 	if(state == 5)
+	  {
 		discard_button -> paint(screen);
+	  }
+	else
+	  {
+	    play_button ->paint(screen);
+	    end_button ->paint(screen);
+	  }
 	SDL_Flip(screen.getImage());                   // Skriv ut bilden pÃ¥ skÃ¤rmen
 	fps.regulateFPS();
 }
@@ -463,26 +508,40 @@ std::cerr << "player line 466" << std::endl;
 		all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
 	}
 	std::cerr << "line 475" << std::endl;
-	
-	int x = 250;
-	for(Player* p : players)
-	{	
-	std::cerr << "line 480" << std::endl;
-	
-		if(p -> isCurrentPlayer())
-		{
-		std::cerr << "line 484" << std::endl;
-			p -> paint(screen);
-		std::cerr << "line 486" << std::endl;
-		}
-		else
-		{
-		std::cerr << "line 490" << std::endl;
-			p -> paint(screen,x,50);
-			x += 200;
-		std::cerr << "line 493" << std::endl;
-		}
-	}
+
+	int player_paint_offset_x = 200;
+	int player_paint_offset_y = 25;
+	unsigned others = 0;
+	for(unsigned i = 0; i < players.size(); ++i)
+	  {
+	    if(players.at(i) -> isCurrentPlayer())
+	      {
+		players.at(i) -> paint(screen);
+	      }
+	    else
+	      {
+		players.at(i) -> paint(screen, player_paint_offset_x, player_paint_offset_y);
+		others++;
+		if(others == 1)
+		  {
+		     player_paint_offset_x = 400;
+		  }
+		else if(others == 2)
+		  {
+		    player_paint_offset_x = 75;
+		    player_paint_offset_y = 270;
+		  }
+		else if(others == 3)
+		  {
+		    player_paint_offset_x = 525;
+		    player_paint_offset_y = 270;
+		  }
+	      }
+	  }
+	if(timer->checkStarted() == true)
+	  {
+	    timer->paint(screen);
+	  }
 }
 
 

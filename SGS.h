@@ -10,7 +10,7 @@
 #include "Window.h"
 #include "Checkbox.h"
 #include "CardList.h"
-
+#include "Timer.h"
 #include "Player.h"
 
 #include <vector>
@@ -94,7 +94,7 @@ private:
 	Object::CardList* discard_pile;
 	Object::CardList* hero_deck;
 	std::vector<Player*> players;
-	//Timer timer;
+	Timer* timer;
 	//map<std::string,SDL_Surface*> card_images;
 	
 	void paint();
@@ -121,6 +121,7 @@ public:
 			players.push_back(p1);
 		}
 		state = 1;
+		timer = new Timer(5,500, 5, "end_turn");
 	}
 	void run();
 	bool setup();

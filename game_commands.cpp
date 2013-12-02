@@ -123,8 +123,16 @@ void Game::run_command(const std::string& what_command)
 		}
 	  }
 	else if(what_command == "end_turn")
-	{
-		state = 5;	//go to discard phase in game
+	{ 
+	  if(timer->checkStarted() == true)
+	    {
+	      timer->stop();
+	    }
+	  timer->start(5);
+	  timer->setCommand("time_out");
+	  std::cout << "Ny timer med time out 5 sek" << std::endl;
+	  
+	  state = 5;	//go to discard phase in game
 	}
 	else if(what_command == "play_card")
 	{
@@ -148,10 +156,19 @@ void Game::run_command(const std::string& what_command)
 			}
 			p -> setSelected(false);
 		}
+		if(timer->checkStarted() == true)
+		  {
+		    timer->stop();
+		  }
+		timer->start(5);
+		timer->setCommand("end_turn");
+		std::cout << "Ny timer med time out 5 sek" << std::endl;
+		
+		
 	}
 	else if(what_command == "discard_card")
 	{
-		std::vector<GameCard*> hand;
+	  std::vector<GameCard*> hand;
 		for(Player* p : players)
 		{
 			if(p -> isCurrentPlayer())
@@ -169,6 +186,16 @@ void Game::run_command(const std::string& what_command)
 			}
 		}
 	}
+	else if(what_command == "time_out")
+	  {
+	    std::cout << "discard phase time out" << std::endl;
+	    while(players.at(self) -> getCurrentHP() < players.at(self) -> getHandSize())
+	      {
+		GameCard* card = players.at(self) -> loseCard( players.at(self)->getHandSize()-1);
+		  discard_pile -> pushBottom(card);
+	      }
+	    state = 6;
+	  }
 	else if(what_command == "dodge")
 	{
 		// std::cout << "dodge begin" << std::endl;

@@ -11,7 +11,9 @@ two more cards drawn
 Command: "activated" is not found in command list
 hero 0
 hero 1
-HERO 1 active
+hero 2
+hero 3
+HERO 3 active
 ger kortet
 för objekt 0:
 dynamic cast success
@@ -23,5 +25,8 @@ för objekt 3:
 dynamic cast success
 för objekt 4:
 normal delete
-current hp: 4
-current hp after mod: 3
+end_turn utfors 
+Ny timer med time out 5 sek
+game.exit() okay!
+Write settings okay!
+exit OK!
