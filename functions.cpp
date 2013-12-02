@@ -200,3 +200,4 @@ bool writeSettings(std::vector< std::pair<std::string, std::string>> settings)
   std::cout << "Write settings okay!" << std::endl;
   return true;
 }
+

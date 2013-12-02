@@ -84,7 +84,9 @@ bool Game::setup()
 				characters->addCard(hero5,300,250);
 				characters->makeButton("Choose",0,500,"pick_hero");
 				add_window(characters);
+				std::cout << "fönstret lagts till" << std::endl;
 			}
+			
 			step = 6;
 		}
 	
@@ -229,6 +231,10 @@ void Game::run()
 		{
 			players.at(i) -> setCurrentPlayer(true);
 			current_player = players.at(i);
+			for(auto p : players)
+			  {
+			    p->setSelected(false);
+			  }
 			state = 2;
 		}
 	//phase 2
@@ -380,10 +386,19 @@ void Game::UI()
 		//fixa med players o deras event!
 		for(Player* p : players)
 		{
-			if(p -> handleEvent(event))
+		 
+		  if(p -> handleEvent(event))
+		    {
+		      target_player = p;
+		      p->setSelected(true);
+		      for(Player* other_players : players)
 			{
-				target_player = p;
+			  if(other_players != p)
+			    {
+			      other_players->setSelected(false);
+			    }
 			}
+		    }
 		}
 		
 		
@@ -433,36 +448,36 @@ UI()
 */
 void Game::paint()
 {
-std::cerr << "player line 466" << std::endl;
-	
-	applySurface(0,0,background,screen); //skriv ut bakgrunden att ha som en bas
-	std::cerr << "player line 469" << std::endl;
-	
-	for(unsigned i = 0; i < all_objects.size() ; ++i)
-	{
-		all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
-	}
+  std::cerr << "player line 466" << std::endl;
+  
+  applySurface(0,0,background,screen); //skriv ut bakgrunden att ha som en bas
+  std::cerr << "player line 469" << std::endl;
+  
+  for(unsigned i = 0; i < all_objects.size() ; ++i)
+    {
+      all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
+    }
 	std::cerr << "line 475" << std::endl;
 	
 	int x = 250;
 	for(Player* p : players)
-	{	
-	std::cerr << "line 480" << std::endl;
-	
-		if(p -> isCurrentPlayer())
-		{
-		std::cerr << "line 484" << std::endl;
-			p -> paint(screen);
-		std::cerr << "line 486" << std::endl;
-		}
-		else
-		{
-		std::cerr << "line 490" << std::endl;
-			p -> paint(screen,x,50);
-			x += 200;
-		std::cerr << "line 493" << std::endl;
-		}
-	}
+	  {	
+	    std::cerr << "line 480" << std::endl;
+	    
+	if(p -> isCurrentPlayer())
+	  {
+	    std::cerr << "line 484" << std::endl;
+	    p -> paint(screen);
+	    std::cerr << "line 486" << std::endl;
+	  }
+	else
+	  {
+	    std::cerr << "line 490" << std::endl;
+	    p -> paint(screen,x,50);
+	    x += 200;
+	    std::cerr << "line 493" << std::endl;
+	  }
+	  }
 }
 
 

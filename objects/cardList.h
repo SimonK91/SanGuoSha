@@ -30,7 +30,7 @@ public:
 	
 	void paint(Surface& to_where)
 	{
-		applySurface(0, 0, image, to_where);
+	  applySurface(0, 0, image, to_where);
 	} //WTF!!
 	
 };

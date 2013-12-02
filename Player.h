@@ -28,6 +28,13 @@ class Player
   Object::HeroCard* hero;
   std::stack<Object::GameCard*> judgement_cards;
 
+  //--life
+  Surface life_symbol;
+  Surface life_symbol_empty;
+  //--selected frame
+  bool sel;
+  Surface selected_frame;
+
  public:
   Player();
   ~Player();
@@ -63,6 +70,7 @@ class Player
   int getRole(){return role;}
 
   void fixCardPosition();
+  void setSelected(bool);
 
 };
 #endif

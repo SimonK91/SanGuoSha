@@ -42,22 +42,23 @@ void Menu::run_command(const std::string& what_command)
 		
 		//skapa spelets layout
 		//game.make_button("exit", 350, 50, "close");
-		Window* hand = new Window(200,550,600,218);
-		Window* profile = new Window(800,550,224,218);
-		Window* equipment = new Window(0,550,200,218);
-		Window* chat = new Window(800,0,224,550);
-		game.make_textbox(50,50,150,400);
-		game.set_text(0,"wololololoW test test test");
+		Window* hand = new Window(155,545,664,223);
+		Window* profile = new Window(864,545,160,223);
+		Window* equipment = new Window(0,545,154,223);
+		Window* chat = new Window(800,0,224,500);
+		chat->makeTextbox(5,100,215,395);
+		//game.set_text(0,"chat chat chat chat");
 		chat->makeButton("Exit",10,10,"close");
 		game.add_window(hand);
 		game.add_window(profile);
 		game.add_window(equipment);
 		game.add_window(chat);
 		if(!game.setup())
-			running = false;
-			
-		game.make_button("end turn", 10, 10, "end_turn");
-		game.make_button("play card", 10, 50, "play_card");
+		  {
+		    running = false;
+		  }
+		game.make_button("end turn", 800, 575, "end_turn");
+		game.make_button("play card", 800, 630, "play_card");
 		//bara preliminärt!
 		game.run();
 		if(!game.exit())

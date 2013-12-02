@@ -145,6 +145,7 @@ void Game::run_command(const std::string& what_command)
 					}
 				}
 			}
+			p -> setSelected(false);
 		}
 	}
 	else if(what_command == "discard_card")

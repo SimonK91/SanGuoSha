@@ -6,9 +6,12 @@ mainMenu startas
 Emperor-cards drawn
 hero_deck shuffled
 two more cards drawn
+fönstret lagts till
 Command: "activated" is not found in command list
 hero 0
-HERO 0 active
+hero 1
+hero 2
+HERO 2 active
 ger kortet
 för objekt 0:
 dynamic cast success
@@ -20,8 +23,6 @@ för objekt 3:
 dynamic cast success
 för objekt 4:
 normal delete
-life: 4
-life: 3
 game.exit() okay!
 Write settings okay!
 exit OK!
