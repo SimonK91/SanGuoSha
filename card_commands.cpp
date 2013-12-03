@@ -20,7 +20,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 	{
 		if(target_player != nullptr)
 		{
-			for(int i = 0; i < players.size(); ++i)
+			for(unsigned i = 0; i < players.size(); ++i)
 			{
 				if(players.at(i) == target_player)
 				{
@@ -103,13 +103,23 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 	}
 	else if(effect == "acedia")
 	{
-		target_player -> addJudgementCard(gameCard);
-		gameCard = nullptr;
+		if(target_player != nullptr)
+		{
+			target_player -> addJudgementCard(gameCard);
+			gameCard = nullptr;
+		}
+		else
+			std::cout << "ingen vald spelare att spela acedia på :( "<< std::endl;
 	}
 	else if(effect == "lightning")
 	{
-		target_player -> addJudgementCard(gameCard);
-		gameCard = nullptr;
+		if(target_player != nullptr)
+		{
+			target_player -> addJudgementCard(gameCard);
+			gameCard = nullptr;
+		}
+		else
+			std::cout << "ingen vald spelare att spela lightning på :( "<< std::endl;
 	}
 	else if(effect == "steal")
 	{
@@ -208,6 +218,20 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		current_player -> setCurrentPlayer(false);
 		target_player = players.at((self +1) % players.size());
 		target_player -> setCurrentPlayer(true);
+	}
+	else if(effect == "harvest")
+	{
+		Window* harvestWindow = new Window(50,150,600,350);
+		for(unsigned i = 0; i < players.size(); ++i)
+		{
+			card = dynamic_cast<GameCard*>(card_deck -> drawCard());
+			harvestWindow -> addCard(card, i* 100, 20);
+		}
+		harvestWindow -> makeButton("take card",170,250,"pick_card");
+		add_window(harvestWindow);
+		has_window = true;
+		//fix target_player
+		target_player = current_player;
 	}
 	else
 	{

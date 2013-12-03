@@ -221,8 +221,8 @@ void Game::run()
 	// running = true;
 	card_deck -> pushTop(new GameCard(2,spades,"barbarian.png","barbarian 5 0"));
 	card_deck -> pushTop(new GameCard(2,spades,"raining_arrows.png","raining_arrows 5 0"));
-	card_deck -> pushTop(new GameCard(6,spades,"blue_steel_blade.png","weapon_blue_steel_blade 5 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(2,spades,"double_gender_sword.png","weapon_double_gender_sword_equip 5 0")); //ability id, target type, target range
+	card_deck -> pushTop(new GameCard(6,spades,"harvest.png","harvest 5 0")); //ability id, target type, target range
+	card_deck -> pushTop(new GameCard(2,spades,"harvest.png","harvest 5 0")); //ability id, target type, target range
 	for(; running ; )
 	{
 	//phase 1)

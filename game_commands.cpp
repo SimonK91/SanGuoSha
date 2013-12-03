@@ -90,7 +90,7 @@ void Game::run_command(const std::string& what_command)
 	{
 		std::vector<GameCard*> hand;
 		hand = current_player -> getHand();
-		for(unsigned i = hand.size() -1 ; i >= 0 ; --i)
+		for(int i = hand.size() -1 ; i >= 0 ; --i)
 		{
 			if(hand.at(i) -> isActive())
 			{
@@ -313,9 +313,9 @@ void Game::run_command(const std::string& what_command)
 			target_player = nullptr;
 		}
 	}
-		else if(what_command == "arrow_attack")	//ej klar
+		else if(what_command == "arrow_attack")	
 	{
-		static int arrowTarget = -1;//problem kanske fixat
+		static int arrowTarget = -1;
 		if(arrowTarget == -1)
 		{
 			arrowTarget = (self + 1) % players.size();
@@ -349,6 +349,58 @@ void Game::run_command(const std::string& what_command)
 			delete all_objects.back();
 			all_objects.pop_back();
 			
+			current_player -> setCurrentPlayer(true);
+			target_player = nullptr;
+		}
+	}
+	else if(what_command == "pick_card")
+	{
+		//fix index
+		static int harvestTarget = -1;
+		if(harvestTarget == -1)
+			harvestTarget = self;
+		//hämta fönster
+		Window* harvestWindow = dynamic_cast<Window*>(all_objects.back());
+		
+		//kolla om något valt
+		GameCard* card = nullptr;
+		int index = -1;
+		for(int i = 0; i < harvestWindow -> getSize() - 1; ++i)
+		{
+			card = dynamic_cast<GameCard*>(harvestWindow -> getObject(i));
+			if(card -> isActive())	
+			{
+				index = i;
+				break;				//card is found and stored
+			}
+			card = nullptr;
+		}
+		
+		//picka kort
+		if(card != nullptr)
+		{
+			card -> setActive(false);
+			target_player -> recieveCard(card);
+			harvestWindow -> remove(index);
+		}
+		else
+			return;	//inget kort valt!
+			
+		//byt spelare
+		target_player -> setCurrentPlayer(false);
+		harvestTarget = (harvestTarget + 1) % players.size();
+		target_player = players.at(harvestTarget);
+		target_player -> setCurrentPlayer(true);
+		
+		//om sig själv destruera fönstrett
+		if(harvestTarget == self)
+		{
+			harvestTarget = -1;
+			
+			has_window = false;
+			delete all_objects.back();
+			all_objects.pop_back();
+			//for the lulz			
 			current_player -> setCurrentPlayer(true);
 			target_player = nullptr;
 		}
