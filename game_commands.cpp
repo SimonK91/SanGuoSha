@@ -73,9 +73,11 @@ void Game::run_command(const std::string& what_command)
 			if(hand.at(i) -> isActive())
 			{
 				GameCard* card = current_player -> playCard(i);
+				std::cout << "Card played: " << card -> getAbility() << std::endl;
 				card = run_effect(card);
 				if(card != nullptr)
 				{
+					std::cout << "Played card: " + card -> getAbility() + " was plased in discard pile" << std::endl;
 					card -> setActive(false);
 					discard_pile -> pushBottom(card);
 				}
@@ -156,6 +158,7 @@ void Game::run_command(const std::string& what_command)
 		
 		current_player -> setCurrentPlayer(true);
 		
+		has_window = false;
 		target_player = nullptr;
 		delete all_objects.back();
 		all_objects.pop_back();
@@ -272,8 +275,11 @@ void Game::run_command(const std::string& what_command)
 	}
 	else if(what_command == "barbarian_attack")	//ej klar
 	{
-		static unsigned barbarianTarget = (self + 1) % players.size();//problem kanske fixat
-		
+		static int barbarianTarget = -1;//problem kanske fixat
+		if(barbarianTarget == -1)
+		{
+			barbarianTarget = (self + 1) % players.size();
+		}
 		bool playedAttack = false;
 		std::vector<GameCard*> hand = target_player -> getHand();
 		for(unsigned i = 0; i < hand.size(); ++i)
@@ -289,7 +295,7 @@ void Game::run_command(const std::string& what_command)
 		if(!playedAttack)
 			target_player -> modifyLife(-1);
 		
-		//nästa spelare (devil)
+		//nästa spelare (devil)(huehuehue)
 		barbarianTarget = (barbarianTarget+1) % players.size();
 		target_player -> setCurrentPlayer(false);
 		target_player = players.at(barbarianTarget);
@@ -297,23 +303,55 @@ void Game::run_command(const std::string& what_command)
 		
 		if(barbarianTarget == self)
 		{
-			barbarianTarget = 0;
-			//fixa bort kortet
-			dynamic_cast<Window*>(all_objects.back()) -> remove(0);
+			barbarianTarget = -1;
 			//döda fönstrett!!
 			has_window = false;
 			delete all_objects.back();
 			all_objects.pop_back();
 			
-			std::cout << "current_player is current: " << std::boolalpha << current_player -> isCurrentPlayer() << std::endl;
 			current_player -> setCurrentPlayer(true);
-			std::cout << "current_player is current: " << std::boolalpha << current_player -> isCurrentPlayer() << std::endl;
-
-			target_player -> setCurrentPlayer(false);
-			for(Player* p : players)
-				std::cout << "players p is current: " << std::boolalpha << p -> isCurrentPlayer() << std::endl;
+			target_player = nullptr;
 		}
-		std::cout << "current_player is current: " << std::boolalpha << current_player -> isCurrentPlayer() << std::endl;
+	}
+		else if(what_command == "arrow_attack")	//ej klar
+	{
+		static int arrowTarget = -1;//problem kanske fixat
+		if(arrowTarget == -1)
+		{
+			arrowTarget = (self + 1) % players.size();
+		}
+		bool playedDodge = false;
+		std::vector<GameCard*> hand = target_player -> getHand();
+		for(unsigned i = 0; i < hand.size(); ++i)
+		{
+			if(hand.at(i) -> getAbility() == "dodge")
+			{
+				playedDodge = true;
+				discard_pile -> pushBottom(target_player -> loseCard(i));
+				break;
+			}
+		}
+		
+		if(!playedDodge)
+			target_player -> modifyLife(-1);
+		
+		//nästa spelare (devil)(huehuehue)
+		arrowTarget = (arrowTarget+1) % players.size();
+		target_player -> setCurrentPlayer(false);
+		target_player = players.at(arrowTarget);
+		target_player -> setCurrentPlayer(true);
+		
+		if(arrowTarget == self)
+		{
+			arrowTarget = -1;
+			//döda fönstrett!!
+			has_window = false;
+			delete all_objects.back();
+			all_objects.pop_back();
+			
+			current_player -> setCurrentPlayer(true);
+			target_player = nullptr;
+		}
 	}
 	else
 	{

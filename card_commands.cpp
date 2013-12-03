@@ -117,7 +117,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		{
 			Window* stealWindow = new Window(50,150,600,350);
 			HeroCard* dummy = new HeroCard("back.png", "42 gray 0 dummy");
-			//getEquipment() måste implementeras!
+
 			std::vector<GameCard*> targetHand = target_player -> getHand();
 			
 			for(unsigned i = 0; i < targetHand.size(); ++i)
@@ -175,11 +175,33 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 	}
 	else if(effect == "barbarian")
 	{
-		Window* barbarianWindow = new Window(50,150,600,350);
-		barbarianWindow -> addCard(gameCard,400,350);
-		barbarianWindow -> makeButton("Attack!!!",170,250,"barbarian_attack");
+		Window* barbarianWindow = new Window(50,350,350,200);
 		
+		// barbarianWindow -> addCard(gameCard,400,350);
+		barbarianWindow -> makeTextbox(20,40,310,30);
+		barbarianWindow -> makeButton("Attack!!!",70,100,"barbarian_attack");
+		
+		barbarianWindow -> setText(0,"   Attack the barbarians or lose a life!");
+
 		add_window(barbarianWindow);
+		has_window = true;
+		
+		//current player is going to go around
+		current_player -> setCurrentPlayer(false);
+		target_player = players.at((self +1) % players.size());
+		target_player -> setCurrentPlayer(true);
+	}
+	else if(effect == "raining_arrows")
+	{
+		Window* arrowWindow = new Window(50,350,350,200);
+		
+		// barbarianWindow -> addCard(gameCard,400,350);
+		arrowWindow -> makeTextbox(40,40,270,30);
+		arrowWindow -> makeButton("Dodge!!!",70,100,"arrow_attack");
+		
+		arrowWindow -> setText(0," Dodge the arrows or lose a life!");
+
+		add_window(arrowWindow);
 		has_window = true;
 		
 		//current player is going to go around
