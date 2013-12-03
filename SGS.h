@@ -34,7 +34,6 @@ protected:
 	bool fullscreen = false;
 	std::vector<std::pair<std::string, std::string>> settings;
 	
-	
 public:
 	//konstruktorer, destruktorer och operatorer
 	SGS(Surface scr) : screen(scr),m("Music/Menu.wav"), fps(30){}
@@ -87,6 +86,11 @@ private:
 	unsigned state;
 	bool run_next;
 	
+	int game_stage;
+	
+	Object::Button* play_card = new Object::Button("play card", 800, 630, "play_card", "Images/Gui/cleanButton2.png", 20);
+	Object::Button* end_turn = new Object::Button("end turn", 800, 575, "end_turn", "Images/Gui/cleanButton2.png", 20);
+	
 	Player* target_player;
 	Player* current_player;
 	Object::GameCard* selected_card;
@@ -107,7 +111,7 @@ public:
 	~Game() = default;
 	Game() = default;
 	
-	Game(Surface scr) : SGS(scr), target_player(nullptr),current_player(nullptr), selected_card(nullptr)
+	Game(Surface scr) : SGS(scr), target_player(nullptr),current_player(nullptr), selected_card(nullptr), game_stage(0)
 	{
 		self = 0; //ska komma utifrån!!
 		card_deck = new Object::CardList("standard_playing_cards");

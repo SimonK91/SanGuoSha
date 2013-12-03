@@ -1,11 +1,9 @@
 #include "SGS.h"
-#include "FrameRateFixer.h"
-
 using namespace Object;
 
 void Menu::run()
 {
-	m.play();
+	// m.play();
 	Uint8 *keystates = SDL_GetKeyState(nullptr);
 	std::string command;
 

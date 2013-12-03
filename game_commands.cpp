@@ -49,19 +49,10 @@ void Game::run_command(const std::string& what_command)
 					//ta bort fönstret
 					all_objects.pop_back();
 					i = hero_window->getSize();
+					has_window = false;
 				}
 			}			
 		}
-	}
-	else if(what_command == "options")
-	{
-		Window* options = new Window(160,50,500,450);
-		options->makeButton("Fullscreen",30,20,"toggle_fullscreen");
-		options->makeButton("Back",270,390,"close_window");
-		//options->makeTextbox(("Music volume: " + I2S(m.getVolume())),300,20,150,30);
-		options->makeSlider(250,60,"set_volume",m.getVolume());
-		add_window(options);
-		has_window = true;
 	}
 	else if(what_command == "close_window")
 	{
@@ -69,59 +60,6 @@ void Game::run_command(const std::string& what_command)
 		all_objects.pop_back();
 		has_window = false;
 	}
-	else if(what_command.substr(0,10) == "set_volume")
-	{
-		//hitta grejer3
-		int volume = S2I(what_command.substr(11,what_command.size()-11));
-		m.setVolume(volume);
-		//settings.at(1).second = I2S(volume);
-		dynamic_cast<Window*>(all_objects.back())->setText(2,"Music volume: " +  I2S(m.getVolume()));
-	}
-	else if(what_command == "toggle_fullscreen")
-	{
-		if(!fullscreen)
-		{
-			screen = SDL_SetVideoMode(800,600,32, screen->flags+SDL_FULLSCREEN);
-			fullscreen = true;
-			//settings.at(2).second = "on";
-		}
-		else
-		{
-			screen = SDL_SetVideoMode(800,600,32, screen->flags-SDL_FULLSCREEN);
-			fullscreen = false;
-			//settings.at(2).second = "off";
-		}
-	}
-
-
-	else if(what_command == "set_settings")
-	  {
-	    
-	    //toggle sounds not yet implementet
-
-	    //set volume
-		if(settings.size() > 2)
-		{
-	     int volume = S2I(settings.at(1).second);
-	    m.setVolume(volume);
-	    //fullscreen on/off
-	    if(settings.at(2).second == "on")
-	      {
-		screen = SDL_SetVideoMode(800,600,32, screen->flags+SDL_FULLSCREEN);
-		fullscreen = true;
-	      }
-	    else
-	      {
-		//screen = SDL_SetVideoMode(800,600,32, screen->flags-SDL_FULLSCREEN);
-		fullscreen = false;
-	      }
-		}
-		else
-		{
-			m.setVolume(67);
-			fullscreen = false;
-		}
-	  }
 	else if(what_command == "end_turn")
 	{
 		state = 5;	//go to discard phase in game
@@ -129,49 +67,42 @@ void Game::run_command(const std::string& what_command)
 	else if(what_command == "play_card")
 	{
 		std::vector<GameCard*> hand;
-		for(Player* p : players)
+		hand = current_player -> getHand();
+		for(unsigned i = 0; i < hand.size() ; ++i)
 		{
-			if(p -> isCurrentPlayer())
+			if(hand.at(i) -> isActive())
 			{
-				hand = p -> getHand();
-				for(unsigned i = 0; i < hand.size() ; ++i)
+				GameCard* card = current_player -> playCard(i);
+				card = run_effect(card);
+				if(card != nullptr)
 				{
-					if(hand.at(i) -> isActive())
-					{
-						GameCard* card = p -> playCard(i);
-						card = run_effect(card);
-						if(card != nullptr)
-							discard_pile -> pushBottom(card);
-						break; //safty if 2 cards is active!
-					}
+					card -> setActive(false);
+					discard_pile -> pushBottom(card);
 				}
+				break; //safty if 2 cards is active!
 			}
 		}
+		current_player -> setSelected(false);
 	}
 	else if(what_command == "discard_card")
 	{
 		std::vector<GameCard*> hand;
-		for(Player* p : players)
+		hand = current_player -> getHand();
+		for(unsigned i = hand.size() -1 ; i >= 0 ; --i)
 		{
-			if(p -> isCurrentPlayer())
+			if(hand.at(i) -> isActive())
 			{
-				hand = p -> getHand();
-				for(unsigned i = 0; i < hand.size(); ++i)
-				{
-					if(hand.at(i) -> isActive())	//den är fel kommer aldrig hit!
-					{
-						GameCard* card = p -> loseCard(i);
-						discard_pile -> pushBottom(card);
-						break; //safty if 2 cards is active!
-					}
-				}
+				GameCard* card = current_player -> loseCard(i);
+				card -> setActive(false);
+				discard_pile -> pushBottom(card);
 			}
 		}
+
 	}
 	else if(what_command == "dodge")
 	{
 		// std::cout << "dodge begin" << std::endl;
-		for(int i = 0; i < players.size(); ++i)
+		for(unsigned i = 0; i < players.size(); ++i)
 		{
 			if(current_player == players.at(i))
 			{
@@ -184,7 +115,7 @@ void Game::run_command(const std::string& what_command)
 		GameCard* card = nullptr;
 		
 		// std::cout << "target player used" << std::endl;
-		for(int i = 0; i < hand.size(); ++i)
+		for(unsigned i = 0; i < hand.size(); ++i)
 		{
 			if(hand.at(i) -> getAbility() == "dodge")
 			{
@@ -201,19 +132,19 @@ void Game::run_command(const std::string& what_command)
 		
 		
 		// std::cout << "fixed discard_pile" << std::endl;
-		target_player = nullptr;
-		delete all_objects.back();
-		all_objects.pop_back();
 		
 		target_player -> setCurrentPlayer(false);
 		target_player = nullptr;
 		current_player -> setCurrentPlayer(true);
 
+		delete all_objects.back();
+		all_objects.pop_back();
+		has_window = false;
 		// std::cout << "dodge done!" << std::endl;
 	}
 	else if(what_command == "take_damage")
 	{
-		for(int i = 0; i < players.size(); ++i)
+		for(unsigned i = 0; i < players.size(); ++i)
 		{
 			if(current_player == players.at(i))
 			{
@@ -222,7 +153,6 @@ void Game::run_command(const std::string& what_command)
 		}
 		target_player -> modifyLife(-1);
 		target_player -> setCurrentPlayer(false);
-		target_player = nullptr;
 		
 		current_player -> setCurrentPlayer(true);
 		
@@ -233,19 +163,46 @@ void Game::run_command(const std::string& what_command)
 	else if(what_command == "steal_card")
 	{
 		Window* stealWindow = dynamic_cast<Window*>(all_objects.back());
-		GameCard* card;
+		Card* card;
 		
 		for(unsigned i = 0 ; i < stealWindow->getSize() ; ++i)
 		{
-			card = dynamic_cast<GameCard*>(stealWindow -> getObject(i));
+			card = dynamic_cast<Card*>(stealWindow -> getObject(i));
 			if(card != nullptr && card -> isActive())
 			{
 			// hittat rätt kort som ska stjälas
-				current_player -> recieveCard( target_player -> loseCard(i));
+				if(i < target_player -> getHandSize())
+					current_player -> recieveCard( target_player -> loseCard(i));
+				else
+				{
+					//equipment
+					GameCard* gc = dynamic_cast<GameCard*>(card);
+					if((gc -> getAbility()).substr(0,6) == "weapon")
+					{
+						current_player -> recieveCard(target_player -> loseEquipment(2));
+					}
+					else if((gc -> getAbility()).substr(0,6) == "shield")
+					{
+						current_player -> recieveCard(target_player -> loseEquipment(3));
+					}
+					else if(gc -> getAbility() == "off_horse")
+					{
+						current_player -> recieveCard(target_player -> loseEquipment(1));
+					}	
+					else if(gc -> getAbility() == "def_horse")
+					{
+						current_player -> recieveCard(target_player -> loseEquipment(0));
+					}
+				}
 			}
 		}
-		//fix window so it wont fuck thins up!
-		delete stealWindow -> remove(stealWindow -> getSize()-1);
+		//delete dummys
+		while(dynamic_cast<HeroCard*>(stealWindow -> getObject(0)) != nullptr)
+		{
+			delete stealWindow -> remove(0);
+		}
+		//delete button
+		delete dynamic_cast<Button*> (stealWindow -> remove(stealWindow -> getSize()-1));
 		
 		while(stealWindow -> getSize() != 0)
 			stealWindow -> remove(0);
@@ -255,6 +212,108 @@ void Game::run_command(const std::string& what_command)
 		
 		delete all_objects.back();
 		all_objects.pop_back();
+	}
+	else if(what_command == "dismantle_card")
+	{
+		Window* dismantleWindow = dynamic_cast<Window*>(all_objects.back());
+		Card* card;
+		
+		for(unsigned i = 0 ; i < dismantleWindow->getSize() ; ++i)
+		{
+			card = dynamic_cast<Card*>(dismantleWindow -> getObject(i));
+			if(card != nullptr && card -> isActive())
+			{
+				card = dynamic_cast<Card*>(dismantleWindow -> getObject(i));
+				if(card != nullptr && card -> isActive())
+				{
+				// hittat rätt kort som ska stjälas
+					if(i < target_player -> getHandSize())
+						discard_pile -> pushBottom(target_player -> loseCard(i));
+					else
+					{
+						//equipment
+						GameCard* gc = dynamic_cast<GameCard*>(card);
+						if((gc -> getAbility()).substr(0,6) == "weapon")
+						{
+							discard_pile -> pushBottom(target_player -> loseEquipment(2));
+						}
+						else if((gc -> getAbility()).substr(0,6) == "shield")
+						{
+							discard_pile -> pushBottom(target_player -> loseEquipment(3));
+						}
+						else if(gc -> getAbility() == "off_horse")
+						{
+							discard_pile -> pushBottom(target_player -> loseEquipment(1));
+						}	
+						else if(gc -> getAbility() == "def_horse")
+						{
+							discard_pile -> pushBottom(target_player -> loseEquipment(0));
+						}
+					}
+				}
+			}
+		}
+		//delete dummys
+		while(dynamic_cast<HeroCard*>(dismantleWindow -> getObject(0)) != nullptr){
+			delete dismantleWindow -> getObject(0);
+			dismantleWindow -> remove(0);
+		}
+		//delete button
+		delete dismantleWindow -> remove(dismantleWindow -> getSize()-1);
+		
+		while(dismantleWindow -> getSize() != 0)
+			dismantleWindow -> remove(0);
+		
+		has_window = false;
+		target_player = nullptr;
+		
+		delete all_objects.back();
+		all_objects.pop_back();
+	}
+	else if(what_command == "barbarian_attack")	//ej klar
+	{
+		static unsigned barbarianTarget = (self + 1) % players.size();//problem kanske fixat
+		
+		bool playedAttack = false;
+		std::vector<GameCard*> hand = target_player -> getHand();
+		for(unsigned i = 0; i < hand.size(); ++i)
+		{
+			if(hand.at(i) -> getAbility() == "attack")
+			{
+				playedAttack = true;
+				discard_pile -> pushBottom(target_player -> loseCard(i));
+				break;
+			}
+		}
+		
+		if(!playedAttack)
+			target_player -> modifyLife(-1);
+		
+		//nästa spelare (devil)
+		barbarianTarget = (barbarianTarget+1) % players.size();
+		target_player -> setCurrentPlayer(false);
+		target_player = players.at(barbarianTarget);
+		target_player -> setCurrentPlayer(true);
+		
+		if(barbarianTarget == self)
+		{
+			barbarianTarget = 0;
+			//fixa bort kortet
+			dynamic_cast<Window*>(all_objects.back()) -> remove(0);
+			//döda fönstrett!!
+			has_window = false;
+			delete all_objects.back();
+			all_objects.pop_back();
+			
+			std::cout << "current_player is current: " << std::boolalpha << current_player -> isCurrentPlayer() << std::endl;
+			current_player -> setCurrentPlayer(true);
+			std::cout << "current_player is current: " << std::boolalpha << current_player -> isCurrentPlayer() << std::endl;
+
+			target_player -> setCurrentPlayer(false);
+			for(Player* p : players)
+				std::cout << "players p is current: " << std::boolalpha << p -> isCurrentPlayer() << std::endl;
+		}
+		std::cout << "current_player is current: " << std::boolalpha << current_player -> isCurrentPlayer() << std::endl;
 	}
 	else
 	{

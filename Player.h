@@ -40,11 +40,19 @@ class Player
   Object::HeroCard* hero;
   std::stack<Object::GameCard*> judgement_cards;
 
+  //--life
+  Surface life_symbol;
+  Surface life_symbol_empty;
+  //--selected frame
+  bool sel;
+  Surface selected_frame;
+
  public:
   Player();
   ~Player();
   Equipment equipment;
   
+
   void setHero(Object::HeroCard*);
   Object::GameCard* playCard(int);
   Object::GameCard* loseCard(int);
@@ -56,7 +64,7 @@ class Player
 
   void modifyLife(int mod)
   { 
-	if(current_life < max_life)
+	if(current_life + mod <= max_life)
 		current_life += mod; 
   }
   void addJudgementCard(Object::GameCard* gc)
@@ -77,12 +85,13 @@ class Player
   bool loading();
   bool left();
 
+  bool handleHand(const SDL_Event& event);
   bool handleEvent(const SDL_Event& event);
   void setPlayerNr(int);
   void paint(Surface);
   void paint(Surface, int, int);
   
-  std::vector<Object::GameCard*> getHand(){ return hand; } //only read not whrite
+  const std::vector<Object::GameCard*>& getHand(){ return hand; } //only read not whrite
   unsigned getHandSize(){ return hand.size(); }
   unsigned getCurrentHP(){ return current_life; }
   
@@ -90,6 +99,7 @@ class Player
   int getRole(){return role;}
 
   void fixCardPosition();
+  void setSelected(bool);
 
 };
 #endif

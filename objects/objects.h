@@ -53,6 +53,7 @@ public:
 	virtual std::string handleEvent(const SDL_Event&) = 0;
 	virtual ~ActiveObject() = default;
 	bool isActive(){return active != 0;}
+	void setActive(bool act){ active = act; }
  };
 
 

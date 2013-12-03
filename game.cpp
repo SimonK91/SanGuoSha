@@ -76,6 +76,7 @@ bool Game::setup()
 			
 			if(emperor == self)
 			{
+				has_window = true;
 				Window* characters = new Window(100,100,600,550);
 				characters->addCard(hero1,0,0);
 				characters->addCard(hero2,200,0);
@@ -183,6 +184,7 @@ bool Game::setup()
 
 void Game::run()
 {
+	game_stage = 1;
 //game
 	//clean up!
 	while(!players.empty())
@@ -217,7 +219,7 @@ void Game::run()
 	player = nullptr;
 	
 	// running = true;
-	card_deck -> pushTop(new GameCard(2,spades,"steal.png","steal 5 0"));
+	card_deck -> pushTop(new GameCard(2,spades,"barbarian.png","barbarian 5 0"));
 	card_deck -> pushTop(new GameCard(6,spades,"blue_steel_blade.png","weapon_blue_steel_blade 5 0")); //ability id, target type, target range
 	card_deck -> pushTop(new GameCard(2,spades,"double_gender_sword.png","weapon_double_gender_sword_equip 5 0")); //ability id, target type, target range
 	for(; running ; )
@@ -230,6 +232,10 @@ void Game::run()
 		{
 			players.at(self) -> setCurrentPlayer(true);
 			current_player = players.at(self);
+			for(auto p : players)
+			  {
+			    p->setSelected(false);
+			  }
 			state = 2;
 		}
 	//phase 2
@@ -384,15 +390,56 @@ void Game::UI()
 		if(state == 5)
 			run_command(discard_button -> handleEvent(event));
 			
-		//fixa med players o deras event!
-		for(Player* p : players)
-		{
-			if(p -> handleEvent(event))
+		//kolla om någon av knapparna trycks!
+			std::string button_command = play_card -> handleEvent(event);
+			if(button_command != "")
+				run_command(button_command);
+			else
 			{
-				target_player = p;
+				button_command = end_turn -> handleEvent(event);
+				if(button_command != "")
+				{
+					SDL_Event temp_event = event;
+					temp_event.motion.x = -100;
+					temp_event.motion.y = -100;
+					current_player -> handleHand(temp_event);
+					run_command(button_command);
+				}
+			}
+			
+		//kolla spelare och nuvarande handen
+		if(event.type == SDL_MOUSEBUTTONUP && !has_window && game_stage == 1)
+		{
+			//om inte, gör detta!
+			if(button_command == "")
+			{
+				bool player_pressed = false;
+				//rensa selection
+				for(Player* p : players)
+				{
+					p->setSelected(false);
+				}
+				target_player = nullptr;
+			
+				//fixa med players o deras event!
+				for(Player* p : players)
+				{
+					if(p -> handleEvent(event))
+					{
+						target_player = p;
+						p->setSelected(true);
+						player_pressed = true;
+						break;
+					}
+				}
+				if(!player_pressed && button_command == "")
+				{
+					if(current_player != nullptr)
+						current_player -> handleHand(event);
+					current_player -> fixCardPosition();
+				}
 			}
 		}
-		
 		
 		   // om krysset uppe till hÃ¶ger eller alt + F4 blev intryckt
 		if( event.type == SDL_QUIT || (keystates[SDLK_LALT] && event.key.keysym.sym == SDLK_F4))
@@ -440,34 +487,29 @@ UI()
 */
 void Game::paint()
 {
-std::cerr << "player line 466" << std::endl;
 	
 	applySurface(0,0,background,screen); //skriv ut bakgrunden att ha som en bas
-	std::cerr << "player line 469" << std::endl;
-	
+
 	for(unsigned i = 0; i < all_objects.size() ; ++i)
 	{
 		all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
 	}
-	std::cerr << "line 475" << std::endl;
+	
+	play_card -> paint(screen);
+	end_turn -> paint(screen);
 	
 	int x = 250;
 	for(Player* p : players)
 	{	
-	std::cerr << "line 480" << std::endl;
 	
 		if(p -> isCurrentPlayer())
 		{
-		std::cerr << "line 484" << std::endl;
 			p -> paint(screen);
-		std::cerr << "line 486" << std::endl;
 		}
 		else
 		{
-		std::cerr << "line 490" << std::endl;
 			p -> paint(screen,x,50);
 			x += 200;
-		std::cerr << "line 493" << std::endl;
 		}
 	}
 }
