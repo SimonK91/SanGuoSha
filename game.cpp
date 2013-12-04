@@ -430,38 +430,54 @@ void Game::UI()
 					run_command(button_command);
 				}
 			}
-			
+		
 		//kolla spelare och nuvarande handen
 		if(event.type == SDL_MOUSEBUTTONUP && !has_window && game_stage == 1)
 		{
-			//om inte, gör detta!
+			//om inte en knapp trycktes in, gör detta!
 			if(button_command == "")
 			{
 				bool player_pressed = false;
-				//rensa selection
-				for(Player* p : players)
-				{
-					p->setSelected(false);
-				}
-				target_player = nullptr;
+				int tmp = 0;
 			
 				//fixa med players o deras event!
+				
 				for(Player* p : players)
 				{
-					if(p -> handleEvent(event))
+					if(target_player == nullptr && p -> handleEvent(event))
 					{
+						if(rulesOK())
+						{
+							target_player = p;
+							p->setSelected(true);
+							player_pressed = true;
+						}
+						break;
+					}
+					else if(target_player != nullptr && source_player == nullptr && target_player != p && p -> handleEvent(event))
+					{
+						source_player = target_player;
 						target_player = p;
-						p->setSelected(true);
+						p-> setSelected(true);
 						player_pressed = true;
 						break;
 					}
+				}
+				//rensa selection
+				if(!player_pressed)
+				{
+					for(Player* p : players)
+					{
+						p->setSelected(false);
+					}
+					target_player = nullptr;
+					source_player = nullptr;
 				}
 				//om varken player eller knappar är tryckta, kolla om kort i hand är tryckta
 				if(!player_pressed && button_command == "")
 				{
 					if(current_player != nullptr)
-						current_player -> handleHand(event);
-					current_player -> fixCardPosition();
+						selected_card = current_player -> handleHand(event);
 				}
 			}
 		}

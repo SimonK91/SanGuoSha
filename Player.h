@@ -85,7 +85,7 @@ class Player
   bool loading();
   bool left();
 
-  bool handleHand(const SDL_Event& event);
+  Object::GameCard* handleHand(const SDL_Event& event);
   bool handleEvent(const SDL_Event& event);
   void setPlayerNr(int);
   void paint(Surface);

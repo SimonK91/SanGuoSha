@@ -14,7 +14,7 @@ CardList::CardList(const std::string& setting)
 	image = loadImage("Images/Cards/back.png", true);
 	if(setting == "empty")
 	{
-		//do nothing
+		//do nothing 
 	}
 	else if(setting == "standard_playing_cards")
 		loadCardDeck();
@@ -143,21 +143,21 @@ void CardList::loadCardDeck()
 
 	//dodges
 	//0 = self/instant, 0 = no range
-	set.push_back(new GameCard(2,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(3,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(4,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(5,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(6,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(7,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(8,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(9,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(10,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(11,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(11,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(2,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(2,hearts,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(13,hearts,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(2,hearts,"dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(2, diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(3, diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(4, diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(5, diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(6, diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(7, diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(8, diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(9, diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(10,diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(11,diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(11,diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(2, diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(2, hearts,   "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(13,hearts,   "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(2, hearts,   "dodge.png","dodge 0 0")); //ability id, target type, target range
 
 	//peaches
 	//0 = self-instant, 0 = no range

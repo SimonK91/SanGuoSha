@@ -251,7 +251,7 @@ void Player::fixCardPosition()
 }
 
 
-bool Player::handleHand(const SDL_Event& event)
+Object::GameCard* Player::handleHand(const SDL_Event& event)
 {
 	for(int i = hand.size()-1 ; i >= 0 ; --i)
 	{
@@ -262,10 +262,11 @@ bool Player::handleHand(const SDL_Event& event)
 			event2.motion.y = -100;
 			for(int j = i-1 ; j >= 0 ; --j)
 				hand.at(j) -> handleEvent(event2);
-			return true;
+			fixCardPosition();
+			return hand.at(i);
 		}
 	}
-	return false;
+	return nullptr;
 }
 bool Player::handleEvent(const SDL_Event& event)
 {	
@@ -289,7 +290,11 @@ bool Player::handleEvent(const SDL_Event& event)
 
 void Player::setSelected(bool change_select)
 {
-  sel = change_select;
+	sel = change_select;
+	if(change_select)
+		hero->setActive(1);
+	else
+		hero->setActive(0);
 }
 
 
