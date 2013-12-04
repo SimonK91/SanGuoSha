@@ -3,7 +3,6 @@ void Game::run_command(const std::string& what_command)
 	if(what_command == "")
 		return;
 		
-	
 	else if(what_command == "close")
 	{
 		running = false;
@@ -103,20 +102,19 @@ void Game::run_command(const std::string& what_command)
 	}
 	else if(what_command == "dodge")
 	{
-		// std::cout << "dodge begin" << std::endl;
 		for(unsigned i = 0; i < players.size(); ++i)
 		{
 			if(current_player == players.at(i))
 			{
+				std::cout << "self = " << self << std::endl;
 				self = i;
+				std::cout << "self = " << self << std::endl;
 			}
 		}
 		
-		// std::cout << "player fixed" << std::endl;
 		std::vector<GameCard*> hand = target_player -> getHand();
 		GameCard* card = nullptr;
 		
-		// std::cout << "target player used" << std::endl;
 		for(unsigned i = 0; i < hand.size(); ++i)
 		{
 			if(hand.at(i) -> getAbility() == "dodge")
@@ -126,23 +124,16 @@ void Game::run_command(const std::string& what_command)
 			}
 		}
 		
-		// std::cout << "hand gone through" << std::endl;
 		if(card == nullptr)
 			target_player -> modifyLife(-1);
 		else
 			discard_pile -> pushBottom(card);
 		
-		
-		// std::cout << "fixed discard_pile" << std::endl;
-		
 		target_player -> setCurrentPlayer(false);
 		target_player = nullptr;
 		current_player -> setCurrentPlayer(true);
 
-		delete all_objects.back();
-		all_objects.pop_back();
-		has_window = false;
-		// std::cout << "dodge done!" << std::endl;
+		run_command("close_window");
 	}
 	else if(what_command == "take_damage")
 	{
@@ -158,10 +149,8 @@ void Game::run_command(const std::string& what_command)
 		
 		current_player -> setCurrentPlayer(true);
 		
-		has_window = false;
 		target_player = nullptr;
-		delete all_objects.back();
-		all_objects.pop_back();
+		run_command("close_window");
 	}
 	else if(what_command == "steal_card")
 	{
@@ -210,11 +199,8 @@ void Game::run_command(const std::string& what_command)
 		while(stealWindow -> getSize() != 0)
 			stealWindow -> remove(0);
 		
-		has_window = false;
 		target_player = nullptr;
-		
-		delete all_objects.back();
-		all_objects.pop_back();
+		run_command("close_window");
 	}
 	else if(what_command == "dismantle_card")
 	{
@@ -267,11 +253,8 @@ void Game::run_command(const std::string& what_command)
 		while(dismantleWindow -> getSize() != 0)
 			dismantleWindow -> remove(0);
 		
-		has_window = false;
 		target_player = nullptr;
-		
-		delete all_objects.back();
-		all_objects.pop_back();
+		run_command("close_window");
 	}
 	else if(what_command == "barbarian_attack")	//ej klar
 	{
@@ -305,9 +288,7 @@ void Game::run_command(const std::string& what_command)
 		{
 			barbarianTarget = -1;
 			//döda fönstrett!!
-			has_window = false;
-			delete all_objects.back();
-			all_objects.pop_back();
+			run_command("close_window");
 			
 			current_player -> setCurrentPlayer(true);
 			target_player = nullptr;
@@ -345,10 +326,8 @@ void Game::run_command(const std::string& what_command)
 		{
 			arrowTarget = -1;
 			//döda fönstrett!!
-			has_window = false;
-			delete all_objects.back();
-			all_objects.pop_back();
 			
+			run_command("close_window");
 			current_player -> setCurrentPlayer(true);
 			target_player = nullptr;
 		}
@@ -397,13 +376,50 @@ void Game::run_command(const std::string& what_command)
 		{
 			harvestTarget = -1;
 			
-			has_window = false;
-			delete all_objects.back();
-			all_objects.pop_back();
+			run_command("close_window");
 			//for the lulz			
 			current_player -> setCurrentPlayer(true);
 			target_player = nullptr;
 		}
+	}
+	else if(what_command == "duel_attack")
+	{
+		static bool targetAttacking = true;
+		int hasAttack = -1;
+		std::vector<GameCard*> hand;
+		//kollar om han har en attack
+		if(targetAttacking)
+			hand = target_player -> getHand();
+		else
+			hand = current_player -> getHand();
+			
+		for(int i = 0; i < hand.size(); ++i)
+			if(hand.at(i) -> getAbility() == "attack")
+				hasAttack = i;
+				
+		if(hasAttack != -1)
+			if(targetAttacking)
+				discard_pile -> pushBottom(target_player -> playCard(hasAttack));
+			else
+				discard_pile -> pushBottom(current_player -> playCard(hasAttack));
+		else
+		{
+			current_player -> setCurrentPlayer(true);
+			target_player -> setCurrentPlayer(false);
+			if(targetAttacking)
+				target_player -> modifyLife(-1);
+			else
+				current_player -> modifyLife(-1);
+				
+			targetAttacking = true;
+			//clean up
+			run_command("close_window");
+			return;
+		}
+		targetAttacking = !targetAttacking;
+		// if(targetAttacking)
+		target_player -> setCurrentPlayer(targetAttacking);
+		current_player -> setCurrentPlayer(!targetAttacking);
 	}
 	else
 	{

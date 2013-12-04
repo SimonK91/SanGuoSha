@@ -27,11 +27,12 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 					self = i;
 				}
 			}
-			has_window = true;
 			Window* dodgeWindow = new Window(160,250,500,250);
 			dodgeWindow -> makeButton("Dodge",37,70,"dodge");
 			dodgeWindow -> makeButton("Take damage",260,70, "take_damage");
 			add_window(dodgeWindow);
+			has_window = true;
+
 			target_player -> setCurrentPlayer(true);
 			current_player -> setCurrentPlayer(false);
 		}
@@ -232,6 +233,24 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		has_window = true;
 		//fix target_player
 		target_player = current_player;
+	}
+	else if(effect == "duel")
+	{
+		if(target_player != nullptr)
+		{
+			Window* duelWindow = new Window(50,350,350,200);
+			duelWindow -> makeTextbox(40,40,270,30);
+			duelWindow -> setText(0,"You are dueld. Attack or lose a life!");
+			duelWindow -> makeButton("Duel!", 70, 100, "duel_attack");
+			add_window(duelWindow);
+			current_player -> setCurrentPlayer(false);
+			target_player -> setCurrentPlayer(true);
+			has_window = true;
+		}
+		else
+		{
+			std::cout << "sadface :( no duelist..." <<std::endl;
+		}
 	}
 	else
 	{
