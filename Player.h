@@ -78,6 +78,7 @@ class Player
 	return gc;
   }
   int getLife(){ return current_life; }
+  int getMaxLife(){ return max_life; }
   void setStatus(unsigned);
   void setCurrentPlayer(bool cp){ current_player = cp; }
   bool isCurrentPlayer(){ return current_player; }
@@ -93,7 +94,7 @@ class Player
   
   const std::vector<Object::GameCard*>& getHand(){ return hand; } //only read not whrite
   unsigned getHandSize(){ return hand.size(); }
-  unsigned getCurrentHP(){ return current_life; }
+  //unsigned getCurrentHP(){ return current_life; }
   
   void setRole(int r){role = r;}
   int getRole(){return role;}

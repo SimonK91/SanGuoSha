@@ -53,7 +53,7 @@ void Menu::run_command(const std::string& what_command)
 		game.add_window(profile);
 		game.add_window(equipment);
 		game.add_window(chat);
-		game.setup();
+		game.setupHotseat();
 		if(game.runNext())
 		{
 			game.run();

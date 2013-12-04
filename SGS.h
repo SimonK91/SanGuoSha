@@ -96,8 +96,10 @@ private:
 	Player* source_player;
 	Object::GameCard* selected_card;
 	
-	bool rulesOK();
+	bool ruleTargetOK(Player*);
+	bool rulePlayCardOK();
 	
+	int getDistance(Player* source, Player* target);
 	Object::CardList* card_deck;
 	Object::CardList* discard_pile;
 	Object::CardList* hero_deck;
@@ -122,7 +124,7 @@ public:
 		hero_deck = new Object::CardList("hero_deck");
 		m.loadMusic("Music/Menu.wav");
 		Player* p1;
-		for(unsigned i = 0 ; i < 1 ; ++i)
+		for(unsigned i = 0 ; i < 5 ; ++i)
 		{
 			p1 = new Player();
 			p1->setStatus(1);
@@ -134,6 +136,7 @@ public:
 	bool runNext(){return run_next;}
 	void run();
 	void setup();
+	void setupHotseat();
 	void end();
 	bool exit();
 	
