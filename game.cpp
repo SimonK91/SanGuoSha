@@ -59,13 +59,13 @@ void Game::setupHotseat()
 			std::cout << "two more cards drawn" << std::endl;
 			
 			has_window = true;
-			Window* characters = new Window(100,100,600,550);
-			characters->addCard(hero1,0,0);
-			characters->addCard(hero2,200,0);
-			characters->addCard(hero3,400,0);
-			characters->addCard(hero4,100,250);
-			characters->addCard(hero5,300,250);
-			characters->makeButton("Choose",0,500,"pick_hero");
+			Window* characters = new Window(80,50,510,470);
+			characters->addCard(hero1,20,30);
+			characters->addCard(hero2,180,30);
+			characters->addCard(hero3,340,30);
+			characters->addCard(hero4,25,250);
+			characters->addCard(hero5,190,250);
+			characters->makeButton("Choose",365,320,"pick_hero","Images/Gui/mediumButton.png");
 			add_window(characters);
 			step = 4;
 			self = emperor;
@@ -109,12 +109,15 @@ void Game::setupHotseat()
 				Card* hero1 = hero_deck->drawCard();
 				Card* hero2 = hero_deck->drawCard();
 				Card* hero3 = hero_deck->drawCard();
-				Window* characters = new Window(100,100,600,550);
-				characters->addCard(hero1,0,0);
-				characters->addCard(hero2,200,0);
-				characters->addCard(hero3,400,0);
-				characters->makeButton("Choose",0,500,"pick_hero");
+				
+				has_window = true;
+				Window* characters = new Window(100,100,500,350);
+				characters->addCard(hero1,15,40);
+				characters->addCard(hero2,170,40);
+				characters->addCard(hero3,335,40);
+				characters->makeButton("Choose",400,280,"pick_hero","Images/Gui/mediumButton.png");
 				add_window(characters);
+				
 				step = 7;
 			}
 		}
@@ -331,7 +334,7 @@ void Game::setup()
 	//return run_next;
 }
 
-void Game::run()
+void Game::runHotseat()
 {
 	game_stage = 1;
 	// card_deck -> shuffle();
@@ -385,21 +388,44 @@ void Game::run()
 	
 	
 	GameCard* card = nullptr;
+	Window* nextPlayer_window = new Window(270,350,300,150);
+	nextPlayer_window -> makeTextbox(50,20,200,30,17);
+	nextPlayer_window -> setText(0, "Next player's turn");
+	nextPlayer_window -> makeButton("OK!",45,70,"next_state");
 	running = true;
+	state = -1;
 	while(running)
 	{
-	//phase 1)
-	//start of turn
-	//special hero abilities trigger here
-		// std::cout << "the state: " << state << std::endl;
-		if(state == 1)
+	//phase -1)
+	//change of player
+		if(state == -1)
 		{
 			players.at(self) -> setCurrentPlayer(true);
 			current_player = players.at(self);
 			for(auto p : players)
-			  {
+			{
 			    p->setSelected(false);
-			  }
+			}
+			has_window = true;
+			add_window(nextPlayer_window);
+			++state;
+		}
+	
+	//phase 0)
+	//go past OK screen
+		if(state == 0)
+		{
+			//happens through button click
+		}
+		
+		
+	//phase 1)
+	//start of turn
+	//special hero abilities trigger here
+		// std::cout << "the state: " << state << std::endl;
+		else if(state == 1)
+		{
+			
 			state = 2;
 		}
 	//phase 2
@@ -469,7 +495,7 @@ void Game::run()
 		{	
 			players.at(self) -> setCurrentPlayer(false);
 			self = (self + 1) % players.size();
-			state = 1;
+			state = -1;
 			target_player = nullptr;
 		}
 		
@@ -686,17 +712,29 @@ void Game::paint()
 	end_turn -> paint(screen);
 	
 	int x = 250;
-	for(Player* p : players)
-	{	
-	
-		if(p -> isCurrentPlayer())
-		{
-			p -> paint(screen);
+	if (game_stage != 0)
+	{
+		for(Player* p : players)
+		{	
+		
+			if(p -> isCurrentPlayer())
+			{
+				if(state != 0)
+					p -> paint(screen);
+			}
+			else
+			{
+				p -> paint(screen,x,50);
+				x += 200;
+			}
 		}
-		else
+	}
+	else
+	{
+		for(Player* p : players)
 		{
-			p -> paint(screen,x,50);
-			x += 200;
+			if(p -> getRole() == 0)
+				p -> paint(screen,824,257);
 		}
 	}
 }

@@ -1,3 +1,4 @@
+
 void Game::run_command(const std::string& what_command)
 {
 	if(what_command == "")
@@ -7,6 +8,13 @@ void Game::run_command(const std::string& what_command)
 	else if(what_command == "close")
 	{
 		running = false;
+		return;
+	}
+	else if(what_command == "next_state")
+	{
+		all_objects.pop_back();
+		++state;
+		has_window = false;
 		return;
 	}
 	else if(what_command == "pick_hero")

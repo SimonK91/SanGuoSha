@@ -56,7 +56,7 @@ void Menu::run_command(const std::string& what_command)
 		game.setupHotseat();
 		if(game.runNext())
 		{
-			game.run();
+			game.runHotseat();
 		}
 	
 		if(!game.runNext())
