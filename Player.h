@@ -62,6 +62,7 @@ class Player
 
   void doEffect(std::string);
 
+  std::string getHeroName(){ return hero -> getName(); }
   void modifyLife(int mod)
   { 
 	if(current_life + mod <= max_life)

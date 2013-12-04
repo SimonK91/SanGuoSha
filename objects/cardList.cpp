@@ -78,32 +78,32 @@ void CardList::shuffle(unsigned leSeed)
 void CardList::loadHeroDeck()
 {
 	//lägger 3 emparors först för att underlätta grejer :)
-	set.push_back(new HeroCard("CaoCao.png", "4 blue 1 ability"));
-	set.push_back(new HeroCard("LiuBei.png", "4 red 1 ability"));
-	set.push_back(new HeroCard("SunQuan.png", "4 green 1 ability"));
+	set.push_back(new HeroCard("CaoCao.png", "4 blue 1 CaoCao ability"));
+	set.push_back(new HeroCard("LiuBei.png", "4 red 1 LiuBei ability"));
+	set.push_back(new HeroCard("SunQuan.png", "4 green 1 SunQuan ability"));
 	//resten
-	set.push_back(new HeroCard("DaQiao.png", "3 green 0 ability"));
-	set.push_back(new HeroCard("DiaoChan.png", "3 gray 0 ability"));
-	set.push_back(new HeroCard("ElderZhuge.png", "3 red 1 ability"));
-	set.push_back(new HeroCard("GanNing.png", "4 green 1 ability"));
-	set.push_back(new HeroCard("GuanYu.png", "4 red 1 ability"));
-	set.push_back(new HeroCard("GuoJia.png", "3 blue 1 ability"));
-	set.push_back(new HeroCard("HuangGai.png", "4 green 1 ability"));
-	set.push_back(new HeroCard("HuangYueYing.png", "3 red 0 ability"));
-	set.push_back(new HeroCard("HuaTuo.png", "3 gray 1 ability"));
-	set.push_back(new HeroCard("LuBu.png", "4 gray 1 ability"));
-	set.push_back(new HeroCard("LuMeng.png", "4 green 1 ability"));
-	set.push_back(new HeroCard("LuXun.png", "3 green 1 ability"));
-	set.push_back(new HeroCard("MaChao.png", "4 red 1 ability"));
-	set.push_back(new HeroCard("SiMaYi.png", "3 blue 1 ability"));
-	set.push_back(new HeroCard("SunShangXiang.png", "3 green 0 ability"));
-	set.push_back(new HeroCard("XiaHouDun.png", "4 blue 1 ability"));
-	set.push_back(new HeroCard("XuChu.png", "4 blue 1 ability"));
-	set.push_back(new HeroCard("ZhangFei.png", "4 red 1 ability"));
-	set.push_back(new HeroCard("ZhangLiao.png", "4 blue 1 ability"));
-	set.push_back(new HeroCard("ZhaoYun.png", "4 red 1 ability"));
-	set.push_back(new HeroCard("ZhenJi.png", "3 blue 0 ability"));
-	set.push_back(new HeroCard("ZhouYu.png", "3 green 1 ability"));
+	set.push_back(new HeroCard("DaQiao.png", "3 green 0 DaQiao ability"));
+	set.push_back(new HeroCard("DiaoChan.png", "3 gray 0 DiaoChan ability"));
+	set.push_back(new HeroCard("ElderZhuge.png", "3 red 1 ElderZhuge ability"));
+	set.push_back(new HeroCard("GanNing.png", "4 green 1 GanNing ability"));
+	set.push_back(new HeroCard("GuanYu.png", "4 red 1 GuanYu ability"));
+	set.push_back(new HeroCard("GuoJia.png", "3 blue 1 GuoJia ability"));
+	set.push_back(new HeroCard("HuangGai.png", "4 green 1 HuangGai ability"));
+	set.push_back(new HeroCard("HuangYueYing.png", "3 red 0 HuangYueYing ability"));
+	set.push_back(new HeroCard("HuaTuo.png", "3 gray 1 HuaTuo ability"));
+	set.push_back(new HeroCard("LuBu.png", "4 gray 1 LuBu ability"));
+	set.push_back(new HeroCard("LuMeng.png", "4 green 1 LuMeng ability"));
+	set.push_back(new HeroCard("LuXun.png", "3 green 1 LuXun ability"));
+	set.push_back(new HeroCard("MaChao.png", "4 red 1 MaChao ability"));
+	set.push_back(new HeroCard("SiMaYi.png", "3 blue 1 SiMaYi ability"));
+	set.push_back(new HeroCard("SunShangXiang.png", "3 green 0 SunShangXiang ability"));
+	set.push_back(new HeroCard("XiaHouDun.png", "4 blue 1 XiaHouDun ability"));
+	set.push_back(new HeroCard("XuChu.png", "4 blue 1 XuChu ability"));
+	set.push_back(new HeroCard("ZhangFei.png", "4 red 1 ZhangFei ability"));
+	set.push_back(new HeroCard("ZhangLiao.png", "4 blue 1 ZhangLiao ability"));
+	set.push_back(new HeroCard("ZhaoYun.png", "4 red 1 ZhaoYun ability"));
+	set.push_back(new HeroCard("ZhenJi.png", "3 blue 0 ZhenJi ability"));
+	set.push_back(new HeroCard("ZhouYu.png", "3 green 1 ZhouYu ability"));
 }
 
 void CardList::loadCardDeck()

@@ -219,9 +219,9 @@ void Game::run()
 	player = nullptr;
 	
 	// running = true;
-	card_deck -> pushTop(new GameCard(2,spades,"barbarian.png","barbarian 5 0"));
+	card_deck -> pushTop(new GameCard(2,spades,"attack.png","attack 5 0"));
 	card_deck -> pushTop(new GameCard(2,spades,"raining_arrows.png","raining_arrows 5 0"));
-	card_deck -> pushTop(new GameCard(6,spades,"duel.png","duel 5 0")); //ability id, target type, target range
+	card_deck -> pushTop(new GameCard(6,spades,"duress.png","duress 5 0")); //ability id, target type, target range
 	card_deck -> pushTop(new GameCard(2,spades,"duel.png","duel 5 0")); //ability id, target type, target range
 	for(; running ; )
 	{

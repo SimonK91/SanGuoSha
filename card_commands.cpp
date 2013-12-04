@@ -252,6 +252,17 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 			std::cout << "sadface :( no duelist..." <<std::endl;
 		}
 	}
+	else if(effect == "duress")
+	{
+		if(target_player != nullptr)
+		{
+			make_button("Attack him!",100,100,"duress_attack");
+			source_player = target_player;
+			target_player = nullptr;
+		}
+		else
+			std::cout << "no target for duress :( " << std::endl;
+	}
 	else
 	{
 		std::cout << "Card command: \"" + effect + "\" does not exist in the list" << std::endl;

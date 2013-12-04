@@ -106,9 +106,7 @@ void Game::run_command(const std::string& what_command)
 		{
 			if(current_player == players.at(i))
 			{
-				std::cout << "self = " << self << std::endl;
 				self = i;
-				std::cout << "self = " << self << std::endl;
 			}
 		}
 		
@@ -417,9 +415,71 @@ void Game::run_command(const std::string& what_command)
 			return;
 		}
 		targetAttacking = !targetAttacking;
-		// if(targetAttacking)
+
 		target_player -> setCurrentPlayer(targetAttacking);
 		current_player -> setCurrentPlayer(!targetAttacking);
+	}
+	else if(what_command == "duress_attack")
+	{
+		if(target_player != nullptr)
+		{
+			current_player -> setCurrentPlayer(false);
+			source_player -> setCurrentPlayer(true);
+			
+			//ta bort duress_attack knappen
+			delete all_objects.back();
+			all_objects.pop_back();
+			//skapa ett fönster med val
+			Window* duressWindow = new Window(160,250,500,250);
+			duressWindow -> makeTextbox(40,40,420,30);
+			duressWindow -> setText(0,"Attack " + current_player -> getHeroName()  + " or lose your weapon to " + current_player -> getHeroName());
+			
+			duressWindow -> makeButton("Attack",37,170,"duress_attack_respons");
+			duressWindow -> makeButton("Give weapon",260,170,"give_weapon");
+			has_window = true;
+			add_window(duressWindow);
+		}
+	}
+	else if(what_command == "give_weapon")
+	{
+		//döda inte :( 
+		if(current_player -> equipment.weapon != nullptr)
+			discard_pile -> pushBottom(current_player -> loseEquipment(2));
+		std::swap(current_player -> equipment.weapon,source_player -> equipment.weapon);
+		
+		run_command("close_window");
+		source_player = nullptr;
+		target_player = nullptr;
+	}
+	else if(what_command == "duress_attack_respons")
+	{
+		std::vector<GameCard*> hand = source_player -> getHand();
+		int index = -1;
+		for(int i = 0; i < hand.size(); ++i)
+			if(hand.at(i) -> getAbility() == "attack")
+				index = i;
+		
+		
+		if(index == -1)
+		{
+			//he was lying!
+			run_command("give_weapon");
+		}
+		else
+		{	
+			GameCard* card = source_player -> playCard(index);
+			source_player -> setCurrentPlayer(false);
+			target_player -> setCurrentPlayer(true);
+
+			//ta bort duress fönstrett
+			run_command("close_window");
+			
+			run_effect(card);
+		
+			discard_pile -> pushBottom(card);
+			// target_player -> setCurrentPlayer(false);
+			// current_player -> setCurrentPlayer(true);
+		}
 	}
 	else
 	{

@@ -93,6 +93,7 @@ private:
 	
 	Player* target_player;
 	Player* current_player;
+	Player* source_player;
 	Object::GameCard* selected_card;
 	
 	Object::CardList* card_deck;
@@ -111,7 +112,7 @@ public:
 	~Game() = default;
 	Game() = default;
 	
-	Game(Surface scr) : SGS(scr), target_player(nullptr),current_player(nullptr), selected_card(nullptr), game_stage(0)
+	Game(Surface scr) : SGS(scr), target_player(nullptr),current_player(nullptr),source_player(nullptr), selected_card(nullptr), game_stage(0)
 	{
 		self = 0; //ska komma utifrån!!
 		card_deck = new Object::CardList("standard_playing_cards");
