@@ -172,28 +172,28 @@ void CardList::loadCardDeck()
 
 	//horses
 	// 5 = equipment, 0 = no range
-	set.push_back(new GameCard(13,spades,"da_wan.png","off_horse 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(5,hearts,"chi_tu.png","off_horse 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(13,diamonds,"zi_xin.png","off_horse 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(5,spades,"jue_ying.png","def_horse 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(5,clubs,"di_lu.png","def_horse 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(13,hearts,"zhua_huang.png","def_horse 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(13,spades,"da_wan.png","equip_off_horse 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(5,hearts,"chi_tu.png","equip_off_horse 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(13,diamonds,"zi_xin.png","equip_off_horse 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(5,spades,"jue_ying.png","equip_def_horse 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(5,clubs,"di_lu.png","equip_def_horse 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(13,hearts,"zhua_huang.png","equip_def_horse 5 0")); //ability id, target type, target range
 
 	//weaponzies and shieldzes
 	//
-	set.push_back(new GameCard(6,spades,"blue_steel_blade.png","weapon_blue_steel_blade 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(2,spades,"double_gender_sword.png","weapon_double_gender_sword_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(5,spades,"green_dragon_cresent_blade.png","weapon_green_dragon_cresent_blade_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(12,spades,"serpent_halberd.png","weapon_serpent_halberd_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(5,hearts,"unicorn_bow.png","weapon_unicorn_bow_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(1,clubs,"zhuge_crossbow.png","weapon_zhuge_crossbow_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(1,diamonds,"zhuge_crossbow.png","weapon_zhuge_crossbow_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(5,diamonds,"rock_cleaving_axe.png","weapon_rock_cleaving_axe_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(12,diamonds,"Heaven_Scorcher_Halberd.png","weapon_Heaven_Scorcher_Halberd_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(2,spades,"frost_blade.png","weapon_frost_blade 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(2,spades,"ba_gua_shield.png","shield_ba_gua_shield_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(2,clubs,"ba_gua_shield.png","shield_ba_gua_shield_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(2,clubs,"ren_wang_shield.png","shield_ren_wang_shield_equip 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(6,spades,"blue_steel_blade.png","equip_weapon_blue_steel_blade 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(2,spades,"double_gender_sword.png","equip_weapon_double_gender_sword_equip 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(5,spades,"green_dragon_cresent_blade.png","equip_weapon_green_dragon_cresent_blade_equip 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(12,spades,"serpent_halberd.png","equip_weapon_serpent_halberd_equip 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(5,hearts,"unicorn_bow.png","equip_weapon_unicorn_bow_equip 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(1,clubs,"zhuge_crossbow.png","equip_weapon_zhuge_crossbow_equip 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(1,diamonds,"zhuge_crossbow.png","equip_weapon_zhuge_crossbow_equip 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(5,diamonds,"rock_cleaving_axe.png","equip_weapon_rock_cleaving_axe_equip 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(12,diamonds,"Heaven_Scorcher_Halberd.png","equip_weapon_Heaven_Scorcher_Halberd_equip 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(2,spades,"frost_blade.png","equip_weapon_frost_blade 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(2,spades,"ba_gua_shield.png","equip_shield_ba_gua_shield_equip 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(2,clubs,"ba_gua_shield.png","equip_shield_ba_gua_shield_equip 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(2,clubs,"ren_wang_shield.png","equip_shield_ren_wang_shield_equip 5 0")); //ability id, target type, target range
 
 	//toolcardses
 	// 0

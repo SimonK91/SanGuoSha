@@ -55,51 +55,10 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
       else
 	current_player -> modifyLife(1);
     }
-  else if(effect == "off_horse")
+  else if(effect.substr(0,5) == "equip")
     {
-      if(current_player -> equipment.off_horse != nullptr)
-	{
-	  std::swap(current_player -> equipment.off_horse, gameCard);
-	}
-      else
-	{
-	  current_player -> equipment.off_horse = gameCard;
-	  gameCard = nullptr;
-	}
-    }
-  else if(effect == "def_horse")
-    {
-      if(current_player -> equipment.def_horse != nullptr)
-	{
-	  std::swap(current_player -> equipment.def_horse, gameCard);
-	}
-      else
-	{
-	  current_player -> equipment.def_horse = gameCard;
-	  gameCard = nullptr;
-	}
-    }
-  else if(effect.substr(0,6) == "weapon")
-    {
-      if(current_player -> equipment.weapon != nullptr)
-	{
-	  std::swap(current_player -> equipment.weapon, gameCard);
-	}
-      else
-	{
-	  current_player -> equipment.weapon = gameCard;
-	  gameCard = nullptr;
-	}
-    }
-  else if(effect.substr(0,6) == "shield")
-    {
-      if(current_player -> equipment.shield != nullptr)
-	std::swap(current_player -> equipment.shield, gameCard);
-      else
-	{
-	  current_player -> equipment.shield = gameCard;
-	  gameCard = nullptr;
-	}
+      gameCard = current_player -> equipStuff(gameCard);
+    
     }
   else if(effect == "peach_garden")
     {

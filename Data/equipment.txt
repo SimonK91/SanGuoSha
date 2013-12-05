@@ -1,0 +1,32 @@
+-----Weapons--------
+blue_steel
+Whenever you use an ATTACK card, you can ignore the armour your target has equipped.
+---
+double_gen
+When you use ATTACK on a character of the opposite gender, ask your target player to choose 1 of the following 2 options before that player uses DODGE : Option 1 - Discard 1 of the target player's on-hand cards.Option 2 - Allow the person attacking (in this case, you) to draw one card from the deck.
+------
+green_drag
+When your target evades your ATTACK, you can choose to use another ATTACK immediately on the same target.
+----
+serpent_ha
+You can choose to use ATTACK by discarding any 2 on-hand cards.
+-----
+unicorn_bo
+When your ATTACKcauses damage to your target, you can choose to discard one of his/her horses that is in the equipped items area.
+----
+zhuge_cros
+During the action phase of your turn, you can use as many ATTACK cards as you wish.
+-----
+rock_cleav
+When your ATTACK has been evaded, you can choose to discard any 2 cards (on-hand or equipped) and force the relevant damage back on to the targeted player. 
+-----
+Heaven_Sco
+When the ATTACK  card used is the last card that is on-hand, you can target up to 3 different players within your attacking range. 
+---
+frost_blad
+When your ATTACK  causes damage to your target, you can choose to prevent that damage by discarding any 2 cards of your choice from him or her. 
+----
+
+
+
+

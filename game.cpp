@@ -225,9 +225,12 @@ void Game::run()
 	player = nullptr;
 	
 	running = true;
-	card_deck -> pushTop(new GameCard(6,spades,"blue_steel_blade.png","weapon_blue_steel_blade 5 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(2,spades,"double_gender_sword.png","weapon_double_gender_sword_equip 5 0")); //ability id, target type, target range
-	
+	card_deck -> pushTop(new GameCard(6,spades,"blue_steel_blade.png","equip_weapon_blue_steel_blade 5 0")); //ability id, target type, target range
+	card_deck -> pushTop(new GameCard(2,spades,"double_gender_sword.png","equip_weapon_double_gender_sword_equip 5 0")); //ability id, target type, target range
+	card_deck ->pushTop(new GameCard(13,hearts,"zhua_huang.png","equip_def_horse 5 0"));
+	card_deck ->pushTop(new GameCard(13,hearts,"zhua_huang.png","equip_def_horse 5 0"));
+	card_deck ->pushTop(new GameCard(13,spades,"da_wan.png","equip_off_horse 5 0"));
+	card_deck ->pushTop(new GameCard(2,clubs,"ren_wang_shield.png","equip_shield_ren_wang_shield_equip 5 0"));
 	while(running)
 	{
 	 
@@ -441,6 +444,11 @@ void Game::UI()
 		      }
 		  }	
 		//kolla spelare och nuvarande handen
+		for(Player* q : players)
+		  {
+		    q -> handleEvent(event);
+		  }
+
 		if(event.type == SDL_MOUSEBUTTONUP && !has_window && game_stage == 1)
 		{
 			//om inte, gör detta!
@@ -549,7 +557,8 @@ std::cerr << "player line 466" << std::endl;
 	      }
 	    else
 	      {
-		players.at(i) -> paint(screen, player_paint_offset_x, player_paint_offset_y);
+		players.at(i)->setPos(player_paint_offset_x, player_paint_offset_y);
+		players.at(i) -> paint(screen);
 		others++;
 		if(others == 1)
 		  {
