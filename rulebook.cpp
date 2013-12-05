@@ -64,7 +64,7 @@ bool Game::rulePlayCardOK()
 	if(selected_card == nullptr)
 		return false;
 	
-	if(selected_card -> getAbility() == "peach" && current_player -> getLife() == current_player -> getMaxLife())
+	if(selected_card -> getAbility() == "peach" && current_player -> getLife() != current_player -> getMaxLife())
 		return false;
 		
 		

@@ -389,7 +389,7 @@ void Game::runHotseat()
 	
 	GameCard* card = nullptr;
 	Window* nextPlayer_window = new Window(270,350,300,150);
-	nextPlayer_window -> makeTextbox(50,20,200,30,17);
+	nextPlayer_window -> makeTextbox(40,25,220,30,17);
 	nextPlayer_window -> setText(0, "Next player's turn");
 	nextPlayer_window -> makeButton("OK!",45,70,"next_state");
 	running = true;
@@ -516,6 +516,7 @@ void Game::runHotseat()
 //if a tool-card is played, check every player for negate card.
 
 	//return run_next;
+	delete nextPlayer_window;
 }
 
 void Game::end()

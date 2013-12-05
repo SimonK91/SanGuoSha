@@ -3,11 +3,17 @@
 
 using namespace Object;
 
-Player::Player() : role(-1),current_life(0),max_life(0), hero(nullptr)
+Player::Player(const std::string& name_) : role(-1),current_life(0),max_life(0), hero(nullptr)
 {
   current_player = false;
   sel = false;
   selected_frame.setImage(loadImage("Images/Cards/Characters/hero-frame.png",true));
+  
+  TTF_Font* font = TTF_OpenFont("Fonts/LHANDW.TTF",13);
+  name = TTF_RenderText_Blended(font,name_.c_str(),{255,255,255,0});	//skapa en yta med namnet
+  
+  cleanUp({font});
+  hero_frame.setImage(loadImage("Images/Gui/heroFrame.png",true));
 }
 
 Player::~Player()
@@ -33,6 +39,7 @@ void Player::setHero(HeroCard* character)
   current_life = max_life;
   male = character->getMale();
   hero = character;
+  hero_profile.setImage(loadImage("Images/Cards/Characters/"+character->getFileName()));
 
   if(hero->getClan() == red)
     { 
@@ -171,6 +178,7 @@ void Player::paint(Surface screen)
 		      }
 		    
 		  }
+		  applySurface(876,555,name,screen);
 
      }
   
@@ -182,12 +190,14 @@ void Player::paint(Surface screen, int x_pos, int y_pos)
 	if(hero != nullptr)
 	{
 	  hero->setPosition(x_pos, y_pos);
-	  hero->paint(screen);
+	  //hero->paint(screen);
 	  
+	  applySurface(x_pos,y_pos,hero_profile,screen);
+	  applySurface(x_pos-3,y_pos-4,hero_frame,screen);
 	  //ritar ut liv
-	  int x_offset_life = x_pos + 30;
-	  int y_offset_life = y_pos + 5;
-	  for(int i = 0; i < max_life; ++i, x_offset_life += 17)
+	  int x_offset_life = x_pos + 70;
+	  int y_offset_life = y_pos + 80;
+	  for(int i = 0; i < max_life; ++i, x_offset_life += 14)
 	    {
 	      if(i < current_life)
 		{
@@ -204,6 +214,7 @@ void Player::paint(Surface screen, int x_pos, int y_pos)
 	    {
 	      applySurface(x_pos-5, y_pos-5,selected_frame,screen);
 	    }
+		  applySurface(x_pos+5,y_pos,name,screen);
 	}
 	//rita ut equipment
 

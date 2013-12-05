@@ -16,8 +16,7 @@ target_type:0 = self
 			5 = equipment
 			
 range:		0 	= inf
-			1->8= const
-			9  	= 
+			1->9= const
 			10 	= physical
 */
 namespace Object

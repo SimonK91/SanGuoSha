@@ -19,6 +19,7 @@ private:
 	Clan clan;
 	bool male;
 	std::string name;
+	std::string file;
 	std::vector<std::string> abilities;
 public:
 	HeroCard(std::string filename, std::string ID);
@@ -27,6 +28,7 @@ public:
 	// std::string handleEvent(const SDL_Event& event);
 
 	std::string getName(){ return name; }
+	std::string getFileName(){ return file; }
 	int getHP()   { return maxHP;}
 	Clan getClan(){ return clan; }
 	bool getMale(){ return male; }

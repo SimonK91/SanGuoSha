@@ -29,6 +29,9 @@ struct Equipment
 class Player
 {
  private:
+  Surface name;
+  Surface hero_frame;
+  Surface hero_profile;
   int role;
   int current_life;
   int max_life;
@@ -48,7 +51,7 @@ class Player
   Surface selected_frame;
 
  public:
-  Player();
+  Player(const std::string&);
   ~Player();
   Equipment equipment;
   

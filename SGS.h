@@ -125,9 +125,9 @@ public:
 		hero_deck = new Object::CardList("hero_deck");
 		m.loadMusic("Music/Menu.wav");
 		Player* p1;
-		for(unsigned i = 0 ; i < 3 ; ++i)
+		for(unsigned i = 0 ; i < 4 ; ++i)
 		{
-			p1 = new Player();
+			p1 = new Player("Miiza"+I2S(i));
 			p1->setStatus(1);
 			players.push_back(p1);
 		}
