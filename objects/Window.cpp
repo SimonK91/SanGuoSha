@@ -28,10 +28,16 @@ namespace Object
 		{
 			tmpCommand = dynamic_cast<ActiveObject*>(objects.at(i))->handleEvent(event2);
 		}
-		if(tmpCommand != "")
+			
+		if(tmpCommand != "" && dynamic_cast<Card*>(objects.at(i)) != nullptr)
 		{
-			break;
+			event2.motion.x = -100;
+			event2.motion.y = -100;
+			for(int j = i-1 ; j >= 0 ; --j)
+				dynamic_cast<ActiveObject*>(objects.at(j))->handleEvent(event2);
 		}
+		if(tmpCommand != "")
+			break;
     }
     
     return tmpCommand;

@@ -9,6 +9,13 @@ void Game::run_command(const std::string& what_command)
 		running = false;
 		return;
 	}
+	else if(what_command == "next_state")
+	{
+		all_objects.pop_back();
+		++state;
+		has_window = false;
+		return;
+	}
 	else if(what_command == "pick_hero")
 	{
 		Window* hero_window = dynamic_cast<Window*>(all_objects.back());
@@ -30,23 +37,24 @@ void Game::run_command(const std::string& what_command)
 					hero_window->remove(i);
 					
 					//för varje annat objekt i fönstret
-					for(unsigned j = 0 ; j < hero_window->getSize() ; ++j)
+					while(hero_window->getSize() != 0)
 					{
-						std::cout << "för objekt " << j << ":" << std::endl;
 						//om det är ett heroCard, flytta in det i hero deck
-						if(dynamic_cast<HeroCard*>(hero_window->getObject(j)) != nullptr)
+						if(dynamic_cast<HeroCard*>(hero_window->getObject(0)) != nullptr)
 						{
 							std::cout << "dynamic cast success" << std::endl;
-							hero_deck->pushBottom(dynamic_cast<HeroCard*>(hero_window->getObject(j)));
+							hero_deck->pushBottom(dynamic_cast<HeroCard*>(hero_window->remove(0)));
+							
 						}
 						//annars ta bort det
 						else
 						{
 							std::cout << "normal delete" << std::endl;
-							delete hero_window->getObject(j);
+							delete hero_window->remove(0);
 						}
 					}
 					//ta bort fönstret
+					delete all_objects.back();
 					all_objects.pop_back();
 					i = hero_window->getSize();
 					has_window = false;

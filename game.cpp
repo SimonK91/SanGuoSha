@@ -4,6 +4,158 @@
 
 using namespace Object;
 
+void Game::setupHotseat()
+{
+	run_next = true;
+	std::vector<int> role{0,2,3,1,3,3,1,3,1,2};
+	int emperor = -1;
+	unsigned step = 1;
+	
+	while(running)
+	{
+	
+	// //step 1)
+	// //shuffle role cards
+		if(step == 1)
+		{
+		
+			unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+			std::shuffle (role.begin(), role.begin()+players.size(), std::default_random_engine(seed));
+			
+			step = 2;
+		}
+		
+		
+	// //step 2)
+	// //distribute role cards
+		else if(step == 2)
+		{
+		
+			for(unsigned i = 0; i < players.size() ; ++i)
+			{
+				players.at(i)->setRole(role.at(i));
+				
+				if(role.at(i) == 0)
+					emperor = i;
+			}
+			step = 3;
+		}
+	//step 3)
+	//shuffle character cards
+	//and give emperor 5 characters to choose between
+		else if(step == 3)
+		{
+		
+			Card* hero1 = hero_deck->drawCard(); //the three emperors
+			Card* hero2 = hero_deck->drawCard();
+			Card* hero3 = hero_deck->drawCard();
+			std::cout << "Emperor-cards drawn" << std::endl;	
+			
+			hero_deck->shuffle();
+			std::cout << "hero_deck shuffled" << std::endl;
+			
+			Card* hero4 = hero_deck->drawCard();
+			Card* hero5 = hero_deck->drawCard();
+			std::cout << "two more cards drawn" << std::endl;
+			
+			has_window = true;
+			Window* characters = new Window(80,50,510,470);
+			characters->addCard(hero1,20,30);
+			characters->addCard(hero2,180,30);
+			characters->addCard(hero3,340,30);
+			characters->addCard(hero4,25,250);
+			characters->addCard(hero5,190,250);
+			characters->makeButton("Choose",365,320,"pick_hero","Images/Gui/mediumButton.png");
+			add_window(characters);
+			step = 4;
+			self = emperor;
+		}
+	
+
+		//step 4)
+		//wait for emperor to choose character
+		else if(step == 4)
+		{
+			if(players.at(emperor)->hasHero())
+			{
+				step = 5;
+			}
+		}
+
+	//step 5)
+	//shuffle all remaining characters
+		else if(step == 5)
+		{
+			for(int i = 0 ; i < 5 ; ++i)
+			{
+				hero_deck->shuffle();
+				SDL_Delay(2);
+			}
+			step = 6;
+		}
+
+	//step 6)
+	//give everyone else 3 characters to choose between
+		else if(step == 6)
+		{
+			++self;
+			if(self == players.size())
+				self = 0;
+		
+			if(self == emperor)
+				step = 8;
+			else
+			{
+				Card* hero1 = hero_deck->drawCard();
+				Card* hero2 = hero_deck->drawCard();
+				Card* hero3 = hero_deck->drawCard();
+				
+				has_window = true;
+				Window* characters = new Window(100,100,500,350);
+				characters->addCard(hero1,15,40);
+				characters->addCard(hero2,170,40);
+				characters->addCard(hero3,335,40);
+				characters->makeButton("Choose",400,280,"pick_hero","Images/Gui/mediumButton.png");
+				add_window(characters);
+				
+				step = 7;
+			}
+		}
+
+	//step 7)
+	//wait for everyone to have chosen a character
+		else if(step == 7)
+		{
+			if(players.at(self)->hasHero())
+				step = 6;
+		}
+	//step 8)
+	//distribute 4 playing cards to each player
+		else if(step == 8)
+		{
+			card_deck->shuffle();
+			for(auto p : players)
+			{
+				p->recieveCard(dynamic_cast<GameCard*>(card_deck->drawCard()));
+				p->recieveCard(dynamic_cast<GameCard*>(card_deck->drawCard()));
+				p->recieveCard(dynamic_cast<GameCard*>(card_deck->drawCard()));
+				p->recieveCard(dynamic_cast<GameCard*>(card_deck->drawCard()));
+			}
+			step = 9;
+		}
+
+	//step 9)
+	//start the game
+		else if(step == 9)
+		{
+			return;
+		}
+
+	//skriver ut UI:t
+		UI();
+	}
+}
+
 
 void Game::setup()
 {
@@ -182,82 +334,98 @@ void Game::setup()
 	//return run_next;
 }
 
-void Game::run()
+void Game::runHotseat()
 {
-	//run_next = true;
 	game_stage = 1;
-//game
-	//clean up!
-	while(!players.empty())
-	{
-		delete players.back();
-		players.pop_back();
-	}
-	//blanda leken :D
-	card_deck -> shuffle();
+	// card_deck -> shuffle();
+	
+	// //simulerade spelare:
+	// Player* player = new Player();
+	// player -> setRole(0); //emparor
+	// player -> setHero(new HeroCard("CaoCao.png", "4 blue 1 ability"));
+	// players.push_back(player);
+	
+	// player = new Player();
+	// player -> setRole(1); 
+	// player -> setHero(new HeroCard("DiaoChan.png", "3 gray 0 ability"));
+	// players.push_back(player);
+	
+	// player = new Player();
+	// player -> setRole(2);
+	// player -> setHero(new HeroCard("DaQiao.png", "3 green 0 ability"));
+	// players.push_back(player);
+	
+	// player = new Player();
+	// player -> setRole(2);
+	// player -> setHero(new HeroCard("ElderZhuge.png", "3 red 1 ability"));
+	// players.push_back(player);	
+	// player = nullptr;
+	
+	// running = true;
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	
 	
 	GameCard* card = nullptr;
-	//simulerade spelare:
-	Player* player = new Player();
-	player -> setRole(0); //emparor
-	player -> setHero(new HeroCard("CaoCao.png", "4 blue 1 ability"));
-	players.push_back(player);
-	
-	player = new Player();
-	player -> setRole(1); 
-	player -> setHero(new HeroCard("DiaoChan.png", "3 gray 0 ability"));
-	players.push_back(player);
-	
-	player = new Player();
-	player -> setRole(2);
-	player -> setHero(new HeroCard("DaQiao.png", "3 green 0 ability"));
-	players.push_back(player);
-	
-	player = new Player();
-	player -> setRole(2);
-	player -> setHero(new HeroCard("ElderZhuge.png", "3 red 1 ability"));
-	players.push_back(player);	
-	player = nullptr;
-	
+	Window* nextPlayer_window = new Window(270,350,300,150);
+	nextPlayer_window -> makeTextbox(40,25,220,30,17);
+	nextPlayer_window -> setText(0, "Next player's turn");
+	nextPlayer_window -> makeButton("OK!",45,70,"next_state");
 	running = true;
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	
+	state = -1;
 	while(running)
 	{
-	//phase 1)
-	//start of turn
-	//special hero abilities trigger here
-		// std::cout << "the state: " << state << std::endl;
-		if(state == 1)
+	//phase -1)
+	//change of player
+		if(state == -1)
 		{
 			players.at(self) -> setCurrentPlayer(true);
 			current_player = players.at(self);
 			for(auto p : players)
-			  {
+			{
 			    p->setSelected(false);
-			  }
+			}
+			has_window = true;
+			add_window(nextPlayer_window);
+			++state;
+		}
+	
+	//phase 0)
+	//go past OK screen
+		if(state == 0)
+		{
+			//happens through button click
+		}
+		
+		
+	//phase 1)
+	//start of turn
+	//special hero abilities trigger here
+		// std::cout << "the state: " << state << std::endl;
+		else if(state == 1)
+		{
+			
 			state = 2;
 		}
 	//phase 2
@@ -314,7 +482,7 @@ void Game::run()
 	//other cards are discarded
 		else if(state == 5)
 		{
-			if(players.at(self) -> getCurrentHP() >= players.at(self) -> getHandSize())
+			if(players.at(self) -> getLife() >= players.at(self) -> getHandSize())
 			{
 				state = 6;
 			}
@@ -327,7 +495,7 @@ void Game::run()
 		{	
 			players.at(self) -> setCurrentPlayer(false);
 			self = (self + 1) % players.size();
-			state = 1;
+			state = -1;
 			target_player = nullptr;
 		}
 		
@@ -348,6 +516,7 @@ void Game::run()
 //if a tool-card is played, check every player for negate card.
 
 	//return run_next;
+	delete nextPlayer_window;
 }
 
 void Game::end()
@@ -417,7 +586,10 @@ void Game::UI()
 		//kolla om någon av knapparna trycks!
 			std::string button_command = play_card -> handleEvent(event);
 			if(button_command != "")
-				run_command(button_command);
+			{
+				if(rulePlayCardOK())
+					run_command(button_command);
+			}
 			else
 			{
 				button_command = end_turn -> handleEvent(event);
@@ -434,34 +606,51 @@ void Game::UI()
 		//kolla spelare och nuvarande handen
 		if(event.type == SDL_MOUSEBUTTONUP && !has_window && game_stage == 1)
 		{
-			//om inte, gör detta!
+			//om inte en knapp trycktes in, gör detta!
 			if(button_command == "")
 			{
 				bool player_pressed = false;
-				//rensa selection
-				for(Player* p : players)
-				{
-					p->setSelected(false);
-				}
-				target_player = nullptr;
 			
 				//fixa med players o deras event!
+				
 				for(Player* p : players)
 				{
-					if(p -> handleEvent(event))
+					if(target_player == nullptr && p -> handleEvent(event))
 					{
+						if(ruleTargetOK(p))
+						{
+							target_player = p;
+							p->setSelected(true);
+							player_pressed = true;
+						}
+						break;
+					}
+					else if(target_player != nullptr && source_player == nullptr && target_player != p && p -> handleEvent(event))
+					{
+						source_player = target_player;
 						target_player = p;
-						p->setSelected(true);
+						p-> setSelected(true);
 						player_pressed = true;
 						break;
 					}
 				}
+				//rensa selection
+				if(!player_pressed)
+				{
+					for(Player* p : players)
+					{
+						p->setSelected(false);
+					}
+					target_player = nullptr;
+					source_player = nullptr;
+				}
 				//om varken player eller knappar är tryckta, kolla om kort i hand är tryckta
 				if(!player_pressed && button_command == "")
 				{
+					selected_card = nullptr;
 					if(current_player != nullptr)
-						current_player -> handleHand(event);
-					current_player -> fixCardPosition();
+						selected_card = current_player -> handleHand(event);
+					std::cout << "selected card: " << std::boolalpha << (selected_card == nullptr) << std::endl;
 				}
 			}
 		}
@@ -524,23 +713,66 @@ void Game::paint()
 	end_turn -> paint(screen);
 	
 	int x = 250;
-	for(Player* p : players)
-	{	
-	
-		if(p -> isCurrentPlayer())
-		{
-			p -> paint(screen);
+	if (game_stage != 0)
+	{
+		for(Player* p : players)
+		{	
+		
+			if(p -> isCurrentPlayer())
+			{
+				if(state != 0)
+					p -> paint(screen);
+			}
+			else
+			{
+				p -> paint(screen,x,50);
+				x += 200;
+			}
 		}
-		else
+	}
+	else
+	{
+		for(Player* p : players)
 		{
-			p -> paint(screen,x,50);
-			x += 200;
+			if(p -> getRole() == 0)
+				p -> paint(screen,824,257);
 		}
 	}
 }
 
 
+int Game::getDistance(Player* source, Player* target)
+{
+	int distance;
+	{ // fixar distance
+		int self;
+		int alive = 0;
+		for(unsigned i = 0; i < players.size() ; ++i) //tmp 
+		{
+			if(players.at(i) -> getLife() > 0)
+				++alive;
+			if(players.at(i) == source)
+				self = alive;
+			if(players.at(i) == target)
+				distance = alive;
+		}
+		//avstånd från en själv till target
+		distance -= self;
+		//om target är till vänster om en själv - invertera
+		if ( distance < 0)
+			distance = -distance;
+		//om andra hållet är närmare - ta det hållet
+		if (alive - distance < distance)
+			distance = alive - distance;
+		if(current_player -> equipment.off_horse != nullptr)
+			--distance;
+		if(target -> equipment.def_horse != nullptr)
+			++distance;
+	}
+	return distance;
+}
 #include "game_commands.cpp"
 #include "card_commands.cpp"
+#include "rulebook.cpp"
 
 

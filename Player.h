@@ -29,6 +29,9 @@ struct Equipment
 class Player
 {
  private:
+  Surface name;
+  Surface hero_frame;
+  Surface hero_profile;
   int role;
   int current_life;
   int max_life;
@@ -48,7 +51,7 @@ class Player
   Surface selected_frame;
 
  public:
-  Player();
+  Player(const std::string&);
   ~Player();
   Equipment equipment;
   
@@ -78,6 +81,7 @@ class Player
 	return gc;
   }
   int getLife(){ return current_life; }
+  int getMaxLife(){ return max_life; }
   void setStatus(unsigned);
   void setCurrentPlayer(bool cp){ current_player = cp; }
   bool isCurrentPlayer(){ return current_player; }
@@ -85,7 +89,7 @@ class Player
   bool loading();
   bool left();
 
-  bool handleHand(const SDL_Event& event);
+  Object::GameCard* handleHand(const SDL_Event& event);
   bool handleEvent(const SDL_Event& event);
   void setPlayerNr(int);
   void paint(Surface);
@@ -93,7 +97,7 @@ class Player
   
   const std::vector<Object::GameCard*>& getHand(){ return hand; } //only read not whrite
   unsigned getHandSize(){ return hand.size(); }
-  unsigned getCurrentHP(){ return current_life; }
+  //unsigned getCurrentHP(){ return current_life; }
   
   void setRole(int r){role = r;}
   int getRole(){return role;}

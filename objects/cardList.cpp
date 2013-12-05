@@ -14,7 +14,7 @@ CardList::CardList(const std::string& setting)
 	image = loadImage("Images/Cards/back.png", true);
 	if(setting == "empty")
 	{
-		//do nothing
+		//do nothing 
 	}
 	else if(setting == "standard_playing_cards")
 		loadCardDeck();
@@ -143,21 +143,21 @@ void CardList::loadCardDeck()
 
 	//dodges
 	//0 = self/instant, 0 = no range
-	set.push_back(new GameCard(2,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(3,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(4,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(5,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(6,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(7,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(8,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(9,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(10,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(11,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(11,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(2,diamonds,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(2,hearts,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(13,hearts,"dodge.png","dodge 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(2,hearts,"dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(2, diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(3, diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(4, diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(5, diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(6, diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(7, diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(8, diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(9, diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(10,diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(11,diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(11,diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(2, diamonds, "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(2, hearts,   "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(13,hearts,   "dodge.png","dodge 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(2, hearts,   "dodge.png","dodge 0 0")); //ability id, target type, target range
 
 	//peaches
 	//0 = self-instant, 0 = no range
@@ -181,26 +181,26 @@ void CardList::loadCardDeck()
 
 	//weaponzies and shieldzes
 	//
-	set.push_back(new GameCard(6,spades,"blue_steel_blade.png","weapon_blue_steel_blade 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(2,spades,"double_gender_sword.png","weapon_double_gender_sword_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(5,spades,"green_dragon_cresent_blade.png","weapon_green_dragon_cresent_blade_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(12,spades,"serpent_halberd.png","weapon_serpent_halberd_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(5,hearts,"unicorn_bow.png","weapon_unicorn_bow_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(1,clubs,"zhuge_crossbow.png","weapon_zhuge_crossbow_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(1,diamonds,"zhuge_crossbow.png","weapon_zhuge_crossbow_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(5,diamonds,"rock_cleaving_axe.png","weapon_rock_cleaving_axe_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(12,diamonds,"Heaven_Scorcher_Halberd.png","weapon_Heaven_Scorcher_Halberd_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(2,spades,"frost_blade.png","weapon_frost_blade 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(2,spades,"ba_gua_shield.png","shield_ba_gua_shield_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(2,clubs,"ba_gua_shield.png","shield_ba_gua_shield_equip 5 0")); //ability id, target type, target range
-	set.push_back(new GameCard(2,clubs,"ren_wang_shield.png","shield_ren_wang_shield_equip 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(6,spades,"blue_steel_blade.png",   			"weapon0 5 2")); //ability id, target type, target range
+	set.push_back(new GameCard(2,spades,"double_gender_sword.png",			"weapon1 5 2")); //ability id, target type, target range
+	set.push_back(new GameCard(5,spades,"green_dragon_cresent_blade.png",	"weapon2 5 3")); //ability id, target type, target range
+	set.push_back(new GameCard(12,spades,"serpent_halberd.png",				"weapon3 5 3")); //ability id, target type, target range
+	set.push_back(new GameCard(5,hearts,"unicorn_bow.png",					"weapon4 5 5")); //ability id, target type, target range
+	set.push_back(new GameCard(1,clubs,"zhuge_crossbow.png",				"weapon5 5 1")); //ability id, target type, target range
+	set.push_back(new GameCard(1,diamonds,"zhuge_crossbow.png",				"weapon5 5 1")); //ability id, target type, target range
+	set.push_back(new GameCard(5,diamonds,"rock_cleaving_axe.png",			"weapon6 5 3")); //ability id, target type, target range
+	set.push_back(new GameCard(12,diamonds,"Heaven_Scorcher_Halberd.png",	"weapon7 5 4")); //ability id, target type, target range
+	set.push_back(new GameCard(2,spades,"frost_blade.png",					"weapon8 5 2")); //ability id, target type, target range
+	set.push_back(new GameCard(2,spades,"ba_gua_shield.png",				"shield0 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(2,clubs,"ba_gua_shield.png",					"shield0 5 0")); //ability id, target type, target range
+	set.push_back(new GameCard(2,clubs,"ren_wang_shield.png",				"shield1 5 0")); //ability id, target type, target range
 
 	//toolcardses
 	// 0
-	set.push_back(new GameCard(12,diamonds,"negate.png","negate 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(13,clubs,"negate.png","negate 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(12,clubs,"negate.png","negate 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(11,spades,"negate.png","negate 0 0")); //ability id, target type, target range
+	set.push_back(new GameCard(12,diamonds,"negate.png","negate 3 0")); //ability id, target type, target range
+	set.push_back(new GameCard(13,clubs,"negate.png","negate 3 0")); //ability id, target type, target range
+	set.push_back(new GameCard(12,clubs,"negate.png","negate 3 0")); //ability id, target type, target range
+	set.push_back(new GameCard(11,spades,"negate.png","negate 3 0")); //ability id, target type, target range
 	set.push_back(new GameCard(1,spades,"duel.png","duel 1 0")); //ability id, target type, target range
 	set.push_back(new GameCard(1,clubs,"duel.png","duel 1 0")); //ability id, target type, target range
 	set.push_back(new GameCard(1,diamonds,"duel.png","duel 1 0")); //ability id, target type, target range
@@ -214,19 +214,19 @@ void CardList::loadCardDeck()
 	set.push_back(new GameCard(1,hearts,"raining_arrows.png","raining_arrows 0 0")); //ability id, target type, target range
 	set.push_back(new GameCard(4,hearts,"harvest.png","harvest 0 0")); //ability id, target type, target range
 	set.push_back(new GameCard(3,hearts,"harvest.png","harvest 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(13,clubs,"duress.png","duress 2 0")); //ability id, target type, target range
-	set.push_back(new GameCard(12,clubs,"duress.png","duress 2 0")); //ability id, target type, target range
-	set.push_back(new GameCard(4,diamonds,"steal.png","steal 1 9")); //ability id, target type, target range
-	set.push_back(new GameCard(3,diamonds,"steal.png","steal 1 9")); //ability id, target type, target range
-	set.push_back(new GameCard(11,spades,"steal.png","steal 1 9")); //ability id, target type, target range
-	set.push_back(new GameCard(4,spades,"steal.png","steal 1 9")); //ability id, target type, target range
-	set.push_back(new GameCard(3,spades,"steal.png","steal 1 9")); //ability id, target type, target range
+	set.push_back(new GameCard(13,clubs,"duress.png","duress 3 0")); //ability id, target type, target range
+	set.push_back(new GameCard(12,clubs,"duress.png","duress 3 0")); //ability id, target type, target range
+	set.push_back(new GameCard(4,diamonds,"steal.png","steal 1 1")); //ability id, target type, target range
+	set.push_back(new GameCard(3,diamonds,"steal.png","steal 1 1")); //ability id, target type, target range
+	set.push_back(new GameCard(11,spades,"steal.png","steal 1 1")); //ability id, target type, target range
+	set.push_back(new GameCard(4,spades,"steal.png","steal 1 1")); //ability id, target type, target range
+	set.push_back(new GameCard(3,spades,"steal.png","steal 1 1")); //ability id, target type, target range
 	set.push_back(new GameCard(13,spades,"barbarian.png","barbarian 0 0")); //ability id, target type, target range
 	set.push_back(new GameCard(7,clubs,"barbarian.png","barbarian 0 0")); //ability id, target type, target range
 	set.push_back(new GameCard(7,spades,"barbarian.png","barbarian 0 0")); //ability id, target type, target range
-	set.push_back(new GameCard(6,hearts,"acedia.png","acedia 3 0")); //ability id, target type, target range
-	set.push_back(new GameCard(6,clubs,"acedia.png","acedia 3 0")); //ability id, target type, target range
-	set.push_back(new GameCard(6,spades,"acedia.png","acedia 3 0")); //ability id, target type, target range
+	set.push_back(new GameCard(6,hearts,"acedia.png","acedia 2 0")); //ability id, target type, target range
+	set.push_back(new GameCard(6,clubs,"acedia.png","acedia 2 0")); //ability id, target type, target range
+	set.push_back(new GameCard(6,spades,"acedia.png","acedia 2 0")); //ability id, target type, target range
 	set.push_back(new GameCard(12,hearts,"dismantle.png","dismantle 1 0")); //ability id, target type, target range
 	set.push_back(new GameCard(12,spades,"dismantle.png","dismantle 1 0")); //ability id, target type, target range
 	set.push_back(new GameCard(3,clubs,"dismantle.png","dismantle 1 0")); //ability id, target type, target range

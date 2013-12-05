@@ -14,6 +14,7 @@ HeroCard::HeroCard(std::string filename, std::string ID) : Card("Characters/" + 
 	clan = str2clan(strClan);
 	ss >> male;
 	ss >> name;
+	file = filename;
 	
 	while(ss >> tmp)
 	{

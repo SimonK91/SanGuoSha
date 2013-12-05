@@ -11,13 +11,12 @@ id struktur:
 target_type:0 = self
 			1 = target
 			2 = pending?
-			3 = ?
+			3 = special
 			4 = ?
 			5 = equipment
 			
 range:		0 	= inf
-			1->8= const
-			9  	= 
+			1->9= const
 			10 	= physical
 */
 namespace Object
@@ -37,6 +36,8 @@ public:
 	
 	Suit getSuit(){ return suit; }
 	int getNumber(){ return number; }
+	int getRange(){ return range; }
+	int getTargetType(){ return target_type; }
 	std::string getAbility(){ return abilityID; }
 	
 	//std::string handleEvent(const SDL_Event& event);
