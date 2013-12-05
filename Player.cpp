@@ -99,20 +99,21 @@ GameCard* Player::loseEquipment(int index)
 	{
 	case 0:
 		lost_equipment = equipment.def_horse;
+		equipment.def_horse = nullptr;
 		break;
 	case 1:
 		lost_equipment = equipment.off_horse;
+		equipment.off_horse = nullptr;
 		break;
 	case 2:
 		lost_equipment = equipment.weapon;
+		equipment.weapon = nullptr;
 		break;
 	case 3:
 		lost_equipment = equipment.shield;
+		equipment.shield = nullptr;
 		break;
 	}
-  // std::vector<GameCard*>::iterator it = eq.equipment.begin() + index;
-  // eq.equipment.erase(it);
-
   return lost_equipment;
   
 }

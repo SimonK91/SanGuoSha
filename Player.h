@@ -101,6 +101,7 @@ class Player
   
   void setRole(int r){role = r;}
   int getRole(){return role;}
+  std::string getHeroName(){return hero->getName();}
 
   void fixCardPosition();
   void setSelected(bool);

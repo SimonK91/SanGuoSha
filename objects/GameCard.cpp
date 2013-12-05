@@ -11,6 +11,7 @@ GameCard::GameCard(int valor, Suit suit_, std::string filename, std::string ID) 
 	std::stringstream ss(ID);
 	SDL_Rect suitClip;
 	int imageOffset;
+		
 	ss >> abilityID;
 	ss >> target_type;
 	ss >> range;

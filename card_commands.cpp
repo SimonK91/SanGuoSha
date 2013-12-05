@@ -27,11 +27,12 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 					self = i;
 				}
 			}
-			has_window = true;
 			Window* dodgeWindow = new Window(160,250,500,250);
 			dodgeWindow -> makeButton("Dodge",37,70,"dodge");
 			dodgeWindow -> makeButton("Take damage",260,70, "take_damage");
 			add_window(dodgeWindow);
+			has_window = true;
+
 			target_player -> setCurrentPlayer(true);
 			current_player -> setCurrentPlayer(false);
 		}
@@ -103,19 +104,165 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 	}
 	else if(effect == "acedia")
 	{
-		target_player -> addJudgementCard(gameCard);
-		gameCard = nullptr;
+		if(target_player != nullptr)
+		{
+			target_player -> addJudgementCard(gameCard);
+			gameCard = nullptr;
+		}
+		else
+			std::cout << "ingen vald spelare att spela acedia på :( "<< std::endl;
 	}
 	else if(effect == "lightning")
 	{
-		target_player -> addJudgementCard(gameCard);
-		gameCard = nullptr;
+		if(target_player != nullptr)
+		{
+			target_player -> addJudgementCard(gameCard);
+			gameCard = nullptr;
+		}
+		else
+			std::cout << "ingen vald spelare att spela lightning på :( "<< std::endl;
 	}
-	// else if(effect == "steal")
-	// {
-		// // Window* stealWindow = new Window(50,50,500,500);
+	else if(effect == "steal")
+	{
+		if(target_player != nullptr)
+		{
+			Window* stealWindow = new Window(50,150,600,350);
+			HeroCard* dummy = new HeroCard("back.png", "42 gray 0 dummy");
+
+			std::vector<GameCard*> targetHand = target_player -> getHand();
+			
+			for(unsigned i = 0; i < targetHand.size(); ++i)
+			{
+				stealWindow -> addCard(new HeroCard("back.png", "42 gray 0 dummy"),100 * i, 20);
+			}
+			//add equipment
+			if(target_player -> equipment.weapon != nullptr)
+				stealWindow -> addCard(target_player -> equipment.weapon,0, 240);
+			if(target_player -> equipment.shield != nullptr)
+				stealWindow -> addCard(target_player -> equipment.shield, 100, 240);
+			if(target_player -> equipment.off_horse != nullptr)
+				stealWindow -> addCard(target_player -> equipment.off_horse, 200, 240);
+			if(target_player -> equipment.def_horse != nullptr)
+				stealWindow -> addCard(target_player -> equipment.def_horse, 300, 240);
+			
+			
+			stealWindow -> makeButton("Steal",170,250, "steal_card");
+			add_window(stealWindow);
+			has_window = true;
+		}
+		else
+			std::cout << "No steal... :(" << std::endl;
+	}
+	else if(effect == "dismantle")
+	{
+		if(target_player != nullptr)
+		{
+			Window* dismantleWindow = new Window(50,150,600,350);
+			HeroCard* dummy = new HeroCard("back.png", "42 gray 0 dummy");
+			//getEquipment() måste implementeras!
+			std::vector<GameCard*> targetHand = target_player -> getHand();
+			
+			for(unsigned i = 0; i < targetHand.size(); ++i)
+			{
+				dismantleWindow -> addCard(new HeroCard("back.png", "42 gray 0 dummy"),100 * i, 20);
+			}
+			//add equipment
+			if(target_player -> equipment.weapon != nullptr)
+				dismantleWindow -> addCard(target_player -> equipment.weapon,0, 240);
+			if(target_player -> equipment.shield != nullptr)
+				dismantleWindow -> addCard(target_player -> equipment.shield, 100, 240);
+			if(target_player -> equipment.off_horse != nullptr)
+				dismantleWindow -> addCard(target_player -> equipment.off_horse, 200, 240);
+			if(target_player -> equipment.def_horse != nullptr)
+				dismantleWindow -> addCard(target_player -> equipment.def_horse, 300, 240);
+			
+			
+			dismantleWindow -> makeButton("dismantle",170,250, "dismantle_card");
+			add_window(dismantleWindow);
+			has_window = true;
+		}
+		else
+			std::cout << "No dismantle... :(" << std::endl;
+	}
+	else if(effect == "barbarian")
+	{
+		Window* barbarianWindow = new Window(50,350,350,200);
 		
-	// }
+		// barbarianWindow -> addCard(gameCard,400,350);
+		barbarianWindow -> makeTextbox(20,40,310,30);
+		barbarianWindow -> makeButton("Attack!!!",70,100,"barbarian_attack");
+		
+		barbarianWindow -> setText(0,"   Attack the barbarians or lose a life!");
+
+		add_window(barbarianWindow);
+		has_window = true;
+		
+		//current player is going to go around
+		current_player -> setCurrentPlayer(false);
+		target_player = players.at((self +1) % players.size());
+		target_player -> setCurrentPlayer(true);
+	}
+	else if(effect == "raining_arrows")
+	{
+		Window* arrowWindow = new Window(50,350,350,200);
+		
+		// barbarianWindow -> addCard(gameCard,400,350);
+		arrowWindow -> makeTextbox(40,40,270,30);
+		arrowWindow -> makeButton("Dodge!!!",70,100,"arrow_attack");
+		
+		arrowWindow -> setText(0," Dodge the arrows or lose a life!");
+
+		add_window(arrowWindow);
+		has_window = true;
+		
+		//current player is going to go around
+		current_player -> setCurrentPlayer(false);
+		target_player = players.at((self +1) % players.size());
+		target_player -> setCurrentPlayer(true);
+	}
+	else if(effect == "harvest")
+	{
+		Window* harvestWindow = new Window(50,150,600,350);
+		for(unsigned i = 0; i < players.size(); ++i)
+		{
+			card = dynamic_cast<GameCard*>(card_deck -> drawCard());
+			harvestWindow -> addCard(card, i* 100, 20);
+		}
+		harvestWindow -> makeButton("take card",170,250,"pick_card");
+		add_window(harvestWindow);
+		has_window = true;
+		//fix target_player
+		target_player = current_player;
+	}
+	else if(effect == "duel")
+	{
+		if(target_player != nullptr)
+		{
+			Window* duelWindow = new Window(50,350,350,200);
+			duelWindow -> makeTextbox(40,40,270,30);
+			duelWindow -> setText(0,"You are dueld. Attack or lose a life!");
+			duelWindow -> makeButton("Duel!", 70, 100, "duel_attack");
+			add_window(duelWindow);
+			current_player -> setCurrentPlayer(false);
+			target_player -> setCurrentPlayer(true);
+			has_window = true;
+		}
+		else
+		{
+			std::cout << "sadface :( no duelist..." <<std::endl;
+		}
+	}
+	else if(effect == "duress")
+	{
+		if(target_player != nullptr)
+		{
+			make_button("Attack him!",100,100,"duress_attack");
+			source_player = target_player;
+			target_player = nullptr;
+		}
+		else
+			std::cout << "no target for duress :( " << std::endl;
+	}
 	else
 	{
 		std::cout << "Card command: \"" + effect + "\" does not exist in the list" << std::endl;
