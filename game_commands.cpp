@@ -292,7 +292,7 @@ void Game::run_command(const std::string& what_command)
 		target_player = players.at(barbarianTarget);
 		target_player -> setCurrentPlayer(true);
 		
-		if(barbarianTarget == self)
+		if(barbarianTarget == (int)self)
 		{
 			barbarianTarget = -1;
 			//döda fönstrett!!
@@ -330,7 +330,7 @@ void Game::run_command(const std::string& what_command)
 		target_player = players.at(arrowTarget);
 		target_player -> setCurrentPlayer(true);
 		
-		if(arrowTarget == self)
+		if(arrowTarget == (int)self)
 		{
 			arrowTarget = -1;
 			//döda fönstrett!!
@@ -352,7 +352,7 @@ void Game::run_command(const std::string& what_command)
 		//kolla om något valt
 		GameCard* card = nullptr;
 		int index = -1;
-		for(int i = 0; i < harvestWindow -> getSize() - 1; ++i)
+		for(unsigned i = 0; i < harvestWindow -> getSize() - 1; ++i)
 		{
 			card = dynamic_cast<GameCard*>(harvestWindow -> getObject(i));
 			if(card -> isActive())	
@@ -380,7 +380,7 @@ void Game::run_command(const std::string& what_command)
 		target_player -> setCurrentPlayer(true);
 		
 		//om sig själv destruera fönstrett
-		if(harvestTarget == self)
+		if(harvestTarget == (int)self)
 		{
 			harvestTarget = -1;
 			
@@ -401,7 +401,7 @@ void Game::run_command(const std::string& what_command)
 		else
 			hand = current_player -> getHand();
 			
-		for(int i = 0; i < hand.size(); ++i)
+		for(unsigned i = 0; i < hand.size(); ++i)
 			if(hand.at(i) -> getAbility() == "attack")
 				hasAttack = i;
 				
@@ -465,7 +465,7 @@ void Game::run_command(const std::string& what_command)
 	{
 		std::vector<GameCard*> hand = source_player -> getHand();
 		int index = -1;
-		for(int i = 0; i < hand.size(); ++i)
+		for(unsigned i = 0; i < hand.size(); ++i)
 			if(hand.at(i) -> getAbility() == "attack")
 				index = i;
 		

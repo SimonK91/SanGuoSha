@@ -102,7 +102,7 @@ void Game::setupHotseat()
 			if(self == players.size())
 				self = 0;
 		
-			if(self == emperor)
+			if((int)self == emperor)
 				step = 8;
 			else
 			{
@@ -388,7 +388,7 @@ void Game::runHotseat()
 	
 	
 	GameCard* card = nullptr;
-	Window* nextPlayer_window = new Window(270,350,300,150);
+	Window* nextPlayer_window = new Window(230,320,300,150);
 	nextPlayer_window -> makeTextbox(40,25,220,30,17);
 	nextPlayer_window -> setText(0, "Next player's turn");
 	nextPlayer_window -> makeButton("OK!",45,70,"next_state");
@@ -482,7 +482,7 @@ void Game::runHotseat()
 	//other cards are discarded
 		else if(state == 5)
 		{
-			if(players.at(self) -> getLife() >= players.at(self) -> getHandSize())
+			if(players.at(self) -> getLife() >= (int)(players.at(self) -> getHandSize()))
 			{
 				state = 6;
 			}
@@ -715,9 +715,10 @@ void Game::paint()
 	int x = 250;
 	if (game_stage != 0)
 	{
+	int i = 0;
 		for(Player* p : players)
 		{	
-		
+			
 			if(p -> isCurrentPlayer())
 			{
 				if(state != 0)
@@ -725,9 +726,19 @@ void Game::paint()
 			}
 			else
 			{
-				p -> paint(screen,x,50);
-				x += 200;
+				if(players.size() == 5)
+				{
+					if(i - self == -1 || i - self == 4)
+						p -> paint(screen,30,300);
+					if(i - self == -2 || i - self == 3)
+						p -> paint(screen,175,30);
+					if(i - self == -3 || i - self == 2)
+						p -> paint(screen,460,30);
+					if(i - self == -4 || i - self == 1)
+						p -> paint(screen,605,300);
+				}
 			}
+			++i;
 		}
 	}
 	else

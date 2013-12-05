@@ -84,7 +84,7 @@ class Game : public SGS
 private:
 
 	unsigned self;
-	unsigned state;
+	int state;
 	bool run_next;
 	
 	int game_stage;
@@ -125,7 +125,7 @@ public:
 		hero_deck = new Object::CardList("hero_deck");
 		m.loadMusic("Music/Menu.wav");
 		Player* p1;
-		for(unsigned i = 0 ; i < 4 ; ++i)
+		for(unsigned i = 0 ; i < 5 ; ++i)
 		{
 			p1 = new Player("Miiza"+I2S(i));
 			p1->setStatus(1);
