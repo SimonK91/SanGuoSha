@@ -10,7 +10,7 @@
 #include "Window.h"
 #include "Checkbox.h"
 #include "CardList.h"
-#include "Timer.h"
+
 #include "Player.h"
 
 #include <vector>
@@ -84,10 +84,13 @@ class Game : public SGS
 private:
 
 	unsigned self;
-	unsigned state;
+	int state;
 	bool run_next;
 	
 	int game_stage;
+	
+	Object::Button* play_card = new Object::Button("play", 800, 630, "play_card", "Images/Gui/smallButton.png", 20);
+	Object::Button* end_turn = new Object::Button("end", 800, 575, "end_turn", "Images/Gui/smallButton.png", 20);
 	
 	Player* target_player;
 	Player* current_player;
@@ -102,7 +105,7 @@ private:
 	Object::CardList* discard_pile;
 	Object::CardList* hero_deck;
 	std::vector<Player*> players;
-	Timer* timer;
+	//Timer timer;
 	//map<std::string,SDL_Surface*> card_images;
 	
 	void paint();
@@ -122,7 +125,7 @@ public:
 		hero_deck = new Object::CardList("hero_deck");
 		m.loadMusic("Music/Menu.wav");
 		Player* p1;
-		for(unsigned i = 0 ; i < 4 ; ++i)
+		for(unsigned i = 0 ; i < 5 ; ++i)
 		{
 			p1 = new Player("Miiza"+I2S(i));
 			p1->setStatus(1);

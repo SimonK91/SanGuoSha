@@ -70,35 +70,16 @@ void Game::run_command(const std::string& what_command)
 	}
 	
 	else if(what_command == "end_turn")
-	{ 
-	  if(timer->checkStarted() == true)
-	    {
-	      timer->stop();
-	    }
-	  timer->start(5);
-	  timer->setCommand("time_out");
-	  std::cout << "Ny timer med time out 5 sek" << std::endl;
-	  
-	  state = 5;	//go to discard phase in game
+	{
+		state = 5;	//go to discard phase in game
 	}
 	else if(what_command == "play_card")
 	{
-	  if(timer->checkStarted() == true)
-	    {
-	      timer->stop();
-	    }
-	  timer->start(5);
-	  timer->setCommand("end_turn");
-	  std::cout << "Ny timer med end turn 5 sek" << std::endl;
-	  std::vector<GameCard*> hand;
-	  for(Player* p : players)
-	    {
-	      if(p -> isCurrentPlayer())
+		std::vector<GameCard*> hand;
+		hand = current_player -> getHand();
+		for(unsigned i = 0; i < hand.size() ; ++i)
 		{
-		  hand = p -> getHand();
-		  for(unsigned i = 0; i < hand.size() ; ++i)
-		    {
-		      if(hand.at(i) -> isActive())
+			if(hand.at(i) -> isActive())
 			{
 				GameCard* card = current_player -> playCard(i);
 				std::cout << "Card played: " << card -> getAbility() << std::endl;
@@ -111,7 +92,6 @@ void Game::run_command(const std::string& what_command)
 				}
 				break; //safty if 2 cards is active!
 			}
-		    }
 		}
 		current_player -> setSelected(false);
 	}
@@ -123,30 +103,13 @@ void Game::run_command(const std::string& what_command)
 		{
 			if(hand.at(i) -> isActive())
 			{
-				hand = p -> getHand();
-				for(unsigned i = 0; i < hand.size(); ++i)
-				{
-					if(hand.at(i) -> isActive())	//den är fel kommer aldrig hit!
-					{
-						GameCard* card = p -> loseCard(i);
-						discard_pile -> pushBottom(card);
-						break; //safty if 2 cards is active!
-					}
-				}
+				GameCard* card = current_player -> loseCard(i);
+				card -> setActive(false);
+				discard_pile -> pushBottom(card);
 			}
 		}
 
 	}
-	else if(what_command == "time_out")
-	  {
-	    std::cout << "discard phase time out" << std::endl;
-	    while(players.at(self) -> getCurrentHP() < players.at(self) -> getHandSize())
-	      {
-		GameCard* card = players.at(self) -> loseCard( players.at(self)->getHandSize()-1);
-		  discard_pile -> pushBottom(card);
-	      }
-	    state = 6;
-	  }
 	else if(what_command == "dodge")
 	{
 		for(unsigned i = 0; i < players.size(); ++i)
@@ -329,7 +292,7 @@ void Game::run_command(const std::string& what_command)
 		target_player = players.at(barbarianTarget);
 		target_player -> setCurrentPlayer(true);
 		
-		if(barbarianTarget == self)
+		if(barbarianTarget == (int)self)
 		{
 			barbarianTarget = -1;
 			//döda fönstrett!!
@@ -367,7 +330,7 @@ void Game::run_command(const std::string& what_command)
 		target_player = players.at(arrowTarget);
 		target_player -> setCurrentPlayer(true);
 		
-		if(arrowTarget == self)
+		if(arrowTarget == (int)self)
 		{
 			arrowTarget = -1;
 			//döda fönstrett!!
@@ -389,7 +352,7 @@ void Game::run_command(const std::string& what_command)
 		//kolla om något valt
 		GameCard* card = nullptr;
 		int index = -1;
-		for(int i = 0; i < harvestWindow -> getSize() - 1; ++i)
+		for(unsigned i = 0; i < harvestWindow -> getSize() - 1; ++i)
 		{
 			card = dynamic_cast<GameCard*>(harvestWindow -> getObject(i));
 			if(card -> isActive())	
@@ -417,7 +380,7 @@ void Game::run_command(const std::string& what_command)
 		target_player -> setCurrentPlayer(true);
 		
 		//om sig själv destruera fönstrett
-		if(harvestTarget == self)
+		if(harvestTarget == (int)self)
 		{
 			harvestTarget = -1;
 			
@@ -438,7 +401,7 @@ void Game::run_command(const std::string& what_command)
 		else
 			hand = current_player -> getHand();
 			
-		for(int i = 0; i < hand.size(); ++i)
+		for(unsigned i = 0; i < hand.size(); ++i)
 			if(hand.at(i) -> getAbility() == "attack")
 				hasAttack = i;
 				
@@ -502,7 +465,7 @@ void Game::run_command(const std::string& what_command)
 	{
 		std::vector<GameCard*> hand = source_player -> getHand();
 		int index = -1;
-		for(int i = 0; i < hand.size(); ++i)
+		for(unsigned i = 0; i < hand.size(); ++i)
 			if(hand.at(i) -> getAbility() == "attack")
 				index = i;
 		

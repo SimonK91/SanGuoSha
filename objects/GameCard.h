@@ -11,13 +11,12 @@ id struktur:
 target_type:0 = self
 			1 = target
 			2 = pending?
-			3 = ?
+			3 = special
 			4 = ?
 			5 = equipment
 			
 range:		0 	= inf
-			1->8= const
-			9  	= 
+			1->9= const
 			10 	= physical
 */
 namespace Object

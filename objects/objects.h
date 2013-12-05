@@ -35,15 +35,9 @@ class DeadObject : public Object
 private:
 
 protected:
- 
-  
+
 public:
 	virtual ~DeadObject() = default;
-	virtual void setPos(int x_pos, int y_pos)
-	{
-	  box.x = x_pos;
-	  box.y = y_pos;
-	}
 };
 
 //alla objekt som har en funktion med något kommando.

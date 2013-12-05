@@ -157,115 +157,41 @@ void Player::paint(Surface screen)
     // {
   if(hero != nullptr)
     {
-      if(isCurrentPlayer() == true)
-	{
-	  for(auto i : hand)
-	    {
-	      i->paint(screen);
-	    }
-	  hero -> setPosition(870,551);
-	  hero -> paint(screen);
-	  
-	  //ritar ut liv
-	  int x_offset_life = 872 + 30;
-	  int y_offset_life = 555 + 5;
-	  for(unsigned i = 0; i < max_life; ++i, x_offset_life += 17)
-	    {
-	      if(i < current_life)
+		for(auto i : hand)
 		{
-		  applySurface(x_offset_life, y_offset_life, life_symbol, screen);
+			i->paint(screen);
 		}
-	      else
-		{
-		  applySurface(x_offset_life, y_offset_life, life_symbol_empty, screen);
-		}
-	      
-	    }
-	  //rita ut equipment
-	  if(equipment.weapon_image.getImage() != nullptr)
-	    {
-	      applySurface(5,550,equipment.weapon_image,screen);
-	    }
-	  if(equipment.shield_image.getImage() != nullptr)
-	    {
-	      applySurface(5,589,equipment.shield_image,screen);
-	    }
-	  if(equipment.def_horse_image.getImage() != nullptr)
-	    {
-	      applySurface(5,628,equipment.def_horse_image,screen);
-	    }
-	  if(equipment.off_horse_image.getImage() != nullptr)
-	    {
-	      applySurface(5,667,equipment.off_horse_image,screen);
-	    }
-	  
-	  
-	  equipment.def_horse_pop->paint(screen);
-	  equipment.off_horse_pop->paint(screen);
-	  equipment.weapon_pop->paint(screen);
-	  equipment.shield_pop->paint(screen);
-	  
-	  
-	}
-      else
-	{
-	  hero->setPosition(player_x, player_y);
-	  hero->paint(screen);
-	      
-	  //ritar ut liv
-	  int x_offset_life = player_x + 30;
-	  int y_offset_life = player_y + 5;
-	  for(unsigned i = 0; i < max_life; ++i, x_offset_life += 17)
-	    {
-	      if(i < current_life)
-		{
-		  applySurface(x_offset_life, y_offset_life, life_symbol, screen);
-		}
-	      else
-		{
-		  applySurface(x_offset_life, y_offset_life, life_symbol_empty, screen);
-		}		  
-		}
-	  //ritar ut ram om markerad
-	  if(sel)
-	    {
-	      applySurface(player_x-5, player_y-5,selected_frame,screen);
-	    }
-	  
-	  
-	  if(equipment.weapon_image.getImage() != nullptr)
-	    {
-	      applySurface(player_x, player_y+50 ,equipment.weapon_image,screen);
-	    }
-	  if(equipment.shield_image.getImage() != nullptr)
-	    {
-	      applySurface(player_x,player_y + 89,equipment.shield_image,screen);
-	    }
-	  if(equipment.def_horse_image.getImage() != nullptr)
-	    {
-	      applySurface(player_x,player_y + 128,equipment.def_horse_image,screen);
-	    }
-	  if(equipment.off_horse_image.getImage() != nullptr)
-	    {
-	      applySurface(player_x,player_y + 167,equipment.off_horse_image,screen);
-	    }
-	  //rita ut popup text(den sköter kontroll om den ska ritas ut eller inte själv)
-	  equipment.def_horse_pop->paint(screen);
-	  equipment.off_horse_pop->paint(screen);
-	  equipment.weapon_pop->paint(screen);
-	  equipment.shield_pop->paint(screen);
-	} 
-      
-    }
+		hero -> setPosition(870,551);
+		hero -> paint(screen);
+
+		 //ritar ut liv
+		int x_offset_life = 872 + 30;
+		int y_offset_life = 555 + 5;
+		for(int i = 0; i < max_life; ++i, x_offset_life += 17)
+		  {
+		    if(i < current_life)
+		      {
+			applySurface(x_offset_life, y_offset_life, life_symbol, screen);
+		      }
+		    else
+		      {
+			applySurface(x_offset_life, y_offset_life, life_symbol_empty, screen);
+		      }
+		    
+		  }
+		  applySurface(876,555,name,screen);
+
+     }
+  
+  //rita ut equipment
 }
 
 void Player::paint(Surface screen, int x_pos, int y_pos)
 {
-  /*
 	if(hero != nullptr)
-	  {
+	{
 	  hero->setPosition(x_pos, y_pos);
-	  hero->paint(screen);
+	  //hero->paint(screen);
 	  
 	  applySurface(x_pos,y_pos,hero_profile,screen);
 	  applySurface(x_pos-3,y_pos-4,hero_frame,screen);
@@ -292,7 +218,7 @@ void Player::paint(Surface screen, int x_pos, int y_pos)
 		  applySurface(x_pos+5,y_pos,name,screen);
 	}
 	//rita ut equipment
-	*/
+
 }
 
 void Player::fixCardPosition()
@@ -369,149 +295,19 @@ bool Player::handleEvent(const SDL_Event& event)
 			{
 				return true;	//den blev fucking klickad!
 			}
-			equipment.def_horse_pop->handleEvent(event);
-			equipment.off_horse_pop->handleEvent(event);
-			equipment.weapon_pop->handleEvent(event);
-			equipment.shield_pop->handleEvent(event);
 		}
-		if(isCurrentPlayer() == true)
-		  {
-		    std::cout << "hest event" << std::endl;
-		    equipment.def_horse_pop->handleEvent(event);
-		    equipment.off_horse_pop->handleEvent(event);
-		    equipment.weapon_pop->handleEvent(event);
-		    equipment.shield_pop->handleEvent(event);
-		  }
     }	
 	return false;
 }
 
 void Player::setSelected(bool change_select)
 {
-  sel = change_select;
+	sel = change_select;
+	if(change_select)
+		hero->setActive(1);
+	else
+		hero->setActive(0);
 }
 
 
-Object::GameCard* Player::equipStuff(GameCard* gear)
-{
-  std::cout << "Vi ska equippa: " << gear->getAbility() << std::endl;
-  std::cout << "ID 6 tecken: " << gear->getAbility().substr(6,6) << std::endl;
-  std::cout << "ID 9 tecken: " << gear->getAbility().substr(6,9) << std::endl;
-  
-  if(gear->getAbility().substr(6,6) == "weapon")
-    {
-
-      std::cout << gear->getAbility().substr(13,10) << std:: endl;
-
-      
-      //equipment.weapon_pop->setText("VAPEN DO DMG AND WIN");
-       equipment.weapon_pop->setFileText("Data/equipment.txt", gear->getAbility().substr(13,10));
-      if(equipment.weapon_image.getImage() == nullptr)
-	{
-	  equipment.weapon_image.setImage(loadImage("Images/Gui/weapon.png"));
-	}
-      if(equipment.weapon == nullptr)
-	{
-	  std::swap(equipment.weapon, gear);
-	  return gear;
-	}
-      else
-	{
-	  equipment.weapon = gear;
-	  return nullptr;
-	}
-    }
-  else if(gear->getAbility().substr(6,6) == "shield")
-    {
-      equipment.shield_pop->setText("shield, describe how it works");
-      if(equipment.shield_image.getImage() == nullptr)
-	{
-	  equipment.shield_image.setImage(loadImage("Images/Gui/shield.png"));
-	}
-      if(equipment.shield == nullptr)
-	{
-	  std::swap(equipment.shield, gear);
-	  return gear;
-	}
-      else
-	{
-	  equipment.shield = gear;
-	  return nullptr;
-	}
-    }
-  else if(gear->getAbility().substr(6,9) == "off_horse")
-    {
-      equipment.off_horse_pop->setText("offensive horse, fuck you horse");
-      if(equipment.off_horse_image.getImage() == nullptr)
-	{
-	  equipment.off_horse_image.setImage(loadImage("Images/Gui/offensive-horse.png"));
-	}
-      if(equipment.off_horse == nullptr)
-	{
-	  std::swap(equipment.off_horse, gear);
-	  return gear;
-	}
-      else
-	{
-	  equipment.off_horse = gear;
-	  return nullptr;
-	}
-    }
-  else if(gear->getAbility().substr(6,9) == "def_horse")
-    {
-      equipment.def_horse_pop->setText("why so defensive");
-      if(equipment.def_horse_image.getImage() == nullptr)
-	{
-	  equipment.def_horse_image.setImage(loadImage("Images/Gui/defensive-horse.png"));					    
-	}
-      if(equipment.def_horse == nullptr)
-	{
-	  std::swap(equipment.def_horse, gear);
-	  return gear;
-	}
-      else
-	{
-	  equipment.def_horse = gear;
-	  return nullptr;
-	}
-    }
-
-  //något gick snett(vi fick en en equipment som inte är vapen/shield/off_horse/def_horse
-  return nullptr;
-}
-
-void Player::setPos(int x_pos, int y_pos)
-{
-  player_x = x_pos;
-  player_y = y_pos;
-  
-  if(isCurrentPlayer() == true)
-    {
-      equipment.weapon_pop->setPos(5,550);
-      equipment.shield_pop->setPos(5,589);
-      equipment.def_horse_pop->setPos(5,628);
-      equipment.off_horse_pop->setPos(5,667);
-    
-
-    }
-  else
-    {
-      equipment.def_horse_pop->setPos(x_pos + 5 ,y_pos + 50);
-      equipment.off_horse_pop->setPos(x_pos + 5, y_pos + 89);
-      equipment.weapon_pop->setPos(x_pos + 5, y_pos + 128);
-      equipment.shield_pop->setPos(x_pos + 5, y_pos + 167);
-    }
-  
-}
-
-void Player::setCurrentPlayer(bool cp)
-{
-  current_player = cp;
-  
-  equipment.weapon_pop->setPos(5,550);
-  equipment.shield_pop->setPos(5,589);
-  equipment.def_horse_pop->setPos(5,628);
-  equipment.off_horse_pop->setPos(5,667);
-  
-}
 

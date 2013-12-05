@@ -127,7 +127,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		if(target_player != nullptr)
 		{
 			Window* stealWindow = new Window(50,150,600,350);
-			HeroCard* dummy = new HeroCard("back.png", "42 gray 0 dummy");
+			// HeroCard* dummy = new HeroCard("back.png", "42 gray 0 dummy");
 
 			std::vector<GameCard*> targetHand = target_player -> getHand();
 			
@@ -158,7 +158,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		if(target_player != nullptr)
 		{
 			Window* dismantleWindow = new Window(50,150,600,350);
-			HeroCard* dummy = new HeroCard("back.png", "42 gray 0 dummy");
+			// HeroCard* dummy = new HeroCard("back.png", "42 gray 0 dummy");
 			//getEquipment() måste implementeras!
 			std::vector<GameCard*> targetHand = target_player -> getHand();
 			
