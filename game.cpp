@@ -438,7 +438,7 @@ void Game::runHotseat()
 		else if(state == 1)
 		{
 		  //timer
-		   timer->start(5);
+		   timer->start(35);
 		   timer->setCommand("end_turn");
 		  state = 2;
 		}

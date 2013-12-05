@@ -27,12 +27,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 					self = i;
 				}
 			}
-			if(timer->checkStarted() == true)
-			  {
-			    timer->stop();
-			  }
-			timer->start(5);
-			timer->setCommand("take_damage");
+			timer->reset(35,"take_damage");
 
 			Window* dodgeWindow = new Window(160,250,500,250);
 			dodgeWindow -> makeButton("Dodge",37,70,"dodge");

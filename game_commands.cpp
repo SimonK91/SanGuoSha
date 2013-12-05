@@ -71,12 +71,7 @@ void Game::run_command(const std::string& what_command)
 	
 	else if(what_command == "end_turn")
 	{
-	  if(timer->checkStarted() == true)
-	    {
-	      timer->stop();
-	    }
-	  timer->start(5);
-	  timer->setCommand("time_out");
+	  timer->reset(35,"time_out");
 	  std::cout << "Ny timer med time out 5 sek" << std::endl;
 	 
 	  state = 5;	//go to discard phase in game
@@ -100,7 +95,7 @@ void Game::run_command(const std::string& what_command)
 	
 	else if(what_command == "play_card")
 	{
-	  timer->reset(5, "end_turn");
+	  timer->reset(35, "end_turn");
 	  std::vector<GameCard*> hand;
 	  hand = current_player -> getHand();
 		for(unsigned i = 0; i < hand.size() ; ++i)
@@ -134,7 +129,7 @@ void Game::run_command(const std::string& what_command)
 				discard_pile -> pushBottom(card);
 			}
 		}
-		timer->reset(5, "time_out");
+		timer->reset(35, "time_out");
 
 	}
 	else if(what_command == "dodge")
@@ -170,7 +165,7 @@ void Game::run_command(const std::string& what_command)
 
 
 		
-		timer->reset(5, "end_turn");
+		timer->reset(35, "end_turn");
 		
 		run_command("close_window");
 	}
@@ -191,7 +186,7 @@ void Game::run_command(const std::string& what_command)
 		target_player = nullptr;
 		run_command("close_window");
 
-		timer->reset(5,"end_turn");
+		timer->reset(35,"end_turn");
 	}
 	else if(what_command == "steal_card")
 	{
@@ -425,7 +420,7 @@ void Game::run_command(const std::string& what_command)
 	}
 	else if(what_command == "duel_attack")
 	{
-	  timer->reset(5, "end_turn");
+	  timer->reset(35, "end_turn");
 		static bool targetAttacking = true;
 		int hasAttack = -1;
 		std::vector<GameCard*> hand;
