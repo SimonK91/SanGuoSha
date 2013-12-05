@@ -10,7 +10,7 @@
 #include "Window.h"
 #include "Checkbox.h"
 #include "CardList.h"
-
+#include "Timer.h"
 #include "Player.h"
 
 #include <vector>
@@ -89,9 +89,6 @@ private:
 	
 	int game_stage;
 	
-	Object::Button* play_card = new Object::Button("play", 800, 630, "play_card", "Images/Gui/smallButton.png", 20);
-	Object::Button* end_turn = new Object::Button("end", 800, 575, "end_turn", "Images/Gui/smallButton.png", 20);
-	
 	Player* target_player;
 	Player* current_player;
 	Player* source_player;
@@ -105,7 +102,7 @@ private:
 	Object::CardList* discard_pile;
 	Object::CardList* hero_deck;
 	std::vector<Player*> players;
-	//Timer timer;
+	Timer* timer;
 	//map<std::string,SDL_Surface*> card_images;
 	
 	void paint();

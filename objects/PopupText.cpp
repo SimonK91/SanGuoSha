@@ -81,18 +81,20 @@ namespace Object
   
   void PopupText::paint(Surface& to_where)
   {
-    SDL_Rect text_rect;
-    text_rect.x = 0;
-    text_rect.y = 0;
-    text_rect.w = text_area->w + 20;
-    text_rect.h = text_area->h + 10;
-
-    if(show_text == true)
+    if(text_area.getImage() != nullptr)
       {
-	applySurface(text_x - 10, text_y -5, background, to_where, &text_rect);
-	applySurface(text_x, text_y, text_area, to_where, NULL);
+	SDL_Rect text_rect;
+	text_rect.x = 0;
+	text_rect.y = 0;
+	text_rect.w = text_area->w + 20;
+	text_rect.h = text_area->h + 10;
+	if(show_text == true)
+	  {
+	    applySurface(text_x - 10, text_y -5, background, to_where, &text_rect);
+	    applySurface(text_x, text_y, text_area, to_where, NULL);
+	  }
+
       }
- 
   }
   
   void PopupText::setFileText(std::string file, std::string keyword)
@@ -120,43 +122,50 @@ namespace Object
     setText(read_text);
 
   }
+
+  void PopupText::setPos(int x_pos, int y_pos)
+  {
+    box.x = x_pos;
+    box.y = y_pos;
+  }
   
   void PopupText:: setText(std::string text)
   {
-    text_area = TTF_RenderText_Solid(font, text.c_str(), text_color);
-
+    std::cout << "start av setText " << std::endl;
+    text_area.setImage(TTF_RenderText_Solid(font, text.c_str(), text_color));
+     std::cout << "text rendered " << std::endl;
      SDL_Rect text_rect;
     text_rect.x = 0;
     text_rect.y = 0;
     text_rect.w = text_area->w + 20;
     text_rect.h = text_area->h + 10;
-
+    std::cout << "setText steg 1: " << std::endl;
     //ramen
-    SDL_Surface* tmp_border = NULL;
-    tmp_border = loadImage("Images/Gui/window/tb.png", true);
+    Surface tmp_border;
+    tmp_border.setImage( loadImage("Images/Gui/window/tb.png", true));
     applySurface(0,0, tmp_border, background, nullptr);
-    frame_size = tmp_border->h;
-    
-    tmp_border = loadImage("Images/Gui/window/lb.png", true);
+    frame_size = tmp_border.getImage()->h;
+    std::cout << "setText steg 2: " << std::endl;
+    tmp_border.setImage(loadImage("Images/Gui/window/lb.png", true));
     applySurface(0,0, tmp_border, background, nullptr);
+    std::cout << "setText steg 3: " << std::endl;
+    tmp_border.setImage(loadImage("Images/Gui/window/bb.png", true));
+    applySurface(0,text_rect.h - tmp_border.getImage()->h, tmp_border, background, nullptr);
 
-    tmp_border = loadImage("Images/Gui/window/bb.png", true);
-    applySurface(0,text_rect.h - tmp_border->h, tmp_border, background, nullptr);
-
-    tmp_border = loadImage("Images/Gui/window/rb.png", true);
+    tmp_border.setImage(loadImage("Images/Gui/window/rb.png", true));
     applySurface(text_rect.w - tmp_border->w, 0, tmp_border, background, nullptr);
 
-    tmp_border = loadImage("Images/Gui/window/ltc.png", true);
+    tmp_border.setImage(loadImage("Images/Gui/window/ltc.png", true));
     applySurface(0,0, tmp_border, background, nullptr);
         
-    tmp_border = loadImage("Images/Gui/window/rtc.png", true);
-    applySurface(text_rect.w - tmp_border->w,0, tmp_border, background, nullptr);
+    tmp_border.setImage( loadImage("Images/Gui/window/rtc.png", true));
+    applySurface(text_rect.w - tmp_border.getImage()->w,0, tmp_border, background, nullptr);
         
-    tmp_border = loadImage("Images/Gui/window/lbc.png", true);
-    applySurface(0, text_rect.h - tmp_border->h, tmp_border, background, nullptr);
+    tmp_border.setImage(loadImage("Images/Gui/window/lbc.png", true));
+    applySurface(0, text_rect.h - tmp_border.getImage()->h, tmp_border, background, nullptr);
      
-    tmp_border = loadImage("Images/Gui/window/rbc.png", true);
-    applySurface(text_rect.w - tmp_border->w, text_rect.h - tmp_border->h, tmp_border, background, nullptr);
+    tmp_border.setImage(loadImage("Images/Gui/window/rbc.png", true));
+    applySurface(text_rect.w - tmp_border.getImage()->w, text_rect.h - tmp_border->h, tmp_border, background, nullptr);
     }
   
 }//namespace

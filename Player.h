@@ -9,13 +9,34 @@
 
 struct Equipment
 {
-	Object::GameCard* def_horse = nullptr;
-	Object::GameCard* off_horse = nullptr;
-	Object::GameCard* weapon = nullptr;
-	Object::GameCard* shield = nullptr;
-	~Equipment()
-	{
-	if(weapon != nullptr)
+ 
+  SDL_Color pop_color = {255,255,255};
+  
+  Object::GameCard* def_horse = nullptr;
+  Surface def_horse_image;
+  Object::PopupText* def_horse_pop;
+
+  Object::GameCard* off_horse = nullptr;
+  Surface off_horse_image;
+  Object::PopupText* off_horse_pop;
+
+  Object::GameCard* weapon = nullptr;
+  Surface weapon_image;
+  Object::PopupText* weapon_pop;
+
+  Object::GameCard* shield = nullptr;
+  Surface shield_image;
+  Object::PopupText* shield_pop;
+ Equipment()
+  {
+    def_horse_pop = new Object::PopupText(0, 0, 144,34, pop_color , "Fonts/LHANDW.TTF", 20);
+    off_horse_pop = new Object::PopupText(0, 0, 144,34, pop_color , "Fonts/LHANDW.TTF", 20);
+    weapon_pop = new Object::PopupText(0,0, 144,34, pop_color , "Fonts/LHANDW.TTF", 20);
+    shield_pop = new Object::PopupText(0,0, 144,34, pop_color , "Fonts/LHANDW.TTF", 20);
+  }
+  ~Equipment()
+  {
+    if(weapon != nullptr)
 		delete weapon;
 	if(shield != nullptr)
 		delete shield;
@@ -42,6 +63,9 @@ class Player
   std::vector<Object::GameCard*> hand;
   Object::HeroCard* hero;
   std::stack<Object::GameCard*> judgement_cards;
+  
+  int player_x;
+  int player_y;
 
   //--life
   Surface life_symbol;
@@ -83,7 +107,7 @@ class Player
   int getLife(){ return current_life; }
   int getMaxLife(){ return max_life; }
   void setStatus(unsigned);
-  void setCurrentPlayer(bool cp){ current_player = cp; }
+  void setCurrentPlayer(bool cp);
   bool isCurrentPlayer(){ return current_player; }
   bool entered();
   bool loading();
@@ -105,6 +129,9 @@ class Player
 
   void fixCardPosition();
   void setSelected(bool);
+  Object::GameCard* equipStuff(Object::GameCard* gear);
+
+  void setPos(int x_pos, int y_pos);
 
 };
 #endif

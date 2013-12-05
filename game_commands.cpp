@@ -70,16 +70,35 @@ void Game::run_command(const std::string& what_command)
 	}
 	
 	else if(what_command == "end_turn")
-	{
-		state = 5;	//go to discard phase in game
+	{ 
+	  if(timer->checkStarted() == true)
+	    {
+	      timer->stop();
+	    }
+	  timer->start(5);
+	  timer->setCommand("time_out");
+	  std::cout << "Ny timer med time out 5 sek" << std::endl;
+	  
+	  state = 5;	//go to discard phase in game
 	}
 	else if(what_command == "play_card")
 	{
-		std::vector<GameCard*> hand;
-		hand = current_player -> getHand();
-		for(unsigned i = 0; i < hand.size() ; ++i)
+	  if(timer->checkStarted() == true)
+	    {
+	      timer->stop();
+	    }
+	  timer->start(5);
+	  timer->setCommand("end_turn");
+	  std::cout << "Ny timer med end turn 5 sek" << std::endl;
+	  std::vector<GameCard*> hand;
+	  for(Player* p : players)
+	    {
+	      if(p -> isCurrentPlayer())
 		{
-			if(hand.at(i) -> isActive())
+		  hand = p -> getHand();
+		  for(unsigned i = 0; i < hand.size() ; ++i)
+		    {
+		      if(hand.at(i) -> isActive())
 			{
 				GameCard* card = current_player -> playCard(i);
 				std::cout << "Card played: " << card -> getAbility() << std::endl;
@@ -92,6 +111,7 @@ void Game::run_command(const std::string& what_command)
 				}
 				break; //safty if 2 cards is active!
 			}
+		    }
 		}
 		current_player -> setSelected(false);
 	}
@@ -103,13 +123,30 @@ void Game::run_command(const std::string& what_command)
 		{
 			if(hand.at(i) -> isActive())
 			{
-				GameCard* card = current_player -> loseCard(i);
-				card -> setActive(false);
-				discard_pile -> pushBottom(card);
+				hand = p -> getHand();
+				for(unsigned i = 0; i < hand.size(); ++i)
+				{
+					if(hand.at(i) -> isActive())	//den är fel kommer aldrig hit!
+					{
+						GameCard* card = p -> loseCard(i);
+						discard_pile -> pushBottom(card);
+						break; //safty if 2 cards is active!
+					}
+				}
 			}
 		}
 
 	}
+	else if(what_command == "time_out")
+	  {
+	    std::cout << "discard phase time out" << std::endl;
+	    while(players.at(self) -> getCurrentHP() < players.at(self) -> getHandSize())
+	      {
+		GameCard* card = players.at(self) -> loseCard( players.at(self)->getHandSize()-1);
+		  discard_pile -> pushBottom(card);
+	      }
+	    state = 6;
+	  }
 	else if(what_command == "dodge")
 	{
 		for(unsigned i = 0; i < players.size(); ++i)

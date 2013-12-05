@@ -6,6 +6,7 @@
 #include "SDL/SDL_ttf.h"
 #include "Objects.h"
 #include <string>
+#include "Textbox.h"
 
 namespace Object
 {
@@ -29,15 +30,17 @@ namespace Object
     bool font_underlined;
     bool font_strike_through;
     
+    Textbox* test;
+
   public:
     PopupText(int x_pos, int y_pos, int width, int height, SDL_Color color, std::string f, unsigned font_size);
     ~PopupText();
     void setColor(std::string color);
     std::string handleEvent(const SDL_Event& event);
-    void  paint(Surface to_where);
+    void paint(Surface& to_where);
     void  setFileText(std::string file, std::string keyword);
     void  setText(std::string text);
-    
+    void setPos(int x_pos, int y_pos);
     
   };
   
