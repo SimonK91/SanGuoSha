@@ -102,7 +102,7 @@ void Game::setupHotseat()
 			if(self == players.size())
 				self = 0;
 		
-			if((int)self == emperor)
+			if(self == emperor)
 				step = 8;
 			else
 			{
@@ -388,7 +388,7 @@ void Game::runHotseat()
 	
 	
 	GameCard* card = nullptr;
-	Window* nextPlayer_window = new Window(230,320,300,150);
+	Window* nextPlayer_window = new Window(270,350,300,150);
 	nextPlayer_window -> makeTextbox(40,25,220,30,17);
 	nextPlayer_window -> setText(0, "Next player's turn");
 	nextPlayer_window -> makeButton("OK!",45,70,"next_state");
@@ -409,6 +409,12 @@ void Game::runHotseat()
 			has_window = true;
 			add_window(nextPlayer_window);
 			++state;
+			if(timer->checkStarted() == true)
+			  {
+			    timer->stop();
+			  }
+			
+		
 		}
 	
 	//phase 0)
@@ -418,15 +424,23 @@ void Game::runHotseat()
 			//happens through button click
 		}
 		
-		
+		std::string cmp = timer->time_ran_out();
+		if(cmp != "")
+		  {
+		    std::cout << "Kor kommandot: " << cmp << std::endl;
+		    run_command(cmp);
+		    //timer->stop();
+		  }
 	//phase 1)
 	//start of turn
 	//special hero abilities trigger here
 		// std::cout << "the state: " << state << std::endl;
 		else if(state == 1)
 		{
-			
-			state = 2;
+		  //timer
+		   timer->start(5);
+		   timer->setCommand("end_turn");
+		  state = 2;
 		}
 	//phase 2
 	//judgement phase
@@ -482,7 +496,7 @@ void Game::runHotseat()
 	//other cards are discarded
 		else if(state == 5)
 		{
-			if(players.at(self) -> getLife() >= (int)(players.at(self) -> getHandSize()))
+			if(players.at(self) -> getLife() >= players.at(self) -> getHandSize())
 			{
 				state = 6;
 			}
@@ -491,14 +505,16 @@ void Game::runHotseat()
 	//phase 6
 	//ending phase
 	//special hero abilities can trigger here (shapeshifter, diao chan
+	
 		else if(state == 6)
 		{	
 			players.at(self) -> setCurrentPlayer(false);
 			self = (self + 1) % players.size();
 			state = -1;
 			target_player = nullptr;
+			
 		}
-		
+		//	std::cout << "state:" << state << std::endl;
 		// if(i == 1)
 		// {
 			// //winning test!
@@ -558,9 +574,11 @@ bool Game::exit()
 void Game::UI()
 {
 	Uint8 *keystates = SDL_GetKeyState(nullptr);
-	std::string command;
-	static Button* discard_button = new Button("Discard", 10, 90, "discard_card","Images/Gui/cleanButton2.png",20);
-	
+	std::string command = "";
+	static Button play_button("Play", 800, 575, "play_card","Images/Gui/smallButton.png",20);
+	static Button end_button("End", 800, 630, "end_turn","Images/Gui/smallButton.png",20);
+	static Button discard_button("Disc",800, 685, "discard_card","Images/Gui/smallButton.png",20);
+
 	fps.start();
 	while( SDL_PollEvent( &event)) //sÃ¥ lÃ¤nge som det finns en event
 	{
@@ -581,28 +599,36 @@ void Game::UI()
 			}
 		}
 		if(state == 5)
-			run_command(discard_button -> handleEvent(event));
-			
+		  run_command(discard_button.handleEvent(event));
+		
 		//kolla om någon av knapparna trycks!
-			std::string button_command = play_card -> handleEvent(event);
-			if(button_command != "")
-			{
-				if(rulePlayCardOK())
-					run_command(button_command);
-			}
-			else
-			{
-				button_command = end_turn -> handleEvent(event);
-				if(button_command != "")
-				{
-					SDL_Event temp_event = event;
-					temp_event.motion.x = -100;
-					temp_event.motion.y = -100;
-					current_player -> handleHand(temp_event);
-					run_command(button_command);
-				}
-			}
-			
+		std::string button_command = play_button.handleEvent(event);
+		if(button_command != "")
+		  {
+		    if(rulePlayCardOK())
+		      run_command(button_command);
+		  }
+		else
+		  {
+		    button_command = end_button.handleEvent(event);
+		    if(button_command != "")
+		      {
+			SDL_Event temp_event = event;
+			temp_event.motion.x = -100;
+			temp_event.motion.y = -100;
+			current_player -> handleHand(temp_event);
+			run_command(button_command);
+		      }
+		  }
+		
+		if(event.type != SDL_MOUSEBUTTONUP)
+		  {
+		    for(Player* p : players)
+		      {
+			p->handleEvent(event);
+		      }
+		  }
+
 		//kolla spelare och nuvarande handen
 		if(event.type == SDL_MOUSEBUTTONUP && !has_window && game_stage == 1)
 		{
@@ -663,12 +689,22 @@ void Game::UI()
 		}
 	}
 
+
 	//måla lite fint
 	paint();
 	if(state == 5)
-		discard_button -> paint(screen);
+	  {
+	    discard_button.paint(screen);
+	  }
+	else if(state != -1)
+	  {
+	    play_button.paint(screen);
+	    end_button.paint(screen);
+	  }
 	SDL_Flip(screen.getImage());                   // Skriv ut bilden pÃ¥ skÃ¤rmen
 	fps.regulateFPS();
+	
+	
 }
 
 //från menyn
@@ -709,46 +745,72 @@ void Game::paint()
 		all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
 	}
 	
-	play_card -> paint(screen);
-	end_turn -> paint(screen);
-	
-	int x = 250;
 	if (game_stage != 0)
 	{
-	int i = 0;
+	  int i = 0;
+	  
 		for(Player* p : players)
 		{	
-			
+		
 			if(p -> isCurrentPlayer())
 			{
 				if(state != 0)
-					p -> paint(screen);
+				  {
+				    p->setPos(0,0);
+				    p -> paint(screen);
+				  }
+				
 			}
 			else
 			{
-				if(players.size() == 5)
+			  if(players.size() == 5)
+			    {
+			      if(i - self == -1 || i - self == 4)
 				{
-					if(i - self == -1 || i - self == 4)
-						p -> paint(screen,30,300);
-					if(i - self == -2 || i - self == 3)
-						p -> paint(screen,175,30);
-					if(i - self == -3 || i - self == 2)
-						p -> paint(screen,460,30);
-					if(i - self == -4 || i - self == 1)
-						p -> paint(screen,605,300);
+				  p-> setPos(30,300);
+				  p -> paint(screen,30,300);    			  
 				}
+			      if(i - self == -2 || i - self == 3)
+				{
+				  p -> setPos(175,30);
+				  p -> paint(screen,175,30);
+				}
+			      if(i - self == -3 || i - self == 2)
+				{
+				  p -> setPos(460,30);
+				  p -> paint(screen,460,30);
+				}
+			      if(i - self == -4 || i - self == 1)
+				{
+				  p -> setPos(605,300);
+				  p -> paint(screen,605,300);
+				}
+			    }
 			}
 			++i;
 		}
 	}
 	else
 	{
-		for(Player* p : players)
-		{
-			if(p -> getRole() == 0)
-				p -> paint(screen,824,257);
-		}
+	  for(Player* p : players)
+	    {
+	      if(p -> getRole() == 0)
+		p -> paint(screen,824,257);
+	    }
 	}
+	if(timer->checkStarted() == true)
+	  {
+	    timer->paint(screen);
+	  }
+	//uppdatera hero positions
+	/*for(Player* p : players)
+	  {
+	    p->setPos(2,3);//tmp värden, ska ha in riktig position
+	    }*/
+	for(Player* pp : players)
+	  {
+	    pp->showToolTip(screen);
+	  }
 }
 
 

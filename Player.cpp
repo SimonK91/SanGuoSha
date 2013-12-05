@@ -181,9 +181,26 @@ void Player::paint(Surface screen)
 		  }
 		  applySurface(876,555,name,screen);
 
-     }
+		  if(equipment.weapon_image.getImage() != nullptr)
+		    {
+		      applySurface(5,550,equipment.weapon_image,screen);
+		    }
+		  if(equipment.shield_image.getImage() != nullptr)
+		    {
+		      applySurface(5,589,equipment.shield_image,screen);
+		    }
+		  if(equipment.def_horse_image.getImage() != nullptr)
+		    {
+		      applySurface(5,628,equipment.def_horse_image,screen);
+		    }
+		  if(equipment.off_horse_image.getImage() != nullptr)
+		    {
+		      applySurface(5,667,equipment.off_horse_image,screen);
+		    }
+    
   
-  //rita ut equipment
+	
+    }
 }
 
 void Player::paint(Surface screen, int x_pos, int y_pos)
@@ -193,8 +210,8 @@ void Player::paint(Surface screen, int x_pos, int y_pos)
 	  hero->setPosition(x_pos, y_pos);
 	  //hero->paint(screen);
 	  
-	  applySurface(x_pos,y_pos,hero_profile,screen);
-	  applySurface(x_pos-3,y_pos-4,hero_frame,screen);
+	  applySurface(x_pos, y_pos, hero_profile,screen);
+	  applySurface(x_pos-3, y_pos-4,hero_frame,screen);
 	  //ritar ut liv
 	  int x_offset_life = x_pos + 70;
 	  int y_offset_life = y_pos + 80;
@@ -215,9 +232,27 @@ void Player::paint(Surface screen, int x_pos, int y_pos)
 	    {
 	      applySurface(x_pos-5, y_pos-5,selected_frame,screen);
 	    }
-		  applySurface(x_pos+5,y_pos,name,screen);
+	  applySurface(x_pos+5,y_pos,name,screen);
 	}
 	//rita ut equipment
+		  //rita ut equipment
+	if(equipment.weapon_image_thin.getImage() != nullptr)
+	  {
+	    applySurface(player_x+1, player_y+ 100,equipment.weapon_image_thin,screen);
+	  }
+	if(equipment.shield_image_thin.getImage() != nullptr)
+	  {
+	    applySurface(player_x+1,player_y + 126,equipment.shield_image_thin,screen);
+	  }
+	if(equipment.def_horse_image_thin.getImage() != nullptr)
+	  {
+	    applySurface(player_x+1,player_y + 153,equipment.def_horse_image_thin,screen);
+	  }
+	if(equipment.off_horse_image_thin.getImage() != nullptr)
+	  {
+	    applySurface(player_x+1,player_y + 179,equipment.off_horse_image_thin,screen);
+	  }
+	
 
 }
 
@@ -258,8 +293,8 @@ void Player::fixCardPosition()
 		x_pos += 135;
 	  }
     }
-	if(hero != nullptr)
-		hero->setPosition(8, 555);	
+  if(hero != nullptr)
+    hero->setPosition(8, 555);	
 }
 
 
@@ -296,6 +331,11 @@ bool Player::handleEvent(const SDL_Event& event)
 				return true;	//den blev fucking klickad!
 			}
 		}
+
+		equipment.def_horse_pop->handleEvent(event);
+		equipment.off_horse_pop->handleEvent(event);
+		equipment.weapon_pop->handleEvent(event);
+		equipment.shield_pop->handleEvent(event);
     }	
 	return false;
 }
@@ -311,3 +351,124 @@ void Player::setSelected(bool change_select)
 
 
 
+
+Object::GameCard* Player::equipStuff(GameCard* gear, int type)
+{
+  std::cout << "Vi ska equippa: " << gear->getAbility() << std::endl;
+  std::cout << "ID 6 tecken: " << gear->getAbility().substr(6,6) << std::endl;
+  std::cout << "ID 9 tecken: " << gear->getAbility().substr(6,9) << std::endl;
+  
+  if(type == 1)
+    {
+      
+      // std::cout << gear->getAbility().substr(13,10) << std:: endl;
+      
+      
+      equipment.weapon_pop->setText("VAPEN DO DMG AND WIN");
+      // equipment.weapon_pop->setFileText("Data/equipment.txt", gear->getAbility().substr(13,10));
+      if(equipment.weapon_image.getImage() == nullptr)
+	{
+	  equipment.weapon_image.setImage(loadImage("Images/Gui/weapon.png"));
+	  equipment.weapon_image_thin.setImage(loadImage("Images/Gui/weapon-thin.png"));
+	}
+      if(equipment.weapon == nullptr)
+	{
+	  std::swap(equipment.weapon, gear);
+	  return gear;
+	}
+      else
+	{
+	  equipment.weapon = gear;
+	  return nullptr;
+	}
+    }
+  else if(type == 2)
+    {
+      equipment.shield_pop->setText("shield, describe how it works");
+      if(equipment.shield_image.getImage() == nullptr)
+	{
+	  equipment.shield_image.setImage(loadImage("Images/Gui/shield.png"));
+	  equipment.shield_image_thin.setImage(loadImage("Images/Gui/shield-thin.png"));
+	}
+      if(equipment.shield == nullptr)
+	{
+	  std::swap(equipment.shield, gear);
+	  return gear;
+	}
+      else
+	{
+	  equipment.shield = gear;
+	  return nullptr;
+	}
+    }
+  else if(type == 3)
+    {
+      equipment.off_horse_pop->setText("offensive horse, fuck you horse");
+      if(equipment.off_horse_image.getImage() == nullptr)
+	{
+	  equipment.off_horse_image.setImage(loadImage("Images/Gui/offensive-horse.png"));
+	  equipment.off_horse_image_thin.setImage(loadImage("Images/Gui/offensive-horse-thin.png"));
+	}
+      if(equipment.off_horse == nullptr)
+	{
+	  std::swap(equipment.off_horse, gear);
+	  return gear;
+	}
+      else
+	{
+	  equipment.off_horse = gear;
+	  return nullptr;
+	}
+    }
+  else if(type == 4)
+    {
+      equipment.def_horse_pop->setText("why so defensive");
+      if(equipment.def_horse_image.getImage() == nullptr)
+	{
+	  equipment.def_horse_image.setImage(loadImage("Images/Gui/defensive-horse.png"));
+	  equipment.def_horse_image_thin.setImage(loadImage("Images/Gui/defensive-horse-thin.png"));					    
+	}
+      if(equipment.def_horse == nullptr)
+	{
+	  std::swap(equipment.def_horse, gear);
+	  return gear;
+	}
+      else
+	{
+	  equipment.def_horse = gear;
+	  return nullptr;
+	}
+    }
+ //något gick snett(vi fick en en equipment som inte är vapen/shield/off_horse/def_horse
+  return nullptr;
+}
+
+
+void Player::showToolTip(Surface screen)
+{
+  equipment.def_horse_pop->paint(screen);
+  equipment.off_horse_pop->paint(screen);
+  equipment.weapon_pop->paint(screen);
+  equipment.shield_pop->paint(screen);
+}
+
+void Player::setPos(int x_pos, int y_pos)
+{
+  player_x = x_pos;
+  player_y = y_pos;
+  
+  if(isCurrentPlayer() == true)
+    {
+      equipment.weapon_pop->setPos(5,550);
+      equipment.shield_pop->setPos(5,589);
+      equipment.def_horse_pop->setPos(5,628);
+      equipment.off_horse_pop->setPos(5,667);
+    }
+  else
+    {
+      equipment.def_horse_pop->setPos(x_pos + 5 ,y_pos + 153);
+      equipment.off_horse_pop->setPos(x_pos + 5, y_pos + 179);
+      equipment.weapon_pop->setPos(x_pos + 5, y_pos + 100);
+      equipment.shield_pop->setPos(x_pos + 5, y_pos + 126);
+    }
+}

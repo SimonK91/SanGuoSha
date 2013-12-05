@@ -71,12 +71,38 @@ void Game::run_command(const std::string& what_command)
 	
 	else if(what_command == "end_turn")
 	{
-		state = 5;	//go to discard phase in game
+	  if(timer->checkStarted() == true)
+	    {
+	      timer->stop();
+	    }
+	  timer->start(5);
+	  timer->setCommand("time_out");
+	  std::cout << "Ny timer med time out 5 sek" << std::endl;
+	 
+	  state = 5;	//go to discard phase in game
 	}
+
+	else if(what_command == "time_out")
+	  {
+	    std::cout << "discard phase time out" << std::endl;
+	    while(players.at(self) -> getLife() < players.at(self) -> getHandSize())
+	      {
+		GameCard* card = players.at(self) -> loseCard( players.at(self)->getHandSize()-1);
+		discard_pile -> pushBottom(card);
+	      }
+	    state = 6;
+
+	    if(timer->checkStarted() == true)
+	      {
+		timer->stop();
+	      }
+	  }
+	
 	else if(what_command == "play_card")
 	{
-		std::vector<GameCard*> hand;
-		hand = current_player -> getHand();
+	  timer->reset(5, "end_turn");
+	  std::vector<GameCard*> hand;
+	  hand = current_player -> getHand();
 		for(unsigned i = 0; i < hand.size() ; ++i)
 		{
 			if(hand.at(i) -> isActive())
@@ -108,6 +134,7 @@ void Game::run_command(const std::string& what_command)
 				discard_pile -> pushBottom(card);
 			}
 		}
+		timer->reset(5, "time_out");
 
 	}
 	else if(what_command == "dodge")
@@ -141,6 +168,10 @@ void Game::run_command(const std::string& what_command)
 		target_player = nullptr;
 		current_player -> setCurrentPlayer(true);
 
+
+		
+		timer->reset(5, "end_turn");
+		
 		run_command("close_window");
 	}
 	else if(what_command == "take_damage")
@@ -159,6 +190,8 @@ void Game::run_command(const std::string& what_command)
 		
 		target_player = nullptr;
 		run_command("close_window");
+
+		timer->reset(5,"end_turn");
 	}
 	else if(what_command == "steal_card")
 	{
@@ -292,7 +325,7 @@ void Game::run_command(const std::string& what_command)
 		target_player = players.at(barbarianTarget);
 		target_player -> setCurrentPlayer(true);
 		
-		if(barbarianTarget == (int)self)
+		if(barbarianTarget == self)
 		{
 			barbarianTarget = -1;
 			//döda fönstrett!!
@@ -330,7 +363,7 @@ void Game::run_command(const std::string& what_command)
 		target_player = players.at(arrowTarget);
 		target_player -> setCurrentPlayer(true);
 		
-		if(arrowTarget == (int)self)
+		if(arrowTarget == self)
 		{
 			arrowTarget = -1;
 			//döda fönstrett!!
@@ -352,7 +385,7 @@ void Game::run_command(const std::string& what_command)
 		//kolla om något valt
 		GameCard* card = nullptr;
 		int index = -1;
-		for(unsigned i = 0; i < harvestWindow -> getSize() - 1; ++i)
+		for(int i = 0; i < harvestWindow -> getSize() - 1; ++i)
 		{
 			card = dynamic_cast<GameCard*>(harvestWindow -> getObject(i));
 			if(card -> isActive())	
@@ -380,7 +413,7 @@ void Game::run_command(const std::string& what_command)
 		target_player -> setCurrentPlayer(true);
 		
 		//om sig själv destruera fönstrett
-		if(harvestTarget == (int)self)
+		if(harvestTarget == self)
 		{
 			harvestTarget = -1;
 			
@@ -392,6 +425,7 @@ void Game::run_command(const std::string& what_command)
 	}
 	else if(what_command == "duel_attack")
 	{
+	  timer->reset(5, "end_turn");
 		static bool targetAttacking = true;
 		int hasAttack = -1;
 		std::vector<GameCard*> hand;
@@ -401,7 +435,7 @@ void Game::run_command(const std::string& what_command)
 		else
 			hand = current_player -> getHand();
 			
-		for(unsigned i = 0; i < hand.size(); ++i)
+		for(int i = 0; i < hand.size(); ++i)
 			if(hand.at(i) -> getAbility() == "attack")
 				hasAttack = i;
 				
@@ -465,7 +499,7 @@ void Game::run_command(const std::string& what_command)
 	{
 		std::vector<GameCard*> hand = source_player -> getHand();
 		int index = -1;
-		for(unsigned i = 0; i < hand.size(); ++i)
+		for(int i = 0; i < hand.size(); ++i)
 			if(hand.at(i) -> getAbility() == "attack")
 				index = i;
 		

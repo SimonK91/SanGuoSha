@@ -9,21 +9,45 @@
 
 struct Equipment
 {
-	Object::GameCard* def_horse = nullptr;
-	Object::GameCard* off_horse = nullptr;
-	Object::GameCard* weapon = nullptr;
-	Object::GameCard* shield = nullptr;
-	~Equipment()
-	{
-	if(weapon != nullptr)
-		delete weapon;
-	if(shield != nullptr)
-		delete shield;
-	if(off_horse != nullptr)
-		delete off_horse;
-	if(def_horse != nullptr)
-		delete def_horse;
-	}
+  SDL_Color pop_color = {255,255,255};
+  
+  Object::GameCard* def_horse = nullptr;
+  Surface def_horse_image;
+  Surface def_horse_image_thin;
+  Object::PopupText* def_horse_pop;
+  
+  Object::GameCard* off_horse = nullptr;
+  Surface off_horse_image;
+  Surface off_horse_image_thin;
+  Object::PopupText* off_horse_pop;
+  
+  Object::GameCard* weapon = nullptr;
+  Surface weapon_image;
+Surface weapon_image_thin;
+  Object::PopupText* weapon_pop;
+  
+  Object::GameCard* shield = nullptr;
+  Surface shield_image;
+  Surface shield_image_thin;
+  Object::PopupText* shield_pop;
+ Equipment()
+  {
+    def_horse_pop = new Object::PopupText(0, 0, 144,34, pop_color , "Fonts/LHANDW.TTF", 20);
+    off_horse_pop = new Object::PopupText(0, 0, 144,34, pop_color , "Fonts/LHANDW.TTF", 20);
+    weapon_pop = new Object::PopupText(0,0, 144,34, pop_color , "Fonts/LHANDW.TTF", 20);
+    shield_pop = new Object::PopupText(0,0, 144,34, pop_color , "Fonts/LHANDW.TTF", 20);
+  }
+  ~Equipment()
+  {
+    if(weapon != nullptr)
+      delete weapon;
+    if(shield != nullptr)
+      delete shield;
+    if(off_horse != nullptr)
+      delete off_horse;
+    if(def_horse != nullptr)
+      delete def_horse;
+  }
 };
 
 class Player
@@ -42,6 +66,10 @@ class Player
   std::vector<Object::GameCard*> hand;
   Object::HeroCard* hero;
   std::stack<Object::GameCard*> judgement_cards;
+
+  //--position
+  int player_x;
+  int player_y;
 
   //--life
   Surface life_symbol;
@@ -105,6 +133,10 @@ class Player
 
   void fixCardPosition();
   void setSelected(bool);
+
+  void setPos(int x_pos, int y_pos);
+  Object::GameCard* equipStuff(Object::GameCard* gear, int type);
+  void showToolTip(Surface);
 
 };
 #endif

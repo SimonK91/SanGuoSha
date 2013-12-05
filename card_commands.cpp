@@ -27,6 +27,13 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 					self = i;
 				}
 			}
+			if(timer->checkStarted() == true)
+			  {
+			    timer->stop();
+			  }
+			timer->start(5);
+			timer->setCommand("take_damage");
+
 			Window* dodgeWindow = new Window(160,250,500,250);
 			dodgeWindow -> makeButton("Dodge",37,70,"dodge");
 			dodgeWindow -> makeButton("Take damage",260,70, "take_damage");
@@ -53,49 +60,19 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 	}
 	else if(effect == "off_horse")
 	{
-		if(current_player -> equipment.off_horse != nullptr)
-		{
-			std::swap(current_player -> equipment.off_horse, gameCard);
-		}
-		else
-		{
-			current_player -> equipment.off_horse = gameCard;
-			gameCard = nullptr;
-		}
+	  gameCard = current_player -> equipStuff(gameCard,3);
 	}
 	else if(effect == "def_horse")
 	{
-		if(current_player -> equipment.def_horse != nullptr)
-		{
-			std::swap(current_player -> equipment.def_horse, gameCard);
-		}
-		else
-		{
-			current_player -> equipment.def_horse = gameCard;
-			gameCard = nullptr;
-		}
+	  gameCard = current_player -> equipStuff(gameCard,4);
 	}
 	else if(effect.substr(0,6) == "weapon")
 	{
-		if(current_player -> equipment.weapon != nullptr)
-		{
-			std::swap(current_player -> equipment.weapon, gameCard);
-		}
-		else
-		{
-			current_player -> equipment.weapon = gameCard;
-			gameCard = nullptr;
-		}
+	  gameCard = current_player -> equipStuff(gameCard,1);
 	}
 	else if(effect.substr(0,6) == "shield")
 	{
-		if(current_player -> equipment.shield != nullptr)
-			std::swap(current_player -> equipment.shield, gameCard);
-		else
-		{
-			current_player -> equipment.shield = gameCard;
-			gameCard = nullptr;
-		}
+	  gameCard = current_player -> equipStuff(gameCard,2);
 	}
 	else if(effect == "peach_garden")
 	{
@@ -127,7 +104,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		if(target_player != nullptr)
 		{
 			Window* stealWindow = new Window(50,150,600,350);
-			// HeroCard* dummy = new HeroCard("back.png", "42 gray 0 dummy");
+			HeroCard* dummy = new HeroCard("back.png", "42 gray 0 dummy");
 
 			std::vector<GameCard*> targetHand = target_player -> getHand();
 			
@@ -158,7 +135,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		if(target_player != nullptr)
 		{
 			Window* dismantleWindow = new Window(50,150,600,350);
-			// HeroCard* dummy = new HeroCard("back.png", "42 gray 0 dummy");
+			HeroCard* dummy = new HeroCard("back.png", "42 gray 0 dummy");
 			//getEquipment() måste implementeras!
 			std::vector<GameCard*> targetHand = target_player -> getHand();
 			
