@@ -39,15 +39,15 @@ bool Game::ruleTargetOK(Player* target)
 	
 	if(selected_card -> getAbility() == "duress")
 	{
-		if(target_player == nullptr)
+		if(target_player.size() == 0)
 		{
 			if(target -> equipment.weapon != nullptr)
 				return true;
 		}
-		else if(source_player == nullptr)
+		else if(target_player.size() == 1)
 		{
-			distance = getDistance(target_player,target);
-			if(target -> equipment.weapon -> getRange() >= distance)
+			distance = getDistance(target_player.at(0),target);
+			if(target_player.at(0) -> equipment.weapon -> getRange() >= distance)
 				return true;
 		}
 	}
@@ -72,10 +72,10 @@ bool Game::rulePlayCardOK()
 		return true;
 		
 		
-	if(selected_card -> getTargetType() == 1 && target_player != nullptr)
+	if(selected_card -> getTargetType() == 1 && target_player.at(0) != nullptr)
 		return true;
 		
-	if(selected_card -> getAbility() == "duress" && target_player != nullptr && source_player != nullptr)
+	if(selected_card -> getAbility() == "duress" && target_player.size() == 2)
 		return true;
 		
 	return false;

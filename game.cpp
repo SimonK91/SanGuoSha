@@ -496,7 +496,8 @@ void Game::runHotseat()
 			players.at(self) -> setCurrentPlayer(false);
 			self = (self + 1) % players.size();
 			state = -1;
-			target_player = nullptr;
+			while(target_player.size() != 0)
+				target_player.pop_back();
 		}
 		
 		// if(i == 1)
@@ -615,22 +616,14 @@ void Game::UI()
 				
 				for(Player* p : players)
 				{
-					if(target_player == nullptr && p -> handleEvent(event))
+					if(p -> handleEvent(event))
 					{
 						if(ruleTargetOK(p))
 						{
-							target_player = p;
+							target_player.push_back(p);
 							p->setSelected(true);
 							player_pressed = true;
 						}
-						break;
-					}
-					else if(target_player != nullptr && source_player == nullptr && target_player != p && p -> handleEvent(event))
-					{
-						source_player = target_player;
-						target_player = p;
-						p-> setSelected(true);
-						player_pressed = true;
 						break;
 					}
 				}
@@ -641,8 +634,8 @@ void Game::UI()
 					{
 						p->setSelected(false);
 					}
-					target_player = nullptr;
-					source_player = nullptr;
+					while(target_player.size() != 0)
+						target_player.pop_back();
 				}
 				//om varken player eller knappar är tryckta, kolla om kort i hand är tryckta
 				if(!player_pressed && button_command == "")
