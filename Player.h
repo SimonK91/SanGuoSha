@@ -9,7 +9,7 @@
 
 struct Equipment
 {
-  SDL_Color pop_color = {255,255,255};
+  SDL_Color pop_color;
   
   Object::GameCard* def_horse = nullptr;
   Surface def_horse_image;
@@ -23,19 +23,23 @@ struct Equipment
   
   Object::GameCard* weapon = nullptr;
   Surface weapon_image;
-Surface weapon_image_thin;
+  Surface weapon_image_thin;
   Object::PopupText* weapon_pop;
   
   Object::GameCard* shield = nullptr;
   Surface shield_image;
   Surface shield_image_thin;
   Object::PopupText* shield_pop;
- Equipment()
+  
+  Equipment()
   {
     def_horse_pop = new Object::PopupText(0, 0, 144,34, pop_color , "Fonts/LHANDW.TTF", 20);
     off_horse_pop = new Object::PopupText(0, 0, 144,34, pop_color , "Fonts/LHANDW.TTF", 20);
     weapon_pop = new Object::PopupText(0,0, 144,34, pop_color , "Fonts/LHANDW.TTF", 20);
     shield_pop = new Object::PopupText(0,0, 144,34, pop_color , "Fonts/LHANDW.TTF", 20);
+    pop_color.r = 255;
+    pop_color.g = 255;
+    pop_color.b = 255;
   }
   ~Equipment()
   {
@@ -67,23 +71,21 @@ class Player
   Object::HeroCard* hero;
   std::stack<Object::GameCard*> judgement_cards;
 
-  //--position
   int player_x;
   int player_y;
-
-  //--life
+  
   Surface life_symbol;
   Surface life_symbol_empty;
-  //--selected frame
+
   bool sel;
   Surface selected_frame;
 
  public:
   Player(const std::string&);
   ~Player();
+
   Equipment equipment;
   
-
   void setHero(Object::HeroCard*);
   Object::GameCard* playCard(int);
   Object::GameCard* loseCard(int);
@@ -92,22 +94,21 @@ class Player
   bool hasHero(){return hero != nullptr;}
 
   void doEffect(std::string);
-
   void modifyLife(int mod)
   { 
-	if(current_life + mod <= max_life)
-		current_life += mod; 
+    if(current_life + mod <= max_life)
+      current_life += mod; 
   }
   void addJudgementCard(Object::GameCard* gc)
   {
-	judgement_cards.push(gc);
+    judgement_cards.push(gc);
   }
   Object::GameCard* getJudgementCard()
-  {
-	Object::GameCard* gc = judgement_cards.top();
-	judgement_cards.pop();
-	return gc;
-  }
+    {
+      Object::GameCard* gc = judgement_cards.top();
+      judgement_cards.pop();
+      return gc;
+    }
   int getLife(){ return current_life; }
   int getMaxLife(){ return max_life; }
   void setStatus(unsigned);
@@ -116,7 +117,7 @@ class Player
   bool entered();
   bool loading();
   bool left();
-
+  
   Object::GameCard* handleHand(const SDL_Event& event);
   bool handleEvent(const SDL_Event& event);
   void setPlayerNr(int);
@@ -125,18 +126,17 @@ class Player
   
   const std::vector<Object::GameCard*>& getHand(){ return hand; } //only read not whrite
   unsigned getHandSize(){ return hand.size(); }
-  //unsigned getCurrentHP(){ return current_life; }
   
   void setRole(int r){role = r;}
   int getRole(){return role;}
   std::string getHeroName(){return hero->getName();}
-
+  
   void fixCardPosition();
   void setSelected(bool);
 
   void setPos(int x_pos, int y_pos);
   Object::GameCard* equipStuff(Object::GameCard* gear, int type);
   void showToolTip(Surface);
-
+  void handleToolTip(SDL_Event&);
 };
 #endif

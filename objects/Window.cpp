@@ -1,4 +1,5 @@
 #include "Window.h"
+#include "HeroCard.h"
 
 namespace Object
 {
@@ -11,39 +12,41 @@ namespace Object
   Window::~Window()
   {
     for(auto i : objects)
-    {
-		delete i;
-    }
+      {
+	delete i;
+      }
   }  
   
   std::string Window::handleEvent(const SDL_Event& event)
   {
     SDL_Event event2 = event;
-	event2.motion.x -= box.x;
-	event2.motion.y -= box.y;
+    event2.motion.x -= box.x;
+    event2.motion.y -= box.y;
     std::string tmpCommand = "";
     for(int i = objects.size()-1;i >= 0 ; --i)
-    {
-		if(dynamic_cast<ActiveObject*>(objects.at(i)) != nullptr)
-		{
-			tmpCommand = dynamic_cast<ActiveObject*>(objects.at(i))->handleEvent(event2);
-		}
-			
-		if(tmpCommand != "" && dynamic_cast<Card*>(objects.at(i)) != nullptr)
-		{
-			event2.motion.x = -100;
-			event2.motion.y = -100;
-			for(int j = i-1 ; j >= 0 ; --j)
-				dynamic_cast<ActiveObject*>(objects.at(j))->handleEvent(event2);
-		}
-		if(tmpCommand != "")
-			break;
-    }
+      {
+	if(dynamic_cast<ActiveObject*>(objects.at(i)) != nullptr)
+	  {
+	    if(dynamic_cast<HeroCard*>(objects.at(i)) != nullptr)
+	      {
+		dynamic_cast<HeroCard*>(objects.at(i))->toolEvent(event2);
+	      }
+	    tmpCommand = dynamic_cast<ActiveObject*>(objects.at(i))->handleEvent(event2);
+	  }
+	
+	if(tmpCommand != "" && dynamic_cast<Card*>(objects.at(i)) != nullptr)
+	  {
+	    event2.motion.x = -100;
+	    event2.motion.y = -100;
+	    for(int j = i-1 ; j >= 0 ; --j)
+	      dynamic_cast<ActiveObject*>(objects.at(j))->handleEvent(event2);
+	  }
+	if(tmpCommand != "")
+	  break;
+      }
     
-    return tmpCommand;
-    
+    return tmpCommand;   
   }
-  
   
   void Window::paint(Surface& screen)
   {
@@ -53,19 +56,20 @@ namespace Object
     backgroundSize.y = 0;
     backgroundSize.w = box.w;
     backgroundSize.h = box.h;
-	windowSurface = SDL_CreateRGBSurface(0, box.w, box.h, 32,
-                                   0, 0, 0, 0);
+    windowSurface = SDL_CreateRGBSurface(0, box.w, box.h, 32,
+					 0, 0, 0, 0);
     
-	//rita ut bakgrunden på bilden
-	applySurface(0, 0, background, windowSurface);
-	
-    //ritar ut alla Object som hör till detta window
+    applySurface(0, 0, background, windowSurface);
+    
     for(auto i : objects)
-    {
-		i->paint(windowSurface);
-    }
+      {
+	if(dynamic_cast<HeroCard*>(i) != nullptr)
+	  {
+	    dynamic_cast<HeroCard*>(i)->showToolTip(screen);
+	  }
+	i->paint(windowSurface);
+      }
     
-    //ritar ut fönstret på skärmen
     applySurface(box.x, box.y, windowSurface, screen, &backgroundSize);
   }
   
@@ -73,22 +77,21 @@ namespace Object
   {
     Slider* temp = new Slider(x_pos, y_pos, command, value);
     if (temp == nullptr)
-		return false;
+      return false;
     objects.push_back(temp);
     return true;
   }
   
   bool Window::makeTextbox(const int& x, const int& y, const int& w , const int& h,
-			               const unsigned& size, const std::string& font)
+			   const unsigned& size, const std::string& font)
   {
     Textbox* temp = new Textbox(x,y,w,h,font,size);
     
     if (temp == nullptr)
       return false;
     objects.push_back(temp);
-    //all_objects.pop_back();
+
     return true;
-    
   }
   void Window::setText(const int& where, const std::string& what_text)
   {
@@ -98,45 +101,41 @@ namespace Object
   void Window::addCard(Card* card, int xPos, int yPos)
   {
     objects.push_back(card);
-	card->setPosition(xPos,yPos);
-	
+    card->setPosition(xPos,yPos);    
   }
-  
-  
-  
-	void Window::loadBackground(int x, int y, int w, int h)
-	{
-	box.x = x;
-	box.y = y;
-	box.w = w;
-	box.h = h;
-	background = loadImage("Images/Gui/Window/background.png", false);
-	Surface tmp_bg;
-	
-	//övre ramen
-	tmp_bg = loadImage("Images/Gui//window/tb.png",true);
-	applySurface(0,0, tmp_bg, background, nullptr);
-	//vänstra ramen
-	tmp_bg = loadImage("Images/Gui/window/lb.png",true);
-	applySurface(0,0, tmp_bg, background, nullptr);
-	//nedre ramen
-	tmp_bg = loadImage("Images/Gui/window/bb.png",true);
-	applySurface(0,h - tmp_bg->h, tmp_bg, background, nullptr);
-	//högra ramen
-	tmp_bg = loadImage("Images/Gui/window/rb.png",true);
-	applySurface(w - tmp_bg->w,0, tmp_bg, background, nullptr);
-	//övre vänstra hörnet
-	tmp_bg = loadImage("Images/Gui/window/ltc.png",true);
-	applySurface(0,0, tmp_bg, background, nullptr);
-	//övre högra hörnet
-	tmp_bg = loadImage("Images/Gui/window/rtc.png",true);
-	applySurface(w - tmp_bg->w,0, tmp_bg, background, nullptr);
-	//nedre vänstra hörnet
-	tmp_bg = loadImage("Images/Gui/window/lbc.png",true);
-	applySurface(0,h - tmp_bg->h, tmp_bg, background, nullptr);
-	//nedre högra hörnet
-	tmp_bg = loadImage("Images/Gui/window/rbc.png",true);
-	applySurface(w - tmp_bg->w, h - tmp_bg->h, tmp_bg, background, nullptr);
-	}
-  
+   
+  void Window::loadBackground(int x, int y, int w, int h)
+  {
+    box.x = x;
+    box.y = y;
+    box.w = w;
+    box.h = h;
+    background = loadImage("Images/Gui/Window/background.png", false);
+    Surface tmp_bg;
+    
+    //övre ramen
+    tmp_bg = loadImage("Images/Gui//window/tb.png",true);
+    applySurface(0,0, tmp_bg, background, nullptr);
+    //vänstra ramen
+    tmp_bg = loadImage("Images/Gui/window/lb.png",true);
+    applySurface(0,0, tmp_bg, background, nullptr);
+    //nedre ramen
+    tmp_bg = loadImage("Images/Gui/window/bb.png",true);
+    applySurface(0,h - tmp_bg->h, tmp_bg, background, nullptr);
+    //högra ramen
+    tmp_bg = loadImage("Images/Gui/window/rb.png",true);
+    applySurface(w - tmp_bg->w,0, tmp_bg, background, nullptr);
+    //övre vänstra hörnet
+    tmp_bg = loadImage("Images/Gui/window/ltc.png",true);
+    applySurface(0,0, tmp_bg, background, nullptr);
+    //övre högra hörnet
+    tmp_bg = loadImage("Images/Gui/window/rtc.png",true);
+    applySurface(w - tmp_bg->w,0, tmp_bg, background, nullptr);
+    //nedre vänstra hörnet
+    tmp_bg = loadImage("Images/Gui/window/lbc.png",true);
+    applySurface(0,h - tmp_bg->h, tmp_bg, background, nullptr);
+    //nedre högra hörnet
+    tmp_bg = loadImage("Images/Gui/window/rbc.png",true);
+    applySurface(w - tmp_bg->w, h - tmp_bg->h, tmp_bg, background, nullptr);
+  }  
 }//slut på namnrymd

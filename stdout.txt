@@ -6,104 +6,63 @@ bakgrundsbilden laddas
 en button skapas
 mainMenu startas
 argument 0: C:\Users\Skatsi\Documents\GitHub\SanGuoSha\SanGuoSha.exe
-laddar timer bilder
-laddar timer bilder
-Emperor-cards drawn
-hero_deck shuffled
-two more cards drawn
-Command: "activated" is not found in command list
-hero 0
-hero 1
-hero 2
-HERO 2 active
-ger kortet
-dynamic cast success
-dynamic cast success
-dynamic cast success
-dynamic cast success
-normal delete
-Command: "activated" is not found in command list
-hero 0
-hero 1
-HERO 1 active
-ger kortet
-dynamic cast success
-dynamic cast success
-normal delete
-Command: "activated" is not found in command list
-hero 0
-hero 1
-hero 2
-HERO 2 active
-ger kortet
-dynamic cast success
-dynamic cast success
-normal delete
-Command: "activated" is not found in command list
-hero 0
-hero 1
-hero 2
-HERO 2 active
-ger kortet
-dynamic cast success
-dynamic cast success
-normal delete
-Command: "activated" is not found in command list
-hero 0
-hero 1
-hero 2
-HERO 2 active
-ger kortet
-dynamic cast success
-dynamic cast success
-normal delete
-selected card: true
-selected card: false
-selected_card == nullptr: false
-selected_card == nullptr: false
-Card played: shield0
-Vi ska equippa: shield0
-ID 6 tecken: 0
-ID 9 tecken: 0
-start av setText 
-text rendered 
-setText steg 1: 
-setText steg 2: 
-setText steg 3: 
-selected card: false
-selected_card == nullptr: false
-selected_card == nullptr: false
-Card played: weapon7
-Vi ska equippa: weapon7
-ID 6 tecken: 7
-ID 9 tecken: 7
-start av setText 
-text rendered 
-setText steg 1: 
-setText steg 2: 
-setText steg 3: 
-selected card: false
-selected_card == nullptr: false
-selected_card == nullptr: false
-Card played: steal
-Played card: steal was plased in discard pile
-Command: "activated" is not found in command list
-selected card: true
-Ny timer med time out 5 sek
-selected card: true
-selected card: false
-selected_card == nullptr: false
-selected_card == nullptr: false
-Card played: weapon4
-Vi ska equippa: weapon4
-ID 6 tecken: 4
-ID 9 tecken: 4
-start av setText 
-text rendered 
-setText steg 1: 
-setText steg 2: 
-setText steg 3: 
-selected card: true
-game.exit() okay!
+make textbbox
+settext
+makeslider
+add windows
+flytta sliderEFFECT VOLYM: 69
+flytta sliderEFFECT VOLYM: 59
+flytta sliderEFFECT VOLYM: 49
+flytta sliderEFFECT VOLYM: 46
+flytta sliderEFFECT VOLYM: 52
+flytta sliderEFFECT VOLYM: 63
+flytta sliderEFFECT VOLYM: 69
+flytta sliderEFFECT VOLYM: 71
+flytta sliderEFFECT VOLYM: 71
+flytta sliderEFFECT VOLYM: 69
+flytta sliderEFFECT VOLYM: 61
+flytta sliderEFFECT VOLYM: 50
+flytta sliderEFFECT VOLYM: 46
+flytta sliderEFFECT VOLYM: 36
+flytta sliderEFFECT VOLYM: 30
+flytta sliderEFFECT VOLYM: 26
+flytta sliderEFFECT VOLYM: 21
+flytta sliderEFFECT VOLYM: 20
+flytta sliderEFFECT VOLYM: 30
+flytta sliderEFFECT VOLYM: 46
+flytta sliderEFFECT VOLYM: 67
+flytta sliderEFFECT VOLYM: 77
+flytta sliderEFFECT VOLYM: 79
+flytta sliderEFFECT VOLYM: 85
+flytta sliderEFFECT VOLYM: 89
+flytta sliderEFFECT VOLYM: 86
+flytta sliderEFFECT VOLYM: 75
+flytta sliderEFFECT VOLYM: 46
+flytta sliderEFFECT VOLYM: 15
+flytta sliderEFFECT VOLYM: 1
+flytta sliderEFFECT VOLYM: 7
+flytta sliderEFFECT VOLYM: 55
+flytta sliderEFFECT VOLYM: 100
+flytta sliderEFFECT VOLYM: 100
+flytta sliderEFFECT VOLYM: 100
+flytta sliderEFFECT VOLYM: 79
+flytta sliderEFFECT VOLYM: 32
+flytta sliderEFFECT VOLYM: 20
+flytta sliderEFFECT VOLYM: 38
+flytta sliderEFFECT VOLYM: 84
+flytta sliderEFFECT VOLYM: 96
+flytta sliderEFFECT VOLYM: 67
+flytta sliderEFFECT VOLYM: 20
+flytta sliderEFFECT VOLYM: 13
+flytta sliderEFFECT VOLYM: 26
+flytta sliderEFFECT VOLYM: 75
+flytta sliderEFFECT VOLYM: 77
+flytta sliderEFFECT VOLYM: 88
+flytta sliderEFFECT VOLYM: 86
+flytta sliderEFFECT VOLYM: 49
+flytta sliderEFFECT VOLYM: 32
+flytta sliderEFFECT VOLYM: 34
+flytta sliderEFFECT VOLYM: 59
+flytta sliderEFFECT VOLYM: 63
 Write settings okay!
 exit OK!

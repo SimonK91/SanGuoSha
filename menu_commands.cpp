@@ -81,6 +81,13 @@ void Menu::run_command(const std::string& what_command)
 		options->makeTextbox(300,20,150,30);
 		options->setText(2,"Music volume: " + I2S(m.getVolume()));
 		options->makeSlider(250,60,"set_volume",m.getVolume());
+		std::cout << "make textbbox" << std::endl;
+		options->makeTextbox(300,120,150,30);
+		std::cout << "settext" << std::endl;
+		options->setText(4,"Effects volume: " + I2S(m.getEffectVolume()));
+		std::cout << "makeslider" << std::endl;
+		options->makeSlider(250,160,"set_effects_volume",m.getEffectVolume());
+		std::cout << "add windows" << std::endl;
 		add_window(options);
 		has_window = true;
 	}
@@ -95,9 +102,17 @@ void Menu::run_command(const std::string& what_command)
 		//hitta grejer3
 		int volume = S2I(what_command.substr(11,what_command.size()-11));
 		m.setVolume(volume);
+		std::cout << "MUSIC VOLYM: " << volume << std::endl;
 		//settings.at(1).second = I2S(volume);
 		dynamic_cast<Window*>(all_objects.back())->setText(2,"Music volume: " +  I2S(m.getVolume()));
 	}
+	if(what_command.substr(0,18) == "set_effects_volume")
+	  {
+	    int volume = S2I(what_command.substr(19,what_command.size()-11));
+	    std::cout << "EFFECT VOLYM: " << volume << std::endl;
+	    m.setEffectVolume(volume);
+	    dynamic_cast<Window*>(all_objects.back())->setText(4,"Effects volume: " +  I2S(m.getEffectVolume()));
+	  }
 	if(what_command == "toggle_fullscreen")
 	{
 		if(!fullscreen)

@@ -11,8 +11,7 @@
 namespace Object
 {
   class PopupText : public ActiveObject
-  {
-    
+  {    
   private:
     TTF_Font* font;
     Surface text_area;
@@ -41,8 +40,8 @@ namespace Object
     void  setFileText(std::string file, std::string keyword);
     void  setText(std::string text);
     void setPos(int x_pos, int y_pos);
+    void handleToolTip(SDL_Event&);
     
-  };
-  
+  };  
 }//namespace
 #endif

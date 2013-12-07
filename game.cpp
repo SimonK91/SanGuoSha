@@ -514,6 +514,11 @@ void Game::runHotseat()
 			target_player = nullptr;
 			
 		}
+		//steal / dismantle phase
+		else if(state == 7)
+		  {
+		    
+		  }
 		//	std::cout << "state:" << state << std::endl;
 		// if(i == 1)
 		// {
@@ -601,6 +606,8 @@ void Game::UI()
 		if(state == 5)
 		  run_command(discard_button.handleEvent(event));
 		
+
+		
 		//kolla om någon av knapparna trycks!
 		std::string button_command = play_button.handleEvent(event);
 		if(button_command != "")
@@ -623,9 +630,10 @@ void Game::UI()
 		
 		if(event.type != SDL_MOUSEBUTTONUP)
 		  {
-		    for(Player* p : players)
+		     for(Player* p : players)
 		      {
 			p->handleEvent(event);
+			p->handleToolTip(event);
 		      }
 		  }
 
@@ -707,106 +715,77 @@ void Game::UI()
 	
 }
 
-//från menyn
-/*
-game.setup();
-game.run();
-
-run()
-{
-	//fixa alla faser o grejer!
-	
-	manageEvents
-	
-	paint();
-}
-
-paint()
-{
-	//rita ut alla objekt + kort
-	
-	//eller så får den ha faser!
-}
-
-UI()
-{
-	manageEvents;
-	paint;
-}
-
-*/
 void Game::paint()
 {
 	
 	applySurface(0,0,background,screen); //skriv ut bakgrunden att ha som en bas
-
 	for(unsigned i = 0; i < all_objects.size() ; ++i)
-	{
-		all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
-	}
+	  {
+	    all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
+	  }
 	
 	if (game_stage != 0)
-	{
-	  int i = 0;
-	  
-		for(Player* p : players)
-		{	
-		
-			if(p -> isCurrentPlayer())
-			{
-				if(state != 0)
-				  {
-				    p->setPos(0,0);
-				    p -> paint(screen);
-				  }
-				
-			}
-			else
-			{
-			  if(players.size() == 5)
-			    {
-			      if(i - self == -1 || i - self == 4)
-				{
-				  p-> setPos(30,300);
-				  p -> paint(screen,30,300);    			  
-				}
-			      if(i - self == -2 || i - self == 3)
-				{
-				  p -> setPos(175,30);
-				  p -> paint(screen,175,30);
-				}
-			      if(i - self == -3 || i - self == 2)
-				{
-				  p -> setPos(460,30);
-				  p -> paint(screen,460,30);
-				}
-			      if(i - self == -4 || i - self == 1)
-				{
-				  p -> setPos(605,300);
-				  p -> paint(screen,605,300);
-				}
-			    }
-			}
-			++i;
-		}
-	}
+	  {
+	    int i = 0;
+	    
+	    for(Player* p : players)
+	      {	
+		if(p -> isCurrentPlayer())
+		  {
+		    if(state != 0)
+		      {
+			p->setPos(0,0);
+			p -> paint(screen);
+		      }
+
+		  }
+		else
+		  {
+		    if(players.size() == 5 && state != 7)
+		      {
+			if(i - self == -1 || i - self == 4)
+			  {
+			    p-> setPos(30,300);
+			    p -> paint(screen,30,300);    			  
+			  }
+			if(i - self == -2 || i - self == 3)
+			  {
+			    p -> setPos(175,30);
+			    p -> paint(screen,175,30);
+			  }
+			if(i - self == -3 || i - self == 2)
+			  {
+			    p -> setPos(460,30);
+			    p -> paint(screen,460,30);
+			  }
+			if(i - self == -4 || i - self == 1)
+			  {
+			    p -> setPos(605,300);
+			    p -> paint(screen,605,300);
+			  }
+		      }
+		    else if(players.size() == 5 && state == 7)
+		      {
+			target_player -> setPos(30,200);
+			target_player ->paint(screen,30,200);
+		      }
+		  }
+		++i;
+	      }
+	  }
 	else
-	{
-	  for(Player* p : players)
-	    {
-	      if(p -> getRole() == 0)
-		p -> paint(screen,824,257);
-	    }
-	}
+	  {
+	    for(Player* p : players)
+	      {
+		if(p -> getRole() == 0)
+		  p -> paint(screen,824,257);
+	      }
+	  }
+
 	if(timer->checkStarted() == true)
 	  {
 	    timer->paint(screen);
 	  }
-	//uppdatera hero positions
-	/*for(Player* p : players)
-	  {
-	    p->setPos(2,3);//tmp värden, ska ha in riktig position
-	    }*/
 	for(Player* pp : players)
 	  {
 	    pp->showToolTip(screen);

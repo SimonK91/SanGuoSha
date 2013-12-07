@@ -110,6 +110,7 @@ namespace Object
 	  {
 	    if(tmp_text == keyword)
 	      {
+		std::cerr << "fond keyword in file " << keyword  << std::endl;
 		std::getline(read_file, read_text);
 		read_file.close();
 		break;
@@ -118,6 +119,7 @@ namespace Object
       }
     else
       {
+	std::cerr << "could not read text from file, keyword was " << keyword << std::endl;
 	read_text = "error reading text from file!";
       }
 
@@ -168,6 +170,6 @@ namespace Object
      
     tmp_border.setImage(loadImage("Images/Gui/window/rbc.png", true));
     applySurface(text_rect.w - tmp_border.getImage()->w, text_rect.h - tmp_border->h, tmp_border, background, nullptr);
-    }
+  }
   
 }//namespace
