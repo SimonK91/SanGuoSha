@@ -20,7 +20,8 @@ namespace Object
     ~Checkbox() = default;
     
     void paint(Surface& to_where);    
-    std::string handleEvent(const SDL_Event& event);	
+    std::string handleEvent(const SDL_Event& event);
+    void setChecked(bool check){checked = check;}
   };
   
 } //namespace

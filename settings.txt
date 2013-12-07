@@ -1,0 +1,2 @@
+FullScreen: 1 
+Vol: 80

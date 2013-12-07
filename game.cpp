@@ -6,6 +6,8 @@ using namespace Object;
 
 void Game::setupHotseat()
 {
+  run_command("set_settings");
+
 	run_next = true;
 	std::vector<int> role{0,2,3,1,3,3,1,3,1,2};
 	int emperor = -1;
@@ -438,8 +440,9 @@ void Game::runHotseat()
 		else if(state == 1)
 		{
 		  //timer
-		   timer->start(5);
+		  timer->start(sett.getTimerTime());
 		   timer->setCommand("end_turn");
+		   m.playSoundEffect(8);
 		  state = 2;
 		}
 	//phase 2
@@ -786,9 +789,12 @@ void Game::paint()
 	  {
 	    timer->paint(screen);
 	  }
-	for(Player* pp : players)
+	if(sett.getToolTips() == true)
 	  {
-	    pp->showToolTip(screen);
+	    for(Player* pp : players)
+	      {
+		pp->showToolTip(screen);
+	      }
 	  }
 }
 

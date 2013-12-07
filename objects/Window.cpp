@@ -82,6 +82,11 @@ namespace Object
     return true;
   }
   
+  void Window::makeCheckbox(int x_pos,int y_pos,const std::string com, bool checked)
+  {
+    Checkbox* temp = new Checkbox(x_pos, y_pos, com, checked);
+    objects.push_back(temp);
+  }
   bool Window::makeTextbox(const int& x, const int& y, const int& w , const int& h,
 			   const unsigned& size, const std::string& font)
   {

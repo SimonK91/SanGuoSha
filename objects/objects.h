@@ -47,7 +47,7 @@ namespace Object
     virtual std::string handleEvent(const SDL_Event&) = 0;
     virtual ~ActiveObject() = default;
     bool isActive(){return active != 0;}
-    void setActive(int act){active = act;}
+    void setActive(int act){active = act;} //wut, why int?
   };    
 }//slut på namnrymden
 #endif

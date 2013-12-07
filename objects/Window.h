@@ -5,6 +5,7 @@
 #include "Button.h"
 #include "Slider.h"
 #include "Textbox.h"
+#include "Checkbox.h"
 #include "Objects.h"
 #include "Card.h"
 #include <vector>
@@ -48,6 +49,7 @@ namespace Object
     }
     std::string handleEvent(const SDL_Event&);
     
+    void makeCheckbox(int, int, const std::string, bool);
     void makeButton(const std::string& text, const int& x_pos, const int& y_pos, const std::string& command = "",
 		    const std::string& image = "Images/Gui/cleanButton2.png", const unsigned& size = 20);
     bool makeSlider(const int& x_pos, const int& y_pos, const std::string& command, const int& value);

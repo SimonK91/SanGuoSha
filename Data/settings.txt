@@ -1,0 +1,5 @@
+Fullscreen: 171
+Music_Vol: 28
+Effect_vol: 47
+Tool_tips: 1
+Timer_time: 10

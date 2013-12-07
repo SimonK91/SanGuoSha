@@ -13,6 +13,7 @@
 #include "Timer.h"
 #include "Player.h"
 #include <vector>
+#include "Settings.h"
 
 class SGS
 {
@@ -29,9 +30,23 @@ protected:
   bool has_window = false;
   bool fullscreen = false;
   std::vector<std::pair<std::string, std::string>> settings;
+  Settings sett;
   
 public:
-  SGS(Surface scr) : screen(scr),m("Music/Menu.wav"), fps(30){}
+  SGS(Surface scr) : screen(scr),m("Music/Menu.wav"), fps(30){
+
+    m.loadMusic("Music/Menu.wav");
+    m.loadSoundEffect("Music/shield-equip.wav");
+    m.loadSoundEffect("Music/weapon-equip.wav");
+    m.loadSoundEffect("Music/horse-equip.wav");
+    m.loadSoundEffect("Music/dismantle.wav");
+    m.loadSoundEffect("Music/steal.wav");
+    m.loadSoundEffect("Music/barbarians.wav");
+    m.loadSoundEffect("Music/arrows.wav");
+    m.loadSoundEffect("Music/dodge.wav");
+    m.loadSoundEffect("Music/draw2-cards.wav");
+    m.loadSoundEffect("Music/hero-pick.wav");
+  }
   ~SGS();
   
   //borttagna
@@ -66,15 +81,7 @@ private:
 public:
   Menu(Surface scr) : SGS(scr)
   {
-    m.loadMusic("Music/Menu.wav");
-    m.loadSoundEffect("Music/shield-equip.wav");
-    m.loadSoundEffect("Music/weapon-equip.wav");
-    m.loadSoundEffect("Music/horse-equip.wav");
-    m.loadSoundEffect("Music/dismantle.wav");
-    m.loadSoundEffect("Music/steal.wav");
-    m.loadSoundEffect("Music/barbarians.wav");
-    m.loadSoundEffect("Music/arrows.wav");
-    m.loadSoundEffect("Music/dodge.wav");
+   
   }
   ~Menu() = default;
   
@@ -114,8 +121,9 @@ public:
   ~Game() = default;
   Game() = default;
   
-  Game(Surface scr) : SGS(scr), game_stage(0), target_player(nullptr), current_player(nullptr), source_player(nullptr), selected_card(nullptr)
+ Game(Surface scr, Settings settings) : SGS(scr), game_stage(0), target_player(nullptr), current_player(nullptr), source_player(nullptr), selected_card(nullptr)
   {
+    sett = settings;
     self = 0; //ska komma utifrån!!
     card_deck = new Object::CardList("standard_playing_cards");
     discard_pile = new Object::CardList("empty");

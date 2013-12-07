@@ -5,6 +5,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
   
   if(effect == "draw2")
     {
+      m.playSoundEffect(8);
       for(int i = 0; i < 2; ++i)
 	{
 	  if(card_deck -> empty())
@@ -27,7 +28,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		  self = i;
 		}
 	    }
-	  timer->reset(5,"take_damage");
+	  timer->reset(sett.getTimerTime(),"take_damage");
 	  
 	  Window* dodgeWindow = new Window(160,250,500,250);
 	  dodgeWindow -> makeButton("Dodge",37,70,"dodge");
@@ -106,8 +107,10 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
     }
   else if(effect == "steal")
     {
+     
       if(target_player != nullptr)
 	{
+	  timer->reset(sett.getTimerTime(),"steal_time_out");
 	  state = 7;
 	  Window* stealWindow = new Window(200,150,600,350);
 	  HeroCard* dummy = new HeroCard("back.png", "42 gray 0 dummy");	  
@@ -145,9 +148,11 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
     }
   else if(effect == "dismantle")
     {
-      state = 7;
+      
       if(target_player != nullptr)
 	{
+	  state = 7;
+	  timer->reset(sett.getTimerTime(), "dismantle_time_out");
 	  Window* dismantleWindow = new Window(200,150,600,350);
 	  HeroCard* dummy = new HeroCard("back.png", "42 gray 0 dummy");
 	  //getEquipment() måste implementeras!
@@ -178,7 +183,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
   else if(effect == "barbarian")
     {
       m.playSoundEffect(5);
-
+      timer->reset(sett.getTimerTime(),"barbarian_attack");
       Window* barbarianWindow = new Window(50,350,350,200);
       barbarianWindow -> makeTextbox(20,40,310,30);
       barbarianWindow -> makeButton("Attack!!!",70,100,"barbarian_attack");		
@@ -194,7 +199,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
   else if(effect == "raining_arrows")
     {
       m.playSoundEffect(6);
-
+      timer->reset(sett.getTimerTime(),"arrow_attack");
       Window* arrowWindow = new Window(50,350,350,200);		
       arrowWindow -> makeTextbox(40,40,270,30);
       arrowWindow -> makeButton("Dodge!!!",70,100,"arrow_attack");		

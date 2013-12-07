@@ -9,6 +9,11 @@ void Game::run_command(const std::string& what_command)
       running = false;
       return;
     }
+  else if(what_command == "set_settings")
+    {
+      m.setVolume(sett.getMusicVolume());
+      m.setEffectVolume(sett.getEffectVolume());
+    }
   else if(what_command == "next_state")
     {
       all_objects.pop_back();
@@ -18,6 +23,7 @@ void Game::run_command(const std::string& what_command)
     }
   else if(what_command == "pick_hero")
     {
+      m.playSoundEffect(9);
       Window* hero_window = dynamic_cast<Window*>(all_objects.back());
       HeroCard* hero;
       for(unsigned i = 0 ; i < hero_window->getSize() ; ++i)
@@ -71,7 +77,7 @@ void Game::run_command(const std::string& what_command)
 	
   else if(what_command == "end_turn")
     {
-      timer->reset(5,"time_out");	 
+      timer->reset(sett.getTimerTime(),"time_out");	 
       state = 5;	//go to discard phase in game
     }
 
@@ -92,7 +98,7 @@ void Game::run_command(const std::string& what_command)
 	
   else if(what_command == "play_card")
     {
-      timer->reset(5, "end_turn");
+      timer->reset(sett.getTimerTime(), "end_turn");
       std::vector<GameCard*> hand;
       hand = current_player -> getHand();
       for(unsigned i = 0; i < hand.size() ; ++i)
@@ -126,7 +132,7 @@ void Game::run_command(const std::string& what_command)
 	      discard_pile -> pushBottom(card);
 	    }
 	}
-      timer->reset(5, "time_out");
+      timer->reset(sett.getTimerTime(), "time_out");
     }
   else if(what_command == "dodge")
     {
@@ -161,7 +167,7 @@ void Game::run_command(const std::string& what_command)
       target_player = nullptr;
       current_player -> setCurrentPlayer(true);
 	
-      timer->reset(5, "end_turn");
+      timer->reset(sett.getTimerTime(), "end_turn");
 		
       run_command("close_window");
     }
@@ -182,7 +188,7 @@ void Game::run_command(const std::string& what_command)
       target_player = nullptr;
       run_command("close_window");
       
-      timer->reset(5,"end_turn");
+      timer->reset(sett.getTimerTime(),"end_turn");
     }
   else if(what_command == "steal_card")
     {
@@ -236,7 +242,33 @@ void Game::run_command(const std::string& what_command)
       target_player = nullptr;
       run_command("close_window");
       state = 4;
-      timer->reset(5,"end_turn");
+      timer->reset(sett.getTimerTime(),"end_turn");
+    }
+  else if(what_command == "steal_time_out")
+    {
+      m.playSoundEffect(4);
+      
+      Window* stealWindow = dynamic_cast<Window*>(all_objects.back());
+      if(target_player->getHand().size() > 0)
+	{
+	  current_player->recieveCard(target_player->loseCard(0));
+	}
+      //delete dummys
+      while(dynamic_cast<HeroCard*>(stealWindow -> getObject(0)) != nullptr)
+	{
+	  delete stealWindow -> remove(0);
+	}
+      //delete button
+      delete dynamic_cast<Button*> (stealWindow -> remove(stealWindow -> getSize()-1));
+      
+      while(stealWindow -> getSize() != 0)
+	stealWindow -> remove(0);
+      
+      target_player = nullptr;
+      run_command("close_window");
+      state = 4;
+      timer->reset(sett.getTimerTime(),"end_turn");
+      
     }
   else if(what_command == "dismantle_card")
     {
@@ -280,11 +312,13 @@ void Game::run_command(const std::string& what_command)
 		}
 	    }
 	}
+      
       //delete dummys
-      while(dynamic_cast<HeroCard*>(dismantleWindow -> getObject(0)) != nullptr){
-	delete dismantleWindow -> getObject(0);
-	dismantleWindow -> remove(0);
-      }
+      while(dynamic_cast<HeroCard*>(dismantleWindow -> getObject(0)) != nullptr)
+	{
+	  delete dismantleWindow -> getObject(0);
+	  dismantleWindow -> remove(0);
+	}
       //delete button
       delete dismantleWindow -> remove(dismantleWindow -> getSize()-1);
       
@@ -295,9 +329,41 @@ void Game::run_command(const std::string& what_command)
       run_command("close_window");
       state = 4;
     }
+  else if(what_command == "dismantle_time_out")
+    {
+      std::cerr << "auto dismantla kort" << std::endl;
+      Window* dismantleWindow = dynamic_cast<Window*>(all_objects.back());
+  std::cerr << "windpw skapat" << std::endl;
+      m.playSoundEffect(3);
+      std::cerr << "ljud spelat" << std::endl;
+      if(target_player->getHand().size() > 0)
+	{
+	  discard_pile -> pushBottom(target_player -> loseCard(0));//what if no cards
+	}
+      std::cerr << "kort auto dismantlat" << std::endl;
+      
+      //delete dummys
+      while(dynamic_cast<HeroCard*>(dismantleWindow -> getObject(0)) != nullptr)
+	{
+	  delete dismantleWindow -> getObject(0);
+	  dismantleWindow -> remove(0);
+	}
+      //delete button
+      delete dismantleWindow -> remove(dismantleWindow -> getSize()-1);
+      
+      while(dismantleWindow -> getSize() != 0)
+	dismantleWindow -> remove(0);
+      
+      timer->reset(sett.getTimerTime(), "end_turn");
+      target_player = nullptr;
+      run_command("close_window");
+      state = 4;
+      std::cerr << "state = 4" << std::endl;
+      
+    }
   else if(what_command == "barbarian_attack")	//ej klar
     {
-      
+      timer->reset(sett.getTimerTime(),"barbarian_attack");
       static int barbarianTarget = -1;//problem kanske fixat
       if(barbarianTarget == -1)
 	{
@@ -332,11 +398,12 @@ void Game::run_command(const std::string& what_command)
 	  
 	  current_player -> setCurrentPlayer(true);
 	  target_player = nullptr;
-		}
+	  timer->reset(sett.getTimerTime(),"end_turn");
+	}
     }
   else if(what_command == "arrow_attack")	
     {
-      
+      timer->reset(sett.getTimerTime(),"arrow_attack");
       static int arrowTarget = -1;
       if(arrowTarget == -1)
 	{
@@ -364,171 +431,172 @@ void Game::run_command(const std::string& what_command)
       target_player -> setCurrentPlayer(true);
       
       if(arrowTarget == self)
-		{
-			arrowTarget = -1;
-			//döda fönstrett!!
-			
-			run_command("close_window");
-			current_player -> setCurrentPlayer(true);
-			target_player = nullptr;
-		}
-	}
-	else if(what_command == "pick_card")
 	{
-		//fix index
-		static int harvestTarget = -1;
-		if(harvestTarget == -1)
-			harvestTarget = self;
-		//hämta fönster
-		Window* harvestWindow = dynamic_cast<Window*>(all_objects.back());
-		
-		//kolla om något valt
-		GameCard* card = nullptr;
-		int index = -1;
-		for(int i = 0; i < harvestWindow -> getSize() - 1; ++i)
-		{
-			card = dynamic_cast<GameCard*>(harvestWindow -> getObject(i));
-			if(card -> isActive())	
-			{
-				index = i;
-				break;				//card is found and stored
-			}
-			card = nullptr;
-		}
-		
-		//picka kort
-		if(card != nullptr)
-		{
-			card -> setActive(false);
-			target_player -> recieveCard(card);
-			harvestWindow -> remove(index);
-		}
-		else
-			return;	//inget kort valt!
-			
+	  arrowTarget = -1;
+	  //döda fönstrett!!
+	  
+	  run_command("close_window");
+	  current_player -> setCurrentPlayer(true);
+	  target_player = nullptr;
+	  timer->reset(sett.getTimerTime(),"end_turn");
+	}
+    }
+  else if(what_command == "pick_card")
+    {
+      //fix index
+      static int harvestTarget = -1;
+      if(harvestTarget == -1)
+	harvestTarget = self;
+      //hämta fönster
+      Window* harvestWindow = dynamic_cast<Window*>(all_objects.back());
+      
+      //kolla om något valt
+      GameCard* card = nullptr;
+      int index = -1;
+      for(int i = 0; i < harvestWindow -> getSize() - 1; ++i)
+	{
+	  card = dynamic_cast<GameCard*>(harvestWindow -> getObject(i));
+	  if(card -> isActive())	
+	    {
+	      index = i;
+	      break;				//card is found and stored
+	    }
+	  card = nullptr;
+	}
+      
+      //picka kort
+      if(card != nullptr)
+	{
+	  card -> setActive(false);
+	  target_player -> recieveCard(card);
+	  harvestWindow -> remove(index);
+	}
+      else
+	return;	//inget kort valt!
+      
 		//byt spelare
-		target_player -> setCurrentPlayer(false);
-		harvestTarget = (harvestTarget + 1) % players.size();
-		target_player = players.at(harvestTarget);
-		target_player -> setCurrentPlayer(true);
-		
-		//om sig själv destruera fönstrett
-		if(harvestTarget == self)
-		{
-			harvestTarget = -1;
-			
-			run_command("close_window");
-			//for the lulz			
-			current_player -> setCurrentPlayer(true);
-			target_player = nullptr;
-		}
-	}
-	else if(what_command == "duel_attack")
+      target_player -> setCurrentPlayer(false);
+      harvestTarget = (harvestTarget + 1) % players.size();
+      target_player = players.at(harvestTarget);
+      target_player -> setCurrentPlayer(true);
+      
+      //om sig själv destruera fönstrett
+      if(harvestTarget == self)
 	{
-	  timer->reset(5, "end_turn");
-		static bool targetAttacking = true;
-		int hasAttack = -1;
-		std::vector<GameCard*> hand;
-		//kollar om han har en attack
-		if(targetAttacking)
-			hand = target_player -> getHand();
-		else
-			hand = current_player -> getHand();
-			
-		for(int i = 0; i < hand.size(); ++i)
-			if(hand.at(i) -> getAbility() == "attack")
-				hasAttack = i;
-				
-		if(hasAttack != -1)
-			if(targetAttacking)
-				discard_pile -> pushBottom(target_player -> playCard(hasAttack));
-			else
-				discard_pile -> pushBottom(current_player -> playCard(hasAttack));
-		else
-		{
-			current_player -> setCurrentPlayer(true);
-			target_player -> setCurrentPlayer(false);
-			if(targetAttacking)
-				target_player -> modifyLife(-1);
-			else
-				current_player -> modifyLife(-1);
-				
-			targetAttacking = true;
-			//clean up
-			run_command("close_window");
-			return;
-		}
-		targetAttacking = !targetAttacking;
-
-		target_player -> setCurrentPlayer(targetAttacking);
-		current_player -> setCurrentPlayer(!targetAttacking);
+	  harvestTarget = -1;
+	  
+	  run_command("close_window");
+	  //for the lulz			
+	  current_player -> setCurrentPlayer(true);
+	  target_player = nullptr;
 	}
-	else if(what_command == "duress_attack")
-	{
-		if(target_player != nullptr)
-		{
-			current_player -> setCurrentPlayer(false);
-			source_player -> setCurrentPlayer(true);
-			
-			//ta bort duress_attack knappen
-			delete all_objects.back();
-			all_objects.pop_back();
-			//skapa ett fönster med val
-			Window* duressWindow = new Window(160,250,500,250);
-			duressWindow -> makeTextbox(40,40,420,30);
-			duressWindow -> setText(0,"Attack " + current_player -> getHeroName()  + " or lose your weapon to " + current_player -> getHeroName());
-			
-			duressWindow -> makeButton("Attack",37,170,"duress_attack_respons");
-			duressWindow -> makeButton("Give weapon",260,170,"give_weapon");
-			has_window = true;
-			add_window(duressWindow);
-		}
-	}
-	else if(what_command == "give_weapon")
-	{
-		//döda inte :( 
-		if(current_player -> equipment.weapon != nullptr)
-			discard_pile -> pushBottom(current_player -> loseEquipment(2));
-		std::swap(current_player -> equipment.weapon,source_player -> equipment.weapon);
-		
-		run_command("close_window");
-		source_player = nullptr;
-		target_player = nullptr;
-	}
-	else if(what_command == "duress_attack_respons")
-	{
-		std::vector<GameCard*> hand = source_player -> getHand();
-		int index = -1;
-		for(int i = 0; i < hand.size(); ++i)
-			if(hand.at(i) -> getAbility() == "attack")
-				index = i;
-		
-		
-		if(index == -1)
-		{
-			//he was lying!
-			run_command("give_weapon");
-		}
-		else
-		{	
-			GameCard* card = source_player -> playCard(index);
-			source_player -> setCurrentPlayer(false);
-			target_player -> setCurrentPlayer(true);
-
-			//ta bort duress fönstrett
-			run_command("close_window");
-			
-			run_effect(card);
-		
-			discard_pile -> pushBottom(card);
-			// target_player -> setCurrentPlayer(false);
-			// current_player -> setCurrentPlayer(true);
-		}
-	}
+    }
+  else if(what_command == "duel_attack")
+    {
+      timer->reset(sett.getTimerTime(), "end_turn");
+      static bool targetAttacking = true;
+      int hasAttack = -1;
+      std::vector<GameCard*> hand;
+      //kollar om han har en attack
+      if(targetAttacking)
+	hand = target_player -> getHand();
+      else
+	hand = current_player -> getHand();
+      
+      for(int i = 0; i < hand.size(); ++i)
+	if(hand.at(i) -> getAbility() == "attack")
+	  hasAttack = i;
+      
+      if(hasAttack != -1)
+	if(targetAttacking)
+	  discard_pile -> pushBottom(target_player -> playCard(hasAttack));
 	else
+	  discard_pile -> pushBottom(current_player -> playCard(hasAttack));
+      else
 	{
-			std::cout << "Command: \"" + what_command + "\" is not found in command list" << std::endl;
+	  current_player -> setCurrentPlayer(true);
+	  target_player -> setCurrentPlayer(false);
+	  if(targetAttacking)
+	    target_player -> modifyLife(-1);
+	  else
+	    current_player -> modifyLife(-1);
+	  
+	  targetAttacking = true;
+	  //clean up
+	  run_command("close_window");
+	  return;
 	}
-	return;
+      targetAttacking = !targetAttacking;
+      
+      target_player -> setCurrentPlayer(targetAttacking);
+      current_player -> setCurrentPlayer(!targetAttacking);
+    }
+  else if(what_command == "duress_attack")
+    {
+      if(target_player != nullptr)
+	{
+	  current_player -> setCurrentPlayer(false);
+	  source_player -> setCurrentPlayer(true);
+	  
+	  //ta bort duress_attack knappen
+	  delete all_objects.back();
+	  all_objects.pop_back();
+	  //skapa ett fönster med val
+	  Window* duressWindow = new Window(160,250,500,250);
+	  duressWindow -> makeTextbox(40,40,420,30);
+	  duressWindow -> setText(0,"Attack " + current_player -> getHeroName()  + " or lose your weapon to " + current_player -> getHeroName());
+	  
+	  duressWindow -> makeButton("Attack",37,170,"duress_attack_respons");
+	  duressWindow -> makeButton("Give weapon",260,170,"give_weapon");
+	  has_window = true;
+	  add_window(duressWindow);
+	}
+    }
+  else if(what_command == "give_weapon")
+    {
+      //döda inte :( 
+      if(current_player -> equipment.weapon != nullptr)
+	discard_pile -> pushBottom(current_player -> loseEquipment(2));
+      std::swap(current_player -> equipment.weapon,source_player -> equipment.weapon);
+      
+      run_command("close_window");
+      source_player = nullptr;
+      target_player = nullptr;
+    }
+  else if(what_command == "duress_attack_respons")
+    {
+      std::vector<GameCard*> hand = source_player -> getHand();
+      int index = -1;
+      for(int i = 0; i < hand.size(); ++i)
+	if(hand.at(i) -> getAbility() == "attack")
+	  index = i;
+      
+      
+      if(index == -1)
+	{
+	  //he was lying!
+	  run_command("give_weapon");
+	}
+      else
+	{	
+	  GameCard* card = source_player -> playCard(index);
+	  source_player -> setCurrentPlayer(false);
+	  target_player -> setCurrentPlayer(true);
+	  
+	  //ta bort duress fönstrett
+	  run_command("close_window");
+	  
+	  run_effect(card);
+	  
+	  discard_pile -> pushBottom(card);
+	  // target_player -> setCurrentPlayer(false);
+	  // current_player -> setCurrentPlayer(true);
+	}
+    }
+  else
+    {
+      std::cout << "Command: \"" + what_command + "\" is not found in command list" << std::endl;
+    }
+  return;
 }
 

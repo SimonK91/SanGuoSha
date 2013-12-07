@@ -7,18 +7,20 @@ namespace Object
   {
     checked = check;
     command = com;
-    
+
+    box_sheet = loadImage("Images/Gui/checkbox.png", true); //fixa bilden
     box.x = x;
     box.y = y;
-    box.h = 98;
-    box.w = 100; 
-    box_sheet = loadImage("Images/Gui/checkbox.png", true); //fixa bilden
+    box.h = box_sheet.getImage()->h / 2;
+    std::cerr << "bildens bredd anges som: " << box_sheet.getImage()->w << std::endl;
+    box.w = box_sheet.getImage()->w; 
+  
     
     SDL_Rect temp_clip;
     temp_clip.x = 0;
     temp_clip.y = 0;
     temp_clip.h = box.h;
-    temp_clip.w = box.h;
+    temp_clip.w = box.w;
     
     clip.push_back(temp_clip);		
     temp_clip.y +=  box.h;
@@ -36,7 +38,7 @@ namespace Object
   std::string Checkbox::handleEvent(const SDL_Event& event)
   {
     static bool changed = false;
-    
+    std::string bool_checker = "";
     if(event.type == SDL_MOUSEBUTTONDOWN)
       {      
 	int pointer_x = event.motion.x;
@@ -47,7 +49,15 @@ namespace Object
 	  {
 	    checked = ! checked;
 	    changed = ! changed;
-	    return command;
+	    if(checked == true)
+	      {
+		bool_checker = "true";
+	      }
+	    else
+	      {
+		bool_checker = "false";
+	      }
+	return command + bool_checker;
 	  }
       }
     else if(event.type == SDL_MOUSEBUTTONUP)
