@@ -1,0 +1,14 @@
+skapa skreen
+Initialize is okay!
+screen skapad
+mainMenu skapas
+bakgrundsbilden laddas
+en button skapas
+mainMenu startas
+argument 0: D:\Programming\GitHub\SanGuoSha\SanGuoSha.exe
+make textbbox
+settext
+makeslider
+add windows
+Write settings okay!
+exit OK!

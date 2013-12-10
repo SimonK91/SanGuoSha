@@ -10,6 +10,11 @@
 #include <vector>
 #include <stdexcept>
 
+	 #define TTF_STYLE_NORMAL    0x00
+    #define TTF_STYLE_BOLD      0x01
+    #define TTF_STYLE_ITALIC    0x02
+    #define TTF_STYLE_UNDERLINE 0x04
+    #define TTF_STYLE_STRIKETHROUGH 0x08
 //using namespace std;
 
 class SGS_error : public std::runtime_error

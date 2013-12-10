@@ -6,6 +6,8 @@ using namespace Object;
 
 void Game::setupHotseat()
 {
+  run_command("set_settings");
+
 	run_next = true;
 	std::vector<int> role{0,2,3,1,3,3,1,3,1,2};
 	int emperor = -1;
@@ -134,6 +136,8 @@ void Game::setupHotseat()
 		else if(step == 8)
 		{
 			card_deck->shuffle();
+			std::cerr << "card_deck shuffles" << std::endl;
+			std::cerr << card_deck->size() << std::endl;
 			for(auto p : players)
 			{
 				p->recieveCard(dynamic_cast<GameCard*>(card_deck->drawCard()));
@@ -141,6 +145,7 @@ void Game::setupHotseat()
 				p->recieveCard(dynamic_cast<GameCard*>(card_deck->drawCard()));
 				p->recieveCard(dynamic_cast<GameCard*>(card_deck->drawCard()));
 			}
+			std::cerr << "Kort givna!" << std::endl;
 			step = 9;
 		}
 
@@ -148,12 +153,14 @@ void Game::setupHotseat()
 	//start the game
 		else if(step == 9)
 		{
+		  std::cerr << "Setup Färdig!" << std::endl;
 			return;
 		}
 
 	//skriver ut UI:t
 		UI();
 	}
+
 }
 
 
@@ -336,6 +343,7 @@ void Game::setup()
 
 void Game::runHotseat()
 {
+  std::cout << "Game startas!!" << std::endl;
 	game_stage = 1;
 	// card_deck -> shuffle();
 	
@@ -400,6 +408,7 @@ void Game::runHotseat()
 	//change of player
 		if(state == -1)
 		{
+		  std::cerr << "state = -1" << std::endl;
 			players.at(self) -> setCurrentPlayer(true);
 			current_player = players.at(self);
 			for(auto p : players)
@@ -421,6 +430,7 @@ void Game::runHotseat()
 	//go past OK screen
 		if(state == 0)
 		{
+		  std::cerr << "state = 0" << std::endl;
 			//happens through button click
 		}
 		
@@ -438,8 +448,9 @@ void Game::runHotseat()
 		else if(state == 1)
 		{
 		  //timer
-		   timer->start(35);
+		  timer->start(sett.getTimerTime());
 		   timer->setCommand("end_turn");
+		   m.playSoundEffect(8);
 		  state = 2;
 		}
 	//phase 2
@@ -514,6 +525,11 @@ void Game::runHotseat()
 			target_player = nullptr;
 			
 		}
+		//steal / dismantle phase
+		else if(state == 7)
+		  {
+		    
+		  }
 		//	std::cout << "state:" << state << std::endl;
 		// if(i == 1)
 		// {
@@ -601,87 +617,91 @@ void Game::UI()
 		if(state == 5)
 		  run_command(discard_button.handleEvent(event));
 		
-		//kolla om någon av knapparna trycks!
-		std::string button_command = play_button.handleEvent(event);
-		if(button_command != "")
+
+		if(game_stage == 1)
 		  {
-		    if(rulePlayCardOK())
-		      run_command(button_command);
-		  }
-		else
-		  {
-		    button_command = end_button.handleEvent(event);
+		    //kolla om någon av knapparna trycks!
+		    std::string button_command = play_button.handleEvent(event);
 		    if(button_command != "")
 		      {
-			SDL_Event temp_event = event;
-			temp_event.motion.x = -100;
-			temp_event.motion.y = -100;
-			current_player -> handleHand(temp_event);
-			run_command(button_command);
+			if(rulePlayCardOK())
+			  run_command(button_command);
 		      }
-		  }
-		
-		if(event.type != SDL_MOUSEBUTTONUP)
-		  {
-		    for(Player* p : players)
+		    else
 		      {
-			p->handleEvent(event);
+			button_command = end_button.handleEvent(event);
+			if(button_command != "")
+			  {
+			    SDL_Event temp_event = event;
+			    temp_event.motion.x = -100;
+			    temp_event.motion.y = -100;
+			    current_player -> handleHand(temp_event);
+			    run_command(button_command);
+			  }
 		      }
-		  }
-
+		    
+		    if(event.type != SDL_MOUSEBUTTONUP)
+		      {
+			for(Player* p : players)
+			  {
+			    p->handleEvent(event);
+			    p->handleToolTip(event);
+			  }
+		      }
+		  
 		//kolla spelare och nuvarande handen
-		if(event.type == SDL_MOUSEBUTTONUP && !has_window && game_stage == 1)
-		{
+		    if(event.type == SDL_MOUSEBUTTONUP && !has_window && game_stage == 1)
+		      {
 			//om inte en knapp trycktes in, gör detta!
 			if(button_command == "")
-			{
-				bool player_pressed = false;
-			
-				//fixa med players o deras event!
-				
+			  {
+			    bool player_pressed = false;
+			    
+			    //fixa med players o deras event!
+			    
+			    for(Player* p : players)
+			      {
+				if(target_player == nullptr && p -> handleEvent(event))
+				  {
+				    if(ruleTargetOK(p))
+				      {
+					target_player = p;
+					p->setSelected(true);
+					player_pressed = true;
+				      }
+				    break;
+				  }
+				else if(target_player != nullptr && source_player == nullptr && target_player != p && p -> handleEvent(event))
+				  {
+				    source_player = target_player;
+				    target_player = p;
+				    p-> setSelected(true);
+				    player_pressed = true;
+				    break;
+				  }
+			      }
+			    //rensa selection
+			    if(!player_pressed)
+			      {
 				for(Player* p : players)
-				{
-					if(target_player == nullptr && p -> handleEvent(event))
-					{
-						if(ruleTargetOK(p))
-						{
-							target_player = p;
-							p->setSelected(true);
-							player_pressed = true;
-						}
-						break;
-					}
-					else if(target_player != nullptr && source_player == nullptr && target_player != p && p -> handleEvent(event))
-					{
-						source_player = target_player;
-						target_player = p;
-						p-> setSelected(true);
-						player_pressed = true;
-						break;
-					}
-				}
-				//rensa selection
-				if(!player_pressed)
-				{
-					for(Player* p : players)
-					{
-						p->setSelected(false);
-					}
-					target_player = nullptr;
-					source_player = nullptr;
-				}
-				//om varken player eller knappar är tryckta, kolla om kort i hand är tryckta
-				if(!player_pressed && button_command == "")
-				{
-					selected_card = nullptr;
-					if(current_player != nullptr)
-						selected_card = current_player -> handleHand(event);
-					std::cout << "selected card: " << std::boolalpha << (selected_card == nullptr) << std::endl;
-				}
-			}
-		}
-		
-		   // om krysset uppe till hÃ¶ger eller alt + F4 blev intryckt
+				  {
+				    p->setSelected(false);
+				  }
+				target_player = nullptr;
+				source_player = nullptr;
+			      }
+			    //om varken player eller knappar är tryckta, kolla om kort i hand är tryckta
+			    if(!player_pressed && button_command == "")
+			      {
+				selected_card = nullptr;
+				if(current_player != nullptr)
+				  selected_card = current_player -> handleHand(event);
+				std::cout << "selected card: " << std::boolalpha << (selected_card == nullptr) << std::endl;
+			      }
+			  }
+		      }
+		  }
+		// om krysset uppe till hÃ¶ger eller alt + F4 blev intryckt
 		if( event.type == SDL_QUIT || (keystates[SDLK_LALT] && event.key.keysym.sym == SDLK_F4))
 		{
 			running = false;
@@ -696,7 +716,7 @@ void Game::UI()
 	  {
 	    discard_button.paint(screen);
 	  }
-	else if(state != -1)
+	else if(state != -1 && game_stage == 1)
 	  {
 	    play_button.paint(screen);
 	    end_button.paint(screen);
@@ -707,109 +727,83 @@ void Game::UI()
 	
 }
 
-//från menyn
-/*
-game.setup();
-game.run();
-
-run()
-{
-	//fixa alla faser o grejer!
-	
-	manageEvents
-	
-	paint();
-}
-
-paint()
-{
-	//rita ut alla objekt + kort
-	
-	//eller så får den ha faser!
-}
-
-UI()
-{
-	manageEvents;
-	paint;
-}
-
-*/
 void Game::paint()
 {
 	
 	applySurface(0,0,background,screen); //skriv ut bakgrunden att ha som en bas
-
 	for(unsigned i = 0; i < all_objects.size() ; ++i)
-	{
-		all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
-	}
+	  {
+	    all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
+	  }
 	
 	if (game_stage != 0)
-	{
-	  int i = 0;
-	  
-		for(Player* p : players)
-		{	
-		
-			if(p -> isCurrentPlayer())
-			{
-				if(state != 0)
-				  {
-				    p->setPos(0,0);
-				    p -> paint(screen);
-				  }
-				
-			}
-			else
-			{
-			  if(players.size() == 5)
-			    {
-			      if(i - self == -1 || i - self == 4)
-				{
-				  p-> setPos(30,300);
-				  p -> paint(screen,30,300);    			  
-				}
-			      if(i - self == -2 || i - self == 3)
-				{
-				  p -> setPos(175,30);
-				  p -> paint(screen,175,30);
-				}
-			      if(i - self == -3 || i - self == 2)
-				{
-				  p -> setPos(460,30);
-				  p -> paint(screen,460,30);
-				}
-			      if(i - self == -4 || i - self == 1)
-				{
-				  p -> setPos(605,300);
-				  p -> paint(screen,605,300);
-				}
-			    }
-			}
-			++i;
-		}
-	}
+	  {
+	    int i = 0;
+	    
+	    for(Player* p : players)
+	      {	
+		if(p -> isCurrentPlayer())
+		  {
+		    if(state != 0)
+		      {
+			p->setPos(0,0);
+			p -> paint(screen);
+		      }
+
+		  }
+		else
+		  {
+		    if(players.size() == 5 && state != 7)
+		      {
+			if(i - self == -1 || i - self == 4)
+			  {
+			    p-> setPos(30,300);
+			    p -> paint(screen,30,300);    			  
+			  }
+			if(i - self == -2 || i - self == 3)
+			  {
+			    p -> setPos(175,30);
+			    p -> paint(screen,175,30);
+			  }
+			if(i - self == -3 || i - self == 2)
+			  {
+			    p -> setPos(460,30);
+			    p -> paint(screen,460,30);
+			  }
+			if(i - self == -4 || i - self == 1)
+			  {
+			    p -> setPos(605,300);
+			    p -> paint(screen,605,300);
+			  }
+		      }
+		    else if(players.size() == 5 && state == 7)
+		      {
+			target_player -> setPos(30,200);
+			target_player ->paint(screen,30,200);
+		      }
+		  }
+		++i;
+	      }
+	  }
 	else
-	{
-	  for(Player* p : players)
-	    {
-	      if(p -> getRole() == 0)
-		p -> paint(screen,824,257);
-	    }
-	}
+	  {
+	    for(Player* p : players)
+	      {
+		if(p -> getRole() == 0)
+		  p -> paint(screen,824,257);
+	      }
+	  }
+
 	if(timer->checkStarted() == true)
 	  {
 	    timer->paint(screen);
 	  }
-	//uppdatera hero positions
-	/*for(Player* p : players)
+	if(sett.getToolTips() == true)
 	  {
-	    p->setPos(2,3);//tmp värden, ska ha in riktig position
-	    }*/
-	for(Player* pp : players)
-	  {
-	    pp->showToolTip(screen);
+	    for(Player* pp : players)
+	      {
+		pp->showToolTip(screen);
+	      }
 	  }
 }
 

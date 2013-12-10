@@ -3,12 +3,16 @@
 //#include <string>
 #include <stdexcept>
 #include "SGS.h"
+#include "SDL/SDL_thread.h"
 
 using namespace std;
 
+
 int main(int argc, char* argv[])
 {
-	// Variabler i starten
+  //thread = SDL_CreateThread(loading_thread, NULL);
+
+  // Variabler i starten
 	const int SCREEN_WIDTH  = 1024;
 	const int SCREEN_HEIGHT = 768;
 	const int SCREEN_BPP    = 32;
@@ -25,9 +29,9 @@ int main(int argc, char* argv[])
 	cout << "bakgrundsbilden laddas" << endl;
 	mainMenu.load_background("Images/Gui/background.png");
 	cout << "en button skapas" << endl;
-	mainMenu.make_button("New Game",300,100,"make_new_game");
-	mainMenu.make_button("Options", 300,200,"options");
-	mainMenu.make_button("Exit", 300,400,"exit"); 
+	mainMenu.make_button("New Game",400,100,"make_new_game");
+	mainMenu.make_button("Options", 400,200,"options");
+	mainMenu.make_button("Exit", 400,400,"exit"); 
 	cout << "mainMenu startas" << endl;
 	
 	for(int i = 0; i < argc ; ++i)
@@ -55,6 +59,7 @@ int main(int argc, char* argv[])
 	}
 	
 	//avslut, ta bort alla surfaces som skapas (enbart screen just nu) och avsluta TTF, SDL och musiken
+	//SDL_KillThread(thread);
 	Mix_CloseAudio();
 	TTF_Quit();
 	SDL_Quit();

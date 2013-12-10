@@ -3,7 +3,7 @@
 
 #include "FrameRateFixer.h"
 #include "music.h"
-#include "functions.h"
+#include "Functions.h"
 #include "Button.h"
 #include "Slider.h"
 #include "Textbox.h"
@@ -12,133 +12,152 @@
 #include "CardList.h"
 #include "Timer.h"
 #include "Player.h"
-
 #include <vector>
+#include "Settings.h"
+#include "SDL/SDL_thread.h"
 
 class SGS
 {
 protected:
-//basvariabler som behövs för att SGS ska fungera
-	Surface background;
-	SDL_Event event;
-	Surface screen;
-	//object::pointer_arrow arrow;
-	std::vector<Object::Object*> all_objects;
-	
-	virtual bool exit() = 0;
-//variabler som finns för alla commands och liknande
-	Music m;
-	FrameRateFixer fps;
-	bool running = true;
-	bool has_window = false;
-	bool fullscreen = false;
-	std::vector<std::pair<std::string, std::string>> settings;
-	
+  Surface background;
+  SDL_Event event;
+  Surface screen;
+  std::vector<Object::Object*> all_objects;
+  
+  virtual bool exit() = 0;
+  Music m;
+  FrameRateFixer fps;
+  bool running = true;
+  bool has_window = false;
+  bool fullscreen = false;
+  std::vector<std::pair<std::string, std::string>> settings;
+  Settings sett;
+  
 public:
-	//konstruktorer, destruktorer och operatorer
-	SGS(Surface scr) : screen(scr),m("Music/Menu.wav"), fps(30){}
-	~SGS();
-	//borttagna
-	SGS() = delete;           //defaultkonstruktor
-	SGS(const SGS&) = delete; //kopieringskonstruktor
-	SGS(SGS&&) = delete;      //movekonstruktor
-	SGS& operator=(const SGS&) = delete;
-	SGS& operator=(SGS&&) = delete;
-	
-	//funktion för att köra programmet.
-	virtual void run() = 0;
-	
-	//funktion med alla kommandon som finns
-	virtual void run_command(const std::string& what_command) = 0; //finns skapad i "game_state_commands.cpp"
-	
-	//publika funktioner för att ladda background och skapa objekt i gamestatet
-	void load_background(const std::string& bg){background = loadImage(bg);}
-	bool make_button(const std::string& name, const int& x_pos, const int& y_pos, const std::string& command,
-					 const std::string& image = "Images/Gui/cleanButton2.png", const unsigned& size = 20);
-	bool make_slider(const int& x_pos, const int& y_pos, const std::string& command);
-	bool add_window(Object::Window* your_window);
-	bool make_checkbox(int x, int y, const std:: string& command, bool checked = false);
-	bool make_textbox(const int& x, const int& y, const int& w, const int& h,
-					  const unsigned& size = 13, const std::string& font = "Fonts/LHANDW.TTF");
-					  void set_text(const int& where, const std::string& what_text);
+  SGS(Surface scr) : screen(scr),m("Music/Menu.wav"), fps(30){
+
+    m.loadMusic("Music/Menu.wav");
+    m.loadSoundEffect("Music/shield-equip.wav");
+    m.loadSoundEffect("Music/weapon-equip.wav");
+    m.loadSoundEffect("Music/horse-equip.wav");
+    m.loadSoundEffect("Music/dismantle.wav");
+    m.loadSoundEffect("Music/steal.wav");
+    m.loadSoundEffect("Music/barbarians.wav");
+    m.loadSoundEffect("Music/arrows.wav");
+    m.loadSoundEffect("Music/dodge.wav");
+    m.loadSoundEffect("Music/draw2-cards.wav");
+    m.loadSoundEffect("Music/hero-pick.wav");
+  }
+  ~SGS(); //ta bort ljud effecter
+  
+  //borttagna
+  SGS() = delete;
+  SGS(const SGS&) = delete;
+  SGS(SGS&&) = delete;      
+  SGS& operator=(const SGS&) = delete;
+  SGS& operator=(SGS&&) = delete;
+  
+  virtual void run() = 0;
+  virtual void run_command(const std::string& what_command) = 0; //finns skapad i "game_state_commands.cpp"
+  
+  void load_background(const std::string& bg){background = loadImage(bg);}
+  bool make_button(const std::string& name, const int& x_pos, const int& y_pos, const std::string& command,
+		   const std::string& image = "Images/Gui/cleanButton2.png", const unsigned& size = 20);
+  bool make_slider(const int& x_pos, const int& y_pos, const std::string& command);
+  bool add_window(Object::Window* your_window);
+  bool make_checkbox(int x, int y, const std:: string& command, bool checked = false);
+  bool make_textbox(const int& x, const int& y, const int& w, const int& h,
+		    const unsigned& size = 13, const std::string& font = "Fonts/LHANDW.TTF");
+  void set_text(const int& where, const std::string& what_text);
 };
 
 
 class Menu : public SGS
 {
 private:
-	void run_command(const std::string& what_command);
-	void paint();
-	bool exit();
-		
+  void run_command(const std::string& what_command);
+  void paint();
+  bool exit();
+  
 public:
-	void run();
-	~Menu() = default;
-	Menu(Surface scr) : SGS(scr){
-	  m.loadMusic("Music/Menu.wav");
-	}
+  Menu(Surface scr) : SGS(scr)
+  {
+  }
+  ~Menu() = default;
+  
+  void run();
 };
 
 class Game : public SGS
 {
 private:
+  unsigned self;
+  int state;
+  bool run_next;
+  
+  int game_stage;
+  
+  Player* target_player;
+  Player* current_player;
+  Player* source_player;
+  Object::GameCard* selected_card;
+  
+  bool ruleTargetOK(Player*);
+  bool rulePlayCardOK();
+  
+  int getDistance(Player* source, Player* target);
+  Object::CardList* card_deck;
+  Object::CardList* discard_pile;
+  Object::CardList* hero_deck;
+  std::vector<Player*> players;
+  Timer* timer;
+  
+  void paint();
+  void run_command(const std::string& what_command);
+  Object::GameCard* run_effect(Object::GameCard* gc);
+  bool loadup(){return true;}
+  void UI();
 
-	unsigned self;
-	int state;
-	bool run_next;
-	
-	int game_stage;
-	
-	Player* target_player;
-	Player* current_player;
-	Player* source_player;
-	Object::GameCard* selected_card;
-	
-	bool ruleTargetOK(Player*);
-	bool rulePlayCardOK();
-	
-	int getDistance(Player* source, Player* target);
-	Object::CardList* card_deck;
-	Object::CardList* discard_pile;
-	Object::CardList* hero_deck;
-	std::vector<Player*> players;
-	Timer* timer;
-	//map<std::string,SDL_Surface*> card_images;
-	
-	void paint();
-	void run_command(const std::string& what_command);
-	Object::GameCard* run_effect(Object::GameCard* gc);
-	bool loadup(){return true;} //dne är skriven här
-	void UI();
-public:
-	~Game() = default;
-	Game() = default;
-	
-	Game(Surface scr) : SGS(scr), game_stage(0), target_player(nullptr), current_player(nullptr), source_player(nullptr), selected_card(nullptr)
-	{
-		self = 0; //ska komma utifrån!!
-		card_deck = new Object::CardList("standard_playing_cards");
-		discard_pile = new Object::CardList("empty");
-		hero_deck = new Object::CardList("hero_deck");
-		m.loadMusic("Music/Menu.wav");
-		Player* p1;
-		for(unsigned i = 0 ; i < 5 ; ++i)
-		{
-			p1 = new Player("Miiza"+I2S(i));
-			p1->setStatus(1);
-			players.push_back(p1);
-		}
-		state = 1;
-		timer = new Timer(5,500,5,"end_turn");
-	}
-	
-	bool runNext(){return run_next;}
-	void run(){}
-	void runHotseat();
-	void setup();
-	void setupHotseat();
-	void end();
-	bool exit();
+ public:
+  ~Game() = default;
+  Game() = default;
+ 
+ Game(Surface scr, Settings settings) : SGS(scr), game_stage(0), target_player(nullptr), current_player(nullptr), source_player(nullptr), selected_card(nullptr)
+  {
+	std::cerr << "Game-objekt skapas\n";
+    sett = settings;
+    self = 0; //ska komma utifrån!!
+	std::cerr << "card_deck-objekt skapas\n";
+    card_deck = new Object::CardList("standard_playing_cards");
+	std::cerr << "discard_pile-objekt skapas\n";
+    discard_pile = new Object::CardList("empty");
+	std::cerr << "hero_deck-objekt skapas\n";
+    hero_deck = new Object::CardList("hero_deck");
+    m.loadMusic("Music/Menu.wav");
+    Player* p1;
+	std::cout << "Player-objekt skapas\n";
+    for(unsigned i = 0 ; i < 5 ; ++i)
+      {
+	p1 = new Player("Player "+I2S(i));
+	p1->setStatus(1);
+	players.push_back(p1);
+      }
+	std::cout << "alla players skapade\n";
+    state = 1;
+	std::cout << "Timer-objekt skapas\n";
+    timer = new Timer(5,500,5,"end_turn");
+	std::cout << "Timer-objekt skapad\n";
+    
+  }
+  
+  
+  bool runNext(){return run_next;}
+  void run(){}
+  void runHotseat();
+  void setup();
+  void setupHotseat();
+  void end();
+  bool exit();
 	
 };
 

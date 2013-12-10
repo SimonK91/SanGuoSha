@@ -1,0 +1,6 @@
+Detta värde ges tool_tip: 1
+bildens bredd anges som: 61
+libpng warning: Interlace handling should be turned on when using png_read_image
+libpng warning: Interlace handling should be turned on when using png_read_image
+libpng warning: Interlace handling should be turned on when using png_read_image
+libpng warning: Interlace handling should be turned on when using png_read_image
