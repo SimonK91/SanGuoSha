@@ -10,7 +10,7 @@ void Menu::run()
 	//CardList* card_deck = new CardList("hero_deck");
 	//CardList* discard_deck = new CardList("empty");
 	//Card* card;
-	
+	//	run_command("set_settings");
 	fps.setFPS(30);
 	
 	fps.start();

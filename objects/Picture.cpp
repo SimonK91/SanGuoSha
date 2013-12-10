@@ -1,6 +1,6 @@
 #include "Picture.h"
-
 #include "../Functions.h"
+
 namespace Object
 {
   Picture::Picture(int x_pos, int y_pos, std::string image, SDL_Rect in_clip)
@@ -18,5 +18,4 @@ namespace Object
   {
     applySurface(pos.x, pos.y, image, to_where, &clip);
   }
-  
 }//namespace

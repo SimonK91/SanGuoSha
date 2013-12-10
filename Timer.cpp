@@ -7,14 +7,12 @@ Timer::Timer(int x_pos, int y_pos, int sec, std::string com)
   paused_ticks = 0;
   started = false;
   paused = false;
-  
   seconds = sec;
-  
   command = com;
-  std::cout << "laddar timer bilder" << std::endl;
+  
   bar.setImage( loadImage("Images/Gui/loading-bar.png", true) );
   frame.setImage( loadImage("Images/Gui/loading-frame.png", true) );
-  std::cout << "laddar timer bilder" << std::endl;	
+  	
   pos.x = x_pos;
   pos.y = y_pos;
 }
@@ -39,28 +37,22 @@ void Timer::stop()
 }
 
 void Timer::pause()
-{
-  
+{ 
   if( (started) && (!paused) )
     {
       paused = true;
-      
       paused_ticks = SDL_GetTicks() - start_ticks;
     }
-
 }
 
 void Timer::unPause()
 {
   if(paused)
     {
-      paused = false;
-
+      paused = false;     
       start_ticks = SDL_GetTicks() - paused_ticks;
-      
       paused_ticks = 0;
-    }
-  
+    }  
 }
 
 int Timer::getTicks()
@@ -76,8 +68,7 @@ int Timer::getTicks()
 	  return SDL_GetTicks() - start_ticks;
 	}      
     }
-  return 0;
-  
+  return 0;  
 }
 
 bool Timer::checkStarted()
@@ -96,14 +87,13 @@ void Timer::paint(Surface screen)
   bar_clip.x = 0;
   bar_clip.y = 0;
   bar_clip.h = 35;
-
+  
   int offset = bar->w / seconds;
   
   bar_clip.w = (getTicks()/1000.0) * offset ;
-
+  
   applySurface(pos.x, pos.y, bar, screen, &bar_clip);
   applySurface(pos.x, pos.y, frame, screen);
-
 }
 
 void Timer::setPos(int x_pos, int y_pos)
@@ -118,7 +108,6 @@ std::string Timer::time_ran_out()
     {
       if( (getTicks() / 1000) >= seconds )
 	{
-	  std::cout << command << " utfors " << std::endl;
 	  return command;
 	}
     }

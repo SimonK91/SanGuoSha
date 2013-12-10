@@ -62,7 +62,8 @@ int Music::getVolume(){
 }
 int Music::getEffectVolume()
 {
-	return (Mix_VolumeChunk(soundEffects.front(),-1) * 100 ) / 128;
+
+  return (Mix_VolumeChunk(soundEffects.front(),-1) * 100 ) / 128;
 }
 
 void Music::loadSoundEffect(const string& effect)
@@ -81,7 +82,6 @@ void Music::playSoundEffect(const unsigned& index)
 		std::cout << "soundEffect index: " << index << " is non existant" << std::endl
 				  << "nEffects loaded are: " << soundEffects.size() << std::endl;
 }
-
 
 
 
