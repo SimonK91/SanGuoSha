@@ -97,7 +97,7 @@ private:
   
   int game_stage;
   
-  Player* target_player;
+  std::vector<Player*> target_player;
   Player* current_player;
   Player* source_player;
   Object::GameCard* selected_card;
@@ -122,7 +122,7 @@ private:
   ~Game() = default;
   Game() = default;
  
- Game(Surface scr, Settings settings) : SGS(scr), game_stage(0), target_player(nullptr), current_player(nullptr), source_player(nullptr), selected_card(nullptr)
+ Game(Surface scr, Settings settings) : SGS(scr), game_stage(0), current_player(nullptr), selected_card(nullptr)
   {
     sett = settings;
     self = 0; //ska komma utifrån!!

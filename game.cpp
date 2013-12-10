@@ -514,7 +514,7 @@ void Game::runHotseat()
 			players.at(self) -> setCurrentPlayer(false);
 			self = (self + 1) % players.size();
 			state = -1;
-			target_player = nullptr;
+			target_player.clear();
 			
 		}
 		//steal / dismantle phase
@@ -653,24 +653,24 @@ void Game::UI()
 			    
 			    for(Player* p : players)
 			      {
-				if(target_player == nullptr && p -> handleEvent(event))
-				  {
-				    if(ruleTargetOK(p))
-				      {
-					target_player = p;
-					p->setSelected(true);
-					player_pressed = true;
-				      }
+					if(p -> handleEvent(event))
+					{
+						if(ruleTargetOK(p))
+						{
+							target_player.push_back(p);
+							p->setSelected(true);
+							player_pressed = true;
+						}
 				    break;
 				  }
-				else if(target_player != nullptr && source_player == nullptr && target_player != p && p -> handleEvent(event))
-				  {
-				    source_player = target_player;
-				    target_player = p;
-				    p-> setSelected(true);
-				    player_pressed = true;
-				    break;
-				  }
+				// else if(target_player.size() != 0 && source_player == nullptr && target_player.at(0) != p && p -> handleEvent(event))
+				  // {
+				    // source_player = target_player;
+				    // target_player = p;
+				    // p-> setSelected(true);
+				    // player_pressed = true;
+				    // break;
+				  // }
 			      }
 			    //rensa selection
 			    if(!player_pressed)
@@ -679,7 +679,8 @@ void Game::UI()
 				  {
 				    p->setSelected(false);
 				  }
-				target_player = nullptr;
+				// target_player = nullptr;
+				target_player.clear();
 				source_player = nullptr;
 			      }
 			    //om varken player eller knappar är tryckta, kolla om kort i hand är tryckta
@@ -770,8 +771,8 @@ void Game::paint()
 		      }
 		    else if(players.size() == 5 && state == 7)
 		      {
-			target_player -> setPos(30,200);
-			target_player ->paint(screen,30,200);
+				target_player.at(0) -> setPos(30,200);
+				target_player.at(0) ->paint(screen,30,200);
 		      }
 		  }
 		++i;

@@ -19,44 +19,26 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
     }
   else if(effect == "attack")	//måste fixas mera!!! sköldar + vapen o skit!
     {
-      if(target_player != nullptr)
-	{
-	  for(unsigned i = 0; i < players.size(); ++i)
-	    {
-	      if(players.at(i) == target_player)
-		{
-		  self = i;
-		}
-	    }
+
 	  timer->reset(sett.getTimerTime(),"take_damage");
 	  
-	  Window* dodgeWindow = new Window(160,250,500,250);
-	  dodgeWindow -> makeButton("Dodge",37,70,"dodge");
-	  dodgeWindow -> makeButton("Take damage",260,70, "take_damage");
-	  add_window(dodgeWindow);
-	  has_window = true;
-	  
-	  target_player -> setCurrentPlayer(true);
-	  current_player -> setCurrentPlayer(false);
-	}
-      else
-	{
-	  std::cout << "no player active... :(" << std::endl;
-	}
+		Window* dodgeWindow = new Window(160,250,500,250);
+		dodgeWindow -> makeButton("Dodge",37,70,"dodge");
+		dodgeWindow -> makeButton("Take damage",260,70, "take_damage");
+		add_window(dodgeWindow);
+		has_window = true;
+
+		target_player.at(0) -> setCurrentPlayer(true);
+		current_player -> setCurrentPlayer(false);
     }
   else if(effect == "heal")
     {
-      std::cout << "heal effect:" << std::endl;
-      std::cout << "target_player == nullptr: " << std::boolalpha << (target_player == nullptr) <<std::endl;
-      std::cout << "current_player == nullptr: " << std::boolalpha << (current_player == nullptr) <<std::endl;
-      if(target_player != nullptr  && target_player -> getLife() <= 0)
-	{
-	  target_player -> modifyLife(1);
-	}
-      else
-	{
-	  current_player -> modifyLife(1);
-	}
+		if(target_player.size() != 0 && target_player.at(0) -> getLife() <= 0)
+		{
+			target_player.at(0) -> modifyLife(1);
+		}
+		else
+			current_player -> modifyLife(1);
     }
   else if(effect == "off_horse")
     {
@@ -81,178 +63,163 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
   else if(effect == "peach_garden")
     {
       for(Player* p : players)
-	p -> modifyLife(1);
+		p -> modifyLife(1);
     }
   else if(effect == "acedia")
     {
-      if(target_player != nullptr)
-	{
-	  target_player -> addJudgementCard(gameCard);
-	  gameCard = nullptr;
-	}
-      else
-	{
-	  std::cout << "ingen vald spelare att spela acedia på :( "<< std::endl;
-	}
+		target_player.at(0) -> addJudgementCard(gameCard);
+		gameCard = nullptr;
     }
   else if(effect == "lightning")
     {
-      if(target_player != nullptr)
-	{
-	  target_player -> addJudgementCard(gameCard);
-	  gameCard = nullptr;
+   		target_player.at(0) -> addJudgementCard(gameCard);
+		gameCard = nullptr;
 	}
-      else
-	std::cout << "ingen vald spelare att spela lightning på :( "<< std::endl;
-    }
   else if(effect == "steal")
     {
      
-      if(target_player != nullptr)
-	{
 	  timer->reset(sett.getTimerTime(),"steal_time_out");
 	  state = 7;
-	  Window* stealWindow = new Window(200,150,600,350);
-	  HeroCard* dummy = new HeroCard("back.png", "42 gray 0 dummy");	  
-	  std::vector<GameCard*> targetHand = target_player -> getHand();
-	  
-	  for(unsigned i = 0; i < targetHand.size(); ++i)
-	    {
-	      stealWindow -> addCard(new HeroCard("back.png", "42 gray 0 dummy"),100 * i, 20);
-	    }
-	  //add equipment
-	  if(target_player -> equipment.weapon != nullptr)
-	    {
-	      stealWindow -> addCard(target_player -> equipment.weapon,0, 240);
-	    }
-	  if(target_player -> equipment.shield != nullptr)
-	    {
-	      stealWindow -> addCard(target_player -> equipment.shield, 100, 240);
-	    }
-	  if(target_player -> equipment.off_horse != nullptr)
-	    {
-	      stealWindow -> addCard(target_player -> equipment.off_horse, 200, 240);
-	    }
-	  if(target_player -> equipment.def_horse != nullptr)
-	    {
-	      stealWindow -> addCard(target_player -> equipment.def_horse, 300, 240);
-	    }
-	  	  
-	  stealWindow -> makeButton("Steal",170,250, "steal_card");
-	  add_window(stealWindow);
-	  has_window = true;
-	  std::cerr << "FORBI steal skapandet" << std::endl;
-	}
-      else
-	std::cout << "No steal... :(" << std::endl;
+	 
+	 	Window* stealWindow = new Window(50,150,600,350);
+
+		std::vector<GameCard*> targetHand = target_player.at(0) -> getHand();
+			
+		for(unsigned i = 0; i < targetHand.size(); ++i)
+		{
+			stealWindow -> addCard(new HeroCard("back.png", "42 gray 0 dummy"),100 * i, 20);
+		}
+		//add equipment
+		if(target_player.at(0) -> equipment.weapon != nullptr)
+			stealWindow -> addCard(target_player.at(0) -> equipment.weapon,0, 240);
+		if(target_player.at(0) -> equipment.shield != nullptr)
+			stealWindow -> addCard(target_player.at(0) -> equipment.shield, 100, 240);
+		if(target_player.at(0) -> equipment.off_horse != nullptr)
+			stealWindow -> addCard(target_player.at(0) -> equipment.off_horse, 200, 240);
+		if(target_player.at(0) -> equipment.def_horse != nullptr)
+			stealWindow -> addCard(target_player.at(0) -> equipment.def_horse, 300, 240);
+			
+			
+		stealWindow -> makeButton("Steal",170,250, "steal_card");
+		add_window(stealWindow);
+		has_window = true;
     }
   else if(effect == "dismantle")
     {
-      
-      if(target_player != nullptr)
-	{
 	  state = 7;
 	  timer->reset(sett.getTimerTime(), "dismantle_time_out");
-	  Window* dismantleWindow = new Window(200,150,600,350);
-	  HeroCard* dummy = new HeroCard("back.png", "42 gray 0 dummy");
-	  //getEquipment() måste implementeras!
-	  std::vector<GameCard*> targetHand = target_player -> getHand();
+	  
+		Window* dismantleWindow = new Window(50,150,600,350);
+		std::vector<GameCard*> targetHand = target_player.at(0) -> getHand();
+		
+		for(unsigned i = 0; i < targetHand.size(); ++i)
+		{
+			dismantleWindow -> addCard(new HeroCard("back.png", "42 gray 0 dummy"),100 * i, 20);
+		}
+		//add equipment
+		if(target_player.at(0) -> equipment.weapon != nullptr)
+			dismantleWindow -> addCard(target_player.at(0) -> equipment.weapon,0, 240);
+		if(target_player.at(0) -> equipment.shield != nullptr)
+			dismantleWindow -> addCard(target_player.at(0) -> equipment.shield, 100, 240);
+		if(target_player.at(0) -> equipment.off_horse != nullptr)
+			dismantleWindow -> addCard(target_player.at(0) -> equipment.off_horse, 200, 240);
+		if(target_player.at(0) -> equipment.def_horse != nullptr)
+			dismantleWindow -> addCard(target_player.at(0) -> equipment.def_horse, 300, 240);
 			
-	  for(unsigned i = 0; i < targetHand.size(); ++i)
-	    {
-	      dismantleWindow -> addCard(new HeroCard("back.png", "42 gray 0 dummy"),100 * i, 20);
-	    }
-	  //add equipment
-	  if(target_player -> equipment.weapon != nullptr)
-	    dismantleWindow -> addCard(target_player -> equipment.weapon,0, 240);
-	  if(target_player -> equipment.shield != nullptr)
-	    dismantleWindow -> addCard(target_player -> equipment.shield, 100, 240);
-	  if(target_player -> equipment.off_horse != nullptr)
-	    dismantleWindow -> addCard(target_player -> equipment.off_horse, 200, 240);
-	  if(target_player -> equipment.def_horse != nullptr)
-	    dismantleWindow -> addCard(target_player -> equipment.def_horse, 300, 240);
-			
-			
-	  dismantleWindow -> makeButton("dismantle",170,250, "dismantle_card");
-	  add_window(dismantleWindow);
-	  has_window = true;
+		dismantleWindow -> makeButton("dismantle",170,250, "dismantle_card");
+		add_window(dismantleWindow);
+		has_window = true;
 	}
-      else
-	std::cout << "No dismantle... :(" << std::endl;
-    }
   else if(effect == "barbarian")
     {
       m.playSoundEffect(5);
       timer->reset(sett.getTimerTime(),"barbarian_attack");
-      Window* barbarianWindow = new Window(50,350,350,200);
-      barbarianWindow -> makeTextbox(20,40,310,30);
-      barbarianWindow -> makeButton("Attack!!!",70,100,"barbarian_attack");		
-      barbarianWindow -> setText(0,"   Attack the barbarians or lose a life!");
-      add_window(barbarianWindow);
-      has_window = true;
+	  
+ 		Window* barbarianWindow = new Window(50,350,350,200);
 		
-      //current player is going to go around
-      current_player -> setCurrentPlayer(false);
-      target_player = players.at((self +1) % players.size());
-      target_player -> setCurrentPlayer(true);
+		// barbarianWindow -> addCard(gameCard,400,350);
+		barbarianWindow -> makeTextbox(20,40,310,30);
+		barbarianWindow -> makeButton("Attack!!!",70,100,"barbarian_attack");
+		barbarianWindow -> setText(0,"   Attack the barbarians or lose a life!");
+		add_window(barbarianWindow);
+		has_window = true;
+		
+		//current player is going to go around
+		current_player -> setCurrentPlayer(false);
+		target_player.clear();
+		for(int i = (self + 1) % players.size(); i != self; i = (i + 1) % players.size())
+			target_player.push_back(players.at(i));
+		
+		// target_player.at(0) = players.at((self +1) % players.size());
+		target_player.at(0) -> setCurrentPlayer(true);
     }
   else if(effect == "raining_arrows")
     {
       m.playSoundEffect(6);
       timer->reset(sett.getTimerTime(),"arrow_attack");
-      Window* arrowWindow = new Window(50,350,350,200);		
-      arrowWindow -> makeTextbox(40,40,270,30);
-      arrowWindow -> makeButton("Dodge!!!",70,100,"arrow_attack");		
-      arrowWindow -> setText(0," Dodge the arrows or lose a life!");
-      add_window(arrowWindow);
-      has_window = true;
+	  
+		Window* arrowWindow = new Window(50,350,350,200);
 		
-      //current player is going to go around
-      current_player -> setCurrentPlayer(false);
-      target_player = players.at((self +1) % players.size());
-      target_player -> setCurrentPlayer(true);
+		// barbarianWindow -> addCard(gameCard,400,350);
+		arrowWindow -> makeTextbox(40,40,270,30);
+		arrowWindow -> makeButton("Dodge!!!",70,100,"arrow_attack");
+		
+		arrowWindow -> setText(0," Dodge the arrows or lose a life!");
+
+		add_window(arrowWindow);
+		has_window = true;
+		
+		//current player is going to go around
+		current_player -> setCurrentPlayer(false);
+		for(int i = (self +1) % players.size(); i != self; i = (i +1) % players.size())
+			target_player.push_back(players.at(i));
+			
+		target_player.at(0) -> setCurrentPlayer(true);
     }
   else if(effect == "harvest")
     {
-      Window* harvestWindow = new Window(50,150,600,350);
-      for(unsigned i = 0; i < players.size(); ++i)
-	{
-	  card = dynamic_cast<GameCard*>(card_deck -> drawCard());
-	  harvestWindow -> addCard(card, i* 100, 20);
-	}
-      harvestWindow -> makeButton("take card",170,250,"pick_card");
-      add_window(harvestWindow);
-      has_window = true;
-      target_player = current_player;
+		Window* harvestWindow = new Window(50,150,600,350);
+		for(unsigned i = 0; i < players.size(); ++i)
+		{
+			card = dynamic_cast<GameCard*>(card_deck -> drawCard());
+			harvestWindow -> addCard(card, i* 100, 20);
+		}
+		harvestWindow -> makeButton("take card",170,250,"pick_card");
+		add_window(harvestWindow);
+		has_window = true;
+		
+		//fix target_players
+		target_player.clear();
+		target_player.push_back(current_player);
+		for(int i = (self +1) % players.size(); i != self; i = (i + 1) % players.size())
+			target_player.push_back(players.at(i));
+		
     }
   else if(effect == "duel")
     {
-      if(target_player != nullptr)
-	{
-	  Window* duelWindow = new Window(50,350,350,200);
-	  duelWindow -> makeTextbox(40,40,270,30);
-	  duelWindow -> setText(0,"You are dueld. Attack or lose a life!");
-	  duelWindow -> makeButton("Duel!", 70, 100, "duel_attack");
-	  add_window(duelWindow);
-	  current_player -> setCurrentPlayer(false);
-	  target_player -> setCurrentPlayer(true);
-	  has_window = true;
-	}
-      else
-	{
-	  std::cout << "sadface :( no duelist..." <<std::endl;
-	}
+		Window* duelWindow = new Window(50,350,350,200);
+		duelWindow -> makeTextbox(40,40,270,30);
+		duelWindow -> setText(0,"You are dueld. Attack or lose a life!");
+		duelWindow -> makeButton("Duel!", 70, 100, "duel_attack");
+		add_window(duelWindow);
+		current_player -> setCurrentPlayer(false);
+		target_player.at(0) -> setCurrentPlayer(true);
+		has_window = true;
     }
   else if(effect == "duress")
     {
-      if(target_player != nullptr)
-	{
-	  make_button("Attack him!",100,100,"duress_attack");
-	  source_player = target_player;
-	  target_player = nullptr;
-	}
-      else
-	std::cout << "no target for duress :( " << std::endl;
+		current_player -> setCurrentPlayer(false);
+		target_player.at(0) -> setCurrentPlayer(true);
+		
+		//skapa ett fönster med val
+		Window* duressWindow = new Window(160,250,500,250);
+		duressWindow -> makeTextbox(40,40,420,30);
+		duressWindow -> setText(0,"Attack " + target_player.at(1) -> getHeroName()  + " or lose your weapon to " + current_player -> getHeroName());
+		
+		duressWindow -> makeButton("Attack",37,170,"duress_attack_respons");
+		duressWindow -> makeButton("Give weapon",260,170,"give_weapon");
+		has_window = true;
+		add_window(duressWindow);
     }
   else
     {
