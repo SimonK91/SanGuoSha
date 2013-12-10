@@ -3,7 +3,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
   GameCard* card = nullptr;
   std::string effect = gameCard -> getAbility();
   
-  if(effect == "draw2")
+  if(effect == "draw2" && !negated())
     {
       m.playSoundEffect(8);
       for(int i = 0; i < 2; ++i)
@@ -62,8 +62,13 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
     }
   else if(effect == "peach_garden")
     {
-      for(Player* p : players)
-		p -> modifyLife(1);
+		for(Player* p : players)
+		{
+			if(p->getLife() != p->getMaxLife() && !negated())
+			{
+				p -> modifyLife(1);
+			}
+		}
     }
   else if(effect == "acedia")
     {
@@ -104,7 +109,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		add_window(stealWindow);
 		has_window = true;
     }
-  else if(effect == "dismantle")
+  else if(effect == "dismantle" && !negated())
     {
 	  state = 7;
 	  timer->reset(sett.getTimerTime(), "dismantle_time_out");
@@ -195,7 +200,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 			target_player.push_back(players.at(i));
 		
     }
-  else if(effect == "duel")
+  else if(effect == "duel" && !negated())
     {
 		Window* duelWindow = new Window(50,350,350,200);
 		duelWindow -> makeTextbox(40,40,270,30);
@@ -206,7 +211,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		target_player.at(0) -> setCurrentPlayer(true);
 		has_window = true;
     }
-  else if(effect == "duress")
+  else if(effect == "duress" && !negated())
     {
 		current_player -> setCurrentPlayer(false);
 		target_player.at(0) -> setCurrentPlayer(true);
@@ -227,4 +232,78 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
     }
   
   return gameCard;
+}
+
+bool Game::negated()
+{
+	GameCard* played_card = selected_card;
+	int i = self;
+	Player* cur_player = players.at(self);
+	Window* negate_window = new Window(250,350,400,200);
+	negate_window->makeButton("Negate",30,120,"negate_true");
+	negate_window->makeButton("Skip",280,120,"negate_false");
+	std::string command;
+	bool isNegated = false;
+	current_player->setCurrentPlayer(false);
+    GameCard* card;
+	std::vector<GameCard*> hand;
+	do
+	{
+		//add_window(negate_window);
+		has_window = true;
+		cur_player -> setCurrentPlayer(true);
+		hand = cur_player ->getHand();
+		card = nullptr;
+		while(has_window)
+		{
+			while(SDL_PollEvent( &event))
+			{
+				command = negate_window->handleEvent(event);
+				if(command == "negate_true")
+				{
+					for(unsigned i = 0; i < hand.size(); ++i)
+					{
+						if(hand.at(i) -> getAbility() == "negate")
+						{
+							card = cur_player -> playCard(i);
+							isNegated = true;
+							break;
+						}
+					}
+				
+					if(card != nullptr)
+						discard_pile -> pushBottom(card);
+					
+					has_window = false;
+					
+				}
+				else if(command == "negate_false")
+				{
+					has_window = false;
+				}
+					
+			}
+			//måla lite fint
+			paint();
+			
+			negate_window->paint(screen);
+			SDL_Flip(screen.getImage());                   // Skriv ut bilden pÃ¥ skÃ¤rmen
+			fps.regulateFPS();
+		}
+		do
+		{
+			if(++i == players.size())
+				i = 0;
+		}while(players.at(i) ->getLife() <=0);
+		cur_player -> setCurrentPlayer(false);
+		cur_player = players.at(i);
+	}
+	while(cur_player != current_player && !isNegated);
+	current_player -> setCurrentPlayer(true);
+	delete negate_window;
+	selected_card = played_card;
+	if(isNegated)
+		return !negated();
+	
+	return false;
 }

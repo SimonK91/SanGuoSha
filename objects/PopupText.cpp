@@ -71,7 +71,6 @@ namespace Object
 	if(x > box.x && x < (box.x + box.w) && y > box.y && y < (box.y + box.h))
 	  {
 	    show_text = true;
-	    std:: cout << "vi ska visa text here" << std::endl;
 	  }
 	else
 	  {
