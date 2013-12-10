@@ -610,89 +610,90 @@ void Game::UI()
 		  run_command(discard_button.handleEvent(event));
 		
 
-		
-		//kolla om någon av knapparna trycks!
-		std::string button_command = play_button.handleEvent(event);
-		if(button_command != "")
+		if(game_stage == 1)
 		  {
-		    if(rulePlayCardOK())
-		      run_command(button_command);
-		  }
-		else
-		  {
-		    button_command = end_button.handleEvent(event);
+		    //kolla om någon av knapparna trycks!
+		    std::string button_command = play_button.handleEvent(event);
 		    if(button_command != "")
 		      {
-			SDL_Event temp_event = event;
-			temp_event.motion.x = -100;
-			temp_event.motion.y = -100;
-			current_player -> handleHand(temp_event);
-			run_command(button_command);
+			if(rulePlayCardOK())
+			  run_command(button_command);
 		      }
-		  }
-		
-		if(event.type != SDL_MOUSEBUTTONUP)
-		  {
-		     for(Player* p : players)
+		    else
 		      {
-			p->handleEvent(event);
-			p->handleToolTip(event);
+			button_command = end_button.handleEvent(event);
+			if(button_command != "")
+			  {
+			    SDL_Event temp_event = event;
+			    temp_event.motion.x = -100;
+			    temp_event.motion.y = -100;
+			    current_player -> handleHand(temp_event);
+			    run_command(button_command);
+			  }
 		      }
-		  }
-
+		    
+		    if(event.type != SDL_MOUSEBUTTONUP)
+		      {
+			for(Player* p : players)
+			  {
+			    p->handleEvent(event);
+			    p->handleToolTip(event);
+			  }
+		      }
+		  
 		//kolla spelare och nuvarande handen
-		if(event.type == SDL_MOUSEBUTTONUP && !has_window && game_stage == 1)
-		{
+		    if(event.type == SDL_MOUSEBUTTONUP && !has_window && game_stage == 1)
+		      {
 			//om inte en knapp trycktes in, gör detta!
 			if(button_command == "")
-			{
-				bool player_pressed = false;
-			
-				//fixa med players o deras event!
-				
+			  {
+			    bool player_pressed = false;
+			    
+			    //fixa med players o deras event!
+			    
+			    for(Player* p : players)
+			      {
+				if(target_player == nullptr && p -> handleEvent(event))
+				  {
+				    if(ruleTargetOK(p))
+				      {
+					target_player = p;
+					p->setSelected(true);
+					player_pressed = true;
+				      }
+				    break;
+				  }
+				else if(target_player != nullptr && source_player == nullptr && target_player != p && p -> handleEvent(event))
+				  {
+				    source_player = target_player;
+				    target_player = p;
+				    p-> setSelected(true);
+				    player_pressed = true;
+				    break;
+				  }
+			      }
+			    //rensa selection
+			    if(!player_pressed)
+			      {
 				for(Player* p : players)
-				{
-					if(target_player == nullptr && p -> handleEvent(event))
-					{
-						if(ruleTargetOK(p))
-						{
-							target_player = p;
-							p->setSelected(true);
-							player_pressed = true;
-						}
-						break;
-					}
-					else if(target_player != nullptr && source_player == nullptr && target_player != p && p -> handleEvent(event))
-					{
-						source_player = target_player;
-						target_player = p;
-						p-> setSelected(true);
-						player_pressed = true;
-						break;
-					}
-				}
-				//rensa selection
-				if(!player_pressed)
-				{
-					for(Player* p : players)
-					{
-						p->setSelected(false);
-					}
-					target_player = nullptr;
-					source_player = nullptr;
-				}
-				//om varken player eller knappar är tryckta, kolla om kort i hand är tryckta
-				if(!player_pressed && button_command == "")
-				{
-					selected_card = nullptr;
-					if(current_player != nullptr)
-						selected_card = current_player -> handleHand(event);
-					std::cout << "selected card: " << std::boolalpha << (selected_card == nullptr) << std::endl;
-				}
-			}
-		}
-		
-		   // om krysset uppe till hÃ¶ger eller alt + F4 blev intryckt
+				  {
+				    p->setSelected(false);
+				  }
+				target_player = nullptr;
+				source_player = nullptr;
+			      }
+			    //om varken player eller knappar är tryckta, kolla om kort i hand är tryckta
+			    if(!player_pressed && button_command == "")
+			      {
+				selected_card = nullptr;
+				if(current_player != nullptr)
+				  selected_card = current_player -> handleHand(event);
+				std::cout << "selected card: " << std::boolalpha << (selected_card == nullptr) << std::endl;
+			      }
+			  }
+		      }
+		  }
+		// om krysset uppe till hÃ¶ger eller alt + F4 blev intryckt
 		if( event.type == SDL_QUIT || (keystates[SDLK_LALT] && event.key.keysym.sym == SDLK_F4))
 		{
 			running = false;
@@ -707,7 +708,7 @@ void Game::UI()
 	  {
 	    discard_button.paint(screen);
 	  }
-	else if(state != -1)
+	else if(state != -1 && game_stage == 1)
 	  {
 	    play_button.paint(screen);
 	    end_button.paint(screen);

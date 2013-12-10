@@ -1,7 +1,7 @@
 CCC        =g++
 CFLAGS   +=-L/sw/gcc-${GCC4_V}/lib -static-libstdc++ -std=c++11 -pedantic -Wall -Wextra
 INCLUDE  = -I./objects
-SDLFLAGS +=-lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer
+SDLFLAGS +=-lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer 
 OBJECTS = main.cpp  gameCard.o heroCard.o card.o menu.o game.o Button.o Slider.o Textbox.o Checkbox.o Functions.o Window.o music.o SGS.o cardList.o FrameRateFixer.o Timer.o PopupText.o Player.o Settings.o
 
 all: $(OBJECTS)
@@ -89,7 +89,7 @@ Timer.o: Timer.h Timer.cpp
 Settings.o: Settings.cpp Settings.h
 			@ echo Settings.o skapas
 			@$(CCC) $(CFLAGS) -c Settings.cpp $(SDLFLAGS)
-			
+
 clean:
 		@ rm -rf *.o
 

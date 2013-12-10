@@ -3,11 +3,45 @@
 //#include <string>
 #include <stdexcept>
 #include "SGS.h"
+#include "SDL/SDL_thread.h"
 
 using namespace std;
 
+bool quit = false;
+int loading_thread(void* data)
+{
+  while(quit == false)
+    {
+      //Do the caption animation 
+      SDL_WM_SetCaption( "S", NULL );
+      SDL_Delay( 250 );
+      SDL_WM_SetCaption( "Sa", NULL );
+      SDL_Delay( 250 ); 
+      SDL_WM_SetCaption( "San", NULL ); 
+      SDL_Delay( 250 );
+      SDL_WM_SetCaption( "SanG", NULL ); 
+      SDL_Delay( 250 );
+      SDL_WM_SetCaption( "SanGu", NULL ); 
+      SDL_Delay( 250 );
+      SDL_WM_SetCaption( "SanGuo", NULL ); 
+      SDL_Delay( 250 );
+      SDL_WM_SetCaption( "SanGuoS", NULL ); 
+      SDL_Delay( 250 ); 
+      SDL_WM_SetCaption( "SanGuoSh", NULL ); 
+      SDL_Delay( 250 );
+      SDL_WM_SetCaption( "SanGuoSha", NULL ); 
+      SDL_Delay( 250 );
+    }
+  
+  return 0;
+}
+SDL_Thread* thread = NULL;
+
+
 int main(int argc, char* argv[])
 {
+  thread = SDL_CreateThread(loading_thread, NULL);
+
 	// Variabler i starten
 	const int SCREEN_WIDTH  = 1024;
 	const int SCREEN_HEIGHT = 768;
@@ -55,6 +89,7 @@ int main(int argc, char* argv[])
 	}
 	
 	//avslut, ta bort alla surfaces som skapas (enbart screen just nu) och avsluta TTF, SDL och musiken
+	SDL_KillThread(thread);
 	Mix_CloseAudio();
 	TTF_Quit();
 	SDL_Quit();

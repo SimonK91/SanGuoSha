@@ -14,6 +14,7 @@
 #include "Player.h"
 #include <vector>
 #include "Settings.h"
+#include "SDL/SDL_thread.h"
 
 class SGS
 {
@@ -47,7 +48,7 @@ public:
     m.loadSoundEffect("Music/draw2-cards.wav");
     m.loadSoundEffect("Music/hero-pick.wav");
   }
-  ~SGS();
+  ~SGS(); //ta bort ljud effecter
   
   //borttagna
   SGS() = delete;
@@ -81,7 +82,6 @@ private:
 public:
   Menu(Surface scr) : SGS(scr)
   {
-   
   }
   ~Menu() = default;
   
@@ -117,10 +117,11 @@ private:
   Object::GameCard* run_effect(Object::GameCard* gc);
   bool loadup(){return true;}
   void UI();
-public:
+
+ public:
   ~Game() = default;
   Game() = default;
-  
+ 
  Game(Surface scr, Settings settings) : SGS(scr), game_stage(0), target_player(nullptr), current_player(nullptr), source_player(nullptr), selected_card(nullptr)
   {
     sett = settings;
@@ -132,15 +133,16 @@ public:
     Player* p1;
     for(unsigned i = 0 ; i < 5 ; ++i)
       {
-	p1 = new Player("Miiza"+I2S(i));
+	p1 = new Player("Player "+I2S(i));
 	p1->setStatus(1);
 	players.push_back(p1);
       }
     state = 1;
     timer = new Timer(5,500,5,"end_turn");
-   
+
     
   }
+  
   
   bool runNext(){return run_next;}
   void run(){}
