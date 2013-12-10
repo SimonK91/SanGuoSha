@@ -2,4 +2,4 @@ Fullscreen: 116
 Music_Vol: 100
 Effect_vol: 100
 Tool_tips: 1
-Timer_time: 15
+Timer_time: 20
