@@ -111,6 +111,11 @@ private:
   Object::CardList* hero_deck;
   std::vector<Player*> players;
   Timer* timer;
+  bool negated()
+  {
+	static int neg = 0;
+	return (neg++)%3 == 0;
+	}
   
   void paint();
   void run_command(const std::string& what_command);
