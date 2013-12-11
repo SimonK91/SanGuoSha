@@ -72,6 +72,7 @@ class Player
   bool current_player;
   int game_status;
   int player_nr;
+  bool alive;
   std::vector<Object::GameCard*> hand;
   Object::HeroCard* hero;
   std::stack<Object::GameCard*> judgement_cards;
@@ -102,18 +103,25 @@ class Player
   void modifyLife(int mod)
   { 
     if(current_life + mod <= max_life)
-      current_life += mod; 
+      current_life += mod;
   }
   void addJudgementCard(Object::GameCard* gc)
   {
     judgement_cards.push(gc);
   }
   Object::GameCard* getJudgementCard()
-    {
-      Object::GameCard* gc = judgement_cards.top();
-      judgement_cards.pop();
-      return gc;
-    }
+  {
+	  if(!judgement_cards.empty())
+	  {
+		  Object::GameCard* gc = judgement_cards.top();
+		  judgement_cards.pop();
+		  return gc;
+	  }
+	  return nullptr;
+  }
+  
+  bool hasAcedia();
+  bool hasLightning();
   int getLife(){ return current_life; }
   int getMaxLife(){ return max_life; }
   void setStatus(unsigned);
@@ -122,6 +130,8 @@ class Player
   bool entered();
   bool loading();
   bool left();
+  void kill(){alive = false;}
+  bool isAlive(){return alive;}
   
   Object::GameCard* handleHand(const SDL_Event& event);
   bool handleEvent(const SDL_Event& event);

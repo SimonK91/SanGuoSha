@@ -10,7 +10,6 @@ namespace Object
     text_x = x_pos;
     text_y = y_pos;
     text_color = color;
-    std::cout << "innan font load" << std::endl;
     font = TTF_OpenFont(f.c_str(), font_size);
     show_text = false;
     box.x = x_pos;
@@ -134,24 +133,19 @@ namespace Object
   
   void PopupText:: setText(std::string text)
   {
-    std::cout << "start av setText " << std::endl;
     text_area.setImage(TTF_RenderText_Solid(font, text.c_str(), text_color));
-     std::cout << "text rendered " << std::endl;
      SDL_Rect text_rect;
     text_rect.x = 0;
     text_rect.y = 0;
     text_rect.w = text_area->w + 20;
     text_rect.h = text_area->h + 10;
-    std::cout << "setText steg 1: " << std::endl;
     //ramen
     Surface tmp_border;
     tmp_border.setImage( loadImage("Images/Gui/window/tb.png", true));
     applySurface(0,0, tmp_border, background, nullptr);
     frame_size = tmp_border.getImage()->h;
-    std::cout << "setText steg 2: " << std::endl;
     tmp_border.setImage(loadImage("Images/Gui/window/lb.png", true));
     applySurface(0,0, tmp_border, background, nullptr);
-    std::cout << "setText steg 3: " << std::endl;
     tmp_border.setImage(loadImage("Images/Gui/window/bb.png", true));
     applySurface(0,text_rect.h - tmp_border.getImage()->h, tmp_border, background, nullptr);
 

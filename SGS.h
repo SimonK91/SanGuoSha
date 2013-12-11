@@ -111,7 +111,13 @@ private:
   Object::CardList* hero_deck;
   std::vector<Player*> players;
   Timer* timer;
+  
   bool negated();
+  bool acedia();
+  bool lightningExplode();
+  
+  void cleanPlayer(Player*);
+  
   
   void paint();
   void run_command(const std::string& what_command);
@@ -144,7 +150,7 @@ private:
     
   }
   
-  
+  int nextPlayer(int unique = -1);
   bool runNext(){return run_next;}
   void run(){}
   void runHotseat();

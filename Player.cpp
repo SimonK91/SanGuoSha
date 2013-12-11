@@ -41,6 +41,7 @@ void Player::setHero(HeroCard* character)
   current_life = max_life;
   male = character->getMale();
   hero = character;
+  alive = true;
   hero_profile.setImage(loadImage("Images/Cards/Characters/"+character->getFileName()));
 
   if(hero->getClan() == red)
@@ -64,21 +65,32 @@ void Player::setHero(HeroCard* character)
 
 GameCard* Player::playCard(int index)
 {
-  GameCard* played_card = hand.at(index);
-  std::vector<GameCard*>::iterator it = hand.begin() + index;
-  hand.erase(it);
+
+  	GameCard* played_card = nullptr;
+	
+	if(index < hand.size())
+	{
+		played_card = hand.at(index);
+		std::vector<GameCard*>::iterator it = hand.begin() + index;
+		hand.erase(it);
   
-  fixCardPosition();
-  return played_card;
+		fixCardPosition();
+	}
+	return played_card;
 }
 
 GameCard* Player::loseCard(int index)
 {
-  GameCard* lost_card = hand.at(index);
-  std::vector<GameCard*>::iterator it = hand.begin() + index;
-  hand.erase(it);
+	GameCard* lost_card = nullptr;
+	
+	if(index < hand.size())
+	{
+		lost_card = hand.at(index);
+		std::vector<GameCard*>::iterator it = hand.begin() + index;
+		hand.erase(it);
   
-  fixCardPosition();
+		fixCardPosition();
+	}
   return lost_card;
 }
 
@@ -97,25 +109,25 @@ GameCard* Player::loseEquipment(int index)
     case 0:
       lost_equipment = equipment.def_horse;
       equipment.def_horse = nullptr;
-      equipment.def_horse_image.setImage(nullptr);
-      equipment.def_horse_image_thin.setImage(nullptr);
+      equipment.def_horse_image.clean();
+      equipment.def_horse_image_thin.clean();
       break;
     case 1:
       lost_equipment = equipment.off_horse;
-      equipment.off_horse_image.setImage(nullptr);
-      equipment.off_horse_image_thin.setImage(nullptr);
+      equipment.off_horse_image.clean();
+      equipment.off_horse_image_thin.clean();
       equipment.off_horse = nullptr;
       break;
     case 2:
       lost_equipment = equipment.weapon;
-      equipment.weapon_image.setImage(nullptr);
-      equipment.weapon_image_thin.setImage(nullptr);
+      equipment.weapon_image.clean();
+      equipment.weapon_image_thin.clean();
       equipment.weapon = nullptr;
       break;
     case 3:
       lost_equipment = equipment.shield;
-      equipment.shield_image.setImage(nullptr);
-      equipment.shield_image_thin.setImage(nullptr);
+      equipment.shield_image.clean();
+      equipment.shield_image_thin.clean();
       equipment.shield = nullptr;
       break;
     }
@@ -481,4 +493,22 @@ void Player::handleToolTip(SDL_Event& event)
     {
       g->toolEvent(event);
     }  
+}
+
+bool Player::hasAcedia()
+{
+	if(judgement_cards.size() == 0)
+		return false;
+	if(judgement_cards.top() -> getAbility() == "acedia" || judgement_cards.size() == 2)
+		return true;
+	return false;
+}
+
+bool Player::hasLightning()
+{
+	if(judgement_cards.size() == 0)
+		return false;
+	if(judgement_cards.top() -> getAbility() == "lightning" || judgement_cards.size() == 2)
+		return true;
+	return false;
 }

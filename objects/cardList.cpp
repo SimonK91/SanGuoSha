@@ -33,7 +33,7 @@ namespace Object
 	set.pop_back();
 	++i;
       }
-	  std::cout << "deleted cards: " << i << std::endl;
+	  std::cerr << "deleted cards: " << i << std::endl;
   }
   
   Card* CardList::drawCard()
@@ -224,9 +224,9 @@ namespace Object
     set.push_back(new GameCard(13,spades,"barbarian.png","barbarian 0 0")); //ability id, target type, target range
     set.push_back(new GameCard(7,clubs,"barbarian.png","barbarian 0 0")); //ability id, target type, target range
     set.push_back(new GameCard(7,spades,"barbarian.png","barbarian 0 0")); //ability id, target type, target range
-    set.push_back(new GameCard(6,hearts,"acedia.png","acedia 2 0")); //ability id, target type, target range
-    set.push_back(new GameCard(6,clubs,"acedia.png","acedia 2 0")); //ability id, target type, target range
-    set.push_back(new GameCard(6,spades,"acedia.png","acedia 2 0")); //ability id, target type, target range
+    set.push_back(new GameCard(6,hearts,"acedia.png","acedia 1 0")); //ability id, target type, target range
+    set.push_back(new GameCard(6,clubs,"acedia.png","acedia 1 0")); //ability id, target type, target range
+    set.push_back(new GameCard(6,spades,"acedia.png","acedia 1 0")); //ability id, target type, target range
     set.push_back(new GameCard(12,hearts,"dismantle.png","dismantle 1 0")); //ability id, target type, target range
     set.push_back(new GameCard(12,spades,"dismantle.png","dismantle 1 0")); //ability id, target type, target range
     set.push_back(new GameCard(3,clubs,"dismantle.png","dismantle 1 0")); //ability id, target type, target range

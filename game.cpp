@@ -219,14 +219,14 @@ void Game::setup()
 			Card* hero1 = hero_deck->drawCard(); //the three emperors
 			Card* hero2 = hero_deck->drawCard();
 			Card* hero3 = hero_deck->drawCard();
-			std::cout << "Emperor-cards drawn" << std::endl;	
+			std::cerr << "Emperor-cards drawn" << std::endl;	
 			
 			hero_deck->shuffle();
-			std::cout << "hero_deck shuffled" << std::endl;
+			std::cerr << "hero_deck shuffled" << std::endl;
 			
 			Card* hero4 = hero_deck->drawCard();
 			Card* hero5 = hero_deck->drawCard();
-			std::cout << "two more cards drawn" << std::endl;
+			std::cerr << "two more cards drawn" << std::endl;
 			
 			if(emperor == (int)self)
 			{
@@ -364,7 +364,6 @@ void Game::runHotseat()
 	// player = nullptr;
 	
 	// running = true;
-	// card_deck -> pushTop(new GameCard(11,hearts,"harvest.png","harvest 0 0")); //ability id, target type, target range
 	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
 	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
 	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
@@ -387,6 +386,8 @@ void Game::runHotseat()
 	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
 	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
 	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	card_deck -> pushTop(new GameCard(1,clubs,"lightning.png","lightning 0 0")); //ability id, target type, target range
+	card_deck -> pushTop(new GameCard(1,clubs,"lightning.png","lightning 0 0")); //ability id, target type, target range
 	
 	
 	GameCard* card = nullptr;
@@ -396,12 +397,14 @@ void Game::runHotseat()
 	nextPlayer_window -> makeButton("OK!",45,70,"next_state");
 	running = true;
 	state = -1;
+	bool isInAcedia;
 	while(running)
 	{
 	//phase -1)
 	//change of player
 		if(state == -1)
 		{
+			isInAcedia = false;
 			players.at(self) -> setCurrentPlayer(true);
 			current_player = players.at(self);
 			for(auto p : players)
@@ -452,6 +455,37 @@ void Game::runHotseat()
 	//else judge
 		else if(state == 2)
 		{
+			GameCard* judgement;
+			do
+			{
+				judgement = current_player -> getJudgementCard();
+				if(judgement != nullptr)
+				{
+					if(judgement -> getAbility() == "acedia")
+					{
+						isInAcedia = acedia();
+						discard_pile -> pushBottom(judgement);
+					}
+					else if(judgement -> getAbility() == "lightning")
+					{
+						if(lightningExplode())
+						{
+							current_player -> modifyLife(-3);
+							discard_pile -> pushBottom(judgement);
+						}
+						else
+						{
+							int newLightningTarget = self;
+							do
+							{
+								newLightningTarget = nextPlayer(newLightningTarget);
+							}while(players.at(newLightningTarget) -> hasLightning());
+							
+							players.at(newLightningTarget) -> addJudgementCard(judgement);
+						}	
+					}
+				}
+			}while(judgement != nullptr);
 			state = 3;
 		}
 	//phase 3
@@ -477,7 +511,10 @@ void Game::runHotseat()
 				/*
 				<insert hero abilitys here>
 				*/
-			state = 4;
+			if(!isInAcedia)
+				state = 4; //  action phase
+			else
+				state = 5; // discard phase
 		}
 		
 	//phase 4
@@ -512,7 +549,7 @@ void Game::runHotseat()
 		else if(state == 6)
 		{	
 			players.at(self) -> setCurrentPlayer(false);
-			self = (self + 1) % players.size();
+			self = nextPlayer();
 			state = -1;
 			target_player.clear();
 			
@@ -564,7 +601,7 @@ bool Game::exit()
 			all_objects.pop_back();
 			nObjects++;
 		}
-		std::cout << "nObjects deleted: " << nObjects << std::endl;
+		std::cerr << "nObjects deleted: " << nObjects << std::endl;
 		nObjects = 0;
 		while(!players.empty())
 		{
@@ -572,7 +609,7 @@ bool Game::exit()
 			players.pop_back();
 			nObjects++;
 		}
-		std::cout << "players deleted: " << nObjects << std::endl;
+		std::cerr << "players deleted: " << nObjects << std::endl;
 		delete card_deck;
 		delete hero_deck;
 		delete discard_pile;
@@ -581,7 +618,7 @@ bool Game::exit()
 	{
 		return false;
 	}
-	std::cout << "clean up was done!" << std::endl;
+	std::cerr << "clean up was done!" << std::endl;
 	return true;
 }
 
@@ -591,7 +628,7 @@ void Game::UI()
 	std::string command = "";
 	static Button play_button("Play", 800, 575, "play_card","Images/Gui/smallButton.png",20);
 	static Button end_button("End", 800, 630, "end_turn","Images/Gui/smallButton.png",20);
-	static Button discard_button("Disc",800, 685, "discard_card","Images/Gui/smallButton.png",20);
+	static Button discard_button("Disc",800, 575, "discard_card","Images/Gui/smallButton.png",20);
 
 	fps.start();
 	while( SDL_PollEvent( &event)) //sÃ¥ lÃ¤nge som det finns en event
@@ -618,25 +655,29 @@ void Game::UI()
 
 		if(game_stage == 1)
 		  {
+			std::string button_command;
 		    //kolla om någon av knapparna trycks!
-		    std::string button_command = play_button.handleEvent(event);
-		    if(button_command != "")
-		      {
-			if(rulePlayCardOK())
-			  run_command(button_command);
-		      }
-		    else
-		      {
-			button_command = end_button.handleEvent(event);
-			if(button_command != "")
-			  {
-			    SDL_Event temp_event = event;
-			    temp_event.motion.x = -100;
-			    temp_event.motion.y = -100;
-			    current_player -> handleHand(temp_event);
-			    run_command(button_command);
-			  }
-		      }
+			if(state == 4)
+			{
+				button_command = play_button.handleEvent(event);
+				if(button_command != "")
+				{
+					if(rulePlayCardOK())
+						run_command(button_command);
+				}
+				else
+				{
+					button_command = end_button.handleEvent(event);
+					if(button_command != "")
+					{
+						SDL_Event temp_event = event;
+						temp_event.motion.x = -100;
+						temp_event.motion.y = -100;
+						current_player -> handleHand(temp_event);
+						run_command(button_command);
+					}
+				}
+			}
 		    
 		    if(event.type != SDL_MOUSEBUTTONUP)
 		      {
@@ -695,7 +736,7 @@ void Game::UI()
 				selected_card = nullptr;
 				if(current_player != nullptr)
 				  selected_card = current_player -> handleHand(event);
-				std::cout << "selected card: " << std::boolalpha << (selected_card == nullptr) << std::endl;
+				std::cerr << "selected card: " << std::boolalpha << (selected_card == nullptr) << std::endl;
 			      }
 			  }
 		      }
@@ -715,7 +756,7 @@ void Game::UI()
 	  {
 	    discard_button.paint(screen);
 	  }
-	else if(state != -1 && game_stage == 1)
+	else if(state == 4 && game_stage == 1)
 	  {
 	    play_button.paint(screen);
 	    end_button.paint(screen);
@@ -837,6 +878,48 @@ int Game::getDistance(Player* source, Player* target)
 	}
 	return distance;
 }
+
+int Game::nextPlayer( int unique)
+{
+	int nP;
+	if(unique != -1)
+		nP = unique;
+	else
+		nP = self;
+	do
+	{
+		nP = (nP+1)%players.size();
+	}while(!(players.at(nP) -> isAlive()));
+	
+	return nP;
+}
+
+void Game::cleanPlayer(Player* what_player)
+{
+	GameCard* clean;
+	//rensar judgementkort
+	do
+	{
+		clean = what_player -> getJudgementCard();
+		if(clean != nullptr)
+			discard_pile -> pushBottom(clean);
+	}while(clean != nullptr);
+	
+	do
+	{
+		clean = what_player -> loseCard(0);
+		if(clean != nullptr)
+			discard_pile ->pushBottom(clean);
+	}while(clean != nullptr);
+	
+	for(int i = 0 ; i < 4 ; ++i)
+	{
+		clean = what_player -> loseEquipment(i);
+		if(clean != nullptr)
+			discard_pile ->pushBottom(clean);
+	}
+}
+	
 #include "game_commands.cpp"
 #include "card_commands.cpp"
 #include "rulebook.cpp"

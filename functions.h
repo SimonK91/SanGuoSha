@@ -68,6 +68,7 @@ public:
 	SDL_Surface* getImage(){return image;}
 	void setImage(Surface);//{image = tmp;}
 	void setImage(SDL_Surface*);//{image = tmp;}
+	void clean(){ if(image != nullptr) SDL_FreeSurface(image); image = nullptr;}
 	std::string getName(){return name;}
 	void setName(std::string imageName){ name = imageName; }
 };

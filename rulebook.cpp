@@ -51,6 +51,11 @@ bool Game::ruleTargetOK(Player* target)
 				return true;
 		}
 	}
+	if(selected_card -> getAbility() == "acedia")
+	{
+		if(!target -> hasAcedia())
+			return true;
+	}
 				
 	
 	
@@ -59,14 +64,14 @@ bool Game::ruleTargetOK(Player* target)
 
 bool Game::rulePlayCardOK()
 {
-	std::cout << "selected_card == nullptr: " << std::boolalpha << (selected_card == nullptr) << std::endl;
-	std::cout << "selected_card == nullptr: " << std::boolalpha << (selected_card == nullptr) << std::endl;
 	if(selected_card == nullptr)
 		return false;
 	
 	if(selected_card -> getAbility() == "peach" && current_player -> getLife() != current_player -> getMaxLife())
 		return false;
 		
+	if(selected_card -> getAbility() == "lightning" && current_player -> hasLightning())
+		return false;
 		
 	if(selected_card -> getTargetType() == 0 || selected_card -> getTargetType() == 5)
 		return true;

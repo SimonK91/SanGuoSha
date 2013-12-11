@@ -32,13 +32,11 @@ void Game::run_command(const std::string& what_command)
 	  hero = dynamic_cast<HeroCard*>(hero_window->getObject(i));
 	  if(hero!=nullptr)
 	    {
-	      std::cout << "hero " << i << std::endl;
 	      if(hero->isActive())
 		{
-		  std::cout << "HERO " << i << " active" << std::endl;
+		  std::cout << "Player: " << self << " took hero: " << hero ->getName() << std::endl;
 		  //ge dig själv hero-kortet
 		  players.at(self)->setHero(hero);
-		  std::cout << "ger kortet" << std::endl;
 				
 		  //tar bort kortet från window
 		  hero_window->remove(i);
@@ -49,14 +47,12 @@ void Game::run_command(const std::string& what_command)
 		      //om det är ett heroCard, flytta in det i hero deck
 		      if(dynamic_cast<HeroCard*>(hero_window->getObject(0)) != nullptr)
 			{
-			  std::cout << "dynamic cast success" << std::endl;
 			  hero_deck->pushBottom(dynamic_cast<HeroCard*>(hero_window->remove(0)));
 							
 			}
 		      //annars ta bort det
 		      else
 			{
-			  std::cout << "normal delete" << std::endl;
 			  delete hero_window->remove(0);
 			}
 		    }
@@ -78,12 +74,14 @@ void Game::run_command(const std::string& what_command)
 	
   else if(what_command == "end_turn")
     {
+		std::cout << "player " << self << " end his/her turn" << std::endl;
       timer->reset(sett.getTimerTime(),"time_out");	 
       state = 5;	//go to discard phase in game
     }
 
   else if(what_command == "time_out")
     {
+		std::cout << "player " << self << " timed out on discard" << std::endl;
       while(players.at(self) -> getLife() < players.at(self) -> getHandSize())
 	{
 	  GameCard* card = players.at(self) -> loseCard( players.at(self)->getHandSize()-1);
@@ -99,20 +97,19 @@ void Game::run_command(const std::string& what_command)
 	
   else if(what_command == "play_card")
     {
-      timer->reset(sett.getTimerTime(), "end_turn");
       std::vector<GameCard*> hand;
       hand = current_player -> getHand();
       for(unsigned i = 0; i < hand.size() ; ++i)
 	{
 	  if(hand.at(i) -> isActive())
 	    {
+			hand.at(i) -> setActive(false);
+			std::cout << "player " << self << " plays a card" << std::endl;
+			timer->reset(sett.getTimerTime(), "end_turn");
 	      GameCard* card = current_player -> playCard(i);
-	      std::cout << "Card played: " << card -> getAbility() << std::endl;
 	      card = run_effect(card);
 	      if(card != nullptr)
 		{
-		  std::cout << "Played card: " + card -> getAbility() + " was plased in discard pile" << std::endl;
-		  card -> setActive(false);
 		  discard_pile -> pushBottom(card);
 		}
 	      break; //safty if 2 cards is active!
@@ -130,6 +127,7 @@ void Game::run_command(const std::string& what_command)
 	    {
 	      GameCard* card = current_player -> loseCard(i);
 	      card -> setActive(false);
+			std::cout << "player " << self << " discards " << card -> getAbility() << std::endl;
 	      discard_pile -> pushBottom(card);
 	    }
 	}
@@ -152,10 +150,21 @@ void Game::run_command(const std::string& what_command)
 	}
 		
 	if(card == nullptr)
+	{
 		target_player.at(targetDodgeing) -> modifyLife(-1);
+		if(target_player.at(targetDodgeing) -> getLife() <= 0)
+		{
+			target_player.at(targetDodgeing) -> kill();
+			cleanPlayer(target_player.at(targetDodgeing));
+		}
+	
+			std::cout << " the attack is not dodged" << std::endl;
+	}
 	else
+	{
 		discard_pile -> pushBottom(card);
-		
+			std::cout << " the attack is dodged" << std::endl;
+	}	
 		target_player.at(targetDodgeing) -> setCurrentPlayer(false);
 		targetDodgeing += 1;
 		
@@ -178,7 +187,13 @@ void Game::run_command(const std::string& what_command)
     }
   else if(what_command == "take_damage")
     {
-		target_player.at(targetDodgeing) -> modifyLife(-1);
+	  
+	    target_player.at(targetDodgeing) -> modifyLife(-1);
+		if(target_player.at(targetDodgeing) -> getLife() <= 0)
+		{
+			target_player.at(targetDodgeing) -> kill();
+			cleanPlayer(target_player.at(targetDodgeing));
+		}
 		target_player.at(targetDodgeing) -> setCurrentPlayer(false);
 		
 		targetDodgeing += 1;
@@ -387,7 +402,14 @@ void Game::run_command(const std::string& what_command)
 	}
       
       if(!playedAttack)
-		target_player.at(barbarianTarget) -> modifyLife(-1);
+	  {
+	    target_player.at(barbarianTarget) -> modifyLife(-1);
+		if(target_player.at(barbarianTarget) -> getLife() <= 0)
+		{
+			target_player.at(barbarianTarget) -> kill();
+			cleanPlayer(target_player.at(barbarianTarget));
+		}
+	  }
 		  
       //nästa spelare (devil)(huehuehue)
       	target_player.at(barbarianTarget) -> setCurrentPlayer(false);
@@ -425,7 +447,14 @@ void Game::run_command(const std::string& what_command)
 	}
       
       if(!playedDodge)
-	target_player.at(arrowTarget) -> modifyLife(-1);
+	  {
+	    target_player.at(arrowTarget) -> modifyLife(-1);
+		if(target_player.at(arrowTarget) -> getLife() <= 0)
+		{
+			target_player.at(arrowTarget) -> kill();
+			cleanPlayer(target_player.at(arrowTarget));
+		}
+	  }
       
 	//nästa spelare (devil)(huehuehue)
 	target_player.at(arrowTarget) -> setCurrentPlayer(false);
@@ -522,9 +551,23 @@ void Game::run_command(const std::string& what_command)
 	  current_player -> setCurrentPlayer(true);
 	  target_player.at(0) -> setCurrentPlayer(false);
 	  if(targetAttacking)
+	  {
 	    target_player.at(0) -> modifyLife(-1);
+		if(target_player.at(0) -> getLife() <= 0)
+		{
+			target_player.at(0) -> kill();
+			cleanPlayer(target_player.at(0));
+		}
+	  }
 	  else
+	  {
 	    current_player -> modifyLife(-1);
+		if(current_player -> getLife() <= 0)
+		{
+			current_player -> kill();
+			cleanPlayer(current_player);
+		}
+	  }
 	  
 	  targetAttacking = true;
 	  //clean up
@@ -604,7 +647,8 @@ void Game::run_command(const std::string& what_command)
     }
   else
     {
-      std::cout << "Command: \"" + what_command + "\" is not found in command list" << std::endl;
+		if(what_command != "activated")
+			std::cout << "Command: \"" + what_command + "\" is not found in command list" << std::endl;
     }
   return;
 }

@@ -60,7 +60,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
       m.playSoundEffect(0);
       gameCard = current_player -> equipStuff(gameCard,2);
     }
-  else if(effect == "peach_garden" && !negated())
+  else if(effect == "peach_garden")
     {
 		for(Player* p : players)
 		{
@@ -77,7 +77,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
     }
   else if(effect == "lightning")
     {
-   		target_player.at(0) -> addJudgementCard(gameCard);
+   		current_player -> addJudgementCard(gameCard);
 		gameCard = nullptr;
 	}
   else if(effect == "steal" && !negated())
@@ -135,7 +135,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		add_window(dismantleWindow);
 		has_window = true;
 	}
-  else if(effect == "barbarian" && !negated())
+  else if(effect == "barbarian")
     {
       m.playSoundEffect(5);
       timer->reset(sett.getTimerTime(),"barbarian_attack");
@@ -158,7 +158,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		// target_player.at(0) = players.at((self +1) % players.size());
 		target_player.at(0) -> setCurrentPlayer(true);
     }
-  else if(effect == "raining_arrows" && !negated())
+  else if(effect == "raining_arrows")
     {
       m.playSoundEffect(6);
       timer->reset(sett.getTimerTime(),"arrow_attack");
@@ -181,7 +181,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 			
 		target_player.at(0) -> setCurrentPlayer(true);
     }
-  else if(effect == "harvest" && !negated())
+  else if(effect == "harvest")
     {
 		Window* harvestWindow = new Window(50,150,600,350);
 		for(unsigned i = 0; i < players.size(); ++i)
@@ -305,5 +305,90 @@ bool Game::negated()
 	if(isNegated)
 		return !negated();
 	
+	return false;
+}
+
+bool Game::acedia()
+{
+	bool occured;
+	if(!negated())
+	{
+		std::string command;
+		GameCard* judge_card = dynamic_cast<GameCard*>(card_deck -> drawCard());
+		if( judge_card -> getSuit() != hearts)
+			occured = true;
+		else
+			occured = false;
+		
+		Window* window_show_card = new Window(200,150,300,400);
+		judge_card -> setPosition(250,165);
+		window_show_card -> makeButton("OK",50,320,"close");
+		
+		has_window = true;
+		while(has_window)
+		{
+			while(SDL_PollEvent( &event))
+			{
+				command = window_show_card->handleEvent(event);
+				if(command == "close")
+				{
+					has_window = false;
+				}
+			}
+			//måla lite fint
+			paint();
+			
+			window_show_card->paint(screen);
+			judge_card -> paint(screen);
+			SDL_Flip(screen.getImage());                   // Skriv ut bilden pÃ¥ skÃ¤rmen
+			fps.regulateFPS();
+		}
+		delete window_show_card;
+		return occured;
+	}
+	return false;
+}
+
+bool Game::lightningExplode()
+{
+	bool occured;
+	if(!negated())
+	{
+		GameCard* judge_card = dynamic_cast<GameCard*>(card_deck -> drawCard());
+		Window* window_show_card = new Window(200,150,300,400);
+		window_show_card -> makeTextbox(5,5,290,70);
+		if( judge_card -> getSuit() == spades && judge_card -> getNumber() >= 2 && judge_card -> getNumber() <=9)
+		{
+			occured = true;
+			window_show_card -> setText(0,"Lightning explode, you lose 3 life");
+		}
+		else
+		{
+			occured = false;
+			window_show_card -> setText(0,"Lightning safe, card moved to the player to your right");			
+		}
+		judge_card -> setPosition(280,225);
+		window_show_card -> makeButton("OK",50,320,"close");
+		has_window = true;
+		while(has_window)
+		{
+			while(SDL_PollEvent( &event))
+			{
+				if(window_show_card->handleEvent(event) == "close")
+				{
+					has_window = false;
+				}
+			}
+			//måla lite fint
+			paint();
+			
+			window_show_card->paint(screen);
+			judge_card -> paint(screen);
+			SDL_Flip(screen.getImage());                   // Skriv ut bilden pÃ¥ skÃ¤rmen
+			fps.regulateFPS();
+		}
+		delete window_show_card;
+		return occured;
+	}
 	return false;
 }

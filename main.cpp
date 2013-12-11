@@ -51,42 +51,42 @@ int main(int argc, char* argv[])
 	{
 	// Initialize	
 	Surface screen;
-	cout << "skapa skreen" << endl;
+	cerr << "skapa skreen" << endl;
 	screen = Init(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP);
-	cout << "screen skapad" << endl;
+	cerr << "screen skapad" << endl;
 	// Start av main	
-	cout << "mainMenu skapas" << endl;
+	cerr << "mainMenu skapas" << endl;
 	Menu mainMenu(screen);  //Skapa mainMenu och länka det till skärmen
-	cout << "bakgrundsbilden laddas" << endl;
+	cerr << "bakgrundsbilden laddas" << endl;
 	mainMenu.load_background("Images/Gui/background.png");
-	cout << "en button skapas" << endl;
+	cerr << "en button skapas" << endl;
 	mainMenu.make_button("New Game",400,100,"make_new_game");
 	mainMenu.make_button("Options", 400,200,"options");
 	mainMenu.make_button("Exit", 400,400,"exit"); 
-	cout << "mainMenu startas" << endl;
+	cerr << "mainMenu startas" << endl;
 	
 	for(int i = 0; i < argc ; ++i)
 	{
-		cout << "argument " << i << ": " << argv[i] << endl;
+		cerr << "argument " << i << ": " << argv[i] << endl;
 	}
 	
 		mainMenu.run(); //startar programmet
 	}
 	catch(runtime_error re)
 	{
-		cout << re.what() << endl;
+		cerr << re.what() << endl;
 	}
 	catch(logic_error le)
 	{
-		cout << le.what() << endl;
+		cerr << le.what() << endl;
 	}
 	catch(exception e)
 	{
-		cout << e.what() << endl;
+		cerr << e.what() << endl;
 	}
 	catch(...)
 	{
-		cout << "an error occured" << endl;
+		cerr << "an error occured" << endl;
 	}
 	
 	//avslut, ta bort alla surfaces som skapas (enbart screen just nu) och avsluta TTF, SDL och musiken
@@ -95,6 +95,6 @@ int main(int argc, char* argv[])
 	TTF_Quit();
 	SDL_Quit();
 	
-	cout << "exit OK!" << endl;
+	cerr << "exit OK!" << endl;
 	return 0;
 }
