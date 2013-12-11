@@ -476,15 +476,19 @@ void Game::run_command(const std::string& what_command)
       
 	//byt spelare
 	target_player.at(harvestTarget) -> setCurrentPlayer(false);
-	harvestTarget = (harvestTarget + 1) % players.size();
+	harvestTarget += 1;
+	timer->reset(sett.getTimerTime(),"");
       
       //om sig själv destruera fönstrett
-      if(harvestWindow -> getSize() == 1)
+      if(harvestTarget == target_player.size())
 	{
 	  harvestTarget = 0;
-	  
+	  //fixa bort kort som negatats
+	  while(harvestWindow -> getSize() != 1)
+		discard_pile -> pushBottom(dynamic_cast<GameCard*>(harvestWindow -> remove(0)));
+		
 	  run_command("close_window");
-	  //for the lulz			
+		
 	  current_player -> setCurrentPlayer(true);
 	  target_player.clear();
 	}

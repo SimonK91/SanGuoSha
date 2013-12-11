@@ -35,13 +35,14 @@ int loading_thread(void* data)
   
   return 0;
 }
-SDL_Thread* thread = NULL;
 
+SDL_Thread* thread = NULL;
+// SDL_Thread* gameInit = NULL;
 
 int main(int argc, char* argv[])
 {
   thread = SDL_CreateThread(loading_thread, NULL);
-
+	// gameInit = SDL_CreateThread(initGame,NULL);
 	// Variabler i starten
 	const int SCREEN_WIDTH  = 1024;
 	const int SCREEN_HEIGHT = 768;

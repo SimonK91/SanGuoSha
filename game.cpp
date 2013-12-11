@@ -364,7 +364,7 @@ void Game::runHotseat()
 	// player = nullptr;
 	
 	// running = true;
-	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
+	// card_deck -> pushTop(new GameCard(11,hearts,"harvest.png","harvest 0 0")); //ability id, target type, target range
 	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
 	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
 	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range

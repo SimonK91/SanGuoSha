@@ -60,7 +60,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
       m.playSoundEffect(0);
       gameCard = current_player -> equipStuff(gameCard,2);
     }
-  else if(effect == "peach_garden")
+  else if(effect == "peach_garden" && !negated())
     {
 		for(Player* p : players)
 		{
@@ -80,7 +80,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
    		target_player.at(0) -> addJudgementCard(gameCard);
 		gameCard = nullptr;
 	}
-  else if(effect == "steal")
+  else if(effect == "steal" && !negated())
     {
      
 	  timer->reset(sett.getTimerTime(),"steal_time_out");
@@ -135,7 +135,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		add_window(dismantleWindow);
 		has_window = true;
 	}
-  else if(effect == "barbarian")
+  else if(effect == "barbarian" && !negated())
     {
       m.playSoundEffect(5);
       timer->reset(sett.getTimerTime(),"barbarian_attack");
@@ -158,7 +158,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		// target_player.at(0) = players.at((self +1) % players.size());
 		target_player.at(0) -> setCurrentPlayer(true);
     }
-  else if(effect == "raining_arrows")
+  else if(effect == "raining_arrows" && !negated())
     {
       m.playSoundEffect(6);
       timer->reset(sett.getTimerTime(),"arrow_attack");
@@ -181,7 +181,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 			
 		target_player.at(0) -> setCurrentPlayer(true);
     }
-  else if(effect == "harvest")
+  else if(effect == "harvest" && !negated())
     {
 		Window* harvestWindow = new Window(50,150,600,350);
 		for(unsigned i = 0; i < players.size(); ++i)
