@@ -557,16 +557,22 @@ bool Game::exit()
 	try
 	{
 	// writeSettings(settings);
+		int nObjects = 0;
 		while(!all_objects.empty())
 		{
 			delete all_objects.back();
 			all_objects.pop_back();
+			nObjects++;
 		}
+		std::cout << "nObjects deleted: " << nObjects << std::endl;
+		nObjects = 0;
 		while(!players.empty())
 		{
 			delete players.back();
 			players.pop_back();
+			nObjects++;
 		}
+		std::cout << "players deleted: " << nObjects << std::endl;
 		delete card_deck;
 		delete hero_deck;
 		delete discard_pile;
@@ -575,7 +581,7 @@ bool Game::exit()
 	{
 		return false;
 	}
-
+	std::cout << "clean up was done!" << std::endl;
 	return true;
 }
 

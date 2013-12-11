@@ -26,11 +26,14 @@ namespace Object
   
   CardList::~CardList()
   {
+	int i = 0;
     while(!set.empty())
       {
 	delete set.back();
 	set.pop_back();
+	++i;
       }
+	  std::cout << "deleted cards: " << i << std::endl;
   }
   
   Card* CardList::drawCard()

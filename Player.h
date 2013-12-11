@@ -43,6 +43,11 @@ struct Equipment
   }
   ~Equipment()
   {
+  	delete def_horse_pop;
+	delete off_horse_pop;
+	delete weapon_pop;
+	delete shield_pop;
+	
     if(weapon != nullptr)
       delete weapon;
     if(shield != nullptr)

@@ -33,6 +33,11 @@ public:
 	{
 		if(surface.name == "screen")
 			image = surface.image;
+		else if(image != nullptr)
+		{
+			SDL_FreeSurface(image);
+			image = loadImage(surface.name);
+		}
 		else
 			image = loadImage(surface.name);
 		name = surface.name;
@@ -42,12 +47,16 @@ public:
 	Surface& operator=(SDL_Surface*);
 	Surface& operator=(const Surface& surface)
 	{
+		if(image != nullptr)
+			SDL_FreeSurface(image);
 		image = loadImage(surface.name);
 		name = surface.name;
 		return *this;
 	}
 	Surface& operator=(Surface&& surface)
 	{
+		if(image != nullptr)
+			SDL_FreeSurface(image);
 		image = surface.image;
 		name = surface.name;
 		surface.image = nullptr;

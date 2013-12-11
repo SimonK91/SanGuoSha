@@ -19,7 +19,7 @@ namespace Object
     Card(std::string filename);
     std::string getName(){ return image.getName(); }	
     std::string handleEvent(const SDL_Event& event);
-    virtual ~Card() = default;
+    virtual ~Card(){ delete description; }
     void paint(Surface& to_where)
     { 
       applySurface(box.x , box.y , image, to_where);
