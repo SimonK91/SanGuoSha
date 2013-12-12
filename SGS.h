@@ -115,6 +115,8 @@ private:
   bool negated();
   bool acedia();
   bool lightningExplode();
+  bool useCard(const std::string&, const std::string&, Player*);
+  
   
   void cleanPlayer(Player*);
   

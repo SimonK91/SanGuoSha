@@ -995,6 +995,68 @@ void Game::exitCommand(SDL_Event& event)
       run_next = false;
     }
 }
+
+bool Game::useCard(const std::string& cardID, const std::string& description, Player* player)
+{
+	timer->reset(sett.getTimerTime(), "skip");
+	bool occured;
+	std::string command;
+	Window options(175,125,400,400);
+	options.makeTextbox(30,30,340,80,25);
+	options.setText(0,description);
+	options.makeButton("Use "+cardID,15,330,"use");
+	options.makeButton("Skip",215,330,"skip");
+	options.makeButton("Show hand",115,230,"show_hand");
+	has_window = true;
+	std::vector<GameCard*> hand = player->getHand();
+	GameCard* card;
+	while(has_window)
+	{
+		command = timer->time_ran_out();
+		while(SDL_PollEvent( &event))
+		{
+			exitCommand(event);
+			if(command == "")
+				command = options.handleEvent(event);
+		}
+		
+		if(command == "skip")
+		{
+			occured = false;
+			has_window = false;
+		}
+		else if(command == "use")
+		{
+			for(unsigned i = 0; i < hand.size(); ++i)
+			{
+				if(hand.at(i) -> getAbility() == cardID)
+				{
+					card = player -> playCard(i);
+					occured = true;
+					break;
+				}
+			}
+	      
+			if(card != nullptr)
+				discard_pile -> pushBottom(card);
+	      
+			has_window = false;
+	      
+	    }
+		else if(command == "show_hand")
+		{
+			
+			occured = false;
+			has_window = false;
+		}
+		paint();
+		options.paint(screen);
+		SDL_Flip(screen.getImage());
+		fps.regulateFPS();
+	}
+	
+	return occured;
+}
 	
 #include "game_commands.cpp"
 #include "card_commands.cpp"
