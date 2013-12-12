@@ -62,6 +62,7 @@ struct Equipment
 class Player
 {
  private:
+	std::string player_name;
   Surface name;
   Surface hero_frame;
   Surface hero_profile;
@@ -133,6 +134,7 @@ class Player
   bool left();
   void kill(){alive = false;}
   bool isAlive(){return alive;}
+  std::string getName(){return player_name;}
   
   Object::GameCard* handleHand(const SDL_Event& event);
   bool handleEvent(const SDL_Event& event);

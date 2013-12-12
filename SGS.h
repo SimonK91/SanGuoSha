@@ -112,7 +112,7 @@ private:
   std::vector<Player*> players;
   Timer* timer;
   
-  bool negated();
+  bool negated(const std::string& description = "no description added - negate something");
   bool acedia();
   bool lightningExplode();
   bool useCard(const std::string&, const std::string&, Player*);

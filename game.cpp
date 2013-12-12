@@ -1007,7 +1007,7 @@ bool Game::useCard(const std::string& cardID, const std::string& description, Pl
 	options.makeButton("Use "+cardID,15,330,"use");
 	options.makeButton("Skip",215,330,"skip");
 	options.makeButton("Show hand",115,230,"show_hand");
-	has_window = true;
+	bool has_window = true;
 	std::vector<GameCard*> hand = player->getHand();
 	GameCard* card;
 	while(has_window)

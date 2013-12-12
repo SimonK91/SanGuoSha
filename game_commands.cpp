@@ -113,7 +113,7 @@ void Game::run_command(const std::string& what_command)
 		{
 		  discard_pile -> pushBottom(card);
 		}
-	      break; //safty if 2 cards is active!
+	      break; //safety if 2 cards is active!
 	    }
 	}
       current_player -> setSelected(false);
