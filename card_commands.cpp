@@ -19,19 +19,19 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
     }
   else if(effect == "attack")	//måste fixas mera!!! sköldar + vapen o skit!
     {
-	
+		has_attacked = true;
 		if(!useCard("dodge", "dodge the attack or lose a life",target_player.at(0)))
-			target_player.at(0) ->modifyLife(-1);
+			modifyLife(target_player.at(0),-1);
     }
 	
   else if(effect == "heal")
     {
 		if(target_player.size() != 0 && target_player.at(0) -> getLife() <= 0)
 		{
-			target_player.at(0) -> modifyLife(1);
+			modifyLife(target_player.at(0),-1);
 		}
 		else
-			current_player -> modifyLife(1);
+			modifyLife(current_player,1);
     }
   else if(effect == "off_horse")
     {
@@ -59,7 +59,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		{
 			if(p->getLife() != p->getMaxLife() && !negated())
 			{
-				p -> modifyLife(1);
+				modifyLife(p,1);
 			}
 		}
     }
@@ -134,7 +134,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
       // timer->reset(sett.getTimerTime(),"barbarian_attack");
 	  for(int nP = nextPlayer(); nP != (int)self ; nP = nextPlayer(nP))
 			if(!useCard("attack","attack the barbarians or lose a life",players.at(nP)))
-				players.at(nP) -> modifyLife(-1);
+				modifyLife(players.at(nP),-1);
  		// Window* barbarianWindow = new Window(50,350,350,200);
 		
 		// // barbarianWindow -> addCard(gameCard,400,350);
@@ -158,7 +158,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
       m.playSoundEffect(6);
 	  for(int nP = nextPlayer(); nP != (int)self ; nP = nextPlayer(nP))
 			if(!negated("negate barbarian for " + players.at(nP) ->getName()) && !useCard("dodge","dodge the rain of arrows or lose a life",players.at(nP)))
-				players.at(nP) -> modifyLife(-1);
+				modifyLife(players.at(nP),-1);
 				
     }
   else if(effect == "harvest")
@@ -182,9 +182,9 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		}while(attacked);
 		
 		if(CP%2 == 1)
-			defender -> modifyLife(-1);
+			modifyLife(defender,-1);
 		else
-			offender -> modifyLife(-1);
+			modifyLife(offender,-1);
     }
   else if(effect == "duress" && !negated())
     {
@@ -194,7 +194,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		if(useCard("attack","attack " + duress_target-> getName() + " or give your weapon to " + current_player -> getName() + '.',duress_source))
 		{
 			if(!useCard("dodge","dodge or lose one life",duress_target))
-				duress_target -> modifyLife(-1);
+				modifyLife(duress_target,-1);
 		}
 		else
 		{
@@ -397,7 +397,7 @@ bool Game::lightningExplode()
   std::string tmp_command = timer->getCommand();
   timer->reset(sett.getTimerTime(),"close");
 	bool occured;
-	if(!negated("Do you want to negate acedia for player: " + current_player->getName()))
+	if(!negated("Do you want to negate Lightning for player: " + current_player->getName()))
 	{
 		GameCard* judge_card = dynamic_cast<GameCard*>(card_deck -> drawCard());
 		Window* window_show_card = new Window(200,150,300,400);

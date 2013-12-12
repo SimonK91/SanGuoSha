@@ -18,6 +18,8 @@ bool Game::ruleTargetOK(Player* target)
 	
 	if(selected_card -> getAbility() == "attack")
 	{
+		if(has_attacked)
+			return false;
 		if((current_player -> equipment.weapon) != nullptr && (current_player -> equipment.weapon) -> getAbility() == "weapon7" && (current_player -> getHand()).size() == 1)
 		{
 			while(target_player.size() >= 3)
@@ -25,6 +27,8 @@ bool Game::ruleTargetOK(Player* target)
 				target_player.at(0) -> setSelected(false);
 				target_player.erase(target_player.begin());
 			}
+			if(target -> getSelected())
+				return false;
 		}
 		else
 		{
@@ -110,7 +114,7 @@ bool Game::rulePlayCardOK()
 	if(selected_card == nullptr)
 		return false;
 	
-	if(selected_card -> getAbility() == "peach" && current_player -> getLife() != current_player -> getMaxLife())
+	if(selected_card -> getAbility() == "heal" && current_player -> getLife() == current_player -> getMaxLife())
 		return false;
 		
 	if(selected_card -> getAbility() == "lightning" && current_player -> hasLightning())
@@ -127,4 +131,40 @@ bool Game::rulePlayCardOK()
 		return true;
 		
 	return false;
+}
+
+int  Game::ruleWinCondition()
+{
+	int rebel = 0;
+	int loyal = 0;
+	int spy = 0;
+	int emperor = 0;
+	for(auto p : players)
+	{
+		if(p -> isAlive())
+		{
+			if( p ->getRole() == 0)
+				++emperor;
+			else if( p ->getRole() == 1)
+				++loyal;
+			else if( p ->getRole() == 2)
+				++spy;
+			else if( p ->getRole() == 3)
+				++rebel;
+		}
+	}
+	if(emperor != 0 && rebel == 0 && spy == 0)
+		return 1; // Emperor victory
+	
+	if(emperor == 0)
+	{
+		if(loyal == 0 && rebel == 0 && spy == 1)
+			return 2; //spy victory
+		else if(rebel != 0)
+			return 3; //rebel victory
+		else
+			return 4; //no victor
+	}
+	
+	return 0;
 }

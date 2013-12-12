@@ -97,6 +97,8 @@ private:
   Uint8 *keystates;
   int game_stage;
   
+  bool has_attacked;
+  
   std::vector<Player*> target_player;
   Player* current_player;
   Player* source_player;
@@ -104,6 +106,7 @@ private:
   
   bool ruleTargetOK(Player*);
   bool rulePlayCardOK();
+  int  ruleWinCondition();
   
   int getDistance(Player* source, Player* target);
   Object::CardList* card_deck;
@@ -117,6 +120,7 @@ private:
   bool acedia();
   bool lightningExplode();
   bool useCard(const std::string&, const std::string&, Player*);
+  void modifyLife(Player*, int);
   
   
   void cleanPlayer(Player*);
@@ -160,7 +164,7 @@ private:
   void runHotseat();
   void setup();
   void setupHotseat();
-  void end();
+  void end(int);
   bool exit();
 	
 };

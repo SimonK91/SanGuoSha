@@ -117,7 +117,7 @@ void Game::setupHotseat()
 				characters->addCard(hero1,15,40);
 				characters->addCard(hero2,170,40);
 				characters->addCard(hero3,335,40);
-				characters->makeButton("Choose",400,280,"pick_hero","Images/Gui/mediumButton.png");
+				characters->makeButton("Choose",300,270,"pick_hero","Images/Gui/mediumButton.png");
 				add_window(characters);
 				
 				step = 7;
@@ -404,6 +404,7 @@ void Game::runHotseat()
 	//change of player
 		if(state == -1)
 		{
+			has_attacked = false;
 			isInAcedia = false;
 			players.at(self) -> setCurrentPlayer(true);
 			current_player = players.at(self);
@@ -470,7 +471,7 @@ void Game::runHotseat()
 					{
 						if(lightningExplode())
 						{
-							current_player -> modifyLife(-3);
+							modifyLife(current_player,-1);
 							discard_pile -> pushBottom(judgement);
 						}
 						else
@@ -580,8 +581,53 @@ void Game::runHotseat()
 	delete nextPlayer_window;
 }
 
-void Game::end()
+void Game::end(int winner)
 {
+	Window winning_screen(50,50,500,500);
+	winning_screen.makeTextbox(30,30,440,300,30);
+	winning_screen.makeButton("Exit",30,430,"close");
+	
+	if(winner == 1)
+	{
+		winning_screen.setText(0,"Congratulations, the winner of this match is the emperor and loyals!");
+	}
+	else if(winner == 2)
+	{
+		winning_screen.setText(0,"The amazing Spy managed to trick everyone and has now taken the spot as a ruler of this infected kingdom.");
+	}
+	else if(winner == 3)
+	{
+		winning_screen.setText(0,"The rebels made an uproar agains the empire and managed to storm the capital. Killing the Emperor and has no ruler anymore");
+	}
+	else if(winner == 4)
+	{
+		winning_screen.setText(0,"Without an Emperor to rule the kingdom, chaos arrived. Loyals and Spies fighting eachother without any results.");
+	}
+	
+	
+	bool has_window = true;
+		while(has_window && running)
+		{
+			while(SDL_PollEvent( &event))
+			{
+			  exitCommand(event);
+				if(winning_screen.handleEvent(event) == "close")
+				{
+					has_window = false;
+					running = false;
+				}
+				
+			}
+			//måla lite fint
+			paint();
+			
+			winning_screen.paint(screen);
+			SDL_Flip(screen.getImage());                   // Skriv ut bilden pÃ¥ skÃ¤rmen
+			fps.regulateFPS();
+		}
+	
+	
+	
 //show score-table
 //keep chat open
 //make exit button
@@ -1133,6 +1179,35 @@ bool Game::useCard(const std::string& cardID, const std::string& description, Pl
 	return occured;
 }
 	
+	
+void Game::modifyLife(Player* what_player, int value)
+{
+	what_player -> modifyLife(value);
+	bool saved = true;
+	while(what_player -> getLife() <= 0 && saved)
+	{
+		saved = false;
+		int nP = self;
+		do
+		{
+			if(useCard("heal",what_player->getName()+" is dying, would you like to save him by using peach?", players.at(nP)))
+				saved = true;
+			nP = nextPlayer(nP);
+		}while(nP != self && !saved);
+	}
+	if(what_player -> getLife() <= 0)
+	{
+		what_player -> kill();
+		cleanPlayer(what_player);
+		int winner = ruleWinCondition();
+		if(winner != 0)
+		{
+			end(winner);
+		}
+		if(what_player = current_player)
+			state = 5;		
+	}
+}
 #include "game_commands.cpp"
 #include "card_commands.cpp"
 #include "rulebook.cpp"
