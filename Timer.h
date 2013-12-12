@@ -34,7 +34,7 @@ public:
   void setPos(int x_pos, int y_pos);
   void setCommand(std::string);
   void reset(int time, std::string cmd);
-  
+  std::string getCommand(){return command;}
   std::string time_ran_out();
 };
 #endif

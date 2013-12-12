@@ -18,7 +18,7 @@ namespace Object
     box.h = height;
 
     //backrundbild
-    background = loadImage("Images/Gui/windowBackground.png", true);
+    background = loadImage("Images/Gui/popupBackground.png", true);
   }
   
   

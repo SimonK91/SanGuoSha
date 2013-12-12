@@ -77,3 +77,4 @@ void SGS::set_text(const int& where, const std::string& what_text)
     }
 }
 
+

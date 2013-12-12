@@ -47,6 +47,11 @@ SDL_Surface* loadImage(const string& filename,bool transparant, const Uint8& red
 	
 	// laddar in bilden till temporÃ¤ra
 	loadedImage = IMG_Load( filename.c_str() );
+	if(loadedImage == nullptr)
+	{
+		loadedImage = IMG_Load("Images/noImage.png");
+		std::cerr << "image: \"" << filename << "\" was not found" << std::endl;
+	}
 	if(loadedImage != nullptr)
 	{
 		if(transparant)
@@ -68,7 +73,7 @@ SDL_Surface* loadImage(const string& filename,bool transparant, const Uint8& red
 	}
 	else
 	{
-		throw SGS_error("could not open file: "+filename+'.');
+		throw SGS_error("could not open file: "+filename+'.'+"wololo");
 	}
 	return optimizedImage;
 }
@@ -80,7 +85,7 @@ void applySurface(int x, int y, Surface& source, Surface& destination, SDL_Rect*
 	if(source.getImage() == nullptr)
 	{
 		// std::cout << "apply surface in if: " << counter << std::endl;
-		throw SGS_error("applySurface failed - nullpointer exception, source: "+source.getName());
+		std::cerr << "applySurface failed - nullpointer exception, source: " << source.getName() << std::endl;
 		// std::cout << "apply surface in if: " << counter << std::endl;
 	}
 	// std::cout << "apply surface: " << ++counter << std::endl;
@@ -199,4 +204,24 @@ bool writeSettings(std::vector< std::pair<std::string, std::string>> settings)
   write_to.close();
   std::cout << "Write settings okay!" << std::endl;
   return true;
+}
+
+Surface textToSurface(std::string text, std::string font, int size)
+{
+
+	Surface tmp_surface("textToSurface: "+text);
+	if(text != "")
+	{
+		SDL_Color text_color;
+		text_color.r = 0;
+		text_color.g = 0;
+		text_color.b = 0;
+	
+		TTF_Font* f = TTF_OpenFont(font.c_str(), size);
+	
+		tmp_surface = TTF_RenderText_Blended(f, text.c_str(), text_color);
+  
+		TTF_CloseFont(f);
+	}
+	return tmp_surface;
 }
