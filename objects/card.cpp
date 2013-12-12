@@ -30,7 +30,6 @@ namespace Object
   }
   std::string Card::handleEvent(const SDL_Event& event)
   {
-    SDL_Event event2 = event;
    
     //ska fixas mer så att den går att använda på något vettigt sätt :D
      if(event.type == SDL_MOUSEBUTTONUP)

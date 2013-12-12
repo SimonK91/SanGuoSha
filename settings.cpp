@@ -24,9 +24,9 @@ Settings::Settings(const string& s)
   fs >> tmp;
   
   if(tmp == "1")
-    fullscreen == true;
+    fullscreen = true;
   else
-    fullscreen == false;
+    fullscreen = false;
   
   fs >> tmp; //ta bort Music_Vol:
   fs >> i;

@@ -90,7 +90,7 @@ GameCard* Player::playCard(int index)
 
   	GameCard* played_card = nullptr;
 	
-	if(index < hand.size())
+	if(index < (int)hand.size())
 	{
 		played_card = hand.at(index);
 		std::vector<GameCard*>::iterator it = hand.begin() + index;
@@ -105,7 +105,7 @@ GameCard* Player::loseCard(int index)
 {
 	GameCard* lost_card = nullptr;
 	
-	if(index < hand.size())
+	if(index < (int)hand.size())
 	{
 		lost_card = hand.at(index);
 		std::vector<GameCard*>::iterator it = hand.begin() + index;

@@ -132,7 +132,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
     {
       m.playSoundEffect(5);
       // timer->reset(sett.getTimerTime(),"barbarian_attack");
-	  for(int nP = nextPlayer(); nP != self ; nP = nextPlayer(nP))
+	  for(int nP = nextPlayer(); nP != (int)self ; nP = nextPlayer(nP))
 			if(!useCard("attack","attack the barbarians or lose a life",players.at(nP)))
 				players.at(nP) -> modifyLife(-1);
  		// Window* barbarianWindow = new Window(50,350,350,200);
@@ -156,8 +156,8 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
   else if(effect == "raining_arrows")
     {
       m.playSoundEffect(6);
-	  for(int nP = nextPlayer(); nP != self ; nP = nextPlayer(nP))
-			if(!useCard("dodge","dodge the rain of arrows or lose a life",players.at(nP)))
+	  for(int nP = nextPlayer(); nP != (int)self ; nP = nextPlayer(nP))
+			if(!negated("negate barbarian for " + players.at(nP) ->getName()) && !useCard("dodge","dodge the rain of arrows or lose a life",players.at(nP)))
 				players.at(nP) -> modifyLife(-1);
 				
     }
@@ -176,7 +176,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		//fix target_players
 		target_player.clear();
 		target_player.push_back(current_player);
-		for(int i = (self +1) % players.size(); i != self; i = (i + 1) % players.size())
+		for(int i = (self +1) % players.size(); i != (int)self; i = (i + 1) % players.size())
 			target_player.push_back(players.at(i));
 		
     }
@@ -207,8 +207,10 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		Player* duress_target = target_player.at(1);
 		
 		if(useCard("attack","attack " + duress_target-> getName() + " or give your weapon to " + current_player -> getName() + '.',duress_source))
+		{
 			if(!useCard("dodge","dodge or lose one life",duress_target))
 				duress_target -> modifyLife(-1);
+		}
 		else
 		{
 			GameCard* equip = duress_source -> loseEquipment(2);
@@ -231,7 +233,7 @@ bool Game::negated(const std::string& description)
 	if(useCard("negate", description, players.at(nP)))
 		return !negated(description);
 	nP = nextPlayer(nP);
-  }while(nP != self);
+  }while(nP != (int)self);
   
   return false;
 }

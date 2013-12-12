@@ -104,7 +104,7 @@ void Game::setupHotseat()
 			if(self == players.size())
 				self = 0;
 		
-			if(self == emperor)
+			if((int)self == emperor)
 				step = 8;
 			else
 			{
@@ -536,7 +536,7 @@ void Game::runHotseat()
 	//other cards are discarded
 		else if(state == 5)
 		{
-			if(players.at(self) -> getLife() >= players.at(self) -> getHandSize())
+			if(players.at(self) -> getLife() >= (int)(players.at(self) -> getHandSize()))
 			{
 				state = 6;
 			}
@@ -795,22 +795,22 @@ void Game::paint()
 		  {
 		    if(players.size() == 5 && state != 7)
 		      {
-			if(i - self == -1 || i - self == 4)
+			if(i - (int)self == -1 || i - (int)self == 4)
 			  {
 			    p-> setPos(30,300);
 			    p -> paint(screen,30,300);    			  
 			  }
-			if(i - self == -2 || i - self == 3)
+			if(i - (int)self == -2 || i - (int)self == 3)
 			  {
 			    p -> setPos(175,30);
 			    p -> paint(screen,175,30);
 			  }
-			if(i - self == -3 || i - self == 2)
+			if(i - (int)self == -3 || i - (int)self == 2)
 			  {
 			    p -> setPos(460,30);
 			    p -> paint(screen,460,30);
 			  }
-			if(i - self == -4 || i - self == 1)
+			if(i - (int)self == -4 || i - (int)self == 1)
 			  {
 			    p -> setPos(605,300);
 			    p -> paint(screen,605,300);
@@ -998,6 +998,7 @@ void Game::exitCommand(SDL_Event& event)
 
 bool Game::useCard(const std::string& cardID, const std::string& description, Player* player)
 {
+	std::string old_timer_command = timer -> getCommand();
 	timer->reset(sett.getTimerTime(), "skip");
 	bool occured;
 	std::string command;
@@ -1010,51 +1011,122 @@ bool Game::useCard(const std::string& cardID, const std::string& description, Pl
 	bool has_window = true;
 	std::vector<GameCard*> hand = player->getHand();
 	GameCard* card;
+	bool show_hand = false;
+	
+	Button play_button("Play", 800, 575, "play","Images/Gui/smallButton.png",20);
+	Button skip_button("Skip", 800, 630, "skip","Images/Gui/smallButton.png",20);
+	Textbox information(250,270,400,120,"Fonts/LHANDW.TTF",20);
+	information.setText(description);
+	GameCard* selected_card = nullptr;
 	while(has_window)
 	{
-		command = timer->time_ran_out();
-		while(SDL_PollEvent( &event))
+		if(!show_hand)
 		{
-			exitCommand(event);
-			if(command == "")
-				command = options.handleEvent(event);
+			command = timer->time_ran_out();
+			while(SDL_PollEvent( &event))
+			{
+				exitCommand(event);
+				if(command == "")
+					command = options.handleEvent(event);
+			}
+		
+			if(command == "skip")
+			{
+				occured = false;
+				has_window = false;
+			}
+			else if(command == "use")
+			{
+				for(unsigned i = 0; i < hand.size(); ++i)
+				{
+					if(hand.at(i) -> getAbility() == cardID)
+					{
+						card = player -> playCard(i);
+						occured = true;
+						break;
+					}
+				}
+	      
+				if(card != nullptr)
+					discard_pile -> pushBottom(card);
+	      
+				has_window = false;
+	      
+			}
+			else if(command == "show_hand")
+			{
+				timer->reset(sett.getTimerTime(), "skip");
+				show_hand = true;
+			}
+		}
+		else
+		{
+			command = timer->time_ran_out();
+			while(SDL_PollEvent( &event))
+			{
+				exitCommand(event);
+				if(command == "")
+					command = play_button.handleEvent(event);
+				if(command == "")
+					command = skip_button.handleEvent(event);
+				if(command == "" && event.type == SDL_MOUSEBUTTONUP)
+					selected_card = player -> handleHand(event);
+			}
+		
+			if(command == "play")
+			{
+				if(selected_card != nullptr && selected_card -> getAbility() == cardID)
+				{
+					std::vector<GameCard*> hand = player ->getHand();
+					for(unsigned i = 0; i < hand.size() ; ++i)
+					{
+						if(hand.at(i) == selected_card)
+						{
+							discard_pile ->pushBottom(player -> playCard(i));
+						}
+					}
+					occured = true;
+					has_window = false;
+				}
+				
+			}
+			if(command == "skip")
+			{
+				occured = false;
+				has_window = false;
+			}
+		}
+		//LiTHe paint
+		applySurface(0,0,background,screen); //skriv ut bakgrunden att ha som en bas
+		for(unsigned i = 0; i < all_objects.size() ; ++i)
+		{
+			all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
 		}
 		
-		if(command == "skip")
+		if(timer->checkStarted() == true)
 		{
-			occured = false;
-			has_window = false;
+			timer->paint(screen);
 		}
-		else if(command == "use")
+		
+		if(show_hand)
 		{
-			for(unsigned i = 0; i < hand.size(); ++i)
-			{
-				if(hand.at(i) -> getAbility() == cardID)
-				{
-					card = player -> playCard(i);
-					occured = true;
-					break;
-				}
-			}
-	      
-			if(card != nullptr)
-				discard_pile -> pushBottom(card);
-	      
-			has_window = false;
-	      
-	    }
-		else if(command == "show_hand")
+			player->paint(screen);
+			information.paint(screen);
+			play_button.paint(screen);
+			skip_button.paint(screen);
+		}
+		else
 		{
+			options.paint(screen);
+			player->paint(screen,600,240);
 			
-			occured = false;
-			has_window = false;
 		}
-		paint();
-		options.paint(screen);
+		
 		SDL_Flip(screen.getImage());
 		fps.regulateFPS();
 	}
 	
+	timer->reset(sett.getTimerTime(), old_timer_command);
 	return occured;
 }
 	
