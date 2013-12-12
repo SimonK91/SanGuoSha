@@ -43,10 +43,7 @@ struct Equipment
     pop_color.r = 255;
     pop_color.g = 255;
     pop_color.b = 255;
-	std::cerr << "skaoar clickbox" << std::endl;
 	weapon_click = new Object::Clickbox(5,550,144,34, "activate");
-	std::cerr << "clickbox skapad" << std::endl;
-	weapon_selected_frame = loadImage("Images/Gui/activated_weapon_frame.png", true);
   }
   ~Equipment()
   {
@@ -69,6 +66,7 @@ struct Equipment
 class Player
 {
  private:
+	std::string player_name;
 	Surface acedia;
 	Surface lightning;
   Surface name;
@@ -160,7 +158,7 @@ bool getWeaponActivated(){return weapon_activated;}
   
   void fixCardPosition();
   void setSelected(bool);
-
+	  std::string getName(){return player_name;}
   void setPos(int x_pos, int y_pos);
   Object::GameCard* equipStuff(Object::GameCard* gear, int type);
   void showToolTip(Surface);
