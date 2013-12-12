@@ -163,22 +163,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
     }
   else if(effect == "harvest")
     {
-		Window* harvestWindow = new Window(50,150,600,350);
-		for(unsigned i = 0; i < players.size(); ++i)
-		{
-			card = dynamic_cast<GameCard*>(card_deck -> drawCard());
-			harvestWindow -> addCard(card, i* 100, 20);
-		}
-		harvestWindow -> makeButton("take card",170,250,"pick_card");
-		add_window(harvestWindow);
-		has_window = true;
-		
-		//fix target_players
-		target_player.clear();
-		target_player.push_back(current_player);
-		for(int i = (self +1) % players.size(); i != (int)self; i = (i + 1) % players.size())
-			target_player.push_back(players.at(i));
-		
+		harvest();
     }
   else if(effect == "duel" && !negated())
     {
@@ -236,6 +221,85 @@ bool Game::negated(const std::string& description)
   }while(nP != (int)self);
   
   return false;
+}
+  
+void Game::harvest()
+{
+	//fixa spelare
+	target_player.clear();
+	target_player.push_back(current_player);
+	for(unsigned i = (self +1) % players.size(); i != self; i = (i +1) % players.size())
+		target_player.push_back(players.at(i));
+	
+	//fixa window
+	GameCard* card = nullptr;
+	Window* harvestWindow = new Window(50,150,600,350);
+	for(unsigned i = 0; i < players.size(); ++i)
+	{
+		card = dynamic_cast<GameCard*>(card_deck -> drawCard());
+		harvestWindow -> addCard(card, i* 100, 20);
+	}
+	harvestWindow -> makeButton("take card",170,250,"pick_card");
+	
+	//variabler
+	card = nullptr;
+	unsigned index = 0;
+	bool testNegate = true;
+	std::string command = "";
+	
+	//das loop
+	while(index != target_player.size())
+	{
+		//polla negate
+		if(testNegate && negated())
+		{
+			index += 1;
+		}
+		else
+		{
+			testNegate = false;
+			//polla events
+			command = "";
+			while(SDL_PollEvent( &event))
+			{
+				exitCommand(event);
+				command = harvestWindow -> handleEvent(event);
+			
+				if(command == "pick_card")
+				{
+					for(unsigned i = 0; i < harvestWindow -> getSize(); ++i)
+					{
+						card = dynamic_cast<GameCard*>(harvestWindow -> getObject(i));
+						
+						if(card != nullptr && card -> isActive())
+						{
+							target_player.at(index) -> recieveCard(card);
+							//ta bort den från window
+							harvestWindow -> remove(i);
+							//byt spelare
+							target_player.at(index) -> setCurrentPlayer(false);
+							index += 1;
+							if(index != target_player.size())
+								target_player.at(index) -> setCurrentPlayer(true);
+							testNegate = true;
+						}
+					}
+				}
+			}
+			//fixa utskrift
+			paint();
+			harvestWindow -> paint(screen);
+			SDL_Flip(screen.getImage());
+			fps.regulateFPS();
+		}
+	}
+	//destroy window
+	while(harvestWindow -> getSize() != 1)
+	{
+		discard_pile -> pushBottom(dynamic_cast<GameCard*>(harvestWindow -> remove(0)));
+	}
+	delete harvestWindow;
+	current_player -> setCurrentPlayer(true);
 }
 
 bool Game::acedia()

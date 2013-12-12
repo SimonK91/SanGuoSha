@@ -472,57 +472,57 @@ void Game::run_command(const std::string& what_command)
 	else
 		target_player.at(currentTarget) -> setCurrentPlayer(true);
     }
-  else if(what_command == "pick_card")
-    {
-      // static int harvestTarget = 0;
+  // else if(what_command == "pick_card")
+    // {
+      // // static int harvestTarget = 0;
      
-      //hämta fönster
-      Window* harvestWindow = dynamic_cast<Window*>(all_objects.back());
+      // //hämta fönster
+      // Window* harvestWindow = dynamic_cast<Window*>(all_objects.back());
       
-      //kolla om något valt
-      GameCard* card = nullptr;
-      int index = -1;
-      for(unsigned i = 0; i < harvestWindow -> getSize() - 1; ++i)
-	{
-	  card = dynamic_cast<GameCard*>(harvestWindow -> getObject(i));
-	  if(card != nullptr && card -> isActive())	
-	    {
-	      index = i;
-	      break;				//card is found and stored
-	    }
-	}
+      // //kolla om något valt
+      // GameCard* card = nullptr;
+      // int index = -1;
+      // for(unsigned i = 0; i < harvestWindow -> getSize() - 1; ++i)
+	// {
+	  // card = dynamic_cast<GameCard*>(harvestWindow -> getObject(i));
+	  // if(card != nullptr && card -> isActive())	
+	    // {
+	      // index = i;
+	      // break;				//card is found and stored
+	    // }
+	// }
       
-      //picka kort
-      if(index != -1)
-	{
-	  card -> setActive(false);
-	  target_player.at(currentTarget) -> recieveCard(card);
-	  harvestWindow -> remove(index);
-	}
-    else if(harvestWindow -> getSize() != 1)
-		return;	//inget kort valt!
+      // //picka kort
+      // if(index != -1)
+	// {
+	  // card -> setActive(false);
+	  // target_player.at(currentTarget) -> recieveCard(card);
+	  // harvestWindow -> remove(index);
+	// }
+    // else if(harvestWindow -> getSize() != 1)
+		// return;	//inget kort valt!
       
-	//byt spelare
-	target_player.at(currentTarget) -> setCurrentPlayer(false);
-	currentTarget += 1;
-	timer->reset(sett.getTimerTime(),"");
+	// //byt spelare
+	// target_player.at(currentTarget) -> setCurrentPlayer(false);
+	// currentTarget += 1;
+	// timer->reset(sett.getTimerTime(),"");
       
-      //om sig själv destruera fönstrett
-      if(currentTarget == target_player.size())
-	{
-	  currentTarget = 0;
-	  //fixa bort kort som negatats
-	  while(harvestWindow -> getSize() != 1)
-		discard_pile -> pushBottom(dynamic_cast<GameCard*>(harvestWindow -> remove(0)));
+      // //om sig själv destruera fönstrett
+      // if(currentTarget == target_player.size())
+	// {
+	  // currentTarget = 0;
+	  // //fixa bort kort som negatats
+	  // while(harvestWindow -> getSize() != 1)
+		// discard_pile -> pushBottom(dynamic_cast<GameCard*>(harvestWindow -> remove(0)));
 		
-	  run_command("close_window");
+	  // run_command("close_window");
 		
-	  current_player -> setCurrentPlayer(true);
-	  target_player.clear();
-	}
-	else
-		target_player.at(currentTarget) -> setCurrentPlayer(true);
-    }
+	  // current_player -> setCurrentPlayer(true);
+	  // target_player.clear();
+	// }
+	// else
+		// target_player.at(currentTarget) -> setCurrentPlayer(true);
+    // }
   else if(what_command == "duel_damage")
 	{
 		timer->reset(sett.getTimerTime(), "end_turn");
