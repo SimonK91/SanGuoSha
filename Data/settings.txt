@@ -1,4 +1,4 @@
-Fullscreen: 116
+Fullscreen: 195
 Music_Vol: 0
 Effect_vol: 100
 Tool_tips: 1
