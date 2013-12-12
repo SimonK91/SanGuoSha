@@ -212,94 +212,123 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 
 bool Game::negated(const std::string& description)
 {
-  int nP = self;
+  unsigned nP = self;
   do
   {
 	if(useCard("negate", description, players.at(nP)))
 		return !negated(description);
 	nP = nextPlayer(nP);
-  }while(nP != (int)self);
+  }while(nP != self);
   
   return false;
 }
   
 void Game::harvest()
 {
-	//fixa spelare
-	target_player.clear();
-	target_player.push_back(current_player);
-	for(unsigned i = (self +1) % players.size(); i != self; i = (i +1) % players.size())
-		target_player.push_back(players.at(i));
-	
-	//fixa window
+	std::string old_timer_command = timer -> getCommand();
+
 	GameCard* card = nullptr;
-	Window* harvestWindow = new Window(50,150,600,350);
-	for(unsigned i = 0; i < players.size(); ++i)
+	//fixa window
+	Window* harvestWindow = new Window(50,50,600,350);
+	
+	//kolla antalet spelare som är vid liv
+	int num_cards = 0;
+	for(int i = 0 ; i < players.size() ; ++i)
+	{
+		if(players.at(i) ->isAlive())
+			++num_cards;
+	}
+	
+	//dra ett kort för varje sådan spelare
+	for(unsigned i = 0; i < num_cards; ++i)
 	{
 		card = dynamic_cast<GameCard*>(card_deck -> drawCard());
-		harvestWindow -> addCard(card, i* 100, 20);
+		harvestWindow -> addCard(card,20 + i*(400/(num_cards-1)), 20);
 	}
-	harvestWindow -> makeButton("take card",170,250,"pick_card");
+	harvestWindow -> makeButton("take card",50,250,"pick_card");
+	harvestWindow -> makeButton("show hand",270,250,"show_hand");
 	
 	//variabler
 	card = nullptr;
-	unsigned index = 0;
-	bool testNegate = true;
 	std::string command = "";
-	
+	bool has_window = true;
+	unsigned nP = self;
 	//das loop
-	while(index != target_player.size())
+	do
 	{
-		//polla negate
-		if(testNegate && negated())
+		if(!negated())
 		{
-			index += 1;
-		}
-		else
-		{
-			testNegate = false;
-			//polla events
-			command = "";
-			while(SDL_PollEvent( &event))
+			bool taken = false;
+			bool show_hand = false;
+			while(!taken)
 			{
-				exitCommand(event);
-				command = harvestWindow -> handleEvent(event);
-			
-				if(command == "pick_card")
+				command = "";
+				while(SDL_PollEvent(&event))
 				{
-					for(unsigned i = 0; i < harvestWindow -> getSize(); ++i)
+					exitCommand(event);
+					command = harvestWindow -> handleEvent(event);
+				
+					if(command == "pick_card")
 					{
-						card = dynamic_cast<GameCard*>(harvestWindow -> getObject(i));
-						
-						if(card != nullptr && card -> isActive())
+						for(unsigned i = 0; i < harvestWindow -> getSize(); ++i)
 						{
-							target_player.at(index) -> recieveCard(card);
-							//ta bort den från window
-							harvestWindow -> remove(i);
-							//byt spelare
-							target_player.at(index) -> setCurrentPlayer(false);
-							index += 1;
-							if(index != target_player.size())
-								target_player.at(index) -> setCurrentPlayer(true);
-							testNegate = true;
+							card = dynamic_cast<GameCard*>(harvestWindow -> getObject(i));
+							if(card != nullptr && card -> isActive())
+							{
+								card -> setActive(0);
+								players.at(nP) -> recieveCard(card);
+								//ta bort den från window
+								harvestWindow -> remove(i);
+								nP = nextPlayer(nP);
+								taken = true;
+							}
 						}
 					}
+					else if(command == "show_hand")
+					{
+						show_hand = true;
+					}
+				}
+				//fixa utskrift
+				if(!taken)
+				{
+					applySurface(0,0,background,screen);
+					for(unsigned i = 0; i < all_objects.size() ; ++i)
+					{
+						all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
+					}
+				
+					if(timer->checkStarted() == true)
+					{
+						timer->paint(screen);
+					}
+				
+					if(show_hand)
+					{
+						players.at(nP)->paint(screen);
+					}
+					else
+					{	
+						players.at(nP)->setPos(680,240);
+						players.at(nP)->paint(screen,680,240);
+					}
+					harvestWindow -> paint(screen);
+					SDL_Flip(screen.getImage());
+					fps.regulateFPS();
 				}
 			}
-			//fixa utskrift
-			paint();
-			harvestWindow -> paint(screen);
-			SDL_Flip(screen.getImage());
-			fps.regulateFPS();
 		}
-	}
+	}while(nP != self);
+	
 	//destroy window
 	while(harvestWindow -> getSize() != 1)
 	{
 		discard_pile -> pushBottom(dynamic_cast<GameCard*>(harvestWindow -> remove(0)));
 	}
 	delete harvestWindow;
-	current_player -> setCurrentPlayer(true);
+	//current_player -> setCurrentPlayer(true);
+	
+	timer->reset(sett.getTimerTime(), old_timer_command);
 }
 
 bool Game::acedia()

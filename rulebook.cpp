@@ -16,7 +16,27 @@ bool Game::ruleTargetOK(Player* target)
 		}
 	}
 	
-	
+	if(selected_card -> getAbility() == "attack")
+	{
+		if((current_player -> equipment.weapon) != nullptr && (current_player -> equipment.weapon) -> getAbility() == "weapon7" && (current_player -> getHand()).size() == 1)
+		{
+			while(target_player.size() >= 3)
+			{
+				target_player.at(0) -> setSelected(false);
+				target_player.erase(target_player.begin());
+			}
+		}
+		else
+		{
+			while(target_player.size() >= 1)
+			{
+				target_player.at(0) -> setSelected(false);
+				target_player.erase(target_player.begin());
+			}
+		}
+		return distance <= weapon_range;
+	}
+			
 	 //0 = self/activated
 	if(selected_card -> getTargetType() == 0)
 		return false;
@@ -29,11 +49,34 @@ bool Game::ruleTargetOK(Player* target)
 	if(selected_card -> getTargetType() == 1)
 	{
 		if(selected_card -> getRange() == 0)  //0 = unlimited
+		{
+			
+			while(target_player.size() >= 3)
+			{
+				target_player.at(0) -> setSelected(false);
+				target_player.erase(target_player.begin());
+			}
+			
 			return true;
+		}
 		else if(selected_card -> getRange() > 0 && selected_card ->getRange() < 10) //1-9 = 1-9
+		{
+			while(target_player.size() >= 1)
+			{
+				target_player.at(0) -> setSelected(false);
+				target_player.erase(target_player.begin());
+			}
 			return distance <= selected_card -> getRange();
+		}
 		else if(selected_card -> getRange() == 10)  //10 = weapon range
+		{
+			while(target_player.size() >= 1)
+			{
+				target_player.at(0) -> setSelected(false);
+				target_player.erase(target_player.begin());
+			}
 			return distance <= weapon_range;	
+		}
 	}
 	
 	

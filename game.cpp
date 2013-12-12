@@ -1000,7 +1000,7 @@ bool Game::useCard(const std::string& cardID, const std::string& description, Pl
 {
 	std::string old_timer_command = timer -> getCommand();
 	timer->reset(sett.getTimerTime(), "skip");
-	bool occured;
+	bool occured = false;
 	std::string command;
 	Window options(175,125,400,400);
 	options.makeTextbox(30,30,340,80,25);
@@ -1049,6 +1049,8 @@ bool Game::useCard(const std::string& cardID, const std::string& description, Pl
 	      
 				if(card != nullptr)
 					discard_pile -> pushBottom(card);
+				else
+					occured = false;
 	      
 				has_window = false;
 	      
@@ -1096,6 +1098,7 @@ bool Game::useCard(const std::string& cardID, const std::string& description, Pl
 				has_window = false;
 			}
 		}
+		
 		//LiTHe paint
 		applySurface(0,0,background,screen); //skriv ut bakgrunden att ha som en bas
 		for(unsigned i = 0; i < all_objects.size() ; ++i)
@@ -1118,8 +1121,8 @@ bool Game::useCard(const std::string& cardID, const std::string& description, Pl
 		else
 		{
 			options.paint(screen);
+			player->setPos(600,240);
 			player->paint(screen,600,240);
-			
 		}
 		
 		SDL_Flip(screen.getImage());
