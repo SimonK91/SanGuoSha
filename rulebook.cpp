@@ -47,7 +47,7 @@ bool Game::ruleTargetOK(Player* target)
 		else if(target_player.size() == 1)
 		{
 			distance = getDistance(target_player.at(0),target);
-			if(target -> equipment.weapon -> getRange() >= distance)
+			if(target_player.at(0) -> equipment.weapon -> getRange() >= distance)
 				return true;
 		}
 	}

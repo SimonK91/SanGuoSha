@@ -19,8 +19,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
     }
   else if(effect == "attack")	//måste fixas mera!!! sköldar + vapen o skit!
     {
-
-	  timer->reset(sett.getTimerTime(),"take_damage");
+		timer->reset(sett.getTimerTime(),"take_damage");
 	  
 		Window* dodgeWindow = new Window(160,250,500,250);
 		dodgeWindow -> makeButton("Dodge",37,70,"dodge");
@@ -138,13 +137,14 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
   else if(effect == "barbarian")
     {
       m.playSoundEffect(5);
-      timer->reset(sett.getTimerTime(),"barbarian_attack");
+      timer->reset(sett.getTimerTime(),"take_damage");
 	  
- 		Window* barbarianWindow = new Window(50,350,350,200);
+ 		Window* barbarianWindow = new Window(150,350,500,150);
 		
 		// barbarianWindow -> addCard(gameCard,400,350);
-		barbarianWindow -> makeTextbox(20,40,310,30);
-		barbarianWindow -> makeButton("Attack!!!",70,100,"barbarian_attack");
+		barbarianWindow -> makeTextbox(120,40,310,30);
+		barbarianWindow -> makeButton("Attack!!!",37,70,"barbarian_attack");
+		barbarianWindow -> makeButton("take damage", 260,70, "take_damage");
 		barbarianWindow -> setText(0,"   Attack the barbarians or lose a life!");
 		add_window(barbarianWindow);
 		has_window = true;
@@ -152,7 +152,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		//current player is going to go around
 		current_player -> setCurrentPlayer(false);
 		target_player.clear();
-		for(int i = (self + 1) % players.size(); i != self; i = (i + 1) % players.size())
+		for(unsigned i = (self + 1) % players.size(); i != self; i = (i + 1) % players.size())
 			target_player.push_back(players.at(i));
 		
 		// target_player.at(0) = players.at((self +1) % players.size());
@@ -161,14 +161,14 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
   else if(effect == "raining_arrows")
     {
       m.playSoundEffect(6);
-      timer->reset(sett.getTimerTime(),"arrow_attack");
+      timer->reset(sett.getTimerTime(),"take_damage");
 	  
-		Window* arrowWindow = new Window(50,350,350,200);
+		Window* arrowWindow = new Window(150,350,500,150);
 		
 		// barbarianWindow -> addCard(gameCard,400,350);
 		arrowWindow -> makeTextbox(40,40,270,30);
-		arrowWindow -> makeButton("Dodge!!!",70,100,"arrow_attack");
-		
+		arrowWindow -> makeButton("Dodge!!!",37,70,"arrow_attack");
+		arrowWindow -> makeButton("take damage", 260,70, "take_damage");
 		arrowWindow -> setText(0," Dodge the arrows or lose a life!");
 
 		add_window(arrowWindow);
@@ -176,7 +176,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		
 		//current player is going to go around
 		current_player -> setCurrentPlayer(false);
-		for(int i = (self +1) % players.size(); i != self; i = (i +1) % players.size())
+		for(unsigned i = (self +1) % players.size(); i != self; i = (i +1) % players.size())
 			target_player.push_back(players.at(i));
 			
 		target_player.at(0) -> setCurrentPlayer(true);
@@ -192,20 +192,22 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		harvestWindow -> makeButton("take card",170,250,"pick_card");
 		add_window(harvestWindow);
 		has_window = true;
-		
+			
 		//fix target_players
 		target_player.clear();
 		target_player.push_back(current_player);
-		for(int i = (self +1) % players.size(); i != self; i = (i + 1) % players.size())
+		for(unsigned i = (self +1) % players.size(); i != self; i = (i + 1) % players.size())
 			target_player.push_back(players.at(i));
 		
     }
   else if(effect == "duel" && !negated())
     {
-		Window* duelWindow = new Window(50,350,350,200);
-		duelWindow -> makeTextbox(40,40,270,30);
+		Window* duelWindow = new Window(50,350,500,150);
+		duelWindow -> makeTextbox(120,40,270,30);
+		
 		duelWindow -> setText(0,"You are dueld. Attack or lose a life!");
-		duelWindow -> makeButton("Duel!", 70, 100, "duel_attack");
+		duelWindow -> makeButton("Duel!", 37, 100, "duel_attack");
+		duelWindow -> makeButton("take damage", 260,70, "duel_damage");
 		add_window(duelWindow);
 		current_player -> setCurrentPlayer(false);
 		target_player.at(0) -> setCurrentPlayer(true);
@@ -237,7 +239,7 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 bool Game::negated()
 {
   GameCard* played_card = selected_card;
-  int i = self;
+  unsigned i = self;
   Player* cur_player = players.at(self);
   Window* negate_window = new Window(250,350,400,200);
   negate_window->makeButton("Negate",30,120,"negate_true");

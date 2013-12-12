@@ -1,6 +1,7 @@
 void Game::run_command(const std::string& what_command)
 {
-	static int targetDodgeing = 0;
+	static unsigned currentTarget = 0;
+	static bool duelTargetAttacking = true;
   if(what_command == "")
     {
       return;
@@ -82,7 +83,7 @@ void Game::run_command(const std::string& what_command)
   else if(what_command == "time_out")
     {
 		std::cout << "player " << self << " timed out on discard" << std::endl;
-      while(players.at(self) -> getLife() < players.at(self) -> getHandSize())
+      while((unsigned)(players.at(self) -> getLife()) < players.at(self) -> getHandSize())
 	{
 	  GameCard* card = players.at(self) -> loseCard( players.at(self)->getHandSize()-1);
 	  discard_pile -> pushBottom(card);
@@ -135,7 +136,7 @@ void Game::run_command(const std::string& what_command)
     }
   else if(what_command == "dodge")
     {	
-     std::vector<GameCard*> hand = target_player.at(targetDodgeing) -> getHand();
+     std::vector<GameCard*> hand = target_player.at(currentTarget) -> getHand();
       GameCard* card = nullptr;
   	
       for(unsigned i = 0; i < hand.size(); ++i)
@@ -144,18 +145,18 @@ void Game::run_command(const std::string& what_command)
 	    {
 	      m.playSoundEffect(7);
 	      // card = target_player -> playCard(i);
-		  card = target_player.at(targetDodgeing) -> playCard(i);
+		  card = target_player.at(currentTarget) -> playCard(i);
 	      break;
 	    }
 	}
 		
 	if(card == nullptr)
 	{
-		target_player.at(targetDodgeing) -> modifyLife(-1);
-		if(target_player.at(targetDodgeing) -> getLife() <= 0)
+		target_player.at(currentTarget) -> modifyLife(-1);
+		if(target_player.at(currentTarget) -> getLife() <= 0)
 		{
-			target_player.at(targetDodgeing) -> kill();
-			cleanPlayer(target_player.at(targetDodgeing));
+			target_player.at(currentTarget) -> kill();
+			cleanPlayer(target_player.at(currentTarget));
 		}
 	
 			std::cout << " the attack is not dodged" << std::endl;
@@ -165,13 +166,13 @@ void Game::run_command(const std::string& what_command)
 		discard_pile -> pushBottom(card);
 			std::cout << " the attack is dodged" << std::endl;
 	}	
-		target_player.at(targetDodgeing) -> setCurrentPlayer(false);
-		targetDodgeing += 1;
+		target_player.at(currentTarget) -> setCurrentPlayer(false);
+		currentTarget += 1;
 		
 		
-		if(target_player.size() == targetDodgeing)
+		if(target_player.size() == currentTarget)
 		{
-			targetDodgeing = 0;
+			currentTarget = 0;
 			current_player -> setCurrentPlayer(true);
 		//------------------------------
 		//----------OBSERVERA-----------
@@ -182,35 +183,33 @@ void Game::run_command(const std::string& what_command)
 		}	
 		else
 		{
-			target_player.at(targetDodgeing) -> setCurrentPlayer(true);
+			target_player.at(currentTarget) -> setCurrentPlayer(true);
 		}
     }
   else if(what_command == "take_damage")
     {
-	  
-	    target_player.at(targetDodgeing) -> modifyLife(-1);
-		if(target_player.at(targetDodgeing) -> getLife() <= 0)
+	    target_player.at(currentTarget) -> modifyLife(-1);
+		if(target_player.at(currentTarget) -> getLife() <= 0)
 		{
-			target_player.at(targetDodgeing) -> kill();
-			cleanPlayer(target_player.at(targetDodgeing));
+			target_player.at(currentTarget) -> kill();
+			cleanPlayer(target_player.at(currentTarget));
 		}
-		target_player.at(targetDodgeing) -> setCurrentPlayer(false);
+		target_player.at(currentTarget) -> setCurrentPlayer(false);
 		
-		targetDodgeing += 1;
+		currentTarget += 1;
 		
-		if(target_player.size() == targetDodgeing)
+		if(target_player.size() == currentTarget)
 		{
-			targetDodgeing = 0;
+			currentTarget = 0;
 			current_player -> setCurrentPlayer(true);
-		//------------------------------
-		//----------OBSERVERA-----------
-		//------------------------------
+		
 			timer->reset(sett.getTimerTime(),"end_turn");
 			run_command("close_window");
 		}	
 		else
 		{
-			target_player.at(targetDodgeing) -> setCurrentPlayer(true);
+			timer->reset(sett.getTimerTime(),"");
+			target_player.at(currentTarget) -> setCurrentPlayer(true);
 		}
     }
   else if(what_command == "steal_card")
@@ -386,38 +385,38 @@ void Game::run_command(const std::string& what_command)
     }
   else if(what_command == "barbarian_attack")
     {
-		static int barbarianTarget = 0;
+		// static int barbarianTarget = 0;
 		bool playedAttack = false;
       timer->reset(sett.getTimerTime(),"barbarian_attack");
 		
-      std::vector<GameCard*> hand = target_player.at(barbarianTarget) -> getHand();
+      std::vector<GameCard*> hand = target_player.at(currentTarget) -> getHand();
       for(unsigned i = 0; i < hand.size(); ++i)
 	{
 	  if(hand.at(i) -> getAbility() == "attack")
 	    {
 	      playedAttack = true;
-	      discard_pile -> pushBottom(target_player.at(barbarianTarget) -> loseCard(i));
+	      discard_pile -> pushBottom(target_player.at(currentTarget) -> loseCard(i));
 	      break;
 	    }
 	}
       
       if(!playedAttack)
 	  {
-	    target_player.at(barbarianTarget) -> modifyLife(-1);
-		if(target_player.at(barbarianTarget) -> getLife() <= 0)
+	    target_player.at(currentTarget) -> modifyLife(-1);
+		if(target_player.at(currentTarget) -> getLife() <= 0)
 		{
-			target_player.at(barbarianTarget) -> kill();
-			cleanPlayer(target_player.at(barbarianTarget));
+			target_player.at(currentTarget) -> kill();
+			cleanPlayer(target_player.at(currentTarget));
 		}
 	  }
 		  
       //nästa spelare (devil)(huehuehue)
-      	target_player.at(barbarianTarget) -> setCurrentPlayer(false);
-		barbarianTarget += 1;
+      	target_player.at(currentTarget) -> setCurrentPlayer(false);
+		currentTarget += 1;
       
-      if(barbarianTarget == target_player.size())
+      if(currentTarget == target_player.size())
 	{
-	  barbarianTarget = 0;
+	  currentTarget = 0;
 	  //döda fönstrett!!
 	  run_command("close_window");
 	  
@@ -426,43 +425,43 @@ void Game::run_command(const std::string& what_command)
 	  timer->reset(sett.getTimerTime(),"end_turn");
 	}
 	else
-		target_player.at(barbarianTarget) -> setCurrentPlayer(true);
+		target_player.at(currentTarget) -> setCurrentPlayer(true);
 
     }
   else if(what_command == "arrow_attack")	
     {
-	  static int arrowTarget = 0;
+	  // static int arrowTarget = 0;
       timer->reset(sett.getTimerTime(),"arrow_attack");
 	  
       bool playedDodge = false;
-      std::vector<GameCard*> hand = target_player.at(arrowTarget) -> getHand();
+      std::vector<GameCard*> hand = target_player.at(currentTarget) -> getHand();
       for(unsigned i = 0; i < hand.size(); ++i)
 	{
 	  if(hand.at(i) -> getAbility() == "dodge")
 	    {
 	      playedDodge = true;
-	      discard_pile -> pushBottom(target_player.at(arrowTarget) -> loseCard(i));
+	      discard_pile -> pushBottom(target_player.at(currentTarget) -> loseCard(i));
 	      break;
 	    }
 	}
       
       if(!playedDodge)
 	  {
-	    target_player.at(arrowTarget) -> modifyLife(-1);
-		if(target_player.at(arrowTarget) -> getLife() <= 0)
+	    target_player.at(currentTarget) -> modifyLife(-1);
+		if(target_player.at(currentTarget) -> getLife() <= 0)
 		{
-			target_player.at(arrowTarget) -> kill();
-			cleanPlayer(target_player.at(arrowTarget));
+			target_player.at(currentTarget) -> kill();
+			cleanPlayer(target_player.at(currentTarget));
 		}
 	  }
       
 	//nästa spelare (devil)(huehuehue)
-	target_player.at(arrowTarget) -> setCurrentPlayer(false);
-	arrowTarget += 1;
+	target_player.at(currentTarget) -> setCurrentPlayer(false);
+	currentTarget += 1;
       
-      if(arrowTarget == target_player.size())
+      if(currentTarget == target_player.size())
 	{
-	  arrowTarget = 0;
+	  currentTarget = 0;
 	  //döda fönstrett!!
 	  
 	  run_command("close_window");
@@ -471,11 +470,11 @@ void Game::run_command(const std::string& what_command)
 	  timer->reset(sett.getTimerTime(),"end_turn");
 	}
 	else
-		target_player.at(arrowTarget) -> setCurrentPlayer(true);
+		target_player.at(currentTarget) -> setCurrentPlayer(true);
     }
   else if(what_command == "pick_card")
     {
-      static int harvestTarget = 0;
+      // static int harvestTarget = 0;
      
       //hämta fönster
       Window* harvestWindow = dynamic_cast<Window*>(all_objects.back());
@@ -483,7 +482,7 @@ void Game::run_command(const std::string& what_command)
       //kolla om något valt
       GameCard* card = nullptr;
       int index = -1;
-      for(int i = 0; i < harvestWindow -> getSize() - 1; ++i)
+      for(unsigned i = 0; i < harvestWindow -> getSize() - 1; ++i)
 	{
 	  card = dynamic_cast<GameCard*>(harvestWindow -> getObject(i));
 	  if(card != nullptr && card -> isActive())	
@@ -497,21 +496,21 @@ void Game::run_command(const std::string& what_command)
       if(index != -1)
 	{
 	  card -> setActive(false);
-	  target_player.at(harvestTarget) -> recieveCard(card);
+	  target_player.at(currentTarget) -> recieveCard(card);
 	  harvestWindow -> remove(index);
 	}
     else if(harvestWindow -> getSize() != 1)
 		return;	//inget kort valt!
       
 	//byt spelare
-	target_player.at(harvestTarget) -> setCurrentPlayer(false);
-	harvestTarget += 1;
+	target_player.at(currentTarget) -> setCurrentPlayer(false);
+	currentTarget += 1;
 	timer->reset(sett.getTimerTime(),"");
       
       //om sig själv destruera fönstrett
-      if(harvestTarget == target_player.size())
+      if(currentTarget == target_player.size())
 	{
-	  harvestTarget = 0;
+	  currentTarget = 0;
 	  //fixa bort kort som negatats
 	  while(harvestWindow -> getSize() != 1)
 		discard_pile -> pushBottom(dynamic_cast<GameCard*>(harvestWindow -> remove(0)));
@@ -522,27 +521,55 @@ void Game::run_command(const std::string& what_command)
 	  target_player.clear();
 	}
 	else
-		target_player.at(harvestTarget) -> setCurrentPlayer(true);
+		target_player.at(currentTarget) -> setCurrentPlayer(true);
     }
+  else if(what_command == "duel_damage")
+	{
+		timer->reset(sett.getTimerTime(), "end_turn");
+			
+		if(duelTargetAttacking)
+		{
+			target_player.at(0) -> modifyLife(-1);
+			if(target_player.at(0) -> getLife() <= 0)
+			{
+				target_player.at(0) -> kill();
+				cleanPlayer(target_player.at(0));
+			}
+		}
+		else 
+		{
+			current_player -> modifyLife(-1);
+			if(current_player -> getLife() <= 0)
+			{
+				current_player -> kill();
+				cleanPlayer(current_player);
+			}
+		}
+
+		target_player.at(0) -> setCurrentPlayer(false);
+		current_player -> setCurrentPlayer(true);
+		
+		run_command("close_window");
+	}
   else if(what_command == "duel_attack")
     {
       timer->reset(sett.getTimerTime(), "end_turn");
-      static bool targetAttacking = true;
+      // static bool duelTargetAttacking = true;
       int hasAttack = -1;
       std::vector<GameCard*> hand;
 	  
       //kollar om han har en attack
-      if(targetAttacking)
-	hand = target_player.at(0) -> getHand();
+      if(duelTargetAttacking)
+		hand = target_player.at(0) -> getHand();
       else
-	hand = current_player -> getHand();
+		hand = current_player -> getHand();
       
-      for(int i = 0; i < hand.size(); ++i)
+      for(unsigned i = 0; i < hand.size(); ++i)
 		 if(hand.at(i) -> getAbility() == "attack")
 			hasAttack = i;
       
     if(hasAttack != -1)
-		if(targetAttacking)
+		if(duelTargetAttacking)
 			discard_pile -> pushBottom(target_player.at(0) -> playCard(hasAttack));
 		else
 			discard_pile -> pushBottom(current_player -> playCard(hasAttack));
@@ -550,7 +577,7 @@ void Game::run_command(const std::string& what_command)
 	{
 	  current_player -> setCurrentPlayer(true);
 	  target_player.at(0) -> setCurrentPlayer(false);
-	  if(targetAttacking)
+	  if(duelTargetAttacking)
 	  {
 	    target_player.at(0) -> modifyLife(-1);
 		if(target_player.at(0) -> getLife() <= 0)
@@ -569,37 +596,16 @@ void Game::run_command(const std::string& what_command)
 		}
 	  }
 	  
-	  targetAttacking = true;
+	  duelTargetAttacking = true;
 	  //clean up
 	  run_command("close_window");
 	  return;
 	}
-      targetAttacking = !targetAttacking;
+      duelTargetAttacking = !duelTargetAttacking;
       
-      target_player.at(0) -> setCurrentPlayer(targetAttacking);
-      current_player -> setCurrentPlayer(!targetAttacking);
+      target_player.at(0) -> setCurrentPlayer(duelTargetAttacking);
+      current_player -> setCurrentPlayer(!duelTargetAttacking);
     }
-  // else if(what_command == "duress_attack")
-    // {
-      // if(target_player != nullptr)
-	// {
-	  // current_player -> setCurrentPlayer(false);
-	  // source_player -> setCurrentPlayer(true);
-	  
-	  // //ta bort duress_attack knappen
-	  // delete all_objects.back();
-	  // all_objects.pop_back();
-	  // //skapa ett fönster med val
-	  // Window* duressWindow = new Window(160,250,500,250);
-	  // duressWindow -> makeTextbox(40,40,420,30);
-	  // duressWindow -> setText(0,"Attack " + current_player -> getHeroName()  + " or lose your weapon to " + current_player -> getHeroName());
-	  
-	  // duressWindow -> makeButton("Attack",37,170,"duress_attack_respons");
-	  // duressWindow -> makeButton("Give weapon",260,170,"give_weapon");
-	  // has_window = true;
-	  // add_window(duressWindow);
-	// }
-    // }
   else if(what_command == "give_weapon")
     {
       //döda inte :( 
@@ -614,7 +620,7 @@ void Game::run_command(const std::string& what_command)
     {
       std::vector<GameCard*> hand = target_player.at(0) -> getHand();
       int index = -1;
-      for(int i = 0; i < hand.size(); ++i)
+      for(unsigned i = 0; i < hand.size(); ++i)
 		if(hand.at(i) -> getAbility() == "attack")
 			index = i;
       
