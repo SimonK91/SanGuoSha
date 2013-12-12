@@ -2,13 +2,13 @@ Initialize is okay!
 Emperor-cards drawn
 hero_deck shuffled
 two more cards drawn
-Player: 1 took hero: SunQuan
-Player: 2 took hero: LuMeng
-Player: 3 took hero: XuChu
-Player: 4 took hero: ZhouYu
-Player: 0 took hero: GuanYu
-player 1 plays a card
-player 1 end his/her turn
-player 2 plays a card
+Player: 0 took hero: SunQuan
+Player: 1 took hero: MaChao
+Player: 2 took hero: ZhouYu
+Player: 3 took hero: DiaoChan
+Player: 4 took hero: LuBu
+player 0 plays a card
+player 0 plays a card
+player 0 end his/her turn
 game.exit() okay!
 Write settings okay!

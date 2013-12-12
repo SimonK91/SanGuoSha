@@ -6,6 +6,7 @@
 #include <stack>
 #include <vector>
 #include "PopupText.h"
+#include "Clickbox.h"
 
 struct Equipment
 {
@@ -21,6 +22,8 @@ struct Equipment
   Surface off_horse_image_thin;
   Object::PopupText* off_horse_pop;
   
+  Surface weapon_selected_frame;
+  Object::Clickbox* weapon_click;
   Object::GameCard* weapon = nullptr;
   Surface weapon_image;
   Surface weapon_image_thin;
@@ -40,6 +43,10 @@ struct Equipment
     pop_color.r = 255;
     pop_color.g = 255;
     pop_color.b = 255;
+	std::cerr << "skaoar clickbox" << std::endl;
+	weapon_click = new Object::Clickbox(5,550,144,34, "activate");
+	std::cerr << "clickbox skapad" << std::endl;
+	weapon_selected_frame = loadImage("Images/Gui/activated_weapon_frame.png", true);
   }
   ~Equipment()
   {
@@ -62,6 +69,8 @@ struct Equipment
 class Player
 {
  private:
+	Surface acedia;
+	Surface lightning;
   Surface name;
   Surface hero_frame;
   Surface hero_profile;
@@ -76,7 +85,7 @@ class Player
   bool alive;
   std::vector<Object::GameCard*> hand;
   Object::HeroCard* hero;
-  std::stack<Object::GameCard*> judgement_cards;
+  std::vector<Object::GameCard*> judgement_cards;
 
   int player_x;
   int player_y;
@@ -110,14 +119,14 @@ bool getWeaponActivated(){return weapon_activated;}
   }
   void addJudgementCard(Object::GameCard* gc)
   {
-    judgement_cards.push(gc);
+    judgement_cards.push_back(gc);
   }
   Object::GameCard* getJudgementCard()
   {
 	  if(!judgement_cards.empty())
 	  {
-		  Object::GameCard* gc = judgement_cards.top();
-		  judgement_cards.pop();
+		  Object::GameCard* gc = judgement_cards.back();
+		  judgement_cards.pop_back();
 		  return gc;
 	  }
 	  return nullptr;
@@ -135,7 +144,7 @@ bool getWeaponActivated(){return weapon_activated;}
   bool left();
   void kill(){alive = false;}
   bool isAlive(){return alive;}
-  
+  Object::GameCard* activatedWeapon();
   Object::GameCard* handleHand(const SDL_Event& event);
   bool handleEvent(const SDL_Event& event);
   void setPlayerNr(int);

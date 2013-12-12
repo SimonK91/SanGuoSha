@@ -141,6 +141,20 @@ fond keyword in file ZhangLiao
 fond keyword in file ZhaoYun
 fond keyword in file ZhenJi
 fond keyword in file ZhouYu
+skaoar clickbox
+clickbox skapad
+libpng warning: Interlace handling should be turned on when using png_read_image
+skaoar clickbox
+clickbox skapad
+libpng warning: Interlace handling should be turned on when using png_read_image
+skaoar clickbox
+clickbox skapad
+libpng warning: Interlace handling should be turned on when using png_read_image
+skaoar clickbox
+clickbox skapad
+libpng warning: Interlace handling should be turned on when using png_read_image
+skaoar clickbox
+clickbox skapad
 libpng warning: Interlace handling should be turned on when using png_read_image
 libpng warning: Interlace handling should be turned on when using png_read_image
 libpng warning: Interlace handling should be turned on when using png_read_image
@@ -162,32 +176,299 @@ libpng warning: Interlace handling should be turned on when using png_read_image
 libpng warning: Interlace handling should be turned on when using png_read_image
 libpng warning: Interlace handling should be turned on when using png_read_image
 libpng warning: Interlace handling should be turned on when using png_read_image
-libpng warning: Interlace handling should be turned on when using png_read_image
-libpng warning: Interlace handling should be turned on when using png_read_image
-libpng warning: Interlace handling should be turned on when using png_read_image
-libpng warning: Interlace handling should be turned on when using png_read_image
+fond keyword in file acedia
 fond keyword in file draw2
 fond keyword in file draw2
 fond keyword in file lightning
 fond keyword in file lightning
 selected card: true
 selected card: false
-def_horse
-fond keyword in file def_horse
+weapon8
+fond keyword in file weapon8
 libpng warning: Interlace handling should be turned on when using png_read_image
 libpng warning: Interlace handling should be turned on when using png_read_image
-selected card: true
 selected card: false
-off_horse
-fond keyword in file off_horse
-libpng warning: Interlace handling should be turned on when using png_read_image
-libpng warning: Interlace handling should be turned on when using png_read_image
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
 selected card: true
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
+trying yo judge judge:0
+judge:0
 selected card: true
-selected card: true
+trying yo judge judge:0
+judge:0
 nObjects deleted: 4
 players deleted: 5
-deleted cards: 88
+deleted cards: 89
 deleted cards: 20
 deleted cards: 0
 clean up was done!

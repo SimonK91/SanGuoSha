@@ -15,6 +15,9 @@ Player::Player(const std::string& name_) : role(-1),current_life(0),max_life(0),
   cleanUp({font});
   hero_frame.setImage(loadImage("Images/Gui/heroFrame.png",true));
   
+	weapon_activated = false;
+	lightning = loadImage("Images/Gui/lightning.png", true);
+	acedia = loadImage("Images/Gui/acedia.png", true);
 }
 
 Player::~Player()
@@ -26,8 +29,8 @@ Player::~Player()
     }
   while(judgement_cards.size() != 0)
     {
-      delete judgement_cards.top();
-      judgement_cards.pop();
+      delete judgement_cards.back();
+      judgement_cards.pop_back();
     }		
   delete hero;
 }
@@ -213,12 +216,39 @@ void Player::paint(Surface screen)
 	    }
 	  
 	}
-		applySurface(950 , 531,player_role,screen);
+		applySurface(980 , 531,player_role,screen);
 		applySurface(876,555,name,screen);
-      
+		int judgement_pos_x = 900;
+		int judgement_pos_y = 725;
+      if(judgement_cards.size() > 0)
+		{
+			for(unsigned i = 0; i < judgement_cards.size(); ++i)
+			{
+					std::cerr << "trying yo judge judge:" << i << std::endl;
+					if(judgement_cards.at(i)->getAbility() == "acedia")
+					{
+						std::cerr << "judge:" << i << std::endl;
+						applySurface(judgement_pos_x, judgement_pos_y, acedia, screen);
+					}
+					else
+					{
+						std::cerr << "judge:" << i << std::endl;
+						applySurface(judgement_pos_x, judgement_pos_y, lightning, screen);
+					}
+					judgement_pos_x += 50;
+			}				
+		}
       if(equipment.weapon_image.getImage() != nullptr)
 	{
-	  applySurface(5,550,equipment.weapon_image,screen);
+			if(weapon_activated == false)
+			{
+				applySurface(5,550,equipment.weapon_image,screen);
+			}
+			else
+			{
+				applySurface(23,548,equipment.weapon_selected_frame,screen);
+				applySurface(25,550,equipment.weapon_image,screen);
+			}
 	}
       if(equipment.shield_image.getImage() != nullptr)
 	{
@@ -239,53 +269,78 @@ void Player::paint(Surface screen, int x_pos, int y_pos)
 {
   if(hero != nullptr)
     {
-      hero->setPosition(x_pos, y_pos);
-      applySurface(x_pos, y_pos, hero_profile,screen);
-      applySurface(x_pos-3, y_pos-4,hero_frame,screen);
+	
+		hero->setPosition(x_pos, y_pos);	
+		applySurface(x_pos, y_pos, hero_profile,screen);
+		applySurface(x_pos-3, y_pos-4,hero_frame,screen);
+			if(sel)
+			{
+				applySurface(x_pos-5, y_pos-5,selected_frame,screen);
+			}
 		if(role == 0)
+				{
+					applySurface(x_pos +100, y_pos -20,player_role, screen);
+				}
+		int judgement_pos_x = x_pos+5;
+		int judgement_pos_y = y_pos+200;
+		
+		if(judgement_cards.size() > 0)
 		{
-				applySurface(x_pos +100, y_pos -20,player_role, screen);
+			for(unsigned i = 0; i < judgement_cards.size(); ++i)
+			{
+					std::cerr << "trying yo judge judge:" << i << std::endl;
+					if(judgement_cards.at(i)->getAbility() == "acedia")
+					{
+						std::cerr << "judge:" << i << std::endl;
+						applySurface(judgement_pos_x, judgement_pos_y, acedia, screen);
+					}
+					else
+					{
+						std::cerr << "judge:" << i << std::endl;
+						applySurface(judgement_pos_x, judgement_pos_y, lightning, screen);
+					}
+					judgement_pos_x += 50;
+			}				
 		}
-      //ritar ut liv
-      int x_offset_life = x_pos + 70;
-      int y_offset_life = y_pos + 80;
-      for(int i = 0; i < max_life; ++i, x_offset_life += 14)
-	{
-	  if(i < current_life)
-	    {
-	      applySurface(x_offset_life, y_offset_life, life_symbol, screen);
-	    }
-	  else
-	    {
-	      applySurface(x_offset_life, y_offset_life, life_symbol_empty, screen);
-	    }
-	  
-	}
-      //ritar ut ram om markerad
-      if(sel)
-	{
-	  applySurface(x_pos-5, y_pos-5,selected_frame,screen);
-	}
-      applySurface(x_pos+5,y_pos,name,screen);
-    }
+			//ritar ut liv
+			int x_offset_life = x_pos + 70;
+			int y_offset_life = y_pos + 80;
+			for(int i = 0; i < max_life; ++i, x_offset_life += 14)
+				{
+					if(i < current_life)
+						{
+							applySurface(x_offset_life, y_offset_life, life_symbol, screen);
+						}
+					else
+						{
+							applySurface(x_offset_life, y_offset_life, life_symbol_empty, screen);
+						}
+		
+				}
+				//ritar ut ram om markerad
+		
+			applySurface(x_pos+5,y_pos,name,screen);
+						
 
-  if(equipment.weapon_image_thin.getImage() != nullptr)
-    {
-      applySurface(player_x+1, player_y+ 100,equipment.weapon_image_thin,screen);
-    }
-  if(equipment.shield_image_thin.getImage() != nullptr)
-    {
-      applySurface(player_x+1,player_y + 126,equipment.shield_image_thin,screen);
-    }
-  if(equipment.def_horse_image_thin.getImage() != nullptr)
-    {
-      applySurface(player_x+1,player_y + 153,equipment.def_horse_image_thin,screen);
-    }
-  if(equipment.off_horse_image_thin.getImage() != nullptr)
-    {
-      applySurface(player_x+1,player_y + 179,equipment.off_horse_image_thin,screen);
-    }    
+			if(equipment.weapon_image_thin.getImage() != nullptr)
+				{
+					applySurface(player_x+1, player_y+ 100,equipment.weapon_image_thin,screen);
+				}
+			if(equipment.shield_image_thin.getImage() != nullptr)
+				{
+					applySurface(player_x+1,player_y + 126,equipment.shield_image_thin,screen);
+				}
+			if(equipment.def_horse_image_thin.getImage() != nullptr)
+				{
+					applySurface(player_x+1,player_y + 153,equipment.def_horse_image_thin,screen);
+				}
+			if(equipment.off_horse_image_thin.getImage() != nullptr)
+				{
+					applySurface(player_x+1,player_y + 179,equipment.off_horse_image_thin,screen);
+				}
+	}
 }
+
 
 void Player::fixCardPosition()
 {
@@ -364,6 +419,7 @@ bool Player::handleEvent(const SDL_Event& event)
     {
       if(!current_player)
 	{
+			
 	  std::string com = "";
 	  if(hero != nullptr)
 	    {
@@ -373,6 +429,23 @@ bool Player::handleEvent(const SDL_Event& event)
 	    {
 	      return true;	//den blev fucking klickad!
 	    }
+	}
+	if(current_player)
+	{
+		if(equipment.weapon_click->handleEvent(event) == "activate")
+			{
+
+					if(weapon_activated == false)
+					{
+							weapon_activated = true;
+							std::cout << "AKTIVERA VAPEN" << std::endl;
+					}
+				else
+					{
+							weapon_activated = false;
+							std::cout << "AVaktivera VAPEN" << std::endl;
+					}
+			}
 	}
       else
 	{
@@ -401,19 +474,15 @@ Object::GameCard* Player::equipStuff(GameCard* gear, int type)
   Surface tmp_range_surface;
   std::string weapon_range = I2S(gear->getRange());
   std::cerr << gear->getAbility() << std::endl;
-  tmp_range_surface = textToSurface(weapon_range,"Fonts/arial.ttf", 15);
+  tmp_range_surface = textToSurface(weapon_range,"Fonts/arial.ttf", 20);
   
   if(type == 1)
     {
-		/*	if(weapon_pop == nullptr)
-			{
-					weapon_pop = new popupTe
-			}*/
 		equipment.weapon_pop->setFileText("Data/card_descriptions.txt", gear->getAbility());
 		equipment.weapon_image.setImage(loadImage("Images/Gui/weapon.png"));
-		applySurface(60,3,tmp_range_surface,equipment.weapon_image);
+		applySurface(80,3,tmp_range_surface,equipment.weapon_image);
 		equipment.weapon_image_thin.setImage(loadImage("Images/Gui/weapon-thin.png"));
-		applySurface(60,3,tmp_range_surface,equipment.weapon_image_thin);	
+		applySurface(80,1,tmp_range_surface,equipment.weapon_image_thin);	
 		std::swap(equipment.weapon, gear);
 		return gear;
     }
@@ -512,7 +581,7 @@ bool Player::hasAcedia()
 {
 	if(judgement_cards.size() == 0)
 		return false;
-	if(judgement_cards.top() -> getAbility() == "acedia" || judgement_cards.size() == 2)
+	if(judgement_cards.back() -> getAbility() == "acedia" || judgement_cards.size() == 2)
 		return true;
 	return false;
 }
@@ -521,7 +590,21 @@ bool Player::hasLightning()
 {
 	if(judgement_cards.size() == 0)
 		return false;
-	if(judgement_cards.top() -> getAbility() == "lightning" || judgement_cards.size() == 2)
+	if(judgement_cards.back() -> getAbility() == "lightning" || judgement_cards.size() == 2)
 		return true;
 	return false;
+}
+
+Object::GameCard* Player::activatedWeapon()
+{
+	if(weapon_activated == true)
+	{
+			return equipment.weapon;
+	}
+	else
+	{
+		return nullptr;
+	}
+	
+		return nullptr;		
 }
