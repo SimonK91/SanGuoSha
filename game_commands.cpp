@@ -386,6 +386,10 @@ void Game::run_command(const std::string& what_command)
     }
   else if(what_command == "barbarian_attack")
     {
+		// for(int nP = nextPlayer(); nP != self ; nP = nextPlayer(nP))
+			// if(!useCard("attack","attack or lose a life",players.at(nP)))
+				// players.at(nP) -> modifyLife(-1);
+		
 		static int barbarianTarget = 0;
 		bool playedAttack = false;
       timer->reset(sett.getTimerTime(),"barbarian_attack");

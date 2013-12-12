@@ -20,16 +20,18 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
   else if(effect == "attack")	//måste fixas mera!!! sköldar + vapen o skit!
     {
 
-	  timer->reset(sett.getTimerTime(),"take_damage");
+	  // timer->reset(sett.getTimerTime(),"take_damage");
 	  
-		Window* dodgeWindow = new Window(160,250,500,250);
-		dodgeWindow -> makeButton("Dodge",37,70,"dodge");
-		dodgeWindow -> makeButton("Take damage",260,70, "take_damage");
-		add_window(dodgeWindow);
-		has_window = true;
+		// Window* dodgeWindow = new Window(160,250,500,250);
+		// dodgeWindow -> makeButton("Dodge",37,70,"dodge");
+		// dodgeWindow -> makeButton("Take damage",260,70, "take_damage");
+		// add_window(dodgeWindow);
+		// has_window = true;
 
-		target_player.at(0) -> setCurrentPlayer(true);
-		current_player -> setCurrentPlayer(false);
+		if(!useCard("dodge", "dodge the attack or lose a life",target_player.at(0)))
+			target_player.at(0) ->modifyLife(-1);
+		// target_player.at(0) -> setCurrentPlayer(true);
+		// current_player -> setCurrentPlayer(false);
     }
   else if(effect == "heal")
     {
@@ -138,25 +140,27 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
   else if(effect == "barbarian")
     {
       m.playSoundEffect(5);
-      timer->reset(sett.getTimerTime(),"barbarian_attack");
-	  
- 		Window* barbarianWindow = new Window(50,350,350,200);
+      // timer->reset(sett.getTimerTime(),"barbarian_attack");
+	  for(int nP = nextPlayer(); nP != self ; nP = nextPlayer(nP))
+			if(!useCard("attack","attack or lose a life",players.at(nP)))
+				players.at(nP) -> modifyLife(-1);
+ 		// Window* barbarianWindow = new Window(50,350,350,200);
 		
-		// barbarianWindow -> addCard(gameCard,400,350);
-		barbarianWindow -> makeTextbox(20,40,310,30);
-		barbarianWindow -> makeButton("Attack!!!",70,100,"barbarian_attack");
-		barbarianWindow -> setText(0,"   Attack the barbarians or lose a life!");
-		add_window(barbarianWindow);
-		has_window = true;
+		// // barbarianWindow -> addCard(gameCard,400,350);
+		// barbarianWindow -> makeTextbox(20,40,310,30);
+		// barbarianWindow -> makeButton("Attack!!!",70,100,"barbarian_attack");
+		// barbarianWindow -> setText(0,"   Attack the barbarians or lose a life!");
+		// add_window(barbarianWindow);
+		// has_window = true;
 		
-		//current player is going to go around
-		current_player -> setCurrentPlayer(false);
-		target_player.clear();
-		for(int i = (self + 1) % players.size(); i != self; i = (i + 1) % players.size())
-			target_player.push_back(players.at(i));
+		// //current player is going to go around
+		// current_player -> setCurrentPlayer(false);
+		// target_player.clear();
+		// for(int i = (self + 1) % players.size(); i != self; i = (i + 1) % players.size())
+			// target_player.push_back(players.at(i));
 		
-		// target_player.at(0) = players.at((self +1) % players.size());
-		target_player.at(0) -> setCurrentPlayer(true);
+		// // target_player.at(0) = players.at((self +1) % players.size());
+		// target_player.at(0) -> setCurrentPlayer(true);
     }
   else if(effect == "raining_arrows")
     {
@@ -326,33 +330,41 @@ bool Game::acedia()
 	bool occured;
 	if(!negated())
 	{
+	
+	
 		std::string command;
-		GameCard* judge_card = dynamic_cast<GameCard*>(card_deck -> drawCard());
-		if( judge_card -> getSuit() != hearts)
-			occured = true;
-		else
-			occured = false;
 		
+		GameCard* judge_card = dynamic_cast<GameCard*>(card_deck -> drawCard());
 		Window* window_show_card = new Window(200,150,300,400);
-		judge_card -> setPosition(250,165);
+		window_show_card -> makeTextbox(5,5,290,70);
+		if( judge_card -> getSuit() != hearts)
+		{
+			occured = true;
+			window_show_card -> setText(0,"Acedia triggered - you cannot play your action phase");
+		}
+		else
+		{
+			occured = false;
+			window_show_card -> setText(0,"Acedia did not trigger - you lucky bastard");			
+		}
+				
+		judge_card -> setPosition(280,225);
 		window_show_card -> makeButton("OK",50,320,"close");
 		
 		has_window = true;
 		while(has_window && running)
 		{
-		  command = timer->time_ran_out();
+			command = timer->time_ran_out();
 			while(SDL_PollEvent( &event))
 			{
 			  exitCommand(event);
 			  if(command != "")
 				command = window_show_card->handleEvent(event);
-			  
-			
 			}
 			if(command == "close")
-				{
-					has_window = false;
-				}
+			{
+				has_window = false;
+			}
 			//måla lite fint
 			paint();
 			
