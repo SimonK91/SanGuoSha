@@ -86,6 +86,7 @@ class Player
 
   bool sel;
   Surface selected_frame;
+	bool weapon_activated;
 
  public:
   Player(const std::string&);
@@ -93,6 +94,7 @@ class Player
 
   Equipment equipment;
   
+bool getWeaponActivated(){return weapon_activated;}
   void setHero(Object::HeroCard*);
   Object::GameCard* playCard(int);
   Object::GameCard* loseCard(int);

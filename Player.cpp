@@ -197,10 +197,10 @@ void Player::paint(Surface screen)
 	{
 	  i->paint(screen);
 	}
-      applySurface(970,540,player_role,screen);
+    
       //ritar ut liv
       int x_offset_life = 872 + 30;
-      int y_offset_life = 555 + 5;
+      int y_offset_life = 580;
       for(int i = 0; i < max_life; ++i, x_offset_life += 17)
 	{
 	  if(i < current_life)
@@ -213,7 +213,8 @@ void Player::paint(Surface screen)
 	    }
 	  
 	}
-      applySurface(876,555,name,screen);
+		applySurface(950 , 531,player_role,screen);
+		applySurface(876,555,name,screen);
       
       if(equipment.weapon_image.getImage() != nullptr)
 	{
@@ -241,7 +242,10 @@ void Player::paint(Surface screen, int x_pos, int y_pos)
       hero->setPosition(x_pos, y_pos);
       applySurface(x_pos, y_pos, hero_profile,screen);
       applySurface(x_pos-3, y_pos-4,hero_frame,screen);
-
+		if(role == 0)
+		{
+				applySurface(x_pos +100, y_pos -20,player_role, screen);
+		}
       //ritar ut liv
       int x_offset_life = x_pos + 70;
       int y_offset_life = y_pos + 80;
@@ -393,89 +397,55 @@ void Player::setSelected(bool change_select)
 
 Object::GameCard* Player::equipStuff(GameCard* gear, int type)
 {
+		
   Surface tmp_range_surface;
   std::string weapon_range = I2S(gear->getRange());
   std::cerr << gear->getAbility() << std::endl;
-  //std::string weapon_range = "5";
   tmp_range_surface = textToSurface(weapon_range,"Fonts/arial.ttf", 15);
   
   if(type == 1)
     {
-      equipment.weapon_pop->setText("VAPEN DO DMG AND WIN");
-      // equipment.weapon_pop->setFileText("Data/equipment.txt", gear->getAbility().substr(13,10));
-      if(equipment.weapon_image.getImage() == nullptr)
-	{
-	  equipment.weapon_image.setImage(loadImage("Images/Gui/weapon.png"));
-	  applySurface(0,0,tmp_range_surface,equipment.weapon_image);
-	  equipment.weapon_image_thin.setImage(loadImage("Images/Gui/weapon-thin.png"));
-	}
-      if(equipment.weapon == nullptr)
-	{
-	  std::swap(equipment.weapon, gear);
-	  return gear;
-	}
-      else
-	{
-	  equipment.weapon = gear;
-	  return nullptr;
-	}
+		/*	if(weapon_pop == nullptr)
+			{
+					weapon_pop = new popupTe
+			}*/
+		equipment.weapon_pop->setFileText("Data/card_descriptions.txt", gear->getAbility());
+		equipment.weapon_image.setImage(loadImage("Images/Gui/weapon.png"));
+		applySurface(60,3,tmp_range_surface,equipment.weapon_image);
+		equipment.weapon_image_thin.setImage(loadImage("Images/Gui/weapon-thin.png"));
+		applySurface(60,3,tmp_range_surface,equipment.weapon_image_thin);	
+		std::swap(equipment.weapon, gear);
+		return gear;
     }
   else if(type == 2)
     {
-      equipment.shield_pop->setText("shield, describe how it works");
-      if(equipment.shield_image.getImage() == nullptr)
-	{
+      equipment.shield_pop->setFileText("Data/card_descriptions.txt", gear->getAbility());
 	  equipment.shield_image.setImage(loadImage("Images/Gui/shield.png"));
 	  equipment.shield_image_thin.setImage(loadImage("Images/Gui/shield-thin.png"));
-	}
-      if(equipment.shield == nullptr)
-	{
+
 	  std::swap(equipment.shield, gear);
 	  return gear;
 	}
-      else
-	{
-	  equipment.shield = gear;
-	  return nullptr;
-	}
-    }
+
+    
   else if(type == 3)
     {
-      equipment.off_horse_pop->setText("offensive horse, fuck you horse");
-      if(equipment.off_horse_image.getImage() == nullptr)
-	{
+      equipment.off_horse_pop->setFileText("Data/card_descriptions.txt", gear->getAbility());
 	  equipment.off_horse_image.setImage(loadImage("Images/Gui/offensive-horse.png"));
 	  equipment.off_horse_image_thin.setImage(loadImage("Images/Gui/offensive-horse-thin.png"));
-	}
-      if(equipment.off_horse == nullptr)
-	{
+
 	  std::swap(equipment.off_horse, gear);
 	  return gear;
 	}
-      else
-	{
-	  equipment.off_horse = gear;
-	  return nullptr;
-	}
-    }
+
   else if(type == 4)
     {
-      equipment.def_horse_pop->setText("why so defensive");
-      if(equipment.def_horse_image.getImage() == nullptr)
-	{
+      equipment.def_horse_pop->setFileText("Data/card_descriptions.txt", gear->getAbility());
 	  equipment.def_horse_image.setImage(loadImage("Images/Gui/defensive-horse.png"));
 	  equipment.def_horse_image_thin.setImage(loadImage("Images/Gui/defensive-horse-thin.png"));					    
-	}
-      if(equipment.def_horse == nullptr)
-	{
+
 	  std::swap(equipment.def_horse, gear);
 	  return gear;
-	}
-      else
-	{
-	  equipment.def_horse = gear;
-	  return nullptr;
-	}
     }
   std::cerr << "något gick snett(vi fick en en equipment som inte är vapen/shield/off_horse/def_horse" << std::endl;
   return nullptr;
@@ -483,10 +453,23 @@ Object::GameCard* Player::equipStuff(GameCard* gear, int type)
 
 void Player::showToolTip(Surface screen)
 {
-  equipment.def_horse_pop->paint(screen);
-  equipment.off_horse_pop->paint(screen);
-  equipment.weapon_pop->paint(screen);
-  equipment.shield_pop->paint(screen);
+		if(equipment.def_horse != nullptr)
+		{
+			equipment.def_horse_pop->paint(screen);
+		}
+		if(equipment.off_horse != nullptr)
+		{
+			  equipment.off_horse_pop->paint(screen);
+		}
+		if(equipment.weapon != nullptr)
+		{
+			  equipment.weapon_pop->paint(screen);
+		}
+		if(equipment.shield != nullptr)
+		{
+			  equipment.shield_pop->paint(screen);
+		}
+
   if(isCurrentPlayer() == true)
     {
       for(GameCard* g : hand)
