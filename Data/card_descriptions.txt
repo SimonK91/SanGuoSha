@@ -19,7 +19,7 @@ negate
 [Negate]
 --
 weapon0
-[Blue steel blade
+[Blue steel blade]
 --
 weapon1
 [Double gender sword]

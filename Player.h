@@ -159,10 +159,11 @@ bool getWeaponActivated(){return weapon_activated;}
   
   void fixCardPosition();
   void setSelected(bool);
-	  std::string getName(){return player_name;}
+  std::string getName(){return player_name;}
   void setPos(int x_pos, int y_pos);
   Object::GameCard* equipStuff(Object::GameCard* gear, int type);
   void showToolTip(Surface);
   void handleToolTip(SDL_Event&);
+  Object::GameCard* getShield(){return equipment.shield;}
 };
 #endif

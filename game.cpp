@@ -386,10 +386,10 @@ void Game::runHotseat()
 	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
 	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
 	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(1,clubs,"lightning.png","lightning 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(1,clubs,"harvest.png","harvest 0 0")); //ability id, target type, target range
-	
-	
+	//card_deck -> pushTop(new GameCard(1,clubs,"lightning.png","lightning 0 0")); //ability id, target type, target range
+	//card_deck -> pushTop(new GameCard(1,clubs,"harvest.png","harvest 0 0")); //ability id, target type, target range
+	card_deck ->pushTop(new GameCard(2,clubs,"ba_gua_shield.png",					"shield0 5 0"));
+	card_deck -> pushTop(new GameCard(2,clubs,"ren_wang_shield.png",				"shield1 5 0"));
 	GameCard* card = nullptr;
 	Window* nextPlayer_window = new Window(270,350,300,150);
 	nextPlayer_window -> makeTextbox(40,25,220,30,17);
@@ -957,7 +957,10 @@ void Game::cleanPlayer(Player* what_player)
 	    {
 	      discard_pile -> pushBottom(dynamic_cast<GameCard*>(tmp_object));
 	    }
-	  tmp_object = nullptr;
+	  else if(tmp_object != nullptr)
+	  {
+		  delete tmp_object;
+	  }
 	}
       delete kill_window;
       timer->reset(sett.getTimerTime(), timer->getCommand());
@@ -1118,8 +1121,8 @@ bool Game::useCard(const std::string& cardID, const std::string& description, Pl
 		else
 		{
 			options.paint(screen);
+			player->setPos(600,240);
 			player->paint(screen,600,240);
-			
 		}
 		
 		SDL_Flip(screen.getImage());
@@ -1130,6 +1133,82 @@ bool Game::useCard(const std::string& cardID, const std::string& description, Pl
 	return occured;
 }
 	
+bool Game::shieldBlock()
+{
+	bool blocked = false;
+	Window* block_window = new Window(100,200,400,400);
+	block_window->makeButton("Ok", 120,350,"ok");
+	block_window->makeTextbox(50,50,300,70);
+	has_window = false;	
+	std::string command = "";
+	GameCard* judge_card;
+	bool unblockable = false;
+	if(current_player->equipment.weapon != nullptr)
+	{
+		if(current_player->equipment.weapon->getAbility() == "weapon0")
+		{
+			unblockable = true;
+		}
+	}
+	
+	if(target_player.at(0)->equipment.shield != nullptr && unblockable == false)
+		{
+			if(target_player.at(0)->equipment.shield->getAbility() == "shield1")
+				{	
+					if(selected_card->getSuit() == spades || selected_card->getSuit()  == clubs)
+					{
+						blocked = true;
+						block_window->setText(1,"Black attack blocked");
+						has_window = true;
+					}
+				}
+				if(target_player.at(0)->equipment.shield->getAbility() == "shield0")
+				{
+					has_window = true;
+					judge_card = dynamic_cast<GameCard*>(card_deck -> drawCard());
+					block_window->addCard(judge_card,50,140);
+					if( judge_card -> getSuit() == hearts || judge_card -> getSuit() == diamonds)
+					{
+						blocked = true;
+						block_window->setText(1,"Red card, attack blocked by shield");
+					}
+				}
+
+			while(has_window)
+			{
+				
+					while(SDL_PollEvent(&event))
+						{
+							command = block_window->handleEvent(event);
+						}						
+				if(command == "ok")
+				{
+					has_window = false;
+				}					
+				
+				paint();
+				block_window->paint(screen);
+				SDL_Flip(screen.getImage());
+				fps.regulateFPS();
+			}
+			 Object::Object* tmp_object = nullptr;
+			while(block_window->getSize() > 0)
+			{
+				tmp_object = block_window->remove(0);
+				if( dynamic_cast<GameCard*>(tmp_object) != nullptr)
+				{
+					discard_pile -> pushBottom(dynamic_cast<GameCard*>(tmp_object));
+				}
+				else if(tmp_object != nullptr)
+				{
+					delete tmp_object;
+				}
+			}
+			delete block_window;
+				
+		}
+	return blocked;
+}
 #include "game_commands.cpp"
 #include "card_commands.cpp"
 #include "rulebook.cpp"

@@ -19,10 +19,12 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
     }
   else if(effect == "attack")	//måste fixas mera!!! sköldar + vapen o skit!
     {
-	
-		if(!useCard("dodge", "dodge the attack or lose a life",target_player.at(0)))
-			target_player.at(0) ->modifyLife(-1);
-    }
+		if(shieldBlock() == false)
+		{
+			if(!useCard("dodge", "dodge the attack or lose a life",target_player.at(0)))
+				target_player.at(0) ->modifyLife(-1);
+		}
+	}
 	
   else if(effect == "heal")
     {
