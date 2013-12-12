@@ -236,80 +236,93 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 
 bool Game::negated()
 {
-	GameCard* played_card = selected_card;
-	int i = self;
-	Player* cur_player = players.at(self);
-	Window* negate_window = new Window(250,350,400,200);
-	negate_window->makeButton("Negate",30,120,"negate_true");
-	negate_window->makeButton("Skip",280,120,"negate_false");
-	std::string command;
-	bool isNegated = false;
-	current_player->setCurrentPlayer(false);
-    GameCard* card;
-	std::vector<GameCard*> hand;
-	do
+  GameCard* played_card = selected_card;
+  int i = self;
+  Player* cur_player = players.at(self);
+  Window* negate_window = new Window(250,350,400,200);
+  negate_window->makeButton("Negate",30,120,"negate_true");
+  negate_window->makeButton("Skip",280,120,"negate_false");
+  std::string command;
+  bool isNegated = false;
+  current_player->setCurrentPlayer(false);
+  GameCard* card;
+  std::vector<GameCard*> hand;
+  do
+    {
+      timer->reset(sett.getTimerTime(), "negate_false");
+      has_window = true;
+      cur_player -> setCurrentPlayer(true);
+      hand = cur_player ->getHand();
+      card = nullptr;
+      while(has_window && running)
 	{
-		//add_window(negate_window);
-		has_window = true;
-		cur_player -> setCurrentPlayer(true);
-		hand = cur_player ->getHand();
-		card = nullptr;
-		while(has_window)
+	  std::string timer_cmp = timer->time_ran_out();
+	  while(SDL_PollEvent( &event))
+	    {
+	      exitCommand(event);
+	       command = negate_window->handleEvent(event);
+	    }
+	  if(command != "negate_true" && command != "negate_false" && timer_cmp != "")
+	    {
+	      command = timer_cmp;
+	    }
+	  if(command == "negate_true")
+	    {
+	      for(unsigned i = 0; i < hand.size(); ++i)
 		{
-			while(SDL_PollEvent( &event))
-			{
-				command = negate_window->handleEvent(event);
-				if(command == "negate_true")
-				{
-					for(unsigned i = 0; i < hand.size(); ++i)
-					{
-						if(hand.at(i) -> getAbility() == "negate")
-						{
-							card = cur_player -> playCard(i);
-							isNegated = true;
-							break;
-						}
-					}
-				
-					if(card != nullptr)
-						discard_pile -> pushBottom(card);
-					
-					has_window = false;
-					
-				}
-				else if(command == "negate_false")
-				{
-					has_window = false;
-				}
-					
-			}
-			//måla lite fint
-			paint();
-			
-			negate_window->paint(screen);
-			SDL_Flip(screen.getImage());                   // Skriv ut bilden pÃ¥ skÃ¤rmen
-			fps.regulateFPS();
+		  if(hand.at(i) -> getAbility() == "negate")
+		    {
+		      card = cur_player -> playCard(i);
+		      isNegated = true;
+		      break;
+		    }
 		}
-		do
-		{
-			if(++i == players.size())
-				i = 0;
-		}while(players.at(i) ->getLife() <=0);
-		cur_player -> setCurrentPlayer(false);
-		cur_player = players.at(i);
+	      
+	      if(card != nullptr)
+		discard_pile -> pushBottom(card);
+	      
+	      has_window = false;
+	      
+	    }
+	  else if(command == "negate_false")
+	    {
+	      has_window = false;
+	    }
+
+	  paint();
+	  negate_window->paint(screen);
+	  SDL_Flip(screen.getImage());
+	  fps.regulateFPS();
 	}
-	while(cur_player != current_player && !isNegated);
-	current_player -> setCurrentPlayer(true);
-	delete negate_window;
-	selected_card = played_card;
-	if(isNegated)
-		return !negated();
-	
-	return false;
+      do
+	{
+	  if(++i == players.size())
+	    i = 0;
+	}while(players.at(i) ->getLife() <=0);
+
+      if(cur_player != players.at(i))
+	{
+	  timer->reset(sett.getTimerTime(), "negate_false");
+	  command = "";
+	}
+      cur_player -> setCurrentPlayer(false);
+      cur_player = players.at(i);
+
+    }while(cur_player != current_player && !isNegated);
+  
+  current_player -> setCurrentPlayer(true);
+  delete negate_window;
+  selected_card = played_card;
+  
+  if(isNegated)
+    return !negated();
+  timer->reset(sett.getTimerTime(), "end_turn");
+  return false;
 }
 
 bool Game::acedia()
 {
+  timer->reset(sett.getTimerTime(), "close");
 	bool occured;
 	if(!negated())
 	{
@@ -325,16 +338,21 @@ bool Game::acedia()
 		window_show_card -> makeButton("OK",50,320,"close");
 		
 		has_window = true;
-		while(has_window)
+		while(has_window && running)
 		{
+		  command = timer->time_ran_out();
 			while(SDL_PollEvent( &event))
 			{
+			  exitCommand(event);
+			  if(command != "")
 				command = window_show_card->handleEvent(event);
-				if(command == "close")
+			  
+			
+			}
+			if(command == "close")
 				{
 					has_window = false;
 				}
-			}
 			//måla lite fint
 			paint();
 			
@@ -344,6 +362,14 @@ bool Game::acedia()
 			fps.regulateFPS();
 		}
 		delete window_show_card;
+		if(occured)
+		  {
+		    timer->reset(sett.getTimerTime(), "time_out");
+		  }
+		else
+		  {
+		    timer->reset(sett.getTimerTime(), "end_turn");
+		  }
 		return occured;
 	}
 	return false;
@@ -351,6 +377,8 @@ bool Game::acedia()
 
 bool Game::lightningExplode()
 {
+  std::string tmp_command = timer->getCommand();
+  timer->reset(sett.getTimerTime(),"close");
 	bool occured;
 	if(!negated())
 	{
@@ -370,15 +398,21 @@ bool Game::lightningExplode()
 		judge_card -> setPosition(280,225);
 		window_show_card -> makeButton("OK",50,320,"close");
 		has_window = true;
-		while(has_window)
+		while(has_window && running)
 		{
 			while(SDL_PollEvent( &event))
 			{
+			  exitCommand(event);
 				if(window_show_card->handleEvent(event) == "close")
 				{
 					has_window = false;
 				}
+				
 			}
+			if(timer->time_ran_out() == "close")
+			  {
+			    has_window = false;
+			  }
 			//måla lite fint
 			paint();
 			
@@ -388,7 +422,10 @@ bool Game::lightningExplode()
 			fps.regulateFPS();
 		}
 		delete window_show_card;
+		
+		timer->reset(sett.getTimerTime(), tmp_command);
 		return occured;
 	}
+	timer->reset(sett.getTimerTime(), tmp_command);
 	return false;
 }

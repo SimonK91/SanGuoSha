@@ -59,7 +59,7 @@ public:
   
   virtual void run() = 0;
   virtual void run_command(const std::string& what_command) = 0; //finns skapad i "game_state_commands.cpp"
-  
+
   void load_background(const std::string& bg){background = loadImage(bg);}
   bool make_button(const std::string& name, const int& x_pos, const int& y_pos, const std::string& command,
 		   const std::string& image = "Images/Gui/cleanButton2.png", const unsigned& size = 20);
@@ -94,7 +94,7 @@ private:
   unsigned self;
   int state;
   bool run_next;
-  
+  Uint8 *keystates;
   int game_stage;
   
   std::vector<Player*> target_player;
@@ -118,6 +118,7 @@ private:
   
   void cleanPlayer(Player*);
   
+  void exitCommand(SDL_Event&);
   
   void paint();
   void run_command(const std::string& what_command);
@@ -146,7 +147,7 @@ private:
       }
     state = 1;
     timer = new Timer(5,500,5,"end_turn");
-
+    keystates = SDL_GetKeyState(nullptr);
     
   }
   

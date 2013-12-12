@@ -79,6 +79,7 @@ void cleanUp(std::vector<TTF_Font*> clean_font = {});
 std::string I2S(const int&);
 int S2I(const std::string&);
 
+Surface textToSurface(std::string, std::string, int);
 bool loadSettings( std::vector<std::pair<std::string, std::string>>&);
 bool writeSettings(std::vector<std::pair<std::string, std::string>>);
 

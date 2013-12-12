@@ -14,6 +14,7 @@ Player::Player(const std::string& name_) : role(-1),current_life(0),max_life(0),
   
   cleanUp({font});
   hero_frame.setImage(loadImage("Images/Gui/heroFrame.png",true));
+  
 }
 
 Player::~Player()
@@ -61,6 +62,27 @@ void Player::setHero(HeroCard* character)
       life_symbol.setImage(loadImage("Images/Cards/Characters/life-gray.png",true));
     }
   life_symbol_empty.setImage(loadImage("Images/Cards/Characters/life-black.png", true));
+}
+void Player::setRole(int r)
+{
+  role = r;
+  if(r == 0)
+    {
+      player_role.setImage(loadImage("Images/Gui/emperor.png", true));
+    }
+  else if(r == 1)
+    {
+      player_role.setImage(loadImage("Images/Gui/loyal.png", true));
+    }
+  else if(r == 2)
+    {
+      player_role.setImage(loadImage("Images/Gui/spy.png", true));
+    }
+  else  if(r == 3)
+    {
+      player_role.setImage(loadImage("Images/Gui/rebel.png", true));
+    }
+  
 }
 
 GameCard* Player::playCard(int index)
@@ -175,6 +197,7 @@ void Player::paint(Surface screen)
 	{
 	  i->paint(screen);
 	}
+      applySurface(970,540,player_role,screen);
       //ritar ut liv
       int x_offset_life = 872 + 30;
       int y_offset_life = 555 + 5;
@@ -370,6 +393,12 @@ void Player::setSelected(bool change_select)
 
 Object::GameCard* Player::equipStuff(GameCard* gear, int type)
 {
+  Surface tmp_range_surface;
+  std::string weapon_range = I2S(gear->getRange());
+  std::cerr << gear->getAbility() << std::endl;
+  //std::string weapon_range = "5";
+  tmp_range_surface = textToSurface(weapon_range,"Fonts/arial.ttf", 15);
+  
   if(type == 1)
     {
       equipment.weapon_pop->setText("VAPEN DO DMG AND WIN");
@@ -377,6 +406,7 @@ Object::GameCard* Player::equipStuff(GameCard* gear, int type)
       if(equipment.weapon_image.getImage() == nullptr)
 	{
 	  equipment.weapon_image.setImage(loadImage("Images/Gui/weapon.png"));
+	  applySurface(0,0,tmp_range_surface,equipment.weapon_image);
 	  equipment.weapon_image_thin.setImage(loadImage("Images/Gui/weapon-thin.png"));
 	}
       if(equipment.weapon == nullptr)
@@ -447,7 +477,7 @@ Object::GameCard* Player::equipStuff(GameCard* gear, int type)
 	  return nullptr;
 	}
     }
-  //något gick snett(vi fick en en equipment som inte är vapen/shield/off_horse/def_horse
+  std::cerr << "något gick snett(vi fick en en equipment som inte är vapen/shield/off_horse/def_horse" << std::endl;
   return nullptr;
 }
 

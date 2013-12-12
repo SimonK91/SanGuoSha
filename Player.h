@@ -65,6 +65,7 @@ class Player
   Surface name;
   Surface hero_frame;
   Surface hero_profile;
+  Surface player_role;
   int role;
   int current_life;
   int max_life;
@@ -142,7 +143,7 @@ class Player
   const std::vector<Object::GameCard*>& getHand(){ return hand; } //only read not whrite
   unsigned getHandSize(){ return hand.size(); }
   
-  void setRole(int r){role = r;}
+  void setRole(int r);
   int getRole(){return role;}
   std::string getHeroName(){return hero->getName();}
   

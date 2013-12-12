@@ -200,3 +200,19 @@ bool writeSettings(std::vector< std::pair<std::string, std::string>> settings)
   std::cout << "Write settings okay!" << std::endl;
   return true;
 }
+
+Surface textToSurface(std::string text, std::string font, int size)
+{
+  SDL_Color text_color;
+  text_color.r = 0;
+  text_color.g = 0;
+  text_color.b = 0;
+  
+  TTF_Font* f = TTF_OpenFont(font.c_str(), size);
+  
+  Surface tmp_surface;
+  tmp_surface = TTF_RenderText_Solid(f, text.c_str(), text_color);
+  
+  TTF_CloseFont(f);
+  return tmp_surface;
+}

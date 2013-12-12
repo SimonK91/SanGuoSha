@@ -624,7 +624,7 @@ bool Game::exit()
 
 void Game::UI()
 {
-	Uint8 *keystates = SDL_GetKeyState(nullptr);
+	
 	std::string command = "";
 	static Button play_button("Play", 800, 575, "play_card","Images/Gui/smallButton.png",20);
 	static Button end_button("End", 800, 630, "end_turn","Images/Gui/smallButton.png",20);
@@ -838,7 +838,7 @@ void Game::paint()
 	  {
 	    timer->paint(screen);
 	  }
-	if(sett.getToolTips() == true)
+	if(sett.getToolTips() == true && state != 0)
 	  {
 	    for(Player* pp : players)
 	      {
@@ -896,28 +896,104 @@ int Game::nextPlayer( int unique)
 
 void Game::cleanPlayer(Player* what_player)
 {
-	GameCard* clean;
-	//rensar judgementkort
-	do
+  timer->stop();
+  Window* kill_window = new Window(150,300,500,400);
+
+  GameCard* tmp_card;
+  int x_offset = 20;
+  int y_offset = 70;
+  std::string tmp_name = what_player->getHeroName() + " was killed";
+  Surface player_name = textToSurface(tmp_name, "Fonts/arial.ttf",20);
+  tmp_card = what_player ->getJudgementCard();
+  if(tmp_card != nullptr)
+    {
+      kill_window->addCard(tmp_card,x_offset,y_offset);
+    }
+  tmp_card = nullptr;
+  x_offset += 50;
+  while(what_player->getHand().size() > 0)
+    {
+      tmp_card = what_player->loseCard(0);
+      kill_window->addCard(tmp_card,x_offset,y_offset);
+      x_offset += 50;
+      tmp_card = nullptr;
+    }
+  x_offset = 20;
+  y_offset = 160;
+  for(int i = 0 ; i < 4 ; ++i)
+    {
+      tmp_card = what_player -> loseEquipment(i);
+      if(tmp_card != nullptr)
+	kill_window->addCard(tmp_card, x_offset,y_offset);
+    }
+
+  kill_window->makeButton("Ok", 300,300, "continue");
+  std::string command = "";
+ 
+      has_window = true;
+      while(has_window && running)
 	{
-		clean = what_player -> getJudgementCard();
-		if(clean != nullptr)
-			discard_pile -> pushBottom(clean);
-	}while(clean != nullptr);
-	
-	do
-	{
-		clean = what_player -> loseCard(0);
-		if(clean != nullptr)
-			discard_pile ->pushBottom(clean);
-	}while(clean != nullptr);
-	
-	for(int i = 0 ; i < 4 ; ++i)
-	{
-		clean = what_player -> loseEquipment(i);
-		if(clean != nullptr)
-			discard_pile ->pushBottom(clean);
+	  while(SDL_PollEvent(&event))
+	    {
+	      command = kill_window->handleEvent(event);
+	      exitCommand(event);
+	    }
+	  if(command == "continue")
+	    {
+	      has_window = false;
+	    }
+
+	  paint();
+	  kill_window->paint(screen);
+	  applySurface(200,330,player_name,screen);
+	  SDL_Flip(screen.getImage());
+	  fps.regulateFPS();
 	}
+      Object::Object* tmp_object = nullptr;
+      while(kill_window->getSize() > 0)
+	{
+	  tmp_object = kill_window->remove(0);
+	  if( dynamic_cast<GameCard*>(tmp_object) != nullptr)
+	    {
+	      discard_pile -> pushBottom(dynamic_cast<GameCard*>(tmp_object));
+	    }
+	  tmp_object = nullptr;
+	}
+      delete kill_window;
+      timer->reset(sett.getTimerTime(), timer->getCommand());
+  /*
+  GameCard* clean;
+  //rensar judgementkort
+  do
+    {
+      clean = what_player -> getJudgementCard();
+      if(clean != nullptr)
+	discard_pile -> pushBottom(clean);
+    }while(clean != nullptr);
+  
+  do
+    {
+      clean = what_player -> loseCard(0);
+      if(clean != nullptr)
+	discard_pile ->pushBottom(clean);
+    }while(clean != nullptr);
+  
+  for(int i = 0 ; i < 4 ; ++i)
+    {
+      clean = what_player -> loseEquipment(i);
+      if(clean != nullptr)
+	discard_pile ->pushBottom(clean);
+    }
+  */
+}
+
+void Game::exitCommand(SDL_Event& event)
+{
+  if( event.type == SDL_QUIT || (keystates[SDLK_LALT] && event.key.keysym.sym == SDLK_F4))
+    {
+      running = false;
+      run_next = false;
+    }
 }
 	
 #include "game_commands.cpp"
