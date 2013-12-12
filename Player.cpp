@@ -8,7 +8,7 @@ Player::Player(const std::string& name_) : role(-1),current_life(0),max_life(0),
   current_player = false;
   sel = false;
   selected_frame.setImage(loadImage("Images/Cards/Characters/hero-frame.png",true));
-  
+  player_name = name_;
   TTF_Font* font = TTF_OpenFont("Fonts/LHANDW.TTF",13);
   name = TTF_RenderText_Blended(font,name_.c_str(),{255,255,255,0});	//skapa en yta med namnet
   
