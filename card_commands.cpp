@@ -20,32 +20,34 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
   else if(effect == "attack")	//måste fixas mera!!! sköldar + vapen o skit!
     {
 		has_attacked = true;
-		if(!useCard("dodge", "dodge the attack or lose a life",target_player.at(0)))
+		if(!shieldBlock("attack"))
 		{
-			modifyLife(target_player.at(0),-1);
-			if(current_player -> equipment.weapon != nullptr && current_player -> equipment.weapon ->getAbility() == "weapon4") //unicorn bow
-				UnicornBow();
-		}
-		else
-		{
-			if(current_player -> equipment.weapon != nullptr && current_player -> equipment.weapon ->getAbility() == "weapon2") //green dragon cresent
+			if(!useCard("dodge", "dodge the attack or lose a life",target_player.at(0)))
 			{
-				bool done = false;
-				do
+				modifyLife(target_player.at(0),-1);
+				if(current_player -> equipment.weapon != nullptr && current_player -> equipment.weapon ->getAbility() == "weapon4") //unicorn bow
+					UnicornBow();
+			}
+			else
+			{
+				if(current_player -> equipment.weapon != nullptr && current_player -> equipment.weapon ->getAbility() == "weapon2") //green dragon cresent
 				{
-					
-					if(useCard("attack", "your attack was dodged, continue attack the target?", current_player))
+					bool done = false;
+					do
 					{
-						if(!useCard("dodge", "dodge the attack or lose a life",target_player.at(0)))
+						if(useCard("attack", "your attack was dodged, continue attack the target?", current_player))
 						{
-							modifyLife(target_player.at(0),-1);
-							done = true;
+							if(!useCard("dodge", "dodge the attack or lose a life",target_player.at(0)))
+							{
+								modifyLife(target_player.at(0),-1);
+								done = true;
+							}
 						}
-					}
-					else
-						done = true;
-				}while(!done);
-			}				
+						else
+							done = true;
+					}while(!done);
+				}				
+			}
 		}
     }
 	
@@ -62,21 +64,29 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
     {
       m.playSoundEffect(2);
       gameCard = current_player -> equipStuff(gameCard,3);
+	  if(gameCard != nullptr)
+		discard_pile -> pushBottom(gameCard);
     }
   else if(effect == "def_horse")
     {
       m.playSoundEffect(2);
       gameCard = current_player -> equipStuff(gameCard,4);
+	  if(gameCard != nullptr)
+		discard_pile -> pushBottom(gameCard);
     }
   else if(effect.substr(0,6) == "weapon")
     {
       m.playSoundEffect(1);
       gameCard = current_player -> equipStuff(gameCard,1);
+	  if(gameCard != nullptr)
+		discard_pile -> pushBottom(gameCard);
     }
   else if(effect.substr(0,6) == "shield")
     {
       m.playSoundEffect(0);
       gameCard = current_player -> equipStuff(gameCard,2);
+	  if(gameCard != nullptr)
+		discard_pile -> pushBottom(gameCard);
     }
   else if(effect == "peach_garden")
     {

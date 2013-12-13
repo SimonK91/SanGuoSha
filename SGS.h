@@ -124,6 +124,7 @@ private:
   
   void UnicornBow();
   
+  bool shieldBlock(std::string, int p_index = 0);
   
   void cleanPlayer(Player*);
   

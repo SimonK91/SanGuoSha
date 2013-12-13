@@ -1003,7 +1003,10 @@ void Game::cleanPlayer(Player* what_player)
 	    {
 	      discard_pile -> pushBottom(dynamic_cast<GameCard*>(tmp_object));
 	    }
-	  tmp_object = nullptr;
+	  else if(tmp_object != nullptr)
+	  {
+		  delete tmp_object;
+	  }
 	}
       delete kill_window;
       timer->reset(sett.getTimerTime(), timer->getCommand());
@@ -1144,7 +1147,6 @@ bool Game::useCard(const std::string& cardID, const std::string& description, Pl
 				has_window = false;
 			}
 		}
-		
 		//LiTHe paint
 		applySurface(0,0,background,screen); //skriv ut bakgrunden att ha som en bas
 		for(unsigned i = 0; i < all_objects.size() ; ++i)
@@ -1207,6 +1209,123 @@ void Game::modifyLife(Player* what_player, int value)
 		if(what_player = current_player)
 			state = 5;		
 	}
+}
+
+	
+bool Game::shieldBlock(std::string type, int p_index)
+{
+	std::cerr<< "Shieldblock for: " << type << std::endl;
+	std::string old_timer_cmd = timer->getCommand();
+	timer->reset(sett.getTimerTime(),"ok");
+	
+	bool blocked = false;
+	Window* block_window = new Window(130,200,400,400);
+	block_window->makeButton("Ok", 120,350,"ok");
+	block_window->makeTextbox(50,50,300,70);
+	has_window = false;	
+	std::string command = "";
+	GameCard* judge_card;
+	bool unblockable = false;
+	if(type == "arrows")
+	{
+		std::cerr << "TYPE IS ARROWS" << std::endl;
+		if(players.at(p_index)->equipment.shield != nullptr)
+		{
+			if(players.at(p_index)->equipment.shield->getAbility() == "shield0")
+			{
+				std::cerr << "Judgement shield time" << std::endl;
+				has_window = true;
+				judge_card = dynamic_cast<GameCard*>(card_deck -> drawCard());
+				block_window->addCard(judge_card,50,140);
+				if( judge_card -> getSuit() == hearts || judge_card -> getSuit() == diamonds)
+				{
+					blocked = true;
+					block_window->setText(1,"Red judgement card, arrows dodged with shield");
+				}
+				else
+				{
+					block_window->setText(1,"Black judgement card, arrows not dodged");
+				}
+			}
+		}
+	}
+	else
+	{
+		if(current_player->equipment.weapon != nullptr)
+		{
+			if(current_player->equipment.weapon->getAbility() == "weapon0")
+			{
+				unblockable = true;
+			}
+		}
+		
+		if(target_player.at(0)->equipment.shield != nullptr && unblockable == false)
+			{
+				if(target_player.at(0)->equipment.shield->getAbility() == "shield1")
+					{	
+						if(selected_card->getSuit() == spades || selected_card->getSuit()  == clubs)
+						{
+							blocked = true;
+							block_window->setText(1,"Black attack blocked");
+							has_window = true;
+						}
+					}
+					if(target_player.at(0)->equipment.shield->getAbility() == "shield0")
+					{
+						std::cerr << "Judgement shield time" << std::endl;
+						has_window = true;
+						judge_card = dynamic_cast<GameCard*>(card_deck -> drawCard());
+						block_window->addCard(judge_card,50,140);
+						if( judge_card -> getSuit() == hearts || judge_card -> getSuit() == diamonds)
+						{
+							blocked = true;
+							block_window->setText(1,"Red judgement card, attack blocked by shield");
+						}
+						else
+						{
+								block_window->setText(1,"Black judgement card, attack not blocked");
+						}
+					}
+			}
+	}
+			while(has_window)
+			{
+				command = timer->time_ran_out();
+					while(SDL_PollEvent(&event))
+						{
+								if(command == "")
+								{									
+									command = block_window->handleEvent(event);
+								}
+						}						
+				if(command == "ok")
+				{
+					has_window = false;
+				}					
+				
+				paint();
+				block_window->paint(screen);
+				SDL_Flip(screen.getImage());
+				fps.regulateFPS();
+			}
+			 Object::Object* tmp_object = nullptr;
+			while(block_window->getSize() > 0)
+			{
+				tmp_object = block_window->remove(0);
+				if( dynamic_cast<GameCard*>(tmp_object) != nullptr)
+				{
+					discard_pile -> pushBottom(dynamic_cast<GameCard*>(tmp_object));
+				}
+				else if(tmp_object != nullptr)
+				{
+					delete tmp_object;
+				}
+			}
+			delete block_window;
+				
+		
+	timer->reset(sett.getTimerTime(), old_timer_cmd);
+	return blocked;
 }
 #include "game_commands.cpp"
 #include "card_commands.cpp"
