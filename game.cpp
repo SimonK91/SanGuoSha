@@ -1051,7 +1051,7 @@ bool Game::useCard(const std::string& cardID, const std::string& description, Pl
 	timer->reset(sett.getTimerTime(), "skip");
 	bool occured = false;
 	std::string command;
-	Window options(175,125,400,400);
+	Window options(175,125,450,400);
 	options.makeTextbox(30,30,340,80,25);
 	options.setText(0,description);
 	options.makeButton("Use "+cardID,15,330,"use");

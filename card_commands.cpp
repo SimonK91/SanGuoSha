@@ -108,13 +108,13 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
    		current_player -> addJudgementCard(gameCard);
 		gameCard = nullptr;
 	}
-  else if(effect == "steal" && !negated())
+  else if(effect == "steal" && !negated("negate steal on " + target_player.at(0)->getName()))
     {
      
 	  timer->reset(sett.getTimerTime(),"steal_time_out");
 	  state = 7;
 	 
-	 	Window* stealWindow = new Window(50,150,600,350);
+	 	Window* stealWindow = new Window(195,30,600,500);
 
 		std::vector<GameCard*> targetHand = target_player.at(0) -> getHand();
 			
@@ -133,16 +133,16 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 			stealWindow -> addCard(target_player.at(0) -> equipment.def_horse, 300, 240);
 			
 			
-		stealWindow -> makeButton("Steal",170,250, "steal_card");
+		stealWindow -> makeButton("Steal",170,450, "steal_card");
 		add_window(stealWindow);
 		has_window = true;
     }
-  else if(effect == "dismantle" && !negated())
+  else if(effect == "dismantle" && !negated("Negate dismantle on " + target_player.at(0)->getName()))
     {
 	  state = 7;
 	  timer->reset(sett.getTimerTime(), "dismantle_time_out");
 	  
-		Window* dismantleWindow = new Window(50,150,600,350);
+		Window* dismantleWindow = new Window(195,30,600,500);
 		std::vector<GameCard*> targetHand = target_player.at(0) -> getHand();
 		
 		for(unsigned i = 0; i < targetHand.size(); ++i)
@@ -159,42 +159,31 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		if(target_player.at(0) -> equipment.def_horse != nullptr)
 			dismantleWindow -> addCard(target_player.at(0) -> equipment.def_horse, 300, 240);
 			
-		dismantleWindow -> makeButton("dismantle",170,250, "dismantle_card");
+		dismantleWindow -> makeButton("dismantle",170,450, "dismantle_card");
 		add_window(dismantleWindow);
 		has_window = true;
 	}
   else if(effect == "barbarian")
     {
       m.playSoundEffect(5);
-      // timer->reset(sett.getTimerTime(),"barbarian_attack");
 	  for(int nP = nextPlayer(); nP != (int)self ; nP = nextPlayer(nP))
-			if(!useCard("attack","attack the barbarians or lose a life",players.at(nP)))
+	  {
+			if(!negated(" negate barbarian for " + players.at(nP)->getName()) && !useCard("attack","attack the barbarians or lose a life",players.at(nP)))
+			{
 				modifyLife(players.at(nP),-1);
- 		// Window* barbarianWindow = new Window(50,350,350,200);
-		
-		// // barbarianWindow -> addCard(gameCard,400,350);
-		// barbarianWindow -> makeTextbox(20,40,310,30);
-		// barbarianWindow -> makeButton("Attack!!!",70,100,"barbarian_attack");
-		// barbarianWindow -> setText(0,"   Attack the barbarians or lose a life!");
-		// add_window(barbarianWindow);
-		// has_window = true;
-		
-		// //current player is going to go around
-		// current_player -> setCurrentPlayer(false);
-		// target_player.clear();
-		// for(int i = (self + 1) % players.size(); i != self; i = (i + 1) % players.size())
-			// target_player.push_back(players.at(i));
-		
-		// // target_player.at(0) = players.at((self +1) % players.size());
-		// target_player.at(0) -> setCurrentPlayer(true);
+			}
+		}
     }
   else if(effect == "raining_arrows")
     {
       m.playSoundEffect(6);
 	  for(int nP = nextPlayer(); nP != (int)self ; nP = nextPlayer(nP))
-			if(!negated("negate barbarian for " + players.at(nP) ->getName()) && !useCard("dodge","dodge the rain of arrows or lose a life",players.at(nP)))
+	  {
+			if(!negated("negate raining arrow for " + players.at(nP) ->getName()) && !useCard("dodge","dodge the rain of arrows or lose a life",players.at(nP)))
+			{
 				modifyLife(players.at(nP),-1);
-				
+			}
+		}	
     }
   else if(effect == "harvest")
     {
@@ -286,7 +275,7 @@ void Game::harvest()
 	//variabler
 	card = nullptr;
 	std::string command = "";
-	bool has_window = true;
+	//bool has_window = true;
 	unsigned nP = self;
 	//das loop
 	do

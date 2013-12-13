@@ -140,6 +140,7 @@ namespace Object
     text_rect.w = text_area->w + 20;
     text_rect.h = text_area->h + 10;
     //ramen
+	background = loadImage("Images/Gui/popupBackground.png", true);
     Surface tmp_border;
     tmp_border.setImage( loadImage("Images/Gui/window/tb.png", true));
     applySurface(0,0, tmp_border, background, nullptr);

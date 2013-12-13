@@ -36,13 +36,13 @@ struct Equipment
   
   Equipment()
   {
+	 pop_color.r = 255;
+    pop_color.g = 130;
+    pop_color.b = 255;
     def_horse_pop = new Object::PopupText(0, 0, 144,34, pop_color , "Fonts/LHANDW.TTF", 20);
     off_horse_pop = new Object::PopupText(0, 0, 144,34, pop_color , "Fonts/LHANDW.TTF", 20);
     weapon_pop = new Object::PopupText(0,0, 144,34, pop_color , "Fonts/LHANDW.TTF", 20);
     shield_pop = new Object::PopupText(0,0, 144,34, pop_color , "Fonts/LHANDW.TTF", 20);
-    pop_color.r = 255;
-    pop_color.g = 255;
-    pop_color.b = 255;
 	weapon_click = new Object::Clickbox(5,550,144,34, "activate");
 	weapon_selected_frame = loadImage("Images/Gui/activated_weapon_frame.png", true);
   }
