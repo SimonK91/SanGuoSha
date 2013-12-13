@@ -184,13 +184,13 @@ namespace Object
     set.push_back(new GameCard(6,spades,"blue_steel_blade.png",   			"weapon0 5 2")); //ability id, target type, target range -- fixade i annan commit
     set.push_back(new GameCard(2,spades,"double_gender_sword.png",			"weapon1 5 2")); //ability id, target type, target range
     set.push_back(new GameCard(5,spades,"green_dragon_cresent_blade.png",	"weapon2 5 3")); //ability id, target type, target range - fixad
-    set.push_back(new GameCard(12,spades,"serpent_halberd.png",				"weapon3 5 3")); //ability id, target type, target range
+    // set.push_back(new GameCard(12,spades,"serpent_halberd.png",				"weapon3 5 3")); //ability id, target type, target range - ej implementerad
     set.push_back(new GameCard(5,hearts,"unicorn_bow.png",					"weapon4 5 5")); //ability id, target type, target range - fixad
     set.push_back(new GameCard(1,clubs,"zhuge_crossbow.png",				"weapon5 5 1")); //ability id, target type, target range - fixad
     set.push_back(new GameCard(1,diamonds,"zhuge_crossbow.png",				"weapon5 5 1")); //ability id, target type, target range - fixad
-    set.push_back(new GameCard(5,diamonds,"rock_cleaving_axe.png",			"weapon6 5 3")); //ability id, target type, target range
+    // set.push_back(new GameCard(5,diamonds,"rock_cleaving_axe.png",			"weapon6 5 3")); //ability id, target type, target range - ej implementerad
     set.push_back(new GameCard(12,diamonds,"Heaven_Scorcher_Halberd.png",	"weapon7 5 4")); //ability id, target type, target range - fixad
-    set.push_back(new GameCard(2,spades,"frost_blade.png",					"weapon8 5 2")); //ability id, target type, target range
+    set.push_back(new GameCard(2,spades,"frost_blade.png",					"weapon8 5 2")); //ability id, target type, target range - fixad
 	
     set.push_back(new GameCard(2,spades,"ba_gua_shield.png",				"shield0 5 0")); //ability id, target type, target range -- fixade i annan commit
     set.push_back(new GameCard(2,clubs,"ba_gua_shield.png",					"shield0 5 0")); //ability id, target type, target range -- fixade i annan commit
