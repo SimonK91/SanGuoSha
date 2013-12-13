@@ -388,6 +388,7 @@ void Game::runHotseat()
 	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
 	//card_deck -> pushTop(new GameCard(1,clubs,"lightning.png","lightning 0 0")); //ability id, target type, target range
 	//card_deck -> pushTop(new GameCard(1,clubs,"harvest.png","harvest 0 0")); //ability id, target type, target range
+	card_deck -> pushTop(new GameCard(1,hearts,"raining_arrows.png","raining_arrows 0 0"));
 	card_deck ->pushTop(new GameCard(2,clubs,"ba_gua_shield.png",					"shield0 5 0"));
 	card_deck -> pushTop(new GameCard(2,clubs,"ren_wang_shield.png",				"shield1 5 0"));
 	GameCard* card = nullptr;
@@ -1133,53 +1134,91 @@ bool Game::useCard(const std::string& cardID, const std::string& description, Pl
 	return occured;
 }
 	
-bool Game::shieldBlock()
+bool Game::shieldBlock(std::string type, int p_index)
 {
+	std::cerr<< "Shieldblock for: " << type << std::endl;
+	std::string old_timer_cmd = timer->getCommand();
+	timer->reset(sett.getTimerTime(),"ok");
+	
 	bool blocked = false;
-	Window* block_window = new Window(100,200,400,400);
+	Window* block_window = new Window(130,200,400,400);
 	block_window->makeButton("Ok", 120,350,"ok");
 	block_window->makeTextbox(50,50,300,70);
 	has_window = false;	
 	std::string command = "";
 	GameCard* judge_card;
 	bool unblockable = false;
-	if(current_player->equipment.weapon != nullptr)
+	if(type == "arrows")
 	{
-		if(current_player->equipment.weapon->getAbility() == "weapon0")
+		std::cerr << "TYPE IS ARROWS" << std::endl;
+		if(players.at(p_index)->equipment.shield != nullptr)
 		{
-			unblockable = true;
+			if(players.at(p_index)->equipment.shield->getAbility() == "shield0")
+			{
+				std::cerr << "Judgement shield time" << std::endl;
+				has_window = true;
+				judge_card = dynamic_cast<GameCard*>(card_deck -> drawCard());
+				block_window->addCard(judge_card,50,140);
+				if( judge_card -> getSuit() == hearts || judge_card -> getSuit() == diamonds)
+				{
+					blocked = true;
+					block_window->setText(1,"Red judgement card, arrows dodged with shield");
+				}
+				else
+				{
+					block_window->setText(1,"Black judgement card, arrows not dodged");
+				}
+			}
 		}
 	}
-	
-	if(target_player.at(0)->equipment.shield != nullptr && unblockable == false)
+	else
+	{
+		if(current_player->equipment.weapon != nullptr)
 		{
-			if(target_player.at(0)->equipment.shield->getAbility() == "shield1")
-				{	
-					if(selected_card->getSuit() == spades || selected_card->getSuit()  == clubs)
+			if(current_player->equipment.weapon->getAbility() == "weapon0")
+			{
+				unblockable = true;
+			}
+		}
+		
+		if(target_player.at(0)->equipment.shield != nullptr && unblockable == false)
+			{
+				if(target_player.at(0)->equipment.shield->getAbility() == "shield1")
+					{	
+						if(selected_card->getSuit() == spades || selected_card->getSuit()  == clubs)
+						{
+							blocked = true;
+							block_window->setText(1,"Black attack blocked");
+							has_window = true;
+						}
+					}
+					if(target_player.at(0)->equipment.shield->getAbility() == "shield0")
 					{
-						blocked = true;
-						block_window->setText(1,"Black attack blocked");
+						std::cerr << "Judgement shield time" << std::endl;
 						has_window = true;
+						judge_card = dynamic_cast<GameCard*>(card_deck -> drawCard());
+						block_window->addCard(judge_card,50,140);
+						if( judge_card -> getSuit() == hearts || judge_card -> getSuit() == diamonds)
+						{
+							blocked = true;
+							block_window->setText(1,"Red judgement card, attack blocked by shield");
+						}
+						else
+						{
+								block_window->setText(1,"Black judgement card, attack not blocked");
+						}
 					}
-				}
-				if(target_player.at(0)->equipment.shield->getAbility() == "shield0")
-				{
-					has_window = true;
-					judge_card = dynamic_cast<GameCard*>(card_deck -> drawCard());
-					block_window->addCard(judge_card,50,140);
-					if( judge_card -> getSuit() == hearts || judge_card -> getSuit() == diamonds)
-					{
-						blocked = true;
-						block_window->setText(1,"Red card, attack blocked by shield");
-					}
-				}
-
+			}
+	}
 			while(has_window)
 			{
-				
+				command = timer->time_ran_out();
 					while(SDL_PollEvent(&event))
 						{
-							command = block_window->handleEvent(event);
+								if(command == "")
+								{									
+									command = block_window->handleEvent(event);
+								}
 						}						
 				if(command == "ok")
 				{
@@ -1206,7 +1245,8 @@ bool Game::shieldBlock()
 			}
 			delete block_window;
 				
-		}
+		
+	timer->reset(sett.getTimerTime(), old_timer_cmd);
 	return blocked;
 }
 #include "game_commands.cpp"
