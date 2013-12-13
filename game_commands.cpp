@@ -100,6 +100,8 @@ void Game::run_command(const std::string& what_command)
     {
       std::vector<GameCard*> hand;
       hand = current_player -> getHand();
+	  if(!rulePlayCardOK())
+		return;
       for(unsigned i = 0; i < hand.size() ; ++i)
 	{
 	  if(hand.at(i) -> isActive())

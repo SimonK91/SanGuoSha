@@ -600,11 +600,11 @@ void Game::end(int winner)
 	}
 	else if(winner == 3)
 	{
-		winning_screen.setText(0,"The rebels made an uproar agains the empire and managed to storm the capital. Killing the Emperor and has no ruler anymore");
+		winning_screen.setText(0,"The rebels made an uproar against the empire and managed to storm the capital. They managed to kill the Emperor and now the Rebels roam freely in the kingdom.");
 	}
 	else if(winner == 4)
 	{
-		winning_screen.setText(0,"Without an Emperor to rule the kingdom, chaos arrived. Loyals and Spies fighting eachother without any results.");
+		winning_screen.setText(0,"Without an Emperor to rule the kingdom, chaos arrived. Loyals and Spies are fighting eachother without any results.");
 	}
 	
 	
@@ -711,6 +711,7 @@ void Game::UI()
 				button_command = play_button.handleEvent(event);
 				if(button_command != "")
 				{
+					std::cout << std::boolalpha << rulePlayCardOK() << std::endl;
 					if(rulePlayCardOK())
 						run_command(button_command);
 				}
@@ -1186,7 +1187,7 @@ void Game::modifyLife(Player* what_player, int value)
 	while(what_player -> getLife() <= 0 && saved)
 	{
 		saved = false;
-		int nP = self;
+		unsigned nP = self;
 		do
 		{
 			if(useCard("heal",what_player->getName()+" is dying, would you like to save him by using peach?", players.at(nP)))

@@ -118,28 +118,24 @@ bool Game::rulePlayCardOK()
 {
 	if(selected_card == nullptr)
 		return false;
-	
-	if(selected_card -> getAbility() == "heal" && current_player -> getLife() == current_player -> getMaxLife())
-		return false;
-	
+	std::cout << selected_card -> getTargetType() << " " << selected_card -> getRange() << " " << selected_card -> getAbility() << std:: endl;
 	if(selected_card -> getAbility() == "dodge")
 		return false;
 		
-	if(selected_card -> getAbility() == "duress" && target_player.size() != 2)
+	if(selected_card -> getAbility() == "heal" && current_player -> getLife() == current_player -> getMaxLife())
 		return false;
-	else
-		return true;
-		
+	
 	if(selected_card -> getAbility() == "lightning" && current_player -> hasLightning())
+		return false;
+		
+	if(selected_card -> getAbility() == "duress" && target_player.size() != 2)
 		return false;
 		
 	if(selected_card -> getTargetType() == 0 || selected_card -> getTargetType() == 5)
 		return true;
 		
 		
-	if(selected_card -> getTargetType() == 1 && target_player.size() == 0)
-		return false;
-	else
+	if(selected_card -> getTargetType() == 1 && target_player.size() != 0)
 		return true;
 		
 		
