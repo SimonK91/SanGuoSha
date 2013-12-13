@@ -1074,6 +1074,7 @@ bool Game::useCard(const std::string& cardID, const std::string& description, Pl
 					unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 					std::cout << seed;
 					card = player -> playCard(seed%hand.size());
+					occured = true;
 				}
 				else
 				{
@@ -1082,6 +1083,7 @@ bool Game::useCard(const std::string& cardID, const std::string& description, Pl
 						if(hand.at(i) -> getAbility() == cardID)
 						{
 							card = player -> playCard(i);
+							occured = true;
 							break;
 						}
 					}
@@ -1090,7 +1092,6 @@ bool Game::useCard(const std::string& cardID, const std::string& description, Pl
 				if(card != nullptr)
 				{
 					discard_pile -> pushBottom(card);
-					occured = true;
 				}
 				else
 					occured = false;
