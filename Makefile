@@ -1,13 +1,23 @@
 CCC        =g++
 CFLAGS   +=-L/sw/gcc-${GCC4_V}/lib -static-libstdc++ -std=c++11 -pedantic -Wall -Wextra
 INCLUDE  = -I./objects
-SDLFLAGS +=-lmingw32 -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer 
+SDLFLAGS += -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer 
 OBJECTS = main.cpp  gameCard.o heroCard.o card.o menu.o game.o Button.o Slider.o Textbox.o Checkbox.o Functions.o Window.o music.o SGS.o cardList.o FrameRateFixer.o Timer.o PopupText.o Player.o Settings.o Clickbox.o
+
+SYS := $(shell gcc -dumpmachine)
+ifneq (, $(findstring mingw, $(SYS)))
+ # mingw
+ALLFLAGS += $(CCC) $(INCLUDE) $(CFLAGS) $(OBJECTS) -lmingw32 $(SDLFLAGS) 
+ else 
+ # else solaris
+ALLFLAGS += $(CCC) $(INCLUDE) $(CFLAGS) $(OBJECTS) $(SDLFLAGS)
+endif
+
 
 all: $(OBJECTS)
 		@ echo
 		@ echo execute skapas
-		@$(CCC) $(INCLUDE) $(CFLAGS) $(OBJECTS) $(SDLFLAGS) -o "SanGuoSha.exe"
+		@$(ALLFLAGS) -o "SanGuoSha.exe"
 		@ echo
 		@ echo Filen lyckades att skapa
 		@ echo Filnamnet ar SanGuoSha.exe
