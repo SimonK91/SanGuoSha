@@ -24,11 +24,33 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 		{
 			if(!useCard("dodge", "dodge the attack or lose a life",target_player.at(0)))
 			{
-				modifyLife(target_player.at(0),-1);
 				if(current_player -> equipment.weapon != nullptr && current_player -> equipment.weapon ->getAbility() == "weapon4") //unicorn bow
+				{
 					UnicornBow();
+					modifyLife(target_player.at(0),-1);
+				}
+				else if(current_player -> equipment.weapon != nullptr && current_player -> equipment.weapon -> getAbility() == "weapon8") //frost blade
+				{
+					if(frostBladeLoseLife())
+						modifyLife(target_player.at(0), -1);
+					else
+					{
+						//fixa med dismantle
+						GameCard* card;
+						card = takeAwayCard(target_player.at(0),false);
+						discard_pile -> pushBottom(gameCard);
+						card = takeAwayCard(target_player.at(0),false);
+						discard_pile -> pushBottom(gameCard);
+					}
+				}
+				else
+				{
+					modifyLife(target_player.at(0),-1);
+				}
 			}
-			else
+		}
+		else
+		{
 			{
 				if(current_player -> equipment.weapon != nullptr && current_player -> equipment.weapon ->getAbility() == "weapon2") //green dragon cresent
 				{
@@ -553,4 +575,166 @@ void Game::UnicornBow()
 	}
 	
 	timer->reset(sett.getTimerTime(), old_timer_command);
+}
+
+bool Game::frostBladeLoseLife()
+{
+	std::string old_timer_command = timer -> getCommand();
+	timer->reset(sett.getTimerTime(), "damage");
+	std::string command;
+	Window options(175,125,400,400);
+	options.makeTextbox(30,30,340,80,25);
+	options.setText(0,"Target lose a life point or you discard 2 cards from the target");
+	bool occured = false;
+	options.makeButton("Do Damage",15,330,"damage");
+	options.makeButton("Dismantle",215,330,"dismantle");
+
+	bool has_window = true;
+	while(has_window)
+	{
+		command = timer->time_ran_out();
+		while(SDL_PollEvent( &event))
+		{
+			exitCommand(event);
+			if(command == "")
+				command = options.handleEvent(event);
+		}
+	
+		if(command == "damage")
+		{
+			occured = true;
+			has_window = false;
+		}
+		else if(command == "dismantle")
+		{
+			occured = false;
+			has_window = false;
+		}
+		//LiTHe paint
+		if(has_window)
+		{
+			applySurface(0,0,background,screen); //skriv ut bakgrunden att ha som en bas
+			for(unsigned i = 0; i < all_objects.size() ; ++i)
+			{
+				all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
+			}
+		
+			if(timer->checkStarted() == true)
+			{
+				timer->paint(screen);
+			}
+		
+			options.paint(screen);
+			current_player -> setPos(600,240);
+			current_player -> paint(screen,600,240);
+		
+			SDL_Flip(screen.getImage());
+			fps.regulateFPS();
+		}
+	}
+	
+	timer->reset(sett.getTimerTime(), old_timer_command);
+	return occured;
+}
+
+GameCard* Game::takeAwayCard(Player* target, bool includeJudgement)
+{
+	Window* takeAwayCardWindow = new Window(150,50,600,600);
+	std::vector<GameCard*> targetHand = target_player.at(0) -> getHand();
+		
+	for(unsigned i = 0; i < targetHand.size(); ++i)
+	{
+		takeAwayCardWindow -> addCard(new HeroCard("back.png", "42 gray 0 dummy"),100 * i, 20);
+	}
+	//add equipment
+	if(target_player.at(0) -> equipment.weapon != nullptr)
+		takeAwayCardWindow -> addCard(target_player.at(0) -> equipment.weapon,0, 240);
+	if(target_player.at(0) -> equipment.shield != nullptr)
+		takeAwayCardWindow -> addCard(target_player.at(0) -> equipment.shield, 100, 240);
+	if(target_player.at(0) -> equipment.off_horse != nullptr)
+		takeAwayCardWindow -> addCard(target_player.at(0) -> equipment.off_horse, 200, 240);
+	if(target_player.at(0) -> equipment.def_horse != nullptr)
+		takeAwayCardWindow -> addCard(target_player.at(0) -> equipment.def_horse, 300, 240);
+			
+	if(includeJudgement)
+	{
+		//få tag i alla judgement cards!!! måste fixas senare :) 
+		// takeAwayCardWindow -> addCard();
+	}
+	
+	takeAwayCardWindow -> makeButton("Take Card",170,500, "take_card");
+	
+	GameCard* card = nullptr;
+	std::string old_timer_command = timer -> getCommand();
+	timer->reset(sett.getTimerTime(), "take_last");
+	std::string command;
+	bool has_window = true;
+	
+	while(has_window)
+	{
+		command = timer->time_ran_out();
+		while(SDL_PollEvent( &event))
+		{
+			exitCommand(event);
+			if(command == "")
+				command = takeAwayCardWindow -> handleEvent(event);
+		}
+		
+		if(command == "take_card")
+		{
+			//kolla alla korten
+			Card* c = nullptr;
+			for(unsigned i = 0 ; i < takeAwayCardWindow->getSize() ; ++i)
+			{
+				c = dynamic_cast<Card*>(takeAwayCardWindow -> getObject(i));
+				if(c != nullptr && c -> isActive())
+				{
+					if(i < target -> getHandSize())
+						card = target -> loseCard(i);
+					else
+					{
+						GameCard* gc = dynamic_cast<GameCard*>(c);
+						if((gc -> getAbility()).substr(0,6) == "weapon")
+							card = target -> loseEquipment(2);
+						else if((gc -> getAbility()).substr(0,6) == "shield")
+							card = target -> loseEquipment(3);
+						else if(gc -> getAbility() == "off_horse")
+							card = target -> loseEquipment(1);	
+						else if(gc -> getAbility() == "def_horse")
+							card = target -> loseEquipment(0);
+					}
+					has_window = false;
+				}
+			}
+		}
+		else if(command == "take_last")
+		{
+			card = target -> loseCard((target -> getHandSize()) - 1);
+			has_window = false;
+		}
+		//LiTHe paint
+		if(has_window)
+		{
+			applySurface(0,0,background,screen); //skriv ut bakgrunden att ha som en bas
+			for(unsigned i = 0; i < all_objects.size() ; ++i)
+			{
+				all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
+			}
+		
+			if(timer->checkStarted() == true)
+			{
+				timer->paint(screen);
+			}
+		
+			takeAwayCardWindow -> paint(screen);
+			current_player -> setPos(750,240);
+			current_player -> paint(screen,750,240);
+		
+			SDL_Flip(screen.getImage());
+			fps.regulateFPS();
+		}
+	}
+	
+	timer->reset(sett.getTimerTime(), old_timer_command);
+	return card;
 }

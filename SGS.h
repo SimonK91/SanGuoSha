@@ -116,11 +116,13 @@ private:
   Timer* timer;
   
   bool negated(const std::string& description = "no description added - negate something");
-  void harvest();
+  bool frostBladeLoseLife();
   bool acedia();
   bool lightningExplode();
   bool useCard(const std::string&, const std::string&, Player*);
   void modifyLife(Player*, int);
+  void harvest();
+  Object::GameCard* takeAwayCard(Player* target, bool includeJudgement = true);
   
   void UnicornBow();
   
