@@ -495,20 +495,23 @@ void Game::runHotseat()
 	//draw 2 cards
 		else if(state == 3)
 		{
-			//check if card_deck is empty
-			if(card_deck -> empty())
-				std::swap(card_deck,discard_pile);
 				
 			//draw 2 cards
-			card = dynamic_cast<GameCard*>(card_deck -> drawCard());
-			players.at(self) -> recieveCard(card);
-			
-			if(card_deck -> empty())
-				std::swap(card_deck,discard_pile);
-						
-			card = dynamic_cast<GameCard*>(card_deck -> drawCard());
-			players.at(self) -> recieveCard(card);
-			
+			for(int i = 0 ; i < 2 ; ++i)
+			{
+				if(card_deck -> empty())
+				{
+					std::swap(card_deck,discard_pile);
+					card_deck -> shuffle();
+				}
+				if(card_deck -> empty())
+					throw SGS_error("card deck and discard deck totally empty!");
+				else
+				{
+					card = dynamic_cast<GameCard*>(card_deck -> drawCard());
+					players.at(self) -> recieveCard(card);
+				}
+			}
 				/*
 				<insert hero abilitys here>
 				*/
@@ -1010,30 +1013,6 @@ void Game::cleanPlayer(Player* what_player)
 	}
       delete kill_window;
       timer->reset(sett.getTimerTime(), timer->getCommand());
-  /*
-  GameCard* clean;
-  //rensar judgementkort
-  do
-    {
-      clean = what_player -> getJudgementCard();
-      if(clean != nullptr)
-	discard_pile -> pushBottom(clean);
-    }while(clean != nullptr);
-  
-  do
-    {
-      clean = what_player -> loseCard(0);
-      if(clean != nullptr)
-	discard_pile ->pushBottom(clean);
-    }while(clean != nullptr);
-  
-  for(int i = 0 ; i < 4 ; ++i)
-    {
-      clean = what_player -> loseEquipment(i);
-      if(clean != nullptr)
-	discard_pile ->pushBottom(clean);
-    }
-  */
 }
 
 void Game::exitCommand(SDL_Event& event)
@@ -1051,10 +1030,14 @@ bool Game::useCard(const std::string& cardID, const std::string& description, Pl
 	timer->reset(sett.getTimerTime(), "skip");
 	bool occured = false;
 	std::string command;
-	Window options(175,125,400,400);
+	Window options(175,125,450,400);
 	options.makeTextbox(30,30,340,80,25);
 	options.setText(0,description);
-	options.makeButton("Use "+cardID,15,330,"use");
+	if(cardID != "discard")
+		options.makeButton("Use "+cardID,15,330,"use");
+	else
+		options.makeButton("Discard",15,330,"use");
+		
 	options.makeButton("Skip",215,330,"skip");
 	options.makeButton("Show hand",115,230,"show_hand");
 	bool has_window = true;
@@ -1086,18 +1069,29 @@ bool Game::useCard(const std::string& cardID, const std::string& description, Pl
 			}
 			else if(command == "use")
 			{
-				for(unsigned i = 0; i < hand.size(); ++i)
+				if(cardID == "discard")
 				{
-					if(hand.at(i) -> getAbility() == cardID)
+					unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+					std::cout << seed;
+					card = player -> playCard(seed%hand.size());
+				}
+				else
+				{
+					for(unsigned i = 0; i < hand.size(); ++i)
 					{
-						card = player -> playCard(i);
-						occured = true;
-						break;
+						if(hand.at(i) -> getAbility() == cardID)
+						{
+							card = player -> playCard(i);
+							break;
+						}
 					}
 				}
 	      
 				if(card != nullptr)
+				{
 					discard_pile -> pushBottom(card);
+					occured = true;
+				}
 				else
 					occured = false;
 	      
@@ -1200,13 +1194,39 @@ void Game::modifyLife(Player* what_player, int value)
 	if(what_player -> getLife() <= 0)
 	{
 		what_player -> kill();
+		if(what_player -> getRole() == 3 && what_player != current_player) //Killing Rebel reward!
+		{
+			GameCard* card;
+			for(int i = 0; i < 3 ; ++i)
+			{
+				if(card_deck -> empty())
+				{
+					std::swap(card_deck,discard_pile);
+					card_deck -> shuffle();
+				}
+				if(card_deck -> empty())
+					throw SGS_error("card deck and discard deck totally empty!");
+				else
+				{
+					card = dynamic_cast<GameCard*>(card_deck -> drawCard());
+					players.at(self) -> recieveCard(card);
+				}
+			}
+		}
+		
+		if(what_player -> getRole() == 1 && current_player -> getRole() == 0) //Emperor killing Loyal punishment!
+		{
+			cleanPlayer(current_player);
+		}
+		
+		
 		cleanPlayer(what_player);
 		int winner = ruleWinCondition();
 		if(winner != 0)
 		{
 			end(winner);
 		}
-		if(what_player = current_player)
+		if(what_player == current_player)
 			state = 5;		
 	}
 }

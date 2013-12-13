@@ -5,7 +5,16 @@ bool Game::ruleTargetOK(Player* target)
 
 	if(target -> getLife() <= 0)
 		return false;
+		
+	if(selected_card -> getAbility() == "acedia")
+	{
+		if(target -> hasAcedia())
+			return false;
+		else
+			return true;
+	}
 
+	
 	int distance = getDistance(current_player, target);
 	
 	int weapon_range = 1;
@@ -18,7 +27,7 @@ bool Game::ruleTargetOK(Player* target)
 	
 	if(selected_card -> getAbility() == "attack")
 	{
-		if(has_attacked || ( (current_player -> equipment.weapon) != nullptr && (current_player -> equipment.weapon) -> getAbility() == "weapon5"))
+		if(has_attacked && !((current_player -> equipment.weapon) != nullptr && (current_player -> equipment.weapon) -> getAbility() == "weapon5"))
 			return false;
 		if((current_player -> equipment.weapon) != nullptr && (current_player -> equipment.weapon) -> getAbility() == "weapon7" && (current_player -> getHand()).size() == 1)
 		{
@@ -98,11 +107,7 @@ bool Game::ruleTargetOK(Player* target)
 				return true;
 		}
 	}
-	if(selected_card -> getAbility() == "acedia")
-	{
-		if(!target -> hasAcedia())
-			return true;
-	}
+	
 				
 	
 	
@@ -116,6 +121,14 @@ bool Game::rulePlayCardOK()
 	
 	if(selected_card -> getAbility() == "heal" && current_player -> getLife() == current_player -> getMaxLife())
 		return false;
+	
+	if(selected_card -> getAbility() == "dodge")
+		return false;
+		
+	if(selected_card -> getAbility() == "duress" && target_player.size() != 2)
+		return false;
+	else
+		return true;
 		
 	if(selected_card -> getAbility() == "lightning" && current_player -> hasLightning())
 		return false;
@@ -124,11 +137,9 @@ bool Game::rulePlayCardOK()
 		return true;
 		
 		
-	if(selected_card -> getTargetType() == 1 && target_player.at(0) != nullptr)
+	if(selected_card -> getTargetType() == 1 && target_player.size() != 0)
 		return true;
 		
-	if(selected_card -> getAbility() == "duress" && target_player.size() == 2)
-		return true;
 		
 	return false;
 }
