@@ -18,7 +18,7 @@ bool Game::ruleTargetOK(Player* target)
 	
 	if(selected_card -> getAbility() == "attack")
 	{
-		if(has_attacked)
+		if(has_attacked || ( (current_player -> equipment.weapon) != nullptr && (current_player -> equipment.weapon) -> getAbility() == "weapon5"))
 			return false;
 		if((current_player -> equipment.weapon) != nullptr && (current_player -> equipment.weapon) -> getAbility() == "weapon7" && (current_player -> getHand()).size() == 1)
 		{

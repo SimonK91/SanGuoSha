@@ -21,7 +21,32 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
     {
 		has_attacked = true;
 		if(!useCard("dodge", "dodge the attack or lose a life",target_player.at(0)))
+		{
 			modifyLife(target_player.at(0),-1);
+			if(current_player -> equipment.weapon != nullptr && current_player -> equipment.weapon ->getAbility() == "weapon4") //unicorn bow
+				UnicornBow();
+		}
+		else
+		{
+			if(current_player -> equipment.weapon != nullptr && current_player -> equipment.weapon ->getAbility() == "weapon2") //green dragon cresent
+			{
+				bool done = false;
+				do
+				{
+					
+					if(useCard("attack", "your attack was dodged, continue attack the target?", current_player))
+					{
+						if(!useCard("dodge", "dodge the attack or lose a life",target_player.at(0)))
+						{
+							modifyLife(target_player.at(0),-1);
+							done = true;
+						}
+					}
+					else
+						done = true;
+				}while(!done);
+			}				
+		}
     }
 	
   else if(effect == "heal")
@@ -318,6 +343,8 @@ void Game::harvest()
 				}
 			}
 		}
+		else
+			nP = nextPlayer(nP);
 	}while(nP != self);
 	
 	//destroy window
@@ -445,4 +472,75 @@ bool Game::lightningExplode()
 	}
 	timer->reset(sett.getTimerTime(), tmp_command);
 	return false;
+}
+
+void Game::UnicornBow()
+{
+	std::string old_timer_command = timer -> getCommand();
+	timer->reset(sett.getTimerTime(), "skip");
+	std::string command;
+	Window options(175,125,400,400);
+	options.makeTextbox(30,30,340,80,25);
+	options.setText(0,"your attack hit the target, with your Bow you are able to kill one of his/her horses");
+	if(target_player.at(0) -> equipment.off_horse != nullptr)
+	{
+		options.makeButton("offensive",15,330,"off_horse");
+	}
+	if(target_player.at(0) -> equipment.def_horse != nullptr)
+	{
+		options.makeButton("defensive",215,330,"def_horse");
+	}
+	options.makeButton("Skip",115,230,"skip");
+	bool has_window = true;
+	GameCard* card;
+	while(has_window)
+	{
+		command = timer->time_ran_out();
+		while(SDL_PollEvent( &event))
+		{
+			exitCommand(event);
+			if(command == "")
+				command = options.handleEvent(event);
+		}
+	
+		if(command == "skip")
+		{
+			has_window = false;
+		}
+		else if(command == "def_horse")
+		{
+			card = target_player.at(0) -> loseEquipment(0);
+			discard_pile -> pushBottom(card);
+			has_window = false;
+		}
+		else if(command == "off_horse")
+		{
+			card = target_player.at(0) -> loseEquipment(1);
+			discard_pile -> pushBottom(card);
+			has_window = false;
+		}
+		//LiTHe paint
+		if(has_window)
+		{
+			applySurface(0,0,background,screen); //skriv ut bakgrunden att ha som en bas
+			for(unsigned i = 0; i < all_objects.size() ; ++i)
+			{
+				all_objects.at(i)->paint(screen); // fÃ¶r varje objekt (oavsett aktivt eller inte), skriv ut det pÃ¥ skÃ¤rmen
+			}
+		
+			if(timer->checkStarted() == true)
+			{
+				timer->paint(screen);
+			}
+		
+			options.paint(screen);
+			target_player.at(0)->setPos(600,240);
+			target_player.at(0)->paint(screen,600,240);
+		
+			SDL_Flip(screen.getImage());
+			fps.regulateFPS();
+		}
+	}
+	
+	timer->reset(sett.getTimerTime(), old_timer_command);
 }

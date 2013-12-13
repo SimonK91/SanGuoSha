@@ -122,6 +122,8 @@ private:
   bool useCard(const std::string&, const std::string&, Player*);
   void modifyLife(Player*, int);
   
+  void UnicornBow();
+  
   
   void cleanPlayer(Player*);
   

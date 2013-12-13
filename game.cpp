@@ -385,11 +385,11 @@ void Game::runHotseat()
 	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
 	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
 	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	// card_deck -> pushTop(new GameCard(11,hearts,"draw2.png","draw2 0 0")); //ability id, target type, target range
-	card_deck -> pushTop(new GameCard(1,clubs,"lightning.png","lightning 0 0")); //ability id, target type, target range
+	card_deck -> pushTop(new GameCard(5,hearts,"unicorn_bow.png",					"weapon4 5 5")); //ability id, target type, target range
+	card_deck -> pushTop(new GameCard(13,spades,"da_wan.png","off_horse 5 0")); //ability id, target type, target range
 	card_deck -> pushTop(new GameCard(1,clubs,"harvest.png","harvest 0 0")); //ability id, target type, target range
-	
-	
+
+
 	GameCard* card = nullptr;
 	Window* nextPlayer_window = new Window(270,350,300,150);
 	nextPlayer_window -> makeTextbox(40,25,220,30,17);
@@ -943,7 +943,7 @@ int Game::nextPlayer( int unique)
 void Game::cleanPlayer(Player* what_player)
 {
   timer->stop();
-  Window* kill_window = new Window(150,300,500,400);
+  Window* kill_window = new Window(150,100,500,500);
 
   GameCard* tmp_card;
   int x_offset = 20;
