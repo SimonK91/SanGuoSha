@@ -109,6 +109,7 @@ bool getWeaponActivated(){return weapon_activated;}
   void recieveCard(Object::GameCard*);
   Object::GameCard* loseEquipment(int);
   bool hasHero(){return hero != nullptr;}
+  bool hasEquipment(){ return (equipment.weapon != nullptr)||(equipment.shield != nullptr)||(equipment.def_horse != nullptr)||(equipment.off_horse != nullptr);}
 
   void doEffect(std::string);
   void modifyLife(int mod)

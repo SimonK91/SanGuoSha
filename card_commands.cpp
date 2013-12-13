@@ -38,9 +38,11 @@ GameCard* Game::run_effect(Object::GameCard* gameCard)
 						//fixa med dismantle
 						GameCard* card;
 						card = takeAwayCard(target_player.at(0),false);
-						discard_pile -> pushBottom(gameCard);
+						if(card != nullptr)
+							discard_pile -> pushBottom(card);
 						card = takeAwayCard(target_player.at(0),false);
-						discard_pile -> pushBottom(gameCard);
+						if(card != nullptr)
+							discard_pile -> pushBottom(card);
 					}
 				}
 				else
@@ -649,6 +651,9 @@ bool Game::frostBladeLoseLife()
 
 GameCard* Game::takeAwayCard(Player* target, bool includeJudgement)
 {
+	if(target -> getHandSize() == 0 && !(target -> hasEquipment()))
+		return nullptr;
+	
 	Window* takeAwayCardWindow = new Window(150,50,600,600);
 	std::vector<GameCard*> targetHand = target_player.at(0) -> getHand();
 		
