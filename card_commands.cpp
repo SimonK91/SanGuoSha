@@ -250,7 +250,7 @@ bool Game::negated(const std::string& description)
 void Game::harvest()
 {
 	std::string old_timer_command = timer -> getCommand();
-
+	timer->reset(sett.getTimerTime(),"pick_card_auto");
 	GameCard* card = nullptr;
 	//fixa window
 	Window* harvestWindow = new Window(50,50,600,350);
@@ -280,24 +280,27 @@ void Game::harvest()
 	//das loop
 	do
 	{
-		if(!negated())
+		if(!negated("Negate harvest for player: " + players.at(nP)->getName()))
 		{
 			bool taken = false;
 			bool show_hand = false;
 			while(!taken)
 			{
-				command = "";
+				command = timer->time_ran_out();
 				while(SDL_PollEvent(&event))
 				{
 					exitCommand(event);
-					command = harvestWindow -> handleEvent(event);
-				
-					if(command == "pick_card")
+					if(command == "")
+					{
+						command = harvestWindow -> handleEvent(event);
+					}	
+				}
+				if(command == "pick_card")
 					{
 						for(unsigned i = 0; i < harvestWindow -> getSize(); ++i)
 						{
-							card = dynamic_cast<GameCard*>(harvestWindow -> getObject(i));
-							if(card != nullptr && card -> isActive())
+							card = dynamic_cast<GameCard*>(harvestWindow -> getObject(i)) ;
+							if(card != nullptr && card->isActive())
 							{
 								card -> setActive(0);
 								players.at(nP) -> recieveCard(card);
@@ -305,6 +308,7 @@ void Game::harvest()
 								harvestWindow -> remove(i);
 								nP = nextPlayer(nP);
 								taken = true;
+								timer->reset(sett.getTimerTime(),"pick_card_auto");
 							}
 						}
 					}
@@ -312,7 +316,22 @@ void Game::harvest()
 					{
 						show_hand = true;
 					}
-				}
+					else if(command == "pick_card_auto")
+					{
+							card = dynamic_cast<GameCard*>(harvestWindow -> getObject(0));
+							if(card != nullptr)
+							{
+								card -> setActive(0);
+								players.at(nP) -> recieveCard(card);
+								//ta bort den från window
+								harvestWindow -> remove(0);
+								nP = nextPlayer(nP);
+								taken = true;
+								timer->reset(sett.getTimerTime(),"pick_card_auto");
+							}
+					}
+					
+				
 				//fixa utskrift
 				if(!taken)
 				{
