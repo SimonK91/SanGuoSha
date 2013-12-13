@@ -137,7 +137,9 @@ bool Game::rulePlayCardOK()
 		return true;
 		
 		
-	if(selected_card -> getTargetType() == 1 && target_player.size() != 0)
+	if(selected_card -> getTargetType() == 1 && target_player.size() == 0)
+		return false;
+	else
 		return true;
 		
 		

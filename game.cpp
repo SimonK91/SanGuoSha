@@ -1026,6 +1026,8 @@ void Game::exitCommand(SDL_Event& event)
 
 bool Game::useCard(const std::string& cardID, const std::string& description, Player* player)
 {
+	if(!running)
+		return false;
 	std::string old_timer_command = timer -> getCommand();
 	timer->reset(sett.getTimerTime(), "skip");
 	bool occured = false;
@@ -1050,7 +1052,7 @@ bool Game::useCard(const std::string& cardID, const std::string& description, Pl
 	Textbox information(250,270,400,120,"Fonts/LHANDW.TTF",20);
 	information.setText(description);
 	GameCard* selected_card = nullptr;
-	while(has_window)
+	while(has_window && running)
 	{
 		if(!show_hand)
 		{
