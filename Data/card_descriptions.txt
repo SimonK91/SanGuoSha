@@ -1,0 +1,169 @@
+GameCard:
+-------------
+attack
+[Attack]
+--
+dodge
+[Dodge]
+--
+heal
+[Peach]
+--
+off_horse
+[Offensive horse]
+--
+def_horse
+[Defensive horse]
+--
+negate
+[Negate]
+--
+weapon0
+[Blue steel blade]
+--
+weapon1
+[Double gender sword]
+--
+weapon2
+[Green dragon cresent]
+--
+weapon3
+[Serpent halbered]
+--
+weapon4
+[Unicorn bow]
+--
+weapon5
+[Zhuge crossbow]
+--
+weapon6
+[Rock cleaving axe]
+--
+weapon7
+[Heaven scorchers halbered]
+--
+weapon8
+[Frost blade]
+--
+shield0
+[Ba gua shield]
+--
+shield1
+[Ren Wang shield]
+--
+negate
+[Negate]
+--
+duel
+[Duel]
+--
+peach_garden
+[Peach garden]
+--
+draw2
+[Draw 2 cards]
+--
+lightning
+[Lightning]
+--
+raining_arrows
+[Raining arrows]
+--
+harvest
+[Harvest]
+--
+duress
+[Duress]
+--
+steal
+[Steal]
+--
+barbarian
+[Barbarians]
+--
+acedia
+[Acedia]
+--
+dismantle
+[Dismantle]
+--
+HEROES:
+------------
+CaoCao
+[]
+--
+LiuBei
+[]
+--
+SunQuan
+[]
+--
+DaQiao
+[]
+--
+DiaoChan
+[]
+--
+ElderZhuge
+[]
+--
+GanNing
+[]
+--
+GuanYu
+[]
+--
+GuoJia
+[]
+--
+HuangGai
+[]
+--
+HuangYueYing
+[]
+--
+HuaTuo
+[]
+--
+LuBu
+[]
+--
+LuMeng
+[]
+--
+LuXun
+[]
+--
+MaChao
+[]
+--
+SiMaYi
+[]
+--
+SunShangXiang
+[]
+--
+XiaHouDun
+[]
+--
+XuChu
+[]
+--
+ZhangFei
+[]
+--
+ZhangLiao
+[]
+--
+ZhaoYun
+[]
+--
+ZhenJi
+[]
+--
+ZhouYu
+[]
+--
+dummy
+[unknown]
+--
