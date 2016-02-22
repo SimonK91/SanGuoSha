@@ -2,7 +2,7 @@ CCC        =g++
 CFLAGS   +=-L/sw/gcc-${GCC4_V}/lib -static-libstdc++ -std=c++11 -pedantic -Wall -Wextra
 INCLUDE  = -I./objects
 SDLFLAGS += -lSDLmain -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer 
-OBJECTS = main.cpp  gameCard.o heroCard.o card.o menu.o game.o Button.o Slider.o Textbox.o Checkbox.o Functions.o Window.o music.o SGS.o cardList.o FrameRateFixer.o Timer.o PopupText.o Player.o Settings.o Clickbox.o
+OBJECTS = main.cpp  GameCard.o HeroCard.o Card.o menu.o game.o Button.o Slider.o Textbox.o Checkbox.o Functions.o Window.o music.o SGS.o CardList.o FrameRateFixer.o Timer.o PopupText.o Player.o Settings.o ClickBox.o
 
 SYS := $(shell gcc -dumpmachine)
 ifneq (, $(findstring mingw, $(SYS)))
@@ -17,10 +17,10 @@ endif
 all: $(OBJECTS)
 		@ echo
 		@ echo execute skapas
-		@$(ALLFLAGS) -o "SanGuoSha.exe"
+		@$(ALLFLAGS) -o "SanGuoSha"
 		@ echo
 		@ echo Filen lyckades att skapa
-		@ echo Filnamnet ar SanGuoSha.exe
+		@ echo Filnamnet ar SanGuoSha
 		@ echo
 
 		
@@ -28,9 +28,9 @@ FrameRateFixer.o: FrameRateFixer.cpp FrameRateFixer.h
 		@ echo FrameRateFixer.o skapas
 		@$(CCC) $(CFLAGS) -c FrameRateFixer.cpp $(SDLFLAGS)
 		
-Functions.o: functions.cpp functions.h
-		@ echo functions.o skapas
-		@$(CCC) $(CFLAGS) -c functions.cpp $(SDLFLAGS)
+Functions.o: Functions.cpp Functions.h
+		@ echo Functions.o skapas
+		@$(CCC) $(CFLAGS) -c Functions.cpp $(SDLFLAGS)
 		
 music.o: music.h music.cpp
 		@ echo music.o skapas
@@ -72,29 +72,29 @@ Textbox.o: ./objects/Textbox.h ./objects/Textbox.cpp
 		@ echo Textbox.o skapas
 		@$(CCC) $(CFLAGS) -c ./objects/Textbox.cpp $(SDLFLAGS)
 			
-gameCard.o: ./objects/gameCard.h ./objects/gameCard.cpp
-		@ echo gameCard.o skapas
-		@$(CCC) $(CFLAGS) -c ./objects/gameCard.cpp $(SDLFLAGS)
+GameCard.o: ./objects/GameCard.h ./objects/GameCard.cpp
+		@ echo GameCard.o skapas
+		@$(CCC) $(CFLAGS) -c ./objects/GameCard.cpp $(SDLFLAGS)
 		
-heroCard.o: ./objects/heroCard.h ./objects/heroCard.cpp
-		@ echo heroCard.o skapas
-		@$(CCC) $(CFLAGS) -c ./objects/heroCard.cpp $(SDLFLAGS)
+HeroCard.o: ./objects/HeroCard.h ./objects/HeroCard.cpp
+		@ echo HeroCard.o skapas
+		@$(CCC) $(CFLAGS) -c ./objects/HeroCard.cpp $(SDLFLAGS)
 
-cardList.o: ./objects/cardList.h ./objects/cardList.cpp
-		@ echo cardList.o skapas
-		@$(CCC) $(CFLAGS) -c ./objects/cardList.cpp $(SDLFLAGS)
+CardList.o: ./objects/CardList.h ./objects/CardList.cpp
+		@ echo CardList.o skapas
+		@$(CCC) $(CFLAGS) -c ./objects/CardList.cpp $(SDLFLAGS)
 
-card.o: ./objects/card.h ./objects/card.cpp
-		@ echo card.o skapas
-		@$(CCC) $(CFLAGS) -c ./objects/card.cpp $(SDLFLAGS)
+Card.o: ./objects/Card.h ./objects/Card.cpp
+		@ echo Card.o skapas
+		@$(CCC) $(CFLAGS) -c ./objects/Card.cpp $(SDLFLAGS)
 	
 PopupText.o: ./objects/PopupText.h ./objects/PopupText.cpp
 		@ echo PopupText.o skapas
 		@$(CCC) $(CFLAGS) -c ./objects/PopupText.cpp $(SDLFLAGS)
 		
-Clickbox.o: ./objects/Clickbox.h ./objects/Clickbox.cpp
-		@ echo Clickbox.o 
-		@ $(CCC) $(CFLAGS) -c ./objects/Clickbox.cpp $(SDLFLAGS)
+ClickBox.o: ./objects/ClickBox.h ./objects/ClickBox.cpp
+		@ echo ClickBox.o 
+		@ $(CCC) $(CFLAGS) -c ./objects/ClickBox.cpp $(SDLFLAGS)
 	
 Timer.o: Timer.h Timer.cpp
 	@ echo Timer.o skapas
@@ -108,5 +108,5 @@ clean:
 		@ rm -rf *.o
 
 zap: clean
-		@ rm -rf "SanGuoSha.exe" *~ stderr.txt stdout.txt
+		@ rm -rf "SanGuoSha" *~ stderr.txt stdout.txt
 		

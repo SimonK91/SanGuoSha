@@ -1,4 +1,4 @@
-Fullscreen: 0
+Fullscreen: 1
 Music_Vol: 0
 Effect_vol: 100
 Tool_tips: 1

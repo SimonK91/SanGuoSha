@@ -1,6 +1,6 @@
-#include "cardList.h"
-#include "gameCard.h"
-#include "heroCard.h"
+#include "CardList.h"
+#include "GameCard.h"
+#include "HeroCard.h"
 	
 #include <algorithm>
 #include <chrono>

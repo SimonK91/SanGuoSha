@@ -1,7 +1,7 @@
 #ifndef MUSIC_H
 #define MUSIC_H
 
-#include "functions.h"
+#include "Functions.h"
 
 class Music
 {

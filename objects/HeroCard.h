@@ -1,7 +1,7 @@
 #ifndef HEROCARD_H
 #define HEROCARD_H
 
-#include "card.h"
+#include "Card.h"
 #include <vector>
 #include <sstream>
 

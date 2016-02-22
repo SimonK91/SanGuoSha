@@ -1,4 +1,4 @@
-#include "settings.h"
+#include "Settings.h"
 #include <iostream>
 #include <fstream>
 #include <stdexcept>

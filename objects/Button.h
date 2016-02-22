@@ -2,7 +2,7 @@
 #define BUTTON_H
 
 #include "Objects.h"
-#include "../functions.h"
+#include "../Functions.h"
 #include <string>
 
 namespace Object

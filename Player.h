@@ -6,7 +6,7 @@
 #include <stack>
 #include <vector>
 #include "PopupText.h"
-#include "Clickbox.h"
+#include "ClickBox.h"
 
 struct Equipment
 {

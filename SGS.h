@@ -3,7 +3,7 @@
 
 #include "FrameRateFixer.h"
 #include "music.h"
-#include "functions.h"
+#include "Functions.h"
 #include "Button.h"
 #include "Slider.h"
 #include "Textbox.h"

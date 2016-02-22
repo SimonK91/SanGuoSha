@@ -1,7 +1,7 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include "../functions.h"
+#include "../Functions.h"
 #include "Button.h"
 #include "Slider.h"
 #include "Textbox.h"

@@ -2,6 +2,8 @@
 ## Eclipse
 #################
 
+*.o
+SanGuoSha
 *.pydevproject
 .project
 .metadata

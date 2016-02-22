@@ -1,6 +1,6 @@
 #ifndef TIMER_H
 #define TIMER_H
-#include "functions.h"
+#include "Functions.h"
 
 class Timer
 {

@@ -1,4 +1,4 @@
-#include "gameCard.h"
+#include "GameCard.h"
 #include <string>
 #include <sstream>
 #include <stdexcept>

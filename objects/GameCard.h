@@ -1,7 +1,7 @@
 #ifndef GAMECARD_H
 #define GAMECARD_H
 
-#include "card.h"
+#include "Card.h"
 #include "PopupText.h"
 /*
   id struktur:
