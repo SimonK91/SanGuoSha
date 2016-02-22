@@ -8,7 +8,7 @@ namespace Object
     checked = check;
     command = com;
 
-    box_sheet = loadImage("Images/Gui/checkbox.png", true); //fixa bilden
+    box_sheet = loadImage("Images/Gui/checkBox.png", true); //fixa bilden
     box.x = x;
     box.y = y;
     box.h = box_sheet.getImage()->h / 2;

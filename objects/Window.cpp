@@ -119,28 +119,28 @@ namespace Object
     Surface tmp_bg;
     
     //övre ramen
-    tmp_bg = loadImage("Images/Gui//window/tb.png",true);
+    tmp_bg = loadImage("Images/Gui/Window/tb.png",true);
     applySurface(0,0, tmp_bg, background, nullptr);
     //vänstra ramen
-    tmp_bg = loadImage("Images/Gui/window/lb.png",true);
+    tmp_bg = loadImage("Images/Gui/Window/lb.png",true);
     applySurface(0,0, tmp_bg, background, nullptr);
     //nedre ramen
-    tmp_bg = loadImage("Images/Gui/window/bb.png",true);
+    tmp_bg = loadImage("Images/Gui/Window/bb.png",true);
     applySurface(0,h - tmp_bg->h, tmp_bg, background, nullptr);
     //högra ramen
-    tmp_bg = loadImage("Images/Gui/window/rb.png",true);
+    tmp_bg = loadImage("Images/Gui/Window/rb.png",true);
     applySurface(w - tmp_bg->w,0, tmp_bg, background, nullptr);
     //övre vänstra hörnet
-    tmp_bg = loadImage("Images/Gui/window/ltc.png",true);
+    tmp_bg = loadImage("Images/Gui/Window/ltc.png",true);
     applySurface(0,0, tmp_bg, background, nullptr);
     //övre högra hörnet
-    tmp_bg = loadImage("Images/Gui/window/rtc.png",true);
+    tmp_bg = loadImage("Images/Gui/Window/rtc.png",true);
     applySurface(w - tmp_bg->w,0, tmp_bg, background, nullptr);
     //nedre vänstra hörnet
-    tmp_bg = loadImage("Images/Gui/window/lbc.png",true);
+    tmp_bg = loadImage("Images/Gui/Window/lbc.png",true);
     applySurface(0,h - tmp_bg->h, tmp_bg, background, nullptr);
     //nedre högra hörnet
-    tmp_bg = loadImage("Images/Gui/window/rbc.png",true);
+    tmp_bg = loadImage("Images/Gui/Window/rbc.png",true);
     applySurface(w - tmp_bg->w, h - tmp_bg->h, tmp_bg, background, nullptr);
   }  
 }//slut på namnrymd

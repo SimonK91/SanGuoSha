@@ -189,7 +189,7 @@ namespace Object
     set.push_back(new GameCard(1,clubs,"zhuge_crossbow.png",				"weapon5 5 1")); //ability id, target type, target range - fixad
     set.push_back(new GameCard(1,diamonds,"zhuge_crossbow.png",				"weapon5 5 1")); //ability id, target type, target range - fixad
     // set.push_back(new GameCard(5,diamonds,"rock_cleaving_axe.png",			"weapon6 5 3")); //ability id, target type, target range - ej implementerad
-    set.push_back(new GameCard(12,diamonds,"Heaven_Scorcher_Halberd.png",	"weapon7 5 4")); //ability id, target type, target range - fixad
+    set.push_back(new GameCard(12,diamonds,"heaven_scorcher_halberd.png",	"weapon7 5 4")); //ability id, target type, target range - fixad
     set.push_back(new GameCard(2,spades,"frost_blade.png",					"weapon8 5 2")); //ability id, target type, target range - fixad
 	
     set.push_back(new GameCard(2,spades,"ba_gua_shield.png",				"shield0 5 0")); //ability id, target type, target range -- fixade i annan commit

@@ -142,27 +142,27 @@ namespace Object
     //ramen
 	background = loadImage("Images/Gui/popupBackground.png", true);
     Surface tmp_border;
-    tmp_border.setImage( loadImage("Images/Gui/window/tb.png", true));
+    tmp_border.setImage( loadImage("Images/Gui/Window/tb.png", true));
     applySurface(0,0, tmp_border, background, nullptr);
     frame_size = tmp_border.getImage()->h;
-    tmp_border.setImage(loadImage("Images/Gui/window/lb.png", true));
+    tmp_border.setImage(loadImage("Images/Gui/Window/lb.png", true));
     applySurface(0,0, tmp_border, background, nullptr);
-    tmp_border.setImage(loadImage("Images/Gui/window/bb.png", true));
+    tmp_border.setImage(loadImage("Images/Gui/Window/bb.png", true));
     applySurface(0,text_rect.h - tmp_border.getImage()->h, tmp_border, background, nullptr);
 
-    tmp_border.setImage(loadImage("Images/Gui/window/rb.png", true));
+    tmp_border.setImage(loadImage("Images/Gui/Window/rb.png", true));
     applySurface(text_rect.w - tmp_border->w, 0, tmp_border, background, nullptr);
 
-    tmp_border.setImage(loadImage("Images/Gui/window/ltc.png", true));
+    tmp_border.setImage(loadImage("Images/Gui/Window/ltc.png", true));
     applySurface(0,0, tmp_border, background, nullptr);
         
-    tmp_border.setImage( loadImage("Images/Gui/window/rtc.png", true));
+    tmp_border.setImage( loadImage("Images/Gui/Window/rtc.png", true));
     applySurface(text_rect.w - tmp_border.getImage()->w,0, tmp_border, background, nullptr);
         
-    tmp_border.setImage(loadImage("Images/Gui/window/lbc.png", true));
+    tmp_border.setImage(loadImage("Images/Gui/Window/lbc.png", true));
     applySurface(0, text_rect.h - tmp_border.getImage()->h, tmp_border, background, nullptr);
      
-    tmp_border.setImage(loadImage("Images/Gui/window/rbc.png", true));
+    tmp_border.setImage(loadImage("Images/Gui/Window/rbc.png", true));
     applySurface(text_rect.w - tmp_border.getImage()->w, text_rect.h - tmp_border->h, tmp_border, background, nullptr);
   }
   
